@@ -1,0 +1,10 @@
+echo y | del Records\AlarmRecords
+echo y | del Records\CSVRecord
+echo y | del Records\DataLogRecords
+echo y | del Records\OperatorRecords
+echo y | del Records\ProcessEvent
+echo y | del Records\ProcessRecordCurves
+echo y | del Records\ProcessRecordLists
+echo y | del Records\ProcessRecords
+echo y | del Records\PurgeGasRecords
+echo y | del Records\VideoRecorders

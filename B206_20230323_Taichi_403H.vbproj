@@ -1,0 +1,714 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{10839C07-B223-402C-874F-19FAF0ADE9BA}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>Resources\Taichi.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>TaiChi</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>CELLO</RootNamespace>
+    <StartupObject>CELLO.My.MyApplication</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>WindowsForms</MyType>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>585F670863F2D20799873572553398AED9EB986E</ManifestCertificateThumbprint>
+    <ManifestKeyFile>B001_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <TargetFrameworkProfile />
+    <PublishUrl>c:\Cello\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>zh-TW</TargetCulture>
+    <ProductName>Bonder Systems</ProductName>
+    <PublisherName>Cello Technology Co. Ltd.</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.4</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>TaiChi.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>TaiChi.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>none</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>TaiChi.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>TaiChi.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Conversion.v3.5" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlDataShow.Designer.vb">
+      <DependentUpon>ControlDataShow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlDataShow.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlDeviceLife.Designer.vb">
+      <DependentUpon>ControlDeviceLife.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlDeviceLife.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlFlowSet.Designer.vb">
+      <DependentUpon>ControlFlowSet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlFlowSet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlINIEdit.Designer.vb">
+      <DependentUpon>ControlINIEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlINIEdit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPaintBoard.designer.vb">
+      <DependentUpon>ControlPaintBoard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPaintBoard.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlProcess.Designer.vb">
+      <DependentUpon>ControlProcess.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlProcess.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlProcessChart.Designer.vb">
+      <DependentUpon>ControlProcessChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlProcessChart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlProcessData.Designer.vb">
+      <DependentUpon>ControlProcessData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlProcessData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlTempCal.Designer.vb">
+      <DependentUpon>ControlTempCal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTempCal.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlTempPID.Designer.vb">
+      <DependentUpon>ControlTempPID.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTempPID.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control_DataLogview.Designer.vb">
+      <DependentUpon>Control_Datalogview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control_Datalogview.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtlSanAnCIM.Designer.vb">
+      <DependentUpon>CtlSanAnCIM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CtlSanAnCIM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlSanAnCIMSetup.Designer.vb">
+      <DependentUpon>ctlSanAnCIMSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ctlSanAnCIMSetup.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormBarcodeInput.Designer.vb">
+      <DependentUpon>FormBarcodeInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBarcodeInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDataLogView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyInFileName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecipeBarcodeInput.Designer.vb">
+      <DependentUpon>FormRecipeBarcodeInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRecipeBarcodeInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecipeMapEdit.Designer.vb">
+      <DependentUpon>FormRecipeMapEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRecipeMapEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSanAnBarcodeInput.Designer.vb">
+      <DependentUpon>FormSanAnBarcodeInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSanAnBarcodeInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSanAnBarcodeInputConfirm.Designer.vb">
+      <DependentUpon>FormSanAnBarcodeInputConfirm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSanAnBarcodeInputConfirm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_ADDA_GAS_Public.vb" />
+    <Compile Include="Module_Calibration.vb" />
+    <Compile Include="Module_CIM_SanAn.vb" />
+    <Compile Include="Module_CIM_SanAn_TCPIP.vb" />
+    <Compile Include="Module_Class_CheckError.vb" />
+    <Compile Include="Comm_PLC_SERIAL.vb" />
+    <Compile Include="FormAlarm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyInDataLogName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMenu.Designer.vb">
+      <DependentUpon>FormMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMsgBox.Designer.vb">
+      <DependentUpon>FormMsgBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMsgBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecipeSelect.Designer.vb">
+      <DependentUpon>FormRecipeSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRecipeSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStartup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFileSelect.Designer.vb">
+      <DependentUpon>FormFileSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFileSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_Alarm_Task.vb" />
+    <Compile Include="Module_Button.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Module_Button_Class.vb" />
+    <Compile Include="Module_Class_Delay.vb" />
+    <Compile Include="Module_Class_Timer.vb" />
+    <Compile Include="Module_CountTimer.vb" />
+    <Compile Include="Module_CreateINIFile.vb" />
+    <Compile Include="Module_CurveData.vb" />
+    <Compile Include="Module_DeviceLife.vb" />
+    <Compile Include="Module_Class_Display.vb" />
+    <Compile Include="FormKeyInRecipeFile.Designer.vb">
+      <DependentUpon>FormKeyInRecipeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormKeyInRecipeFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLicense.Designer.vb">
+      <DependentUpon>FormLicense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLicense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyBoard1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyBoard2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyBoard3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyInProcessName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKeyInVideoName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoginSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMaintance.Designer.vb">
+      <DependentUpon>FormMaintance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMaintance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_DigitalFilter.vb" />
+    <Compile Include="Module_FileSelect.vb" />
+    <Compile Include="Module_Form_Public.vb" />
+    <Compile Include="Module_KeyBoard_Public.vb" />
+    <Compile Include="Module_Language_Change.vb" />
+    <Compile Include="Module_License_Data.vb" />
+    <Compile Include="Module_Login_Setup.vb" />
+    <Compile Include="Module_MsgBox.vb" />
+    <Compile Include="Module_PLC_IO.vb" />
+    <Compile Include="Module_RecipeMap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_Recipe_Public.vb" />
+    <Compile Include="Module_SUB_Functions.vb" />
+    <Compile Include="Module_User_Control_Setup.vb" />
+    <Compile Include="Module_USB_Function.vb" />
+    <Compile Include="Module_VacuumGaugeAD.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="FormParameter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAlarmPopup.Designer.vb">
+      <DependentUpon>FormAlarmPopup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAlarmPopup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcess.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecipe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_Parameter.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Module_AutoTask.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FormManual.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module_WIN32API.vb" />
+    <Compile Include="ControlManualChart.Designer.vb">
+      <DependentUpon>ControlManualChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlManualChart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPressCal.Designer.vb">
+      <DependentUpon>ControlPressCal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPressCal.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlManual.Designer.vb">
+      <DependentUpon>ControlManual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlManual.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlDataShowVertical.Designer.vb">
+      <DependentUpon>ControlDataShowVertical.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlDataShowVertical.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormKeyBoardIP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="ControlDataShow.resx">
+      <DependentUpon>ControlDataShow.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlDeviceLife.resx">
+      <DependentUpon>ControlDeviceLife.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlFlowSet.resx">
+      <DependentUpon>ControlFlowSet.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlINIEdit.resx">
+      <DependentUpon>ControlINIEdit.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPaintBoard.resx">
+      <DependentUpon>ControlPaintBoard.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlProcess.resx">
+      <DependentUpon>ControlProcess.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlProcessChart.resx">
+      <DependentUpon>ControlProcessChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlProcessData.resx">
+      <DependentUpon>ControlProcessData.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlTempCal.resx">
+      <DependentUpon>ControlTempCal.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlTempPID.resx">
+      <DependentUpon>ControlTempPID.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control_Datalogview.resx">
+      <DependentUpon>Control_Datalogview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtlSanAnCIM.resx">
+      <DependentUpon>CtlSanAnCIM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlSanAnCIMSetup.resx">
+      <DependentUpon>ctlSanAnCIMSetup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAlarm.resx">
+      <DependentUpon>FormAlarm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBarcodeInput.resx">
+      <DependentUpon>FormBarcodeInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDataLogView.resx">
+      <DependentUpon>FormDataLogView.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyBoard1.resx">
+      <DependentUpon>FormKeyBoard1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyBoard2.resx">
+      <DependentUpon>FormKeyBoard2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyBoard3.resx">
+      <DependentUpon>FormKeyBoard3.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyInDataLogName.resx">
+      <DependentUpon>FormKeyInDataLogName.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyInFileName.resx">
+      <DependentUpon>FormKeyInFileName.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyInProcessName.resx">
+      <DependentUpon>FormKeyInProcessName.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyInRecipeFile.resx">
+      <DependentUpon>FormKeyInRecipeFile.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyInVideoName.resx">
+      <DependentUpon>FormKeyInVideoName.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLicense.resx">
+      <DependentUpon>FormLicense.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoginSetup.resx">
+      <DependentUpon>FormLoginSetup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMaintance.resx">
+      <DependentUpon>FormMaintance.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMenu.resx">
+      <DependentUpon>FormMenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMsgBox.resx">
+      <DependentUpon>FormMsgBox.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRecipeBarcodeInput.resx">
+      <DependentUpon>FormRecipeBarcodeInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRecipeMapEdit.resx">
+      <DependentUpon>FormRecipeMapEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRecipeSelect.resx">
+      <DependentUpon>FormRecipeSelect.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSanAnBarcodeInput.resx">
+      <DependentUpon>FormSanAnBarcodeInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSanAnBarcodeInputConfirm.resx">
+      <DependentUpon>FormSanAnBarcodeInputConfirm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStartup.resx">
+      <DependentUpon>FormStartup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFileSelect.resx">
+      <DependentUpon>FormFileSelect.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormParameter.resx">
+      <DependentUpon>FormParameter.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAlarmPopup.resx">
+      <DependentUpon>FormAlarmPopup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcess.resx">
+      <DependentUpon>FormProcess.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRecipe.resx">
+      <DependentUpon>FormRecipe.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRecord.resx">
+      <DependentUpon>FormRecord.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManual.resx">
+      <DependentUpon>FormManual.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlManualChart.resx">
+      <DependentUpon>ControlManualChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPressCal.resx">
+      <DependentUpon>ControlPressCal.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlManual.resx">
+      <DependentUpon>ControlManual.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlDataShowVertical.resx">
+      <DependentUpon>ControlDataShowVertical.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKeyBoardIP.resx">
+      <DependentUpon>FormKeyBoardIP.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PressControl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Taichi.ico" />
+    <None Include="Resources\Blank24.png" />
+    <None Include="Resources\BlankGreen24.png" />
+    <None Include="Resources\BlankRed24.png" />
+    <Content Include="Taichi.ico" />
+    <None Include="Resources\Users.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
