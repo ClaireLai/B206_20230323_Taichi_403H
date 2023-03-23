@@ -1392,7 +1392,7 @@ Module Comm_PLC_SERIAL
 
                         R1100_Value_Compare(R_R1100_Read, 0, 191)
                     End If
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
 
                 Loop Until (bolQuit = True)
                 PLCComm.Close()
@@ -1441,7 +1441,7 @@ Module Comm_PLC_SERIAL
                     PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60X0000", ETX)) 'Åª¨úX0-X47 '44
 
                     'Debug.Print("All_time=" + wdog1.ElapsedMilliseconds.ToString)
-                    wdog1_Restart()
+                    'wdog1_Restart()
                     wdog_Restart()
                     'swdog_Restart()
                     Do
@@ -1452,7 +1452,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read x ok")
                     CommLivePLC = True
 
@@ -1477,7 +1477,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read y ok")
                     If InStr(1, Rx_msgPLC, "0144") > 0 Then
                         UpDataPLC_FB(1)
@@ -1497,7 +1497,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read m ok")
                     If InStr(1, Rx_msgPLC, "0144") > 0 Then
                         UpDataPLC_FB(2)
@@ -1517,7 +1517,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1000-R1019 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(3)
@@ -1537,7 +1537,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read _R1032-R1071 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(6)
@@ -1558,7 +1558,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1100-1131 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(5)
@@ -1579,7 +1579,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1132-R1195 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(7)
@@ -1601,7 +1601,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1200-1263 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(8)
@@ -1621,7 +1621,7 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1300-R1363 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(9)
@@ -1643,13 +1643,13 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1364-R1395 ok")
                     If InStr(1, Rx_msgPLC, "0146") > 0 Then
                         UpDataPLC_FB(10)
                     End If
 
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
 
                     checkWriteR()
                     If boolfirst Then
@@ -1658,7 +1658,7 @@ Module Comm_PLC_SERIAL
                     Else
                         R1100_Value_Compare(R_R1100_Read, 0, 191)
                     End If
-                    System.Threading.Thread.Sleep(2)
+                    'System.Threading.Thread.Sleep(2)
 
                 Loop Until (bolQuit = True)
                 PLCComm.Close()
