@@ -181,8 +181,6 @@ Public Class FormStartup
         SetupLogo()
         SetupFlag()
 
-
-
         pgbSystemLoad.PerformStep()
         ReadVacuumSetup(ProgramINIFile)         '讀取真空計設定
         pgbSystemLoad.PerformStep()

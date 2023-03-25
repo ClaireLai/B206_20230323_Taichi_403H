@@ -2450,25 +2450,28 @@ Public Class FormProcess
 
     Private Sub btnLoadRecipe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadRecipe.Click
         Dim i As Integer
-        On Error Resume Next
+        'On Error Resume Next
         If SystemParameters.BarcodeOnly = "1" Then
             BarcodeReadStart()
         Else
             pnlRecipe.Enabled = True
             LoadRecipe()
-            For i = 0 To MAXPLATE
-                CSubAutoProcess(i).LoadPlateRecipe(RecipeNum(RecipeRunIndex).Plate(i))
-                Dim TopTemp1 As Integer
-                Dim BotTemp1 As Integer
+            If (FormRecipeSelects.RecipeFileName) <> Nothing And lblRecipeFileName.Text <> "" Then
+                For i = 0 To MAXPLATE
 
-                TopTemp1 = TempCal(i).GetTICTopTemp(Val(RecipeNum(RecipeRunIndex).Plate(i).Temperature(0)))
-                BotTemp1 = TempCal(i).GetTICBotTemp(Val(RecipeNum(RecipeRunIndex).Plate(i).Temperature(0))) 'TempTopSV 'Modified by Vincent 20180419 
-                ManualControl(i).WriteTempData(TopTemp1, BotTemp1, RecipeNum(RecipeRunIndex).Plate(i).Temperature_Rate(0))
-                ManualControl(i).WritePressData(RecipeNum(RecipeRunIndex).Plate(i).Pressure(0), RecipeNum(RecipeRunIndex).Plate(i).Pressure_Rate(0))
-                PIDs(i).PIDTopSave()
-                PIDs(i).PIDBotSave()
-            Next
-            pnlRecipe.Enabled = False
+                    CSubAutoProcess(i).LoadPlateRecipe(RecipeNum(RecipeRunIndex).Plate(i))
+                    Dim TopTemp1 As Integer
+                    Dim BotTemp1 As Integer
+
+                    TopTemp1 = TempCal(i).GetTICTopTemp(Val(RecipeNum(RecipeRunIndex).Plate(i).Temperature(0)))
+                    BotTemp1 = TempCal(i).GetTICBotTemp(Val(RecipeNum(RecipeRunIndex).Plate(i).Temperature(0))) 'TempTopSV 'Modified by Vincent 20180419 
+                    ManualControl(i).WriteTempData(TopTemp1, BotTemp1, RecipeNum(RecipeRunIndex).Plate(i).Temperature_Rate(0))
+                    ManualControl(i).WritePressData(RecipeNum(RecipeRunIndex).Plate(i).Pressure(0), RecipeNum(RecipeRunIndex).Plate(i).Pressure_Rate(0))
+                    PIDs(i).PIDTopSave()
+                    PIDs(i).PIDBotSave()
+                Next
+                pnlRecipe.Enabled = False
+            End If
         End If
     End Sub
 

@@ -456,8 +456,8 @@
 
     '根據目前溫度寫入PID
     '目前溫度範圍(共3個,分上下.)
-    Private TempArea, TopArea0, TopArea1, TopArea2, TopArea3 As Boolean
-    Private BotArea0, BotArea1, BotArea2, BotArea3 As Boolean
+    Public TempArea, TopArea0, TopArea1, TopArea2, TopArea3 As Boolean
+    Public BotArea0, BotArea1, BotArea2, BotArea3 As Boolean
     Private WriteP, WriteI, WriteD, WriteMax, WriteMin As Integer
 
     Private TopLowTemp, TopLowPower As Integer
@@ -618,6 +618,7 @@
         '    End If
         'End If
         If (itopSV >= TopLowTemp) And (itopSV < TopRangeLow) And TopArea1 = False Then
+            '已經寫入
             If GetPLCRValue(DATopMaxPowerIndex) = Val(txtTopMaxL.Text) * 10 And GetPLCRValue(DATopMinPowerIndex) = Val((txtTopMinL.Text) * 10) _
                 And GetPLCRValue(DATopP1Index) = Val(txtTopPL.Text) * 10 And GetPLCRValue(DATopI1Index) = Val(txtTopIL.Text) And GetPLCRValue(DATopD1Index) = Val(txtTopDL.Text) Then
                 TopArea0 = False
@@ -625,6 +626,7 @@
                 TopArea2 = False
                 TopArea3 = False
             End If
+            '還沒寫入
             If TopArea1 = False Then
                 If Output(DoSetTopATIndex).Status = False Then
                     Write_PLC_R1100(DATopP1Index, Val(txtTopPL.Text) * 10)

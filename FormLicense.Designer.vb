@@ -35,7 +35,7 @@ Partial Class FormLicense
         Me.txtRegisterCode2 = New System.Windows.Forms.TextBox()
         Me.txtNoticeCode2 = New System.Windows.Forms.TextBox()
         Me.btnTry = New System.Windows.Forms.Button()
-        Me.picCelloLogo = New System.Windows.Forms.PictureBox()
+        Me.picCelloLogo1 = New System.Windows.Forms.PictureBox()
         Me.btnResetTrial = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnResetExpired = New System.Windows.Forms.Button()
@@ -60,7 +60,8 @@ Partial Class FormLicense
         Me.lblMBID = New System.Windows.Forms.Label()
         Me.lblCPUID = New System.Windows.Forms.Label()
         Me.lblTotalMins = New System.Windows.Forms.Label()
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        CType(Me.picCelloLogo1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSpecial.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -228,14 +229,14 @@ Partial Class FormLicense
         Me.btnTry.UseVisualStyleBackColor = True
         Me.btnTry.Visible = False
         '
-        'picCelloLogo
+        'picCelloLogo1
         '
-        Me.picCelloLogo.Location = New System.Drawing.Point(0, 0)
-        Me.picCelloLogo.Name = "picCelloLogo"
-        Me.picCelloLogo.Size = New System.Drawing.Size(102, 84)
-        Me.picCelloLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picCelloLogo.TabIndex = 218
-        Me.picCelloLogo.TabStop = False
+        Me.picCelloLogo1.Location = New System.Drawing.Point(0, 0)
+        Me.picCelloLogo1.Name = "picCelloLogo1"
+        Me.picCelloLogo1.Size = New System.Drawing.Size(102, 84)
+        Me.picCelloLogo1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picCelloLogo1.TabIndex = 218
+        Me.picCelloLogo1.TabStop = False
         '
         'btnResetTrial
         '
@@ -412,6 +413,7 @@ Partial Class FormLicense
         '
         'pnlSpecial
         '
+        Me.pnlSpecial.Controls.Add(Me.DateTimePicker1)
         Me.pnlSpecial.Controls.Add(Me.lblHDDSN)
         Me.pnlSpecial.Controls.Add(Me.lblUsedMins)
         Me.pnlSpecial.Controls.Add(Me.lblHDD1ID)
@@ -436,7 +438,7 @@ Partial Class FormLicense
         Me.pnlSpecial.Controls.Add(Me.btnRegister)
         Me.pnlSpecial.Location = New System.Drawing.Point(423, 2)
         Me.pnlSpecial.Name = "pnlSpecial"
-        Me.pnlSpecial.Size = New System.Drawing.Size(295, 318)
+        Me.pnlSpecial.Size = New System.Drawing.Size(295, 366)
         Me.pnlSpecial.TabIndex = 241
         Me.pnlSpecial.Visible = False
         '
@@ -471,7 +473,7 @@ Partial Class FormLicense
         Me.lblHDD1ID.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblHDD1ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblHDD1ID.Font = New System.Drawing.Font("Arial", 9.0!)
-        Me.lblHDD1ID.Location = New System.Drawing.Point(9, 286)
+        Me.lblHDD1ID.Location = New System.Drawing.Point(11, 339)
         Me.lblHDD1ID.Name = "lblHDD1ID"
         Me.lblHDD1ID.Size = New System.Drawing.Size(283, 22)
         Me.lblHDD1ID.TabIndex = 244
@@ -483,7 +485,7 @@ Partial Class FormLicense
         Me.lblMBID.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblMBID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblMBID.Font = New System.Drawing.Font("Arial", 9.0!)
-        Me.lblMBID.Location = New System.Drawing.Point(9, 258)
+        Me.lblMBID.Location = New System.Drawing.Point(11, 311)
         Me.lblMBID.Name = "lblMBID"
         Me.lblMBID.Size = New System.Drawing.Size(283, 22)
         Me.lblMBID.TabIndex = 243
@@ -495,7 +497,7 @@ Partial Class FormLicense
         Me.lblCPUID.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblCPUID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblCPUID.Font = New System.Drawing.Font("Arial", 9.0!)
-        Me.lblCPUID.Location = New System.Drawing.Point(9, 230)
+        Me.lblCPUID.Location = New System.Drawing.Point(11, 283)
         Me.lblCPUID.Name = "lblCPUID"
         Me.lblCPUID.Size = New System.Drawing.Size(281, 22)
         Me.lblCPUID.TabIndex = 242
@@ -514,13 +516,26 @@ Partial Class FormLicense
         Me.lblTotalMins.Text = "0123456789012"
         Me.lblTotalMins.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CalendarFont = New System.Drawing.Font("新細明體", 14.0!)
+        Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
+        Me.DateTimePicker1.Font = New System.Drawing.Font("Arial", 26.0!)
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker1.Location = New System.Drawing.Point(13, 229)
+        Me.DateTimePicker1.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
+        Me.DateTimePicker1.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(279, 47)
+        Me.DateTimePicker1.TabIndex = 560
+        '
         'FormLicense
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(720, 328)
+        Me.ClientSize = New System.Drawing.Size(720, 380)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlSpecial)
-        Me.Controls.Add(Me.picCelloLogo)
+        Me.Controls.Add(Me.picCelloLogo1)
         Me.Controls.Add(Me.txtNoticeCode2)
         Me.Controls.Add(Me.txtRegisterCode2)
         Me.Controls.Add(Me.btnTry)
@@ -538,7 +553,7 @@ Partial Class FormLicense
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "License"
         Me.TopMost = True
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picCelloLogo1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSpecial.ResumeLayout(False)
         Me.pnlSpecial.PerformLayout()
         Me.ResumeLayout(False)
@@ -556,7 +571,7 @@ Partial Class FormLicense
     Public WithEvents txtRegisterCode2 As System.Windows.Forms.TextBox
     Public WithEvents txtNoticeCode2 As System.Windows.Forms.TextBox
     Public WithEvents btnTry As System.Windows.Forms.Button
-    Friend WithEvents picCelloLogo As System.Windows.Forms.PictureBox
+    Friend WithEvents picCelloLogo1 As System.Windows.Forms.PictureBox
     Friend WithEvents btnResetTrial As System.Windows.Forms.Button
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents btnResetExpired As System.Windows.Forms.Button
@@ -581,4 +596,5 @@ Partial Class FormLicense
     Friend WithEvents lblCPUID As System.Windows.Forms.Label
     Public WithEvents lblUsedMins As System.Windows.Forms.Label
     Friend WithEvents lblHDDSN As System.Windows.Forms.Label
+    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
 End Class

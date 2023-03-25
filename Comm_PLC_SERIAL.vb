@@ -700,7 +700,7 @@ Module Comm_PLC_SERIAL
             '    intHead = R_SQHeadPLC
         End If
         j = intHead - intTail
-        Debug.Print("筆數=" + j.ToString)
+        'Debug.Print("筆數=" + j.ToString)
         cmdstr = FillZero(j, 2)
         For i = intTail + 1 To intHead
             m = FillZero(Val(PLCRSet(i Mod PLCRSetMaxCount).PLCRSetValue), 4)
@@ -715,9 +715,9 @@ Module Comm_PLC_SERIAL
                 cmdstr += "R" + Format(PLCRSet(i Mod PLCRSetMaxCount).PLCRSetCH - 96 + 1300, "00000") + m
             End If
         Next
-        Debug.Print("WriteR OK " + (R_SQTailPLC + 1).ToString() + "~" + R_SQHeadPLC.ToString())
+        'Debug.Print("WriteR OK " + (R_SQTailPLC + 1).ToString() + "~" + R_SQHeadPLC.ToString())
         R_SQTailPLC = intHead Mod PLCRSetMaxCount
-        Debug.Print("R_SQTailPLC 尾 =" + intTail.ToString)
+        'Debug.Print("R_SQTailPLC 尾 =" + intTail.ToString)
         'If cmdstr.Length < 12 Then
         '    Debug.Print("Err")
         'End If
@@ -725,7 +725,7 @@ Module Comm_PLC_SERIAL
         'Debug.Print("cmdstr=" + cmdstr)
         'PLCComm.Output = PLCSendCmd(STX, Slaveno, CmdWRITEREGISTERS, cmdstr, ETX)
         PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdManyWRITEREGISTERS, cmdstr, ETX))
-        Debug.Print("WriteR many " + (intTail + 1).ToString() + "~" + intHead.ToString())
+        'Debug.Print("WriteR many " + (intTail + 1).ToString() + "~" + intHead.ToString())
         'PLCAlarm_Log("WriteR many " + intTail.ToString() + "~" + intHead.ToString())
         'System.Threading.Thread.Sleep(5)
     End Sub
@@ -1769,10 +1769,10 @@ Module Comm_PLC_SERIAL
             bolWriteROK = True
             'PLCAlarm_Log("WriteR OK " + R_SQTailPLC.ToString() + "~" + R_SQHeadPLC.ToString())
             'R_SQTailPLC = R_SQHeadPLC
-            Debug.Print("R_SQTailPLC 頭=  " + R_SQHeadPLC.ToString)
+            'Debug.Print("R_SQTailPLC 頭=  " + R_SQHeadPLC.ToString)
             'check 資料格式 error code
             If Rx_msgPLC.Substring(1, 5) <> "01490" Then
-                Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
+                'Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
                 PLCAlarm_Log("err code=" + Rx_msgPLC.Substring(1, 5))
             End If
         End If
