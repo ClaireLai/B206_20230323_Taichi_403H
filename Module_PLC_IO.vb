@@ -242,7 +242,7 @@
     Public Const Do1stContactOK05Index As Integer = 94        '首次壓合完成
     Public Const Do1stContactOK06Index As Integer = 95        '首次壓合完成
 
-
+    'R1100
     '================================================
     Public Const DAkgDARatio1Index As Integer = 0 '壓力/DA值比例
     Public Const DAkgDARatio2Index As Integer = 1 '壓力/DA值比例
@@ -417,7 +417,8 @@
     Public Const DAProcessTemp03Index As Integer = 141        '溫度'R1345
     Public Const DAProcessTempRate03Index As Integer = 142    '溫速
     'R1347
-    Public Const DAProcessBond04Index As Integer = 143     '壓合壓力 
+    Public Const DAPCConnectIndex As Integer = 143     'Pc連線 counter
+    'Public Const DAProcessBond04Index As Integer = 143     '壓合壓力 
     Public Const DAProcessBondRate04Index As Integer = 144 '壓速
     Public Const DAProcessTemp04Index As Integer = 145        '溫度'R1349
     Public Const DAProcessTempRate04Index As Integer = 146    '溫速
