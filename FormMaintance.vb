@@ -5,7 +5,20 @@
     Public OldLanguage As Integer
 
     Dim initflag As Boolean = False
+    Private X As Single '當前窗體的寬度
+    Private Y As Single '當前窗體的高度
+    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
+    Private FormW As Integer
+    Private FormH As Integer
 
+    Public Sub New()
+
+        ' 設計工具需要此呼叫。
+        InitializeComponent()
+        isLoaded = False
+        ' 在 InitializeComponent() 呼叫之後加入所有初始設定。
+
+    End Sub
 
     Private Sub FormMaintenace_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Top = FromStartUpTopPosition
@@ -54,6 +67,10 @@
         Timer1.Interval = 500
         Timer1.Enabled = True
         initflag = True
+        X = Me.Width '獲取窗體的寬度
+        Y = Me.Height '獲取窗體的高度
+        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
+        SetTag(Me) '調用方法
     End Sub
 
 
@@ -219,5 +236,24 @@
             Help.SetToolTip(OutStatus(i), Microsoft.VisualBasic.Right(OutStatus(i).Name, 3))
         Next
     End Sub
+    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If isLoaded Then
 
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
+            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Width = FormW
+            SetControls(new_x, new_Y, Me, isLoaded)
+            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+        End If
+    End Sub
+
+    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
+        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+
+        Me.WindowState = FormWindowState.Normal
+        FormProcess_Resize(Me, e)
+        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
+    End Sub
 End Class

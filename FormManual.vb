@@ -85,6 +85,11 @@ Public Class FormManual
     Friend WithEvents btnPullerClose As System.Windows.Forms.Button
     Friend WithEvents picC05 As System.Windows.Forms.PictureBox
     Friend WithEvents lblDPTemp As System.Windows.Forms.Label
+    Private X As Single '當前窗體的寬度
+    Private Y As Single '當前窗體的高度
+    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
+    Private FormW As Integer
+    Private FormH As Integer
     Dim maxvalue(10) As Double
 #Region " Windows Form 設計工具產生的程式碼 "
 
@@ -93,7 +98,7 @@ Public Class FormManual
 
         '此呼叫為 Windows Form 設計工具的必要項。
         InitializeComponent()
-
+        isLoaded = False
         '在 InitializeComponent() 呼叫之後加入所有的初始設定
 
     End Sub
@@ -1360,6 +1365,10 @@ Public Class FormManual
 
         Timer1.Interval = 500
         Timer1.Enabled = True
+        X = Me.Width '獲取窗體的寬度
+        Y = Me.Height '獲取窗體的高度
+        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
+        SetTag(Me) '調用方法
 
     End Sub
 
@@ -1993,5 +2002,25 @@ Public Class FormManual
     Private Sub btnPullerClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPullerClose.Click
         Output(DoPullerCloseIndex).Status = Not Output(DoPullerCloseIndex).Status
         'watdog_Restart()
+    End Sub
+    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If isLoaded Then
+
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
+            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Width = FormW
+            SetControls(new_x, new_Y, Me, isLoaded)
+            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+        End If
+    End Sub
+
+    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
+        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+
+        Me.WindowState = FormWindowState.Normal
+        FormProcess_Resize(Me, e)
+        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
     End Sub
 End Class

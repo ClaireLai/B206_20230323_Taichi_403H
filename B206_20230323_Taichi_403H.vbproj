@@ -266,6 +266,7 @@
     <Compile Include="FormSanAnBarcodeInputConfirm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Module_FormReSize.vb" />
     <Compile Include="Module_ADDA_GAS_Public.vb" />
     <Compile Include="Module_Calibration.vb" />
     <Compile Include="Module_CIM_SanAn.vb" />

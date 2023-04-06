@@ -128,12 +128,17 @@ Public Class FormProcess
 '#End If
     Friend WithEvents lblCIMError As System.Windows.Forms.Label
     Friend WithEvents TabPageVacuum As System.Windows.Forms.TabPage
+    Private X As Single '當前窗體的寬度
+    Private Y As Single '當前窗體的高度
+    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
+    Private FormW As Integer
+    Private FormH As Integer
     Public Sub New()
         MyBase.New()
 
         '此呼叫為 Windows Form 設計工具的必要項。
         InitializeComponent()
-
+        isLoaded = False
         '在 InitializeComponent() 呼叫之後加入所有的初始設定
 
     End Sub
@@ -2066,13 +2071,13 @@ Public Class FormProcess
 
 
 
-    Private Sub Process_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Public Sub Process_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
         If DesignMode Then Exit Sub
         Dim i As Byte
         Me.Top = FromStartUpTopPosition
         Me.Left = 0
-
+        Debug.Print("FromStartUpTopPosition=" + FromStartUpTopPosition.ToString)
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
 #If SanAn_TCPIP_Used = 0 Then
@@ -2111,6 +2116,11 @@ Public Class FormProcess
         Timer1.Interval = 1000
         Timer1.Enabled = True
 
+        X = Me.Width '獲取窗體的寬度
+        Y = Me.Height '獲取窗體的高度
+        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
+        SetTag(Me) '調用方法
+        Debug.Print("FormProcess_Load")
     End Sub
 
 
@@ -2302,7 +2312,7 @@ Public Class FormProcess
         lblProcessRunTime.Text = ConvertSecToTime(TotalProcessTime) + Format(TotalProcessTime, "(0)")
         lblProcessStatus.Text = ProcessStatusString
 
-    
+
 
     End Sub
 
@@ -2990,7 +3000,7 @@ Public Class FormProcess
         Dim me_gr As Graphics = obj.CreateGraphics
 
         ' Make a Bitmap to hold the image.
-        Dim bm As New Bitmap(obj.ClientSize.Width, _
+        Dim bm As New Bitmap(obj.ClientSize.Width,
             obj.ClientSize.Height, me_gr)
         Dim bm_gr As Graphics = Graphics.FromImage(bm)
         Dim bm_hdc As IntPtr = bm_gr.GetHdc
@@ -3000,8 +3010,8 @@ Public Class FormProcess
         Dim me_hdc As IntPtr = me_gr.GetHdc
 
         ' BitBlt the form's image onto the Bitmap.
-        BitBlt(bm_hdc, 0, 0, obj.ClientSize.Width, _
-            obj.ClientSize.Height, _
+        BitBlt(bm_hdc, 0, 0, obj.ClientSize.Width,
+            obj.ClientSize.Height,
             me_hdc, 0, 0, SRCCOPY)
         me_gr.ReleaseHdc(me_hdc)
         bm_gr.ReleaseHdc(bm_hdc)
@@ -3443,7 +3453,7 @@ Public Class FormProcess
         i = RecipeRunIndex
         pgbReadCurve.Visible = True
         FormRecipeSelects.RecipeDir = RecipeDir
-      
+
         ProcessRecipeFileName = lblRecipeFileName.Text & ".rcp"
         ProcessRecipeName = lblRecipeFileName.Text
 
@@ -3496,7 +3506,7 @@ Public Class FormProcess
 
     Public Function ConfirmLoad() As Boolean
         If RemoteCIM.ConfirmEnable Then
-            If MsgBoxLangYesNo("是否執行製程?  配方檔案: " + RemoteCIM.RecipeData.RecipeName, _
+            If MsgBoxLangYesNo("是否執行製程?  配方檔案: " + RemoteCIM.RecipeData.RecipeName,
                             "Confirm to run process? Recipe: " + RemoteCIM.RecipeData.RecipeName) = False Then
                 'MsgBoxLangErr("製程未執行!", "Process not excuted!")
                 RemoteCIM.ErrorString = GetLangText("製程未執行!", "Process not excuted!")
@@ -3582,6 +3592,27 @@ Public Class FormProcess
         Return True
 
     End Function
+
+    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If isLoaded Then
+
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
+            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Width = FormW
+            SetControls(new_x, new_Y, Me, isLoaded)
+            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+        End If
+    End Sub
+
+    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
+        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+
+        Me.WindowState = FormWindowState.Normal
+        FormProcess_Resize(Me, e)
+        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
+    End Sub
     'SanAn CIM  20190710  by vincent ---------------- End
 #End Region
 End Class

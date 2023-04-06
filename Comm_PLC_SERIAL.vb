@@ -244,7 +244,7 @@ Module Comm_PLC_SERIAL
             R1100_Changed(key) = False
             'R1100_Changed(key) = True
             'bolWriteROK = True
-            Debug.Print("index=" + key.ToString + ",新增=" + newValue.ToString())
+            'Debug.Print("index=" + key.ToString + ",新增=" + newValue.ToString())
         End If
     End Sub
     Private Sub ReadOriginalR1100()
@@ -616,7 +616,7 @@ Module Comm_PLC_SERIAL
     Public Function PLCSendCmd(ByVal StartX As String, ByVal SlaveNumber As String, ByVal PlcCmd As String, ByVal sData As String, ByVal EndX As String) As String
         Dim sstr As String = ""
         If PlcCmd = "49" Then
-            Debug.Print("49")
+            'Debug.Print("49")
         End If
         sstr = PLCSendCmd_FB(StartX, SlaveNumber, PlcCmd, sData, EndX)  '使用 FATECK 設定
         Return sstr

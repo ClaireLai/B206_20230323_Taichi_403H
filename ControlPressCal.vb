@@ -310,7 +310,7 @@ Public Class ControlPressCal
         txtY4.Text = Get_PLC_R1100(DAPressCalYIndex + 3)
         txtY5.Text = Get_PLC_R1100(DAPressCalYIndex + 4)
         If boltemp Then
-            Debug.Print("Read PLC")
+            'Debug.Print("Read PLC")
             boltemp = False
         End If
     End Sub

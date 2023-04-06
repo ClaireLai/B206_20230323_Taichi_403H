@@ -27,7 +27,7 @@
     'Public FormTempCals As FormTempCal = FormTempCal
     Public FormDataLogViews As FormDataLogView = FormDataLogView
     'FORM 初始位置
-    Public FromStartUpTopPosition As Integer = 58
+    Public FromStartUpTopPosition As Integer = Screen.PrimaryScreen.Bounds.Height / 16
 
     Public Program_Title As String
     Public Program_DeviceName As String
@@ -123,8 +123,6 @@
         FindAndSetLogos(iForm, "picCelloTitle", YesNo)
         FindAndSetLogos(iForm, "picCelloTitleEng", YesNo)
     End Sub
-
-
     Private Sub FindAndSetLogos(ByRef pnl As Object, ByVal name As String, ByVal YesNo As Boolean)
         For Each aa As Control In pnl.Controls
             If aa.Name = name Then

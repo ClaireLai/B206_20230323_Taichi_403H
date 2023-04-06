@@ -10,8 +10,23 @@
     Public CurrentMenuIndex, LastMenuIndex As Integer
     Public FormPtr() As Form
     Public ButtonPtr() As Button
+    Private X As Single '當前窗體的寬度
+    Private Y As Single '當前窗體的高度
+    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
+    Private FormW As Integer
+    Private FormH As Integer
+    Dim size As Size
 
 
+    Public Sub New()
+
+        ' 設計工具需要此呼叫。
+        InitializeComponent()
+
+        ' 在 InitializeComponent() 呼叫之後加入所有初始設定。
+        isLoaded = False
+        ImageList1.Images.Clear()
+    End Sub
 
     Private Sub MenuForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If DesignMode Then Exit Sub
@@ -39,28 +54,37 @@
 
         CurrentMenuIndex = 1
         LastMenuIndex = 1
-        SetActiveButton(CurrentMenuIndex, Color.FromArgb(255, 192, 192), Color.FromArgb(255, 255, 192))
+        'SetActiveButton(CurrentMenuIndex, Color.FromArgb(255, 192, 192), Color.FromArgb(255, 255, 192))
         Timer1.Interval = 1000
         Timer1.Enabled = True
+        X = Me.Width '獲取窗體的寬度
+        Y = Me.Height '獲取窗體的高度
+        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
+        SetTag(Me) '調用方法
+        Debug.Print("FormManu_Load")
     End Sub
     Public Sub SetActiveButton(ByVal index As Integer, ByVal oncolor As Color, ByVal offcolor As Color)
         Dim i As Integer
         For i = FORM_MENU.PROCESS To FORM_MENU.MAINTANCE
             ButtonPtr(i).BackColor = offcolor
-            ButtonPtr(i).Image = My.Resources.button
+            'ButtonPtr(i).Image = Resize_Image(My.Resources.button, size)
+            ButtonPtr(i).Image = ImageList1.Images(1)
         Next
-        ButtonPtr(index).Image = My.Resources.buttonRed
+        'ButtonPtr(index).Image = Resize_Image(My.Resources.buttonRed, size)
+        ButtonPtr(index).Image = ImageList1.Images(0)
         ButtonPtr(index).BackColor = oncolor
 
     End Sub
 
-    Public Sub SetActiveButton(ByVal index As Integer, ByVal ON_String As String, ByVal OFF_String As String)
-        Dim i As Integer
-        For i = FORM_MENU.PROCESS To FORM_MENU.MAINTANCE
-            ButtonPtr(i).Image = My.Resources.button
-        Next
-        ButtonPtr(index).Image = My.Resources.buttonRed
-    End Sub
+    'Public Sub SetActiveButton(ByVal index As Integer, ByVal ON_String As String, ByVal OFF_String As String)
+    '    Dim i As Integer
+    '    For i = FORM_MENU.PROCESS To FORM_MENU.MAINTANCE
+    '        'ButtonPtr(i).Image = Resize_Image(My.Resources.button, size)
+    '        ButtonPtr(i).Image = ImageList1.Images(1)
+    '    Next
+    '    'ButtonPtr(index).Image = Resize_Image(My.Resources.buttonRed, size)
+    '    ButtonPtr(i).Image = ImageList1.Images(0)
+    'End Sub
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         On Error Resume Next
@@ -277,5 +301,33 @@
             'LoadProgramStringList()
         End If
     End Sub
+    Private Sub FormMenu_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If isLoaded Then
 
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = FormH / Y
+
+            size.Width = 200
+            size.Height = 800
+            Me.Height = (FormW)
+            Me.Width = FormW
+            SetControls(new_x, new_Y, Me, isLoaded)
+            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+            ImageList1.Images.Add(Resize_Image(My.Resources.buttonRed, size))
+            ImageList1.Images.Add(Resize_Image(My.Resources.button, size))
+            'Resize_Image(My.Resources.button, size)
+            'Resize_Image(My.Resources.buttonRed, size)
+
+            SetActiveButton(CurrentMenuIndex, Color.FromArgb(255, 192, 192), Color.FromArgb(255, 255, 192))
+        End If
+    End Sub
+
+    Private Sub FormMenu_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
+        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 16
+
+        Me.WindowState = FormWindowState.Normal
+        FormMenu_Resize(Me, e)
+        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
+    End Sub
 End Class

@@ -1,6 +1,11 @@
 Public Class FormLoginSetup
     Inherits System.Windows.Forms.Form
     Dim state As Integer
+    Private X As Single '當前窗體的寬度
+    Private Y As Single '當前窗體的高度
+    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
+    Private FormW As Integer
+    Private FormH As Integer
 
 #Region " Windows Form 設計工具產生的程式碼 "
 
@@ -9,7 +14,7 @@ Public Class FormLoginSetup
 
         '此呼叫為 Windows Form 設計工具的必要項。
         InitializeComponent()
-
+        isLoaded = False
         '在 InitializeComponent() 呼叫之後加入所有的初始設定
 
     End Sub
@@ -328,6 +333,10 @@ Public Class FormLoginSetup
         'ReadUserRightsFile(UserDataFileName, UserRights)  '讀取使用者資料設定檔
         'AddAuthoritySetupToPanel(FormLoginSetups.pnlAuthority, 0, MaxUser)
         'SetFromRights()
+        X = Me.Width '獲取窗體的寬度
+        Y = Me.Height '獲取窗體的高度
+        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
+        SetTag(Me) '調用方法
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -343,7 +352,26 @@ Public Class FormLoginSetup
         SetFromRights()                                     '設定表單內之資料
         ResetModifiedButton(btnSave, "*")
     End Sub
+    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If isLoaded Then
 
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
+            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Width = FormW
+            SetControls(new_x, new_Y, Me, isLoaded)
+            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+        End If
+    End Sub
+
+    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
+        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+
+        Me.WindowState = FormWindowState.Normal
+        FormProcess_Resize(Me, e)
+        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
+    End Sub
 
 
 End Class

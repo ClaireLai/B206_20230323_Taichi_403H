@@ -1698,8 +1698,8 @@ Public Class FormRecipe
     End Sub
     Private Sub Timer1_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         Dim i As Integer
-        Me.Top = FromStartUpTopPosition
-        Me.Left = 0
+        'Me.Top = FromStartUpTopPosition
+        'Me.Left = 0
         'Cal_StepTime()
         If SystemLanguage <> LanguageChange Then
             For i = 0 To Recipe_Num
