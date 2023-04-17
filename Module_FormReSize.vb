@@ -17,7 +17,8 @@ Module Module_FormReSize
                 con.Left = CInt((a))
                 a = System.Convert.ToSingle(mytag(3)) * newy
                 con.Top = CInt((a))
-                Dim currentSize As Single = System.Convert.ToSingle(mytag(4)) * newy
+                Dim currentSize As Single = System.Convert.ToSingle(mytag(4)) * newx - 2
+                Debug.Print("currentSize=" + currentSize.ToString)
                 con.Font = New Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit)
                 If con.Controls.Count > 0 Then
                     SetControls(newx, newy, con, isLoaded)
