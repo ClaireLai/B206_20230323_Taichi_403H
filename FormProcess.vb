@@ -2121,6 +2121,7 @@ Public Class FormProcess
         isLoaded = True '已設定各控制項的尺寸到Tag屬性中
         SetTag(Me) '調用方法
         Debug.Print("FormProcess_Load")
+
     End Sub
 
 
@@ -3596,12 +3597,16 @@ Public Class FormProcess
     Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If isLoaded Then
 
-            Dim new_x As Single = FormW / X
-            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
+            NewX_sub = FormW / X
+            NewY_sub = (FormH - FromStartUpTopPosition) / Y
             Me.Height = (FormW - FromStartUpTopPosition)
             Me.Width = FormW
-            SetControls(new_x, new_Y, Me, isLoaded)
+            SetControls(NewX_sub, NewY_sub, Me, isLoaded)
             Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+            'RecipeInit(RecipeINIFile)
+            CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)
+            RecipeStructReDim(Recipe_Max)
+            'CreateUserControlData()
         End If
     End Sub
 
