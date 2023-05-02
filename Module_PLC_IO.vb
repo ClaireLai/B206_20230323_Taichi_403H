@@ -441,9 +441,9 @@
     Public Const DA2ndPress6Index As Integer = 160    '溫速
 
     'R1365
-    Public Const DAPlateUpPressure1Index As Integer = 161   '壓合壓力 
-    Public Const DAPlateUpPressure2Index As Integer = 162 '壓速
-    Public Const DAPlateUpPressure3Index As Integer = 163        '溫度
+    Public Const DAPlateUpPressure1Index As Integer = 161    '壓合壓力 
+    Public Const DAPlateUpPressure2Index As Integer = 162    '壓速
+    Public Const DAPlateUpPressure3Index As Integer = 163    '溫度
     Public Const DAPlateUpPressure4Index As Integer = 164    '溫速
     Public Const DAPlateUpPressure5Index As Integer = 165    '溫速
     Public Const DAPlateUpPressure6Index As Integer = 166    '溫速
@@ -465,12 +465,40 @@
     '================================================
     Public Const DAOutRangAddDA1Index As Integer = 179 '壓力/DA值比例
     Public Const DAOutRangAddDA2Index As Integer = 180 '壓力/DA值比例
-    Public Const DAOutRangAddDA3Index As Integer = 181 '壓力/DA值比例
-    Public Const DAOutRangAddDA4Index As Integer = 182 '壓力/DA值比例
-    Public Const DAOutRangAddDA5Index As Integer = 183 '壓力/DA值比例
-    Public Const DAOutRangAddDA6Index As Integer = 184 '壓力/DA值比例
+    'Public Const DAOutRangAddDA3Index As Integer = 181 '壓力/DA值比例
+    'Public Const DAOutRangAddDA4Index As Integer = 182 '壓力/DA值比例
+    'Public Const DAOutRangAddDA5Index As Integer = 183 '壓力/DA值比例
+    'Public Const DAOutRangAddDA6Index As Integer = 184 '壓力/DA值比例
 
     '=====================================================
+
+    'R1377 PID相關參數
+    '================================================
+    'Public Const RampTimeIndex As Integer = 173 '升壓時間
+    'Public Const HoldingTimeIIndex As Integer = 174 '持壓時間
+    'Public Const StepTimeIndex As Integer = 175 'step時間
+    Public Const RampRateIndex As Integer = 176  '壓速
+    'Public Const SetPrePressIndex As Integer = 177 '設定前壓力 R1381
+    Public Const SetPressIndex As Integer = 178 '設定壓力 R1382
+    Public Const OverPressIndex As Integer = 181 '超出壓力 R1385
+    Public Const AdjustDAIndex As Integer = 184 'DA調整 R1388
+    Public Const IntervalIndex As Integer = 186  '控壓時間間隔
+
+    'R1392 PID
+    '================================================
+    Public Const PIndex As Integer = 188 '壓力/P值  R1392
+    Public Const IIndex As Integer = 189 '壓力/I值  R1393
+    Public Const DIndex As Integer = 190 '壓力/D值  'R1394
+
+
+
+
+    Public Const sPIndex As Integer = 191 '壓力小/P值 'R1395
+    Public Const sIIndex As Integer = 182 '壓力小/I值  R1386
+    Public Const sDIndex As Integer = 194 '壓力小/D值  R1398
+    '=====================================================
+
+
 
     Public Const ADBoundingP01Index As Integer = 0     '目前 LOAD CELL 值(校正過已扣重)
     Public Const ADBoundingP02Index As Integer = 1     '目前 LOAD CELL 值(校正過已扣重)

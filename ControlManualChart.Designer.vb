@@ -29,18 +29,18 @@ Partial Class ControlManualChart
         Me.btnCurveReset = New System.Windows.Forms.Button()
         Me.btnPrintCurve = New System.Windows.Forms.Button()
         Me.pnlProcessCSelect = New System.Windows.Forms.Panel()
-        Me.lblAxis5 = New System.Windows.Forms.Label()
-        Me.btnColor05 = New System.Windows.Forms.Button()
-        Me.chkMonTemp = New System.Windows.Forms.CheckBox()
         Me.lblAxis4 = New System.Windows.Forms.Label()
         Me.btnColor04 = New System.Windows.Forms.Button()
         Me.chkDAValue = New System.Windows.Forms.CheckBox()
         Me.lblAxis3 = New System.Windows.Forms.Label()
+        Me.btnColor03 = New System.Windows.Forms.Button()
         Me.lblAxis2 = New System.Windows.Forms.Label()
         Me.lblAxis1 = New System.Windows.Forms.Label()
-        Me.btnColor03 = New System.Windows.Forms.Button()
         Me.btnColor02 = New System.Windows.Forms.Button()
         Me.btnColor01 = New System.Windows.Forms.Button()
+        Me.lblAxis5 = New System.Windows.Forms.Label()
+        Me.btnColor05 = New System.Windows.Forms.Button()
+        Me.chkMonTemp = New System.Windows.Forms.CheckBox()
         Me.pnlControl = New System.Windows.Forms.Panel()
         Me.btnStopZoom = New System.Windows.Forms.Button()
         Me.btnSaveAs = New System.Windows.Forms.Button()
@@ -131,42 +131,6 @@ Partial Class ControlManualChart
         Me.pnlProcessCSelect.TabIndex = 543
         Me.pnlProcessCSelect.Visible = False
         '
-        'lblAxis5
-        '
-        Me.lblAxis5.BackColor = System.Drawing.Color.White
-        Me.lblAxis5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblAxis5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAxis5.Location = New System.Drawing.Point(107, 190)
-        Me.lblAxis5.Name = "lblAxis5"
-        Me.lblAxis5.Size = New System.Drawing.Size(27, 25)
-        Me.lblAxis5.TabIndex = 6
-        Me.lblAxis5.Text = "1"
-        Me.lblAxis5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblAxis5.Visible = False
-        '
-        'btnColor05
-        '
-        Me.btnColor05.BackColor = System.Drawing.Color.Blue
-        Me.btnColor05.Location = New System.Drawing.Point(70, 192)
-        Me.btnColor05.Name = "btnColor05"
-        Me.btnColor05.Size = New System.Drawing.Size(33, 25)
-        Me.btnColor05.TabIndex = 5
-        Me.btnColor05.UseVisualStyleBackColor = False
-        Me.btnColor05.Visible = False
-        '
-        'chkMonTemp
-        '
-        Me.chkMonTemp.Checked = True
-        Me.chkMonTemp.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkMonTemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkMonTemp.Location = New System.Drawing.Point(140, 190)
-        Me.chkMonTemp.Name = "chkMonTemp"
-        Me.chkMonTemp.Size = New System.Drawing.Size(105, 25)
-        Me.chkMonTemp.TabIndex = 4
-        Me.chkMonTemp.Text = "下溫度"
-        Me.chkMonTemp.UseVisualStyleBackColor = True
-        Me.chkMonTemp.Visible = False
-        '
         'lblAxis4
         '
         Me.lblAxis4.BackColor = System.Drawing.Color.White
@@ -212,6 +176,15 @@ Partial Class ControlManualChart
         Me.lblAxis3.Text = "1"
         Me.lblAxis3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnColor03
+        '
+        Me.btnColor03.BackColor = System.Drawing.Color.Black
+        Me.btnColor03.Location = New System.Drawing.Point(3, 66)
+        Me.btnColor03.Name = "btnColor03"
+        Me.btnColor03.Size = New System.Drawing.Size(33, 25)
+        Me.btnColor03.TabIndex = 2
+        Me.btnColor03.UseVisualStyleBackColor = False
+        '
         'lblAxis2
         '
         Me.lblAxis2.BackColor = System.Drawing.Color.White
@@ -236,15 +209,6 @@ Partial Class ControlManualChart
         Me.lblAxis1.Text = "1"
         Me.lblAxis1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'btnColor03
-        '
-        Me.btnColor03.BackColor = System.Drawing.Color.Black
-        Me.btnColor03.Location = New System.Drawing.Point(3, 66)
-        Me.btnColor03.Name = "btnColor03"
-        Me.btnColor03.Size = New System.Drawing.Size(33, 25)
-        Me.btnColor03.TabIndex = 2
-        Me.btnColor03.UseVisualStyleBackColor = False
-        '
         'btnColor02
         '
         Me.btnColor02.BackColor = System.Drawing.Color.Blue
@@ -262,6 +226,42 @@ Partial Class ControlManualChart
         Me.btnColor01.Size = New System.Drawing.Size(33, 25)
         Me.btnColor01.TabIndex = 0
         Me.btnColor01.UseVisualStyleBackColor = False
+        '
+        'lblAxis5
+        '
+        Me.lblAxis5.BackColor = System.Drawing.Color.White
+        Me.lblAxis5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblAxis5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAxis5.Location = New System.Drawing.Point(107, 190)
+        Me.lblAxis5.Name = "lblAxis5"
+        Me.lblAxis5.Size = New System.Drawing.Size(27, 25)
+        Me.lblAxis5.TabIndex = 6
+        Me.lblAxis5.Text = "1"
+        Me.lblAxis5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblAxis5.Visible = False
+        '
+        'btnColor05
+        '
+        Me.btnColor05.BackColor = System.Drawing.Color.Blue
+        Me.btnColor05.Location = New System.Drawing.Point(70, 192)
+        Me.btnColor05.Name = "btnColor05"
+        Me.btnColor05.Size = New System.Drawing.Size(33, 25)
+        Me.btnColor05.TabIndex = 5
+        Me.btnColor05.UseVisualStyleBackColor = False
+        Me.btnColor05.Visible = False
+        '
+        'chkMonTemp
+        '
+        Me.chkMonTemp.Checked = True
+        Me.chkMonTemp.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkMonTemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.chkMonTemp.Location = New System.Drawing.Point(140, 190)
+        Me.chkMonTemp.Name = "chkMonTemp"
+        Me.chkMonTemp.Size = New System.Drawing.Size(105, 25)
+        Me.chkMonTemp.TabIndex = 4
+        Me.chkMonTemp.Text = "下溫度"
+        Me.chkMonTemp.UseVisualStyleBackColor = True
+        Me.chkMonTemp.Visible = False
         '
         'pnlControl
         '

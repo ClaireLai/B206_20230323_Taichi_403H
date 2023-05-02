@@ -1263,7 +1263,7 @@ Module Module_License_Data
                 Dim cs As CryptoStream = New CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write)
                 cs.Write(dataByteArray, 0, dataByteArray.Length)
                 cs.FlushFinalBlock()
-                Debug.Print("UTF8=" + Encoding.UTF8.GetString(ms.ToArray()))
+                'Debug.Print("UTF8=" + Encoding.UTF8.GetString(ms.ToArray()))
                 Return Encoding.UTF8.GetString(ms.ToArray())
             Catch ex As Exception
                 'WriteDataToFile(Application.StartupPath & "\Err.Log", ex.ToString)

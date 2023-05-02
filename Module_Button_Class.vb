@@ -708,39 +708,39 @@ Module Module_Button_Class
                         Status = True
                         Control_State = 3
                         If OutputYIndex = debugID Then
-                            Debug.Print("0_Control_State = 3 +" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("0_Control_State = 3 +" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     ElseIf PLC_M(OutputYIndex) = "0" Then       '初始狀態為 OFF, 跳到狀態 1
                         Status = False
                         Control_State = 1
                         If OutputYIndex = debugID Then
-                            Debug.Print("0_PLC_Y(OutputYIndex) = 0 +" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("0_PLC_Y(OutputYIndex) = 0 +" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     Else
                         Set_MBit(OutputMIndex, DEVICE_OFF)     '初始狀態不明,強制設定為OFF 並到 跳到狀態 4
                         Status = False
                         Control_State = 4
                         If OutputMIndex = debugID Then
-                            Debug.Print("0_Set_MBit(OutputMIndex, DEVICE_OFF+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("0_Set_MBit(OutputMIndex, DEVICE_OFF+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     End If
                 Case 1  '狀態為 OFF, 等待 ON
                     If Status And on_cond Then          'PLC端 設定為 ON, 跳到 狀態5
                         Control_State = 5
                         If OutputMIndex = debugID Then
-                            Debug.Print("1_狀態為 OFF, 等待 ON +" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("1_狀態為 OFF, 等待 ON +" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     Else
                         If PLC_M(OutputYIndex) = "1" Then  '若OUPUT 由PLC內部 ON 則更新為ON狀態 3
                             Status = True
                             Control_State = 3
                             If OutputMIndex = debugID Then
-                                Debug.Print("1_PLC_M(OutputYIndex) = 1 +" + watdog.ElapsedMilliseconds.ToString)
-                                watdog_Restart()
+                                'Debug.Print("1_PLC_M(OutputYIndex) = 1 +" + watdog.ElapsedMilliseconds.ToString)
+                                'watdog_Restart()
                             End If
                         Else
                             Status = False      '若未ON則在 狀態 1等待
@@ -749,8 +749,8 @@ Module Module_Button_Class
                 Case 2  'PLC 設定ON ,檢查是否已ON
                     If Not (vStatus And on_cond) Then    'PC 端命令 OFF , 設定 OFF 後到狀態4
                         If OutputMIndex = debugID Then
-                            Debug.Print("2_Set_MBit(OutputMIndex, DEVICE_OFF +" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("2_Set_MBit(OutputMIndex, DEVICE_OFF +" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                         Set_MBit(OutputMIndex, DEVICE_OFF)
                         Status = False
@@ -760,15 +760,15 @@ Module Module_Button_Class
                             Status = True
                             Control_State = 3
                             If OutputMIndex = debugID Then
-                                Debug.Print("2_PLC_Y(OutputYIndex) = 1 Then  PC 端已設定ON,+" + watdog.ElapsedMilliseconds.ToString)
-                                watdog_Restart()
+                                'Debug.Print("2_PLC_Y(OutputYIndex) = 1 Then  PC 端已設定ON,+" + watdog.ElapsedMilliseconds.ToString)
+                                'watdog_Restart()
                             End If
                         Else
                             Status = False
                             Control_State = 1
                             If OutputMIndex = debugID Then
-                                Debug.Print("2_PLC 設定ON ,檢查是否已ON+" + watdog.ElapsedMilliseconds.ToString)
-                                watdog_Restart()
+                                'Debug.Print("2_PLC 設定ON ,檢查是否已ON+" + watdog.ElapsedMilliseconds.ToString)
+                                'watdog_Restart()
                             End If
                         End If
                     End If
@@ -778,15 +778,15 @@ Module Module_Button_Class
                         Status = False
                         Control_State = 4
                         If OutputMIndex = debugID Then
-                            Debug.Print("3_Set_MBit(OutputMIndex, DEVICE_OFF+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("3_Set_MBit(OutputMIndex, DEVICE_OFF+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     ElseIf PLC_M(OutputYIndex) = "0" Then  '輸出已ON, 等待PLC命令OFF則跳到 狀態1
                         Status = False
                         Control_State = 1
                         If OutputMIndex = debugID Then
-                            Debug.Print("3_輸出已ON, 等待PC命令OFF+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("3_輸出已ON, 等待PC命令OFF+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     End If
                 Case 4  ' 強制 OFF , 等待 PLC OFF
@@ -794,8 +794,8 @@ Module Module_Button_Class
                         Status = False
                         Control_State = 1
                         If OutputMIndex = debugID Then
-                            Debug.Print("4_強制 OFF , 等待 PLC OFF+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("4_強制 OFF , 等待 PLC OFF+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     End If
                 Case 5  'PC端設為 ON, 設定輸出命令
@@ -803,16 +803,16 @@ Module Module_Button_Class
                         Status = False                  '強制OFF
                         Control_State = 4
                         If OutputMIndex = debugID Then
-                            Debug.Print("5_PC端設為 ON, 設定輸出命令+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("5_PC端設為 ON, 設定輸出命令+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     Else                                '設定為ON 並跳到 狀態2
                         Set_MBit(OutputMIndex, DEVICE_ON)
                         Status = True
                         Control_State = 2
                         If OutputMIndex = debugID Then
-                            Debug.Print("5_Set_MBit(OutputMIndex, DEVICE_ON+" + watdog.ElapsedMilliseconds.ToString)
-                            watdog_Restart()
+                            'Debug.Print("5_Set_MBit(OutputMIndex, DEVICE_ON+" + watdog.ElapsedMilliseconds.ToString)
+                            'watdog_Restart()
                         End If
                     End If
             End Select

@@ -7,6 +7,7 @@
     Public DeviceLifeINIFile As String
     Public DeviceDataINIFile As String
     Public ParameterINIFile As String
+    Public PIDINIFile As String
     Public PLCIOMappingINIFile As String
 
 
@@ -20,6 +21,7 @@
         DeviceDataINIFile = sdir + "DEVICEDATA.INI"   '程式資料INI檔案
         ParameterINIFile = sdir + "PARAMETER.INI"     '程式資料INI檔案
         PLCIOMappingINIFile = sdir + "PLCIOMAP.INI"   '程式資料INI檔案
+        PIDINIFile = sdir + "PID.INI"
         ProcessINIFile = sdir + "PROCESS.INI"
         RunDataINIFile = ProgramDir + "RUNDATA.INI"  'Barcode 20160808 by vincent ----------------
         InitRecipe(sdir)

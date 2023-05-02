@@ -70,6 +70,8 @@
     ''' </summary>
     ''' <remarks></remarks>
     Public ManualControl(MAXPLATE) As ControlManual
+
+    Public PressPID As New ControlPressPID
     ''' <summary>
     ''' 壓力校正子元件
     ''' </summary>
@@ -140,7 +142,8 @@
         End If
         '建立流量控制項
         CreateFlowSet(FormParameters.flwFlowSetup, 0, MAXPLATE)
-
+        '建立壓力PID控制項
+        CreatePressPID(FormParameters.flwPressPID, 0, 0)
         '建立製程壓頭顯示控制項
         CreatePlateProcess(FormProcesss.flwProcess, 0, MAXPLATE)
         '建立製程壓頭配方顯示控制項
@@ -204,10 +207,10 @@
             PressCal(i) = New ControlPressCal
             PressCal(i).Name = "PARAMETER_PRESSCAL" + Format(i, "00")
 
-            PressCal(i).Initial(i, DAPressureCal1XIndex + i * 5, DAPressure01Cal1Index + i * 5, _
-                                ADOriginPressAD01Index + i, ADOriginPress01Index + i, ADBoundingP01Index + i, _
-                                DAPressFullScaleIndex, ADScalerA01Index + i, _
-                                 DoBondUp01Index + i * 4, DoBondDown01Index + i * 4, _
+            PressCal(i).Initial(i, DAPressureCal1XIndex + i * 5, DAPressure01Cal1Index + i * 5,
+                                ADOriginPressAD01Index + i, ADOriginPress01Index + i, ADBoundingP01Index + i,
+                                DAPressFullScaleIndex, ADScalerA01Index + i,
+                                 DoBondUp01Index + i * 4, DoBondDown01Index + i * 4,
                                  DoOilPump01Index + i * 4, 3000)
             PressCal(i).Title = Title + Format(i + 1, "00")
             PressCal(i).OilPumpUsed = OilPumpUsed
@@ -215,6 +218,13 @@
             If i > 0 Then PressCal(i).EnableXInput = False
         Next
         AddHandler PressCal(0).CalXInput, AddressOf SyncPressCalData
+    End Sub
+    Public Sub CreatePressPID(ByRef frm As Object, ByVal iStart As Integer, ByVal iEnd As Integer)
+        PressPID.Width = 60
+        PressPID.Height = 50
+        frm.Controls.Add(PressPID)
+        PressPID.ReadPID()
+
     End Sub
 
     Public Sub SyncPressCalData()

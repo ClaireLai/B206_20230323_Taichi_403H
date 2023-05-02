@@ -252,6 +252,7 @@
         Return Check_PLC_Y(DoTopHeaterIndex)
     End Function
 
+
     ''' <summary>
     ''' 設定油壓幫浦動作
     ''' </summary>
