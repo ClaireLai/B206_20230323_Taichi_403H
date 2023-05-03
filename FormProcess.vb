@@ -2357,7 +2357,7 @@ Public Class FormProcess
                 ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
                 ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
                 CsvFilename = ProcessCSVDir + sFile + ".csv"
-
+                CsvFilename1 = ProcessCSVDir + sFile + "_A.csv"
                 If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
                     FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
                 End If
@@ -2369,6 +2369,9 @@ Public Class FormProcess
                 End If
                 If FileIO.FileSystem.FileExists(CsvFilename) Then
                     FileIO.FileSystem.DeleteFile(CsvFilename)
+                End If
+                If FileIO.FileSystem.FileExists(CsvFilename1) Then
+                    FileIO.FileSystem.DeleteFile(CsvFilename1)
                 End If
                 lblProcessStartTime.Text = TTime
                 lblProcessStopTime.Text = "00:00:00"
@@ -2408,7 +2411,7 @@ Public Class FormProcess
                 'sFile = ProcessRecordFileName 'FormKeyInProcessNames.ProcessFileName
                 ProcessPN = sFile
                 ProcessRecordFileName = ProcessRecordDir + sFile + ".dat"
-                'ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
+                ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
                 ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
                 ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
                 If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
@@ -2420,7 +2423,7 @@ Public Class FormProcess
                 End If
                 lblProcessDataFile.Text = ProcessPN + ".dat"
                 CsvFilename = ProcessCSVDir + sFile + ".csv"
-
+                CsvFilename1 = ProcessCSVDir + sFile + "_A.csv"
                 lblProcessStartTime.Text = TTime
                 lblProcessStopTime.Text = "00:00:00"
 
@@ -3265,7 +3268,7 @@ Public Class FormProcess
             ProcessRecordFileName1 = ProcessRecordDir + recipe + "_A.txt"
             ProcessRecordCurveFileName = ProcessRecordCurveDir + recipe + ".Proc"
             CsvFilename = ProcessCSVDir + recipe + ".csv"
-
+            CsvFilename1 = ProcessCSVDir + recipe + "_A.csv"
             If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
                 FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
             End If
@@ -3278,7 +3281,9 @@ Public Class FormProcess
             If FileIO.FileSystem.FileExists(CsvFilename) Then
                 FileIO.FileSystem.DeleteFile(CsvFilename)
             End If
-
+            If FileIO.FileSystem.FileExists(CsvFilename1) Then
+                FileIO.FileSystem.DeleteFile(CsvFilename1)
+            End If
 
             Dim SaveName1 As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".csv"
             AppendDataA(SaveName1, "LogFile," & "=""" & ProcessRecordShortFileName & """")
@@ -3556,7 +3561,7 @@ Public Class FormProcess
         ProcessRecordCurveFileName = ProcessRecordCurveDir + ProcessRecordShortFileName + ".Proc"
 
         CsvFilename = ProcessCSVDir + ProcessRecordShortFileName + ".csv"
-
+        CsvFilename1 = ProcessCSVDir + ProcessRecordShortFileName + "_A.csv"
         lblProcessStartTime.Text = TTime
         lblProcessStopTime.Text = "00:00:00"
 

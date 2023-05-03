@@ -33,6 +33,7 @@
 
     Public VideoFileName As String
     Public CsvFilename As String
+    Public CsvFilename1 As String
     Public UserDataFileName As String         '使用者帳密設定檔
     Public AlarmRecordFileName As String             '異常記錄資料夾
     Public PLCAlarmRecordFileName As String             'PLC異常記錄資料夾

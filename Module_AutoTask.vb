@@ -1872,7 +1872,142 @@ Module Module_AutoTask
                 'End If
         End Select
     End Sub
+    '曲線及製程記錄/依據PID timer interval
+    Public Sub ProcessRecord_Task_ms()
+        Static Control_State As Byte
+        Dim ShowData As String
+        Dim Data(200) As String
+        Dim j, datamax As Integer
+        Dim i As Byte
+        On Error Resume Next
+        If ProcessRecordFileName1 = "" Then
+            Exit Sub
+        End If
 
+        Select Case Control_State
+            Case 0
+                If ProcessMode_RUN Then
+                    ProcessRecordsIndex1 = 0
+
+                    Control_State = 1
+                End If
+            Case 1
+
+                If ProcessMode_RUN Then
+                    '標題
+                    If ProcessRecordsIndex1 = 0 Then
+                        ShowData = "Model:" + vbTab + Program_ModelName + vbTab + " Process Start for Recipe:" + vbTab + ProcessRecipeName + "Date/Time:" + ADate + " " + TTime + vbTab + "  PN:" + ProcessPN
+                        AppendMultiData(ProcessRecordFileName1, 150, ShowData)
+                        ShowData = ""
+                        datamax = 0
+                        Data(datamax) = "No."
+                        datamax += 1
+                        Data(datamax) = "Step"
+                        datamax += 1
+                        Data(datamax) = "Time"
+                        datamax += 1
+                        Data(datamax) = "ProcessTime"
+                        datamax += 1
+                        Data(datamax) = "Vacuum"
+                        datamax += 1
+                        Data(datamax) = "MPCurrent"
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
+                            datamax += 1
+                            Data(datamax) = "TopTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "Pressure" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "DA" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopWater" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotWater" + Format(i + 1, "00")
+                        Next
+                        For i = 0 To datamax - 1
+                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
+                        Next
+                        ShowData = ShowData + Data(i)
+                        'AppendMultiData(ProcessRecordFileName, 511, ShowData)
+                        AppendData(ProcessRecordFileName1, ShowData, 511)
+                        ShowData = ""
+                        ProcessRecordsIndex1 += 1
+                    End If
+                    'log 資料
+                    If ProcessMode_RUN Then
+
+                        ShowData = ""
+                        datamax = 0
+                        Data(datamax) = Format(ProcessRecordsIndex)
+                        datamax += 1
+                        Data(datamax) = Format(ProcessStepIndex + 1)
+                        datamax += 1
+                        Data(datamax) = TTime
+                        datamax += 1
+                        Data(datamax) = ConvertSecToTime(TotalProcessTime)
+                        datamax += 1
+                        Data(datamax) = GaugeCHVacStr
+                        datamax += 1
+                        Data(datamax) = MPCurrentStr
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
+                            datamax += 1
+                            Data(datamax) = TopTempPVStr(i)
+                            datamax += 1
+                            Data(datamax) = BotTempPVStr(i)
+                            datamax += 1
+                            Data(datamax) = PressPVstr(i)
+                            datamax += 1
+                            Data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
+                            datamax += 1
+                            Data(datamax) = TopCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = BotCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetTopFLowStr
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetBotFLowStr
+
+                        Next
+                        For i = 0 To datamax - 1
+                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab
+                        Next
+                        ShowData = ShowData + Data(i)
+                        AppendMultiData(ProcessRecordFileName1, 255, ShowData)
+
+                        'ProcessRecords.ProcessStep = Data(0)
+                        'ProcessRecords.ProcessTime = Data(1)
+                        'ProcessRecords.TopTemperature = Data(2)
+                        'ProcessRecords.BotTemperature = Data(3)
+                        'ProcessRecords.TopCurrent = Data(4)
+                        'ProcessRecords.BotCurrent = Data(5)
+                        'ProcessRecords.BondingPressure = Data(6)
+                        'ProcessRecords.DPCurrent = Data(7)
+                        'ProcessRecords.Vacuum = Data(8)
+                        'FileOpen(21, ProcessRecordCurveFileName, OpenMode.Random, , OpenShare.Shared, 300)
+                        'FilePut(21, ProcessRecords, ProcessRecordsIndex)
+                        'FileClose(21)
+                        ProcessRecordsIndex1 = ProcessRecordsIndex1 + 1
+                    End If
+                Else
+                    Control_State = 99
+                End If
+            Case 99
+                Control_State = 0
+                ProcessRecordsIndex1 = 0
+                'If ProcessRecordsIndex > 0 Then
+                '    FileClose(21)
+                'End If
+        End Select
+    End Sub
     '手動資料記錄,
     Public DatalogStart As Boolean
     Public DatalogCount As Integer
@@ -1886,7 +2021,9 @@ Module Module_AutoTask
 
     Public DataLogRecordFileName As String
     Public DataLogShortFileName As String
+    Public DataLogShortFileName1 As String
     Public DataLogCUVFileName As String
+    Public DataLogCUVFileName1 As String
     Public DataLogRecordDir As String
 
     Public Sub DataLog_Task()

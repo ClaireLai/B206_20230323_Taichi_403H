@@ -455,7 +455,7 @@ Module Module_CurveData
     Public Process_Series(10) As chkSeries '製程用
     Public Manual_Series(10) As chkSeries '製程用
 
-    '記錄用
+    '建立記錄畫面曲線選擇區
     Public Sub InitSeriesSelect(ByRef pnl As Panel, ByRef chk() As chkSeries, ByVal cChart As Chart, Optional ByVal iNext As Integer = 0)
         Dim i As Integer
         Dim iNum As Integer
@@ -814,6 +814,8 @@ Module Module_CurveData
                             data(datamax) = BotTempPVStr(i)
                             datamax += 1
                             data(datamax) = PressPVstr(i)
+                            datamax += 1
+                            data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
                             datamax += 1
                             data(datamax) = PresetTempStr(i)
                             datamax += 1

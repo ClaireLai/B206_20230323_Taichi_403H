@@ -230,7 +230,9 @@ Public Class FormKeyinDataLogName
             txtFileName.Text = FDate + "-" + FTime + "-[" + LoginUserName + "]"
         Else
             DataLogShortFileName = txtFileName.Text + ".csv"
+            DataLogShortFileName1 = txtFileName.Text + "_A.csv"
             DataLogCUVFileName = txtFileName.Text + ".cuv"
+            DataLogCUVFileName1 = txtFileName.Text + "_A.cuv"
             DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
             DataLogRecordFileName1 = DataLogRecordDir + txtFileName.Text + "_A.txt"
         End If
