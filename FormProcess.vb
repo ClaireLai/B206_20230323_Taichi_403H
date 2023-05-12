@@ -2561,7 +2561,7 @@ Public Class FormProcess
         'Chart1.Series("Series1").Color = Color.Violet
         'Chart1.Series("Series2").Color = Color.Cyan
         'Chart1.Series("Series3").Color = Color.DarkGray
-        ReDim RealTimePreSetCurves(MAXPLATE)
+        ReDim RealTimePreSetCurves(MAXPLATE) 'claire
         For l = 0 To MAXPLATE
             ReDim RealTimePreSetCurves(l).BondingPressure(iTotal + 100)
             ReDim RealTimePreSetCurves(l).BotTemperature(iTotal + 100)
@@ -2629,7 +2629,7 @@ Public Class FormProcess
 
             'ProcessCurve(l).Chart1.ChartAreas(0).AxisX.Maximum = iTotal * 1.5
             ProcessCurve(l).Chart1.ChartAreas(0).AxisX.Maximum = [Double].NaN
-            CurveDataBindY(ProcessCurve(l).Chart1, 3, RealTimePreSetCurves(l).TopTemperature)
+            CurveDataBindY(ProcessCurve(l).Chart1, 3, RealTimePreSetCurves(l).TopTemperature) 'claire
             CurveDataBindY(ProcessCurve(l).Chart1, 4, RealTimePreSetCurves(l).BondingPressure)
             'ProcessCurve(l).Chart1.ChartAreas(0).RecalculateAxesScale()
         Next

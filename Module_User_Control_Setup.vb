@@ -224,7 +224,6 @@
         PressPID.Height = 50
         frm.Controls.Add(PressPID)
         PressPID.ReadPID()
-
     End Sub
 
     Public Sub SyncPressCalData()
@@ -239,7 +238,6 @@
             PressCal(i).SaveData()
         Next
     End Sub
-
 
     Public Sub CreateManual(ByRef frm As Object, ByVal iStart As Integer, ByVal iEnd As Integer, Optional ByVal Title As String = "Site #")
         Dim i As Integer

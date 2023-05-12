@@ -201,19 +201,20 @@
             '各頭加壓值
             oriPressPV(i) = Get_PLC_R1000(ADBoundingP01Index + i)
             If oriPressPV(i) < 0 Then oriPressPV(i) = 0
+            PressPV(i) = oriPressPV(i)
             'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
-            If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then
-                'If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
-                AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
-                'Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(oriPressPV(i), Val(SystemParameters.PeakLimit), Val(SystemParameters.PeakTimes))
-                'Else
-                '    AvergaeValue(i).ClearAverageTimes()
-                '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                'End If
-            Else
-                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            End If
+            'If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then
+            '    'If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
+            '    AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
+            '    'Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+            '    PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(oriPressPV(i), Val(SystemParameters.PeakLimit), Val(SystemParameters.PeakTimes))
+            '    'Else
+            '    '    AvergaeValue(i).ClearAverageTimes()
+            '    '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+            '    'End If
+            'Else
+            '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+            'End If
             If GetTrue01Boolean(SystemParameters.PressureAdjust) Then
                 Select Case PressState(i)
                     Case 0
@@ -235,7 +236,7 @@
                     Case 1
                         If Check_PLC_M(DoBondForce01Index + i) Then
                             If Get_PLC_R1100(DAProcessBond01Index + 4 * i) <> OldPressValue(i) Then
-                                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                                'PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
                                 PressStateDelay(i) += 1
                                 If PressStateDelay(i) > 3 Then
                                     PressStateDelay(i) = 0
@@ -255,10 +256,10 @@
                 OldPressValue(i) = 0
             End If
 
-            If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False And GetTrue01Boolean(SystemParameters.PressureAdjust) = False Then
-                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            End If
-
+            'If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False And GetTrue01Boolean(SystemParameters.PressureAdjust) = False Then
+            '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '壓力均化範圍
+            'End If
+            PressPV(i) = oriPressPV(i)
 
             'Remark  by Vincent 20181016  壓力修整功能 -- 下行為原本程式碼:
             ' PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))

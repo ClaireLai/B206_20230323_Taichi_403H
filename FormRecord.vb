@@ -1159,7 +1159,11 @@ Public Class FormRecord
     Dim j As Integer
     Dim i0 As Integer
     Dim ShowIndex As Integer
-
+    ''' <summary>
+    ''' 選取曲線檔後狀態
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnOpenCurve1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenCurve1.Click
         OpenFileDialog4.Filter = "Curve files (*.cuv)|*.cuv"
         OpenFileDialog4.InitialDirectory = WorkingDir & "Records\ProcessrecordCurves\"
@@ -1175,19 +1179,21 @@ Public Class FormRecord
             For i = 0 To ChartRecord.ChartAreas.Count - 1
                 ChartRecord.ChartAreas(i).AxisX.Maximum = [Double].NaN
             Next
-            'chkSite1.Checked = True
-            'chkSite2.Checked = False
-            'chkSite3.Checked = False
+
+            chkSite1.Checked = True
+            chkSite2.Checked = True
+            chkSite3.Checked = True
             'chkSite4.Checked = False
             'chkSite5.Checked = False
             'chkSite6.Checked = False
-            'chkVacuum.Checked = False
+            chkVacuum.Checked = True
             lblMessage.Text = "Reading Data"
             pgbReadCurve.Visible = True
             btnOpenCurve1.Enabled = False
-            'For i = 0 To Record_Series.Length - 1
-            '    Record_Series(i).chkEnable.Checked = False
-            'Next
+            For i = 0 To Record_Series.Length - 1
+                Record_Series(i).chkEnable.Checked = True
+                Record_Series(i).lblAxis.Text = "1"
+            Next
             'CurveSelectChecked(chkSite1)
             ReadCurveData = New System.Threading.Thread(AddressOf ReadCurveDataThread)
             ReadCurveData.Priority = Threading.ThreadPriority.Highest

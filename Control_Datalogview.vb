@@ -5,6 +5,10 @@ Public Class Control_Datalogview
         Dim i As Integer
         Form.CheckForIllegalCrossThreadCalls = False
     End Sub
+    ''' <summary>
+    ''' 讀Chart 右邊一排 List
+    ''' </summary>
+    ''' <param name="sfile"></param>
     Public Sub ReadProcessRecord(ByVal sfile As String)
         Dim i, j, k, l As Integer
         Dim filenum As Integer
@@ -61,7 +65,7 @@ Public Class Control_Datalogview
             'System.Threading.Thread.Sleep(1)
             'Application.DoEvents()
 
-
+            '
 
             dgDatalogView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             dgDatalogView.ColumnHeadersDefaultCellStyle.Font = New Font("ARIAL", 10)

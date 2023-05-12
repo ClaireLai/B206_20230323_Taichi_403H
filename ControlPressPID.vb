@@ -6,13 +6,13 @@
     Public FormH As Integer
     Dim II As Integer = 0
     Private Sub txtP1_MouseDown(sender As Object, e As MouseEventArgs) Handles txtP1.MouseDown
-        CallKeyboard2(sender, "20", "0")
+        CallKeyboard2(sender, "30", "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
 
     Private Sub txtI1_MouseDown(sender As Object, e As MouseEventArgs) Handles txtI1.MouseDown
-        CallKeyboard2(sender, "30", "0")
+        CallKeyboard2(sender, "40", "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
@@ -69,7 +69,7 @@
         txtInterval.Text = ReadProgData("PID", "Interval", "100", PIDINIFile)
         txtOverPress.Text = ReadProgData("PID", "OverPress", "100", PIDINIFile)
         txtAdjustDA.Text = ReadProgData("PID", "AdjustDA", "100", PIDINIFile)
-
+        Form1.Timer2.Interval = Val(txtInterval.Text) * 100
     End Sub
     Private Sub SavePID()
         Write_PLC_R1100(PIndex, Val(txtP1.Text))

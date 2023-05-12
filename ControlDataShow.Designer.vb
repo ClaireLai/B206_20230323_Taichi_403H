@@ -23,18 +23,18 @@ Partial Class ControlDataShow
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ControlDataShow))
-        Me.grpTitle = New System.Windows.Forms.GroupBox
-        Me.lblkg01Text = New System.Windows.Forms.Label
-        Me.picC01 = New System.Windows.Forms.PictureBox
-        Me.lblPressure = New System.Windows.Forms.Label
-        Me.lblPressureText = New System.Windows.Forms.Label
-        Me.lblBotTemp = New System.Windows.Forms.Label
-        Me.lblPressurePreset = New System.Windows.Forms.Label
-        Me.lblTempPreset = New System.Windows.Forms.Label
-        Me.lblTopTemp = New System.Windows.Forms.Label
-        Me.lblTopTempText = New System.Windows.Forms.Label
-        Me.lblTempPresetText = New System.Windows.Forms.Label
-        Me.lblBotTempText = New System.Windows.Forms.Label
+        Me.grpTitle = New System.Windows.Forms.GroupBox()
+        Me.lblkg01Text = New System.Windows.Forms.Label()
+        Me.picC01 = New System.Windows.Forms.PictureBox()
+        Me.lblPressure = New System.Windows.Forms.Label()
+        Me.lblBotTemp = New System.Windows.Forms.Label()
+        Me.lblPressureDA = New System.Windows.Forms.Label()
+        Me.lblTempPreset = New System.Windows.Forms.Label()
+        Me.lblTopTemp = New System.Windows.Forms.Label()
+        Me.lblTopTempText = New System.Windows.Forms.Label()
+        Me.lblTempPresetText = New System.Windows.Forms.Label()
+        Me.lblBotTempText = New System.Windows.Forms.Label()
+        Me.lblPressureText = New System.Windows.Forms.Label()
         Me.grpTitle.SuspendLayout()
         CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,7 +45,7 @@ Partial Class ControlDataShow
         Me.grpTitle.Controls.Add(Me.picC01)
         Me.grpTitle.Controls.Add(Me.lblPressure)
         Me.grpTitle.Controls.Add(Me.lblBotTemp)
-        Me.grpTitle.Controls.Add(Me.lblPressurePreset)
+        Me.grpTitle.Controls.Add(Me.lblPressureDA)
         Me.grpTitle.Controls.Add(Me.lblTempPreset)
         Me.grpTitle.Controls.Add(Me.lblTopTemp)
         Me.grpTitle.Controls.Add(Me.lblTopTempText)
@@ -64,7 +64,7 @@ Partial Class ControlDataShow
         '
         'lblkg01Text
         '
-        Me.lblkg01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblkg01Text.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblkg01Text.ForeColor = System.Drawing.Color.Black
         Me.lblkg01Text.Location = New System.Drawing.Point(188, 14)
         Me.lblkg01Text.Name = "lblkg01Text"
@@ -97,17 +97,6 @@ Partial Class ControlDataShow
         Me.lblPressure.Text = "000"
         Me.lblPressure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lblPressureText
-        '
-        Me.lblPressureText.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPressureText.ForeColor = System.Drawing.Color.Black
-        Me.lblPressureText.Location = New System.Drawing.Point(8, 13)
-        Me.lblPressureText.Name = "lblPressureText"
-        Me.lblPressureText.Size = New System.Drawing.Size(61, 18)
-        Me.lblPressureText.TabIndex = 539
-        Me.lblPressureText.Text = "壓力:"
-        Me.lblPressureText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'lblBotTemp
         '
         Me.lblBotTemp.BackColor = System.Drawing.Color.Black
@@ -122,19 +111,19 @@ Partial Class ControlDataShow
         Me.lblBotTemp.Text = "0"
         Me.lblBotTemp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lblPressurePreset
+        'lblPressureDA
         '
-        Me.lblPressurePreset.BackColor = System.Drawing.Color.Black
-        Me.lblPressurePreset.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblPressurePreset.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPressurePreset.ForeColor = System.Drawing.Color.Cyan
-        Me.lblPressurePreset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPressurePreset.Location = New System.Drawing.Point(127, 12)
-        Me.lblPressurePreset.Name = "lblPressurePreset"
-        Me.lblPressurePreset.Size = New System.Drawing.Size(58, 20)
-        Me.lblPressurePreset.TabIndex = 530
-        Me.lblPressurePreset.Text = "0000"
-        Me.lblPressurePreset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblPressureDA.BackColor = System.Drawing.Color.Black
+        Me.lblPressureDA.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblPressureDA.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPressureDA.ForeColor = System.Drawing.Color.Cyan
+        Me.lblPressureDA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPressureDA.Location = New System.Drawing.Point(127, 12)
+        Me.lblPressureDA.Name = "lblPressureDA"
+        Me.lblPressureDA.Size = New System.Drawing.Size(58, 20)
+        Me.lblPressureDA.TabIndex = 530
+        Me.lblPressureDA.Text = "0000"
+        Me.lblPressureDA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblTempPreset
         '
@@ -195,6 +184,17 @@ Partial Class ControlDataShow
         Me.lblBotTempText.Text = "下溫度"
         Me.lblBotTempText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblPressureText
+        '
+        Me.lblPressureText.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPressureText.ForeColor = System.Drawing.Color.Black
+        Me.lblPressureText.Location = New System.Drawing.Point(8, 13)
+        Me.lblPressureText.Name = "lblPressureText"
+        Me.lblPressureText.Size = New System.Drawing.Size(61, 18)
+        Me.lblPressureText.TabIndex = 539
+        Me.lblPressureText.Text = "壓力:"
+        Me.lblPressureText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'ControlDataShow
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -213,7 +213,7 @@ Partial Class ControlDataShow
     Friend WithEvents lblPressure As System.Windows.Forms.Label
     Friend WithEvents lblPressureText As System.Windows.Forms.Label
     Friend WithEvents lblBotTemp As System.Windows.Forms.Label
-    Friend WithEvents lblPressurePreset As System.Windows.Forms.Label
+    Friend WithEvents lblPressureDA As System.Windows.Forms.Label
     Friend WithEvents lblTempPreset As System.Windows.Forms.Label
     Friend WithEvents lblTopTemp As System.Windows.Forms.Label
     Friend WithEvents lblTopTempText As System.Windows.Forms.Label

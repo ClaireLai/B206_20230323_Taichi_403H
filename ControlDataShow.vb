@@ -35,6 +35,11 @@
             lblBotTemp.Text = value
         End Set
     End Property
+    'WriteOnly Property SetPressure() As String
+    '    Set(ByVal value As String)
+    '        lblPressure.Text = value
+    '    End Set
+    'End Property
     WriteOnly Property SetPressure() As String
         Set(ByVal value As String)
             lblPressure.Text = value
@@ -45,9 +50,14 @@
             lblTempPreset.Text = value
         End Set
     End Property
+    WriteOnly Property SetPresetDA() As String
+        Set(ByVal value As String)
+            lblPressureDA.Text = value
+        End Set
+    End Property
     WriteOnly Property SetPressurePreset() As String
         Set(ByVal value As String)
-            lblPressurePreset.Text = value
+            lblPressureDA.Text = value
         End Set
     End Property
 

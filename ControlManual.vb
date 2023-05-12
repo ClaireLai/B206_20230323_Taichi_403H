@@ -112,7 +112,7 @@
             lblVPB.Visible = False
         End If
 
-        Timer1.Interval = 100
+        Timer1.Interval = 500
         Timer1.Enabled = True
     End Sub
     '屬性

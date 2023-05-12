@@ -8,7 +8,7 @@ Module Module_CurveData
     Public TempInSecondary As Boolean
 
     Public Sub InitCurveData(ByVal sdir As String)
-        CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
+        CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
         ReadCurveNames(CurveDataINI)
         ' 建立製程用曲線
         ChartInitial()
@@ -125,7 +125,7 @@ Module Module_CurveData
             ProcessCurve(i).Chart1.Series(0).Points.AddY(TopTempPV(i)) 'Val(PLC_R_READ(ADTopTemp01Index)))
             ProcessCurve(i).Chart1.Series(1).Points.AddY(BotTempPV(i)) 'Val(PLC_R_READ(ADBottomTemperatureIndex)))
             ProcessCurve(i).Chart1.Series(2).Points.AddY(PressPV(i))
-            'ProcessCurve(j).Chart1.Series(CurveNames.BotCurrent).Points.AddY(BotCurrent(0))
+            'ProcessCurve(j).Chart1.Series(3).Points.AddY(DA1stPressIndex(i)))
             'ChartProcess.Series(CurveNames.Pressure).Points.AddY(PressPV(0)) 'Val(PLC_R_READ(ADBoundingP01Index)))
             'ChartProcess.Series(CurveNames.DPCurrent).Points.AddY(MPCurrent)
         Next
@@ -467,8 +467,6 @@ Module Module_CurveData
         ReDim chk(MAX_CURVES)
         For i = 0 To MAX_CURVES
 
-
-
             chk(i).pnlColor = New Panel
             chk(i).pnlColor.Name = "PNL_" + Format(i, "00")
             chk(i).pnlColor.Location = New Point(5, i * ColorBoxSize)
@@ -729,12 +727,19 @@ Module Module_CurveData
                     FormRecords.lblCHVac.Text = Format(ChartRecord.Series(0).Points(e.NewPosition).YValues(0), "0.0+E00")
                     FormRecords.lblDPCurrent.Text = Format(ChartRecord.Series(1).Points(e.NewPosition).YValues(0), "0.00")
                     For j = 0 To MAXPLATE
-                        If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
-                            RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
+                        'If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
+                        '    RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
+                        'End If
+                        If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
+                            RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 6 + 3).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetPressure = ChartRecord.Series(j * 6 + 4).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetPresetDA = ChartRecord.Series(j * 6 + 5).Points(e.NewPosition).YValues(0).ToString 'da值
+                            RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 6 + 6).Points(e.NewPosition).YValues(0).ToString '溫度預設
                         End If
                     Next
                 Else
