@@ -5,6 +5,7 @@ Public Class FormParameter
     Private txtC_Time As Integer = 200 ''By chesly 20181023 壓缸自動循環動作/Sec
     Private txtCR_Time As Integer = 999 'By chesly 20181023 壓缸自動循環動作/次數
     Private tempi As Integer
+    Private bolUp As Boolean
     'Public Resistance_ruler_Flag As Boolean
 #Const SanAn_TCPIP_Used = 0
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -467,8 +468,18 @@ Public Class FormParameter
     Friend WithEvents lblPressAverageText As Label
     Friend WithEvents txtPressAverage As TextBox
     Friend WithEvents lblKg12Text As Label
-    Friend WithEvents Button1 As Button
     Friend WithEvents Timer2 As Timer
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents btDn As Button
+    Friend WithEvents btUp As Button
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtdown As TextBox
+    Friend WithEvents txtup As TextBox
+    Friend WithEvents txtinterval As TextBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnlog As Button
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -743,6 +754,7 @@ Public Class FormParameter
         Me.flwPressCalUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPageSystem = New System.Windows.Forms.TabPage()
         Me.TabPageCIM = New System.Windows.Forms.TabPage()
+        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
         Me.TabPageCello = New System.Windows.Forms.TabPage()
         Me.tabSystem = New System.Windows.Forms.TabControl()
         Me.tabpageTempCal = New System.Windows.Forms.TabPage()
@@ -882,6 +894,17 @@ Public Class FormParameter
         Me.btnPlateUp1 = New System.Windows.Forms.Button()
         Me.btnPlateDown1 = New System.Windows.Forms.Button()
         Me.pnl6Plate = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnlog = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtdown = New System.Windows.Forms.TextBox()
+        Me.txtup = New System.Windows.Forms.TextBox()
+        Me.txtinterval = New System.Windows.Forms.TextBox()
+        Me.btDn = New System.Windows.Forms.Button()
+        Me.btUp = New System.Windows.Forms.Button()
         Me.lblPositionSet6 = New System.Windows.Forms.Label()
         Me.lblPositionSet5 = New System.Windows.Forms.Label()
         Me.lblPositionSet4 = New System.Windows.Forms.Label()
@@ -952,6 +975,7 @@ Public Class FormParameter
         Me.lblThresholdText = New System.Windows.Forms.Label()
         Me.lblThresholdPressRatioText = New System.Windows.Forms.Label()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
+        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtTICComport = New System.Windows.Forms.TextBox()
@@ -997,14 +1021,11 @@ Public Class FormParameter
         Me.picCelloTitle = New System.Windows.Forms.PictureBox()
         Me.picCelloLogo = New System.Windows.Forms.PictureBox()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
-        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlParaSet.SuspendLayout
-        Me.grpVacuum.SuspendLayout
-        Me.pnlDPWaterFlow.SuspendLayout
-        Me.pnlDPTemp.SuspendLayout
+        Me.pnlParaSet.SuspendLayout()
+        Me.grpVacuum.SuspendLayout()
+        Me.pnlDPWaterFlow.SuspendLayout()
+        Me.pnlDPTemp.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1041,6 +1062,7 @@ Public Class FormParameter
         Me.tabpagePressControl.SuspendLayout()
         Me.pnlPressureAverage.SuspendLayout()
         Me.pnl6Plate.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tabPageIniEdit.SuspendLayout()
         Me.TabPageTempCalTool.SuspendLayout()
@@ -3687,6 +3709,14 @@ Public Class FormParameter
         Me.TabPageCIM.TabIndex = 5
         Me.TabPageCIM.Text = "CIM Setup"
         '
+        'CtlSanAnCIMSetup1
+        '
+        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
+        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
+        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
+        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
+        Me.CtlSanAnCIMSetup1.TabIndex = 0
+        '
         'TabPageCello
         '
         Me.TabPageCello.BackColor = System.Drawing.Color.Transparent
@@ -4380,7 +4410,7 @@ Public Class FormParameter
         'tabpagePressControl
         '
         Me.tabpagePressControl.BackColor = System.Drawing.Color.Transparent
-        Me.tabpagePressControl.Controls.Add(Me.Button1)
+        Me.tabpagePressControl.Controls.Add(Me.GroupBox2)
         Me.tabpagePressControl.Controls.Add(Me.lblNoControlPressText)
         Me.tabpagePressControl.Controls.Add(Me.lblPressAverageText)
         Me.tabpagePressControl.Controls.Add(Me.txtNoControlPress)
@@ -4508,7 +4538,7 @@ Public Class FormParameter
         'txtNoControlPress
         '
         Me.txtNoControlPress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNoControlPress.Location = New System.Drawing.Point(851, 342)
+        Me.txtNoControlPress.Location = New System.Drawing.Point(908, 339)
         Me.txtNoControlPress.Name = "txtNoControlPress"
         Me.txtNoControlPress.Size = New System.Drawing.Size(60, 30)
         Me.txtNoControlPress.TabIndex = 861
@@ -4518,7 +4548,7 @@ Public Class FormParameter
         'txtPressAverage
         '
         Me.txtPressAverage.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPressAverage.Location = New System.Drawing.Point(851, 374)
+        Me.txtPressAverage.Location = New System.Drawing.Point(908, 372)
         Me.txtPressAverage.Name = "txtPressAverage"
         Me.txtPressAverage.Size = New System.Drawing.Size(60, 30)
         Me.txtPressAverage.TabIndex = 951
@@ -4529,7 +4559,7 @@ Public Class FormParameter
         '
         Me.lblKg23Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblKg23Text.ForeColor = System.Drawing.Color.Black
-        Me.lblKg23Text.Location = New System.Drawing.Point(920, 342)
+        Me.lblKg23Text.Location = New System.Drawing.Point(965, 340)
         Me.lblKg23Text.Name = "lblKg23Text"
         Me.lblKg23Text.Size = New System.Drawing.Size(45, 26)
         Me.lblKg23Text.TabIndex = 860
@@ -4539,7 +4569,7 @@ Public Class FormParameter
         '
         Me.lblKg12Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblKg12Text.ForeColor = System.Drawing.Color.Black
-        Me.lblKg12Text.Location = New System.Drawing.Point(920, 374)
+        Me.lblKg12Text.Location = New System.Drawing.Point(965, 372)
         Me.lblKg12Text.Name = "lblKg12Text"
         Me.lblKg12Text.Size = New System.Drawing.Size(45, 26)
         Me.lblKg12Text.TabIndex = 950
@@ -5474,6 +5504,131 @@ Public Class FormParameter
         Me.pnl6Plate.Size = New System.Drawing.Size(309, 436)
         Me.pnl6Plate.TabIndex = 850
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.btnlog)
+        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.txtdown)
+        Me.GroupBox2.Controls.Add(Me.txtup)
+        Me.GroupBox2.Controls.Add(Me.txtinterval)
+        Me.GroupBox2.Controls.Add(Me.btDn)
+        Me.GroupBox2.Controls.Add(Me.btUp)
+        Me.GroupBox2.Location = New System.Drawing.Point(695, 330)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(168, 177)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Visible = False
+        '
+        'btnlog
+        '
+        Me.btnlog.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnlog.Location = New System.Drawing.Point(16, 75)
+        Me.btnlog.Name = "btnlog"
+        Me.btnlog.Size = New System.Drawing.Size(56, 37)
+        Me.btnlog.TabIndex = 962
+        Me.btnlog.Text = "log"
+        Me.btnlog.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(118, 131)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(41, 37)
+        Me.Button1.TabIndex = 961
+        Me.Button1.Text = "stop"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(39, 89)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(59, 32)
+        Me.Label9.TabIndex = 960
+        Me.Label9.Text = "下"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(39, 58)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(59, 32)
+        Me.Label8.TabIndex = 959
+        Me.Label8.Text = "上"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(11, 29)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 32)
+        Me.Label3.TabIndex = 958
+        Me.Label3.Text = "時間間隔"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtdown
+        '
+        Me.txtdown.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtdown.Location = New System.Drawing.Point(99, 98)
+        Me.txtdown.Name = "txtdown"
+        Me.txtdown.Size = New System.Drawing.Size(60, 27)
+        Me.txtdown.TabIndex = 957
+        Me.txtdown.Text = "1500"
+        Me.txtdown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtup
+        '
+        Me.txtup.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtup.Location = New System.Drawing.Point(99, 64)
+        Me.txtup.Name = "txtup"
+        Me.txtup.Size = New System.Drawing.Size(60, 27)
+        Me.txtup.TabIndex = 956
+        Me.txtup.Text = "2200"
+        Me.txtup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtinterval
+        '
+        Me.txtinterval.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtinterval.Location = New System.Drawing.Point(99, 29)
+        Me.txtinterval.Name = "txtinterval"
+        Me.txtinterval.Size = New System.Drawing.Size(60, 27)
+        Me.txtinterval.TabIndex = 955
+        Me.txtinterval.Text = "3000"
+        Me.txtinterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btDn
+        '
+        Me.btDn.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btDn.Location = New System.Drawing.Point(63, 134)
+        Me.btDn.Name = "btDn"
+        Me.btDn.Size = New System.Drawing.Size(49, 37)
+        Me.btDn.TabIndex = 954
+        Me.btDn.Text = "Down"
+        Me.btDn.UseVisualStyleBackColor = True
+        '
+        'btUp
+        '
+        Me.btUp.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btUp.Location = New System.Drawing.Point(16, 131)
+        Me.btUp.Name = "btUp"
+        Me.btUp.Size = New System.Drawing.Size(41, 37)
+        Me.btUp.TabIndex = 953
+        Me.btUp.Text = "up"
+        Me.btUp.UseVisualStyleBackColor = True
+        '
         'lblPositionSet6
         '
         Me.lblPositionSet6.BackColor = System.Drawing.Color.Black
@@ -6302,6 +6457,15 @@ Public Class FormParameter
         Me.tabPageIniEdit.Text = "設定檔編輯"
         Me.tabPageIniEdit.UseVisualStyleBackColor = True
         '
+        'ControlINIEdit1
+        '
+        Me.ControlINIEdit1.AutoSize = True
+        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
+        Me.ControlINIEdit1.Name = "ControlINIEdit1"
+        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
+        Me.ControlINIEdit1.TabIndex = 0
+        '
         'TabPageTempCalTool
         '
         Me.TabPageTempCalTool.Controls.Add(Me.Label1)
@@ -6888,33 +7052,6 @@ Public Class FormParameter
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(541, 489)
         Me.FlowLayoutPanel1.TabIndex = 847
         '
-        'CtlSanAnCIMSetup1
-        '
-        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
-        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
-        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
-        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
-        Me.CtlSanAnCIMSetup1.TabIndex = 0
-        '
-        'ControlINIEdit1
-        '
-        Me.ControlINIEdit1.AutoSize = True
-        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
-        Me.ControlINIEdit1.Name = "ControlINIEdit1"
-        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
-        Me.ControlINIEdit1.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(950, 351)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(56, 37)
-        Me.Button1.TabIndex = 953
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Timer2
         '
         Me.Timer2.Enabled = True
@@ -6995,6 +7132,8 @@ Public Class FormParameter
         Me.pnlPressureAverage.PerformLayout()
         Me.pnl6Plate.ResumeLayout(False)
         Me.pnl6Plate.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.tabPageIniEdit.ResumeLayout(False)
@@ -7720,6 +7859,10 @@ Public Class FormParameter
         BondCycle6.SetDelayTime(txtC_Time, txtC_Time)
         BondCycle6.CycleTimes(txtCR_Time)
         'By chesly 20181023 壓缸自動循環動作 end
+
+
+        ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
+
     End Sub
     'Modified 990203 Vincent Start
 
@@ -8218,12 +8361,12 @@ Public Class FormParameter
     End Sub
 
     Private Sub txtITVDAOut_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtLowPDAOut.MouseDown
-        CallKeyboard2(sender, "8191", "0")
+        CallKeyboard2(sender, "16383", "0")
         'Write_PLC_R1100(DALowDAIndex, Val(sender.Text))
         SaveParameter()
     End Sub
     Private Sub txtHighPDAOut_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtHighPDAOut.MouseDown
-        CallKeyboard2(sender, "8191", "0")
+        CallKeyboard2(sender, "16383", "0")
         Write_PLC_R1100(DAHighDAIndex, Val(sender.Text))
         SaveParameter()
     End Sub
@@ -9028,20 +9171,68 @@ Public Class FormParameter
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btUp_Click(sender As Object, e As EventArgs) Handles btUp.Click
         Timer2.Enabled = True
-        Timer2.Interval = 10000
-        tempi = 1600
+        Timer2.Interval = txtinterval.Text
+        tempi = Int(txtdown.Text)
         txtHighPDAOut.Text = tempi
+        bolUp = True
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         If btnForceDAOut.BackColor = Color.Lime Then
-            txtHighPDAOut.Text = tempi
-            Write_PLC_R1100(DAHighDAIndex, tempi)
-            tempi = tempi - 1
-            If tempi < 1520 Then Timer2.Enabled = False
+            If bolUp = True Then '上
+                txtHighPDAOut.Text = tempi
+                Write_PLC_R1100(DAHighDAIndex, tempi)
+                tempi = tempi + 1
+                If tempi > Int(txtup.Text) Then
+                    Timer2.Enabled = False
+                    CSVTimerStartPb_Status = False
+                End If
+            Else
+                txtHighPDAOut.Text = tempi
+                Write_PLC_R1100(DAHighDAIndex, tempi)
+                tempi = tempi - 1
+                If tempi < Int(txtdown.Text) Then
+                    Timer2.Enabled = False
+                    CSVTimerStartPb_Status = False
+                End If
+            End If
+
         End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Timer2.Enabled = False
+    End Sub
+
+    Private Sub btDn_Click(sender As Object, e As EventArgs) Handles btDn.Click
+        Timer2.Enabled = True
+        Timer2.Interval = txtinterval.Text
+        tempi = Int(txtup.Text)
+        txtHighPDAOut.Text = tempi
+        bolUp = False
+    End Sub
+
+    Private Sub btnlog_Click(sender As Object, e As EventArgs) Handles btnlog.Click
+        Dim tempstr As String
+        tempstr = DataLogRecordFileName
+        If CSVTimerStartPb_Status = True Then
+            CSVTimerStartPb_Status = False
+        Else
+            DataLogRecordFileName = ""
+            If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                If Len(DataLogShortFileName) > 0 Then
+                    CheckDataLogDirAndCreate()
+
+                    FormManual.lblDatalogFileName.Text = DataLogRecordFileName
+                    DatalogTime = Val(FormManual.txtDataLogStepTime.Text)
+                    CSVTimerStartPb_Status = True
+                End If
+            End If
+        End If
+        DatalogStart = CSVTimerStartPb_Status
 
     End Sub
 End Class

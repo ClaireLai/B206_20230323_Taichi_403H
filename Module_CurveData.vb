@@ -244,51 +244,51 @@ Module Module_CurveData
         ''Optional ByVal iX As Integer = 3, Optional ByVal iY As Integer = 15, Optional ByVal iW As Integer = 97, Optional ByVal iH As Integer = 100)
         Dim index As Integer
 
-        For Index = 0 To cChart.ChartAreas.Count - 1
+        For index = 0 To cChart.ChartAreas.Count - 1
             cChart.BackColor = System.Drawing.SystemColors.Control
-            cChart.ChartAreas(Index).BackColor = System.Drawing.SystemColors.Control
+            cChart.ChartAreas(index).BackColor = System.Drawing.SystemColors.Control
 
 
-            cChart.ChartAreas(Index).AxisX.Minimum = [Double].NaN            'X軸 設定 CHART X軸 的最小刻度為 自動
-            cChart.ChartAreas(Index).AxisX.Maximum = MAX_X_SCALE               'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
-            cChart.ChartAreas(Index).AxisX.MajorGrid.LineColor = Color.LightGray
+            cChart.ChartAreas(index).AxisX.Minimum = [Double].NaN            'X軸 設定 CHART X軸 的最小刻度為 自動
+            cChart.ChartAreas(index).AxisX.Maximum = MAX_X_SCALE               'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
+            cChart.ChartAreas(index).AxisX.MajorGrid.LineColor = Color.LightGray
 
-            cChart.ChartAreas(Index).AxisX.ScaleView.Zoomable = True         'X軸 可放大,縮小
-            cChart.ChartAreas(Index).AxisX.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
-            cChart.ChartAreas(Index).AxisX.ScrollBar.Size = 20                       'X軸 設定捲軸大小,最大為20
-            cChart.ChartAreas(Index).AxisX.ScrollBar.BackColor = Color.LightGray
-            cChart.ChartAreas(Index).AxisX.ScrollBar.ButtonColor = Color.LightGray
-
-
-            cChart.ChartAreas(Index).CursorX.IsUserEnabled = True            'X軸 使用 游標控制
-            cChart.ChartAreas(Index).CursorX.IsUserSelectionEnabled = True   'X軸 可使用 使用者拖曳選擇
-            cChart.ChartAreas(Index).CursorX.AutoScroll = True                   'X軸 捲軸自動產生
-
-            cChart.ChartAreas(Index).AxisY.Minimum = [Double].NaN                'X軸 設定 CHART X軸 的最小刻度為 自動
-            cChart.ChartAreas(Index).AxisY.Maximum = [Double].NaN                'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
-            cChart.ChartAreas(Index).AxisY.MajorGrid.LineColor = Color.LightGray
-
-            cChart.ChartAreas(Index).AxisY.ScaleView.Zoomable = True             'X軸 可放大,縮小
-            cChart.ChartAreas(Index).AxisY.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
-            cChart.ChartAreas(Index).AxisY.ScrollBar.Size = 20                    'X軸 設定捲軸大小,最大為20
-            cChart.ChartAreas(Index).AxisY.ScrollBar.BackColor = Color.LightGray
-            cChart.ChartAreas(Index).AxisY.ScrollBar.ButtonColor = Color.LightGray
-
-            cChart.ChartAreas(Index).CursorY.IsUserEnabled = True                'X軸 使用 游標控制
-            cChart.ChartAreas(Index).CursorY.IsUserSelectionEnabled = True       'X軸 可使用 使用者拖曳選擇
-            cChart.ChartAreas(Index).CursorY.AutoScroll = True                    'X軸 捲軸自動產生
+            cChart.ChartAreas(index).AxisX.ScaleView.Zoomable = True         'X軸 可放大,縮小
+            cChart.ChartAreas(index).AxisX.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
+            cChart.ChartAreas(index).AxisX.ScrollBar.Size = 20                       'X軸 設定捲軸大小,最大為20
+            cChart.ChartAreas(index).AxisX.ScrollBar.BackColor = Color.LightGray
+            cChart.ChartAreas(index).AxisX.ScrollBar.ButtonColor = Color.LightGray
 
 
-            cChart.ChartAreas(Index).AxisY2.Minimum = [Double].NaN                'X軸 設定 CHART X軸 的最小刻度為 自動
-            cChart.ChartAreas(Index).AxisY2.Maximum = [Double].NaN                'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
-            cChart.ChartAreas(Index).AxisY2.MajorGrid.LineColor = Color.LightGray
+            cChart.ChartAreas(index).CursorX.IsUserEnabled = True            'X軸 使用 游標控制
+            cChart.ChartAreas(index).CursorX.IsUserSelectionEnabled = True   'X軸 可使用 使用者拖曳選擇
+            cChart.ChartAreas(index).CursorX.AutoScroll = True                   'X軸 捲軸自動產生
 
-            cChart.ChartAreas(Index).AxisY2.ScaleView.Zoomable = True             'X軸 可放大,縮小
-            cChart.ChartAreas(Index).AxisY2.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
-            cChart.ChartAreas(Index).AxisY2.ScrollBar.Size = 20                    'X軸 設定捲軸大小,最大為20
-            cChart.ChartAreas(Index).AxisY2.ScrollBar.BackColor = Color.LightGray
-            cChart.ChartAreas(Index).AxisY2.ScrollBar.ButtonColor = Color.LightGray
-            cChart.ChartAreas(Index).AxisY2.Enabled = AxisEnabled.Auto
+            cChart.ChartAreas(index).AxisY.Minimum = [Double].NaN                'X軸 設定 CHART X軸 的最小刻度為 自動
+            cChart.ChartAreas(index).AxisY.Maximum = [Double].NaN                'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
+            cChart.ChartAreas(index).AxisY.MajorGrid.LineColor = Color.LightGray
+
+            cChart.ChartAreas(index).AxisY.ScaleView.Zoomable = True             'X軸 可放大,縮小
+            cChart.ChartAreas(index).AxisY.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
+            cChart.ChartAreas(index).AxisY.ScrollBar.Size = 20                    'X軸 設定捲軸大小,最大為20
+            cChart.ChartAreas(index).AxisY.ScrollBar.BackColor = Color.LightGray
+            cChart.ChartAreas(index).AxisY.ScrollBar.ButtonColor = Color.LightGray
+
+            cChart.ChartAreas(index).CursorY.IsUserEnabled = True                'X軸 使用 游標控制
+            cChart.ChartAreas(index).CursorY.IsUserSelectionEnabled = True       'X軸 可使用 使用者拖曳選擇
+            cChart.ChartAreas(index).CursorY.AutoScroll = True                    'X軸 捲軸自動產生
+
+
+            cChart.ChartAreas(index).AxisY2.Minimum = [Double].NaN                'X軸 設定 CHART X軸 的最小刻度為 自動
+            cChart.ChartAreas(index).AxisY2.Maximum = [Double].NaN                'X軸 設定 CHART X軸 的最大刻度為 MAX_X_SCALE
+            cChart.ChartAreas(index).AxisY2.MajorGrid.LineColor = Color.LightGray
+
+            cChart.ChartAreas(index).AxisY2.ScaleView.Zoomable = True             'X軸 可放大,縮小
+            cChart.ChartAreas(index).AxisY2.ScrollBar.IsPositionedInside = False   'X軸 使用捲軸, 並設在圖表外側
+            cChart.ChartAreas(index).AxisY2.ScrollBar.Size = 20                    'X軸 設定捲軸大小,最大為20
+            cChart.ChartAreas(index).AxisY2.ScrollBar.BackColor = Color.LightGray
+            cChart.ChartAreas(index).AxisY2.ScrollBar.ButtonColor = Color.LightGray
+            cChart.ChartAreas(index).AxisY2.Enabled = AxisEnabled.Auto
             cChart.ChartAreas(index).AxisY2.MajorGrid.LineColor = Color.LightPink
             ChartRecord.ChartAreas(index).AxisX.Minimum = 0
             ChartRecord.ChartAreas(index).AxisY.Minimum = 0
@@ -430,19 +430,19 @@ Module Module_CurveData
 
 
     '預設曲線顏色
-    Public SeriesColor() As Color = { _
-                                    Color.FromArgb(255, 0, 0), Color.FromArgb(0, 255, 0), Color.FromArgb(0, 0, 255), _
-                                    Color.FromArgb(255, 255, 0), Color.FromArgb(0, 255, 255), Color.FromArgb(255, 0, 255), _
-                                    Color.FromArgb(255, 224, 0), Color.FromArgb(0, 255, 224), Color.FromArgb(192, 192, 192), _
-                                    Color.FromArgb(224, 0, 0), Color.FromArgb(0, 224, 0), Color.FromArgb(0, 0, 224), _
-                                    Color.FromArgb(224, 224, 0), Color.FromArgb(0, 224, 224), Color.FromArgb(224, 0, 224), _
-                                    Color.FromArgb(224, 192, 0), Color.FromArgb(0, 224, 192), Color.FromArgb(192, 0, 224), _
-                                    Color.FromArgb(224, 127, 0), Color.FromArgb(0, 224, 127), Color.FromArgb(127, 0, 224), _
-                                    Color.FromArgb(224, 64, 0), Color.FromArgb(0, 224, 64), Color.FromArgb(64, 0, 224), _
-                                    Color.FromArgb(192, 192, 0), Color.FromArgb(0, 192, 192), Color.FromArgb(192, 0, 192), _
-                                    Color.FromArgb(127, 0, 0), Color.FromArgb(0, 127, 0), Color.FromArgb(0, 0, 127), _
-                                    Color.FromArgb(192, 0, 0), Color.FromArgb(0, 192, 0), Color.FromArgb(0, 0, 192), _
-                                    Color.FromArgb(192, 127, 0), Color.FromArgb(0, 192, 127), Color.FromArgb(192, 0, 127) _
+    Public SeriesColor() As Color = {
+                                    Color.FromArgb(255, 0, 0), Color.FromArgb(0, 255, 0), Color.FromArgb(0, 0, 255),
+                                    Color.FromArgb(255, 255, 0), Color.FromArgb(0, 255, 255), Color.FromArgb(255, 0, 255),
+                                    Color.FromArgb(255, 224, 0), Color.FromArgb(0, 255, 224), Color.FromArgb(192, 192, 192),
+                                    Color.FromArgb(224, 0, 0), Color.FromArgb(0, 224, 0), Color.FromArgb(0, 0, 224),
+                                    Color.FromArgb(224, 224, 0), Color.FromArgb(0, 224, 224), Color.FromArgb(224, 0, 224),
+                                    Color.FromArgb(224, 192, 0), Color.FromArgb(0, 224, 192), Color.FromArgb(192, 0, 224),
+                                    Color.FromArgb(224, 127, 0), Color.FromArgb(0, 224, 127), Color.FromArgb(127, 0, 224),
+                                    Color.FromArgb(224, 64, 0), Color.FromArgb(0, 224, 64), Color.FromArgb(64, 0, 224),
+                                    Color.FromArgb(192, 192, 0), Color.FromArgb(0, 192, 192), Color.FromArgb(192, 0, 192),
+                                    Color.FromArgb(127, 0, 0), Color.FromArgb(0, 127, 0), Color.FromArgb(0, 0, 127),
+                                    Color.FromArgb(192, 0, 0), Color.FromArgb(0, 192, 0), Color.FromArgb(0, 0, 192),
+                                    Color.FromArgb(192, 127, 0), Color.FromArgb(0, 192, 127), Color.FromArgb(192, 0, 127)
                                     }
     Public diagColor As ColorDialog
     <StructLayout(LayoutKind.Sequential)> Public Structure chkSeries
@@ -839,7 +839,7 @@ Module Module_CurveData
                     End If
 
                 Case 99
-                        Control_State = 0
+                    Control_State = 0
 
             End Select
 
