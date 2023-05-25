@@ -17,11 +17,11 @@
         SavePID()
     End Sub
 
-    Private Sub txtD1_MouseDown(sender As Object, e As MouseEventArgs) Handles txtD1.MouseDown
-        CallKeyboard2(sender, "10", "0")
-        sender.text = Format(Val(sender.Text), "0")
-        SavePID()
-    End Sub
+    'Private Sub txtD1_MouseDown(sender As Object, e As MouseEventArgs) 
+    '    CallKeyboard2(sender, "10", "0")
+    '    sender.text = Format(Val(sender.Text), "0")
+    '    SavePID()
+    'End Sub
 
     Private Sub txtP2_MouseDown(sender As Object, e As MouseEventArgs) Handles txtP2.MouseDown
         CallKeyboard2(sender, "15", "0")
@@ -35,11 +35,11 @@
         SavePID()
     End Sub
 
-    Private Sub txtD2_MouseDown(sender As Object, e As MouseEventArgs) Handles txtD2.MouseDown
-        CallKeyboard2(sender, "10", "0")
-        sender.text = Format(Val(sender.Text), "0")
-        SavePID()
-    End Sub
+    'Private Sub txtD2_MouseDown(sender As Object, e As MouseEventArgs) 
+    '    CallKeyboard2(sender, "10", "0")
+    '    sender.text = Format(Val(sender.Text), "0")
+    '    SavePID()
+    'End Sub
 
     Private Sub txtOverPress_MouseDown(sender As Object, e As MouseEventArgs) Handles txtOverPress.MouseDown
         CallKeyboard2(sender, "15", "2")
@@ -61,11 +61,11 @@
     Public Sub ReadPID()
         txtP1.Text = ReadProgData("PID", "P1", "100", PIDINIFile)
         txtI1.Text = ReadProgData("PID", "I1", "100", PIDINIFile)
-        txtD1.Text = ReadProgData("PID", "D1", "100", PIDINIFile)
+        NudUp.Text = ReadProgData("PID", "ModifySec", "3", PIDINIFile)
         txtP2.Text = ReadProgData("PID", "P2", "100", PIDINIFile)
 
         txtI2.Text = ReadProgData("PID", "I2", "100", PIDINIFile)
-        txtD2.Text = ReadProgData("PID", "D2", "100", PIDINIFile)
+        'txtD2.Text = ReadProgData("PID", "D2", "100", PIDINIFile)
         txtInterval.Text = ReadProgData("PID", "Interval", "100", PIDINIFile)
         txtOverPress.Text = ReadProgData("PID", "OverPress", "100", PIDINIFile)
         txtAdjustDA.Text = ReadProgData("PID", "AdjustDA", "100", PIDINIFile)
@@ -74,7 +74,7 @@
     Private Sub SavePID()
         Write_PLC_R1100(PIndex, Val(txtP1.Text))
         Write_PLC_R1100(IIndex, Val(txtI1.Text))
-        Write_PLC_R1100(DIndex, Val(txtD1.Text))
+        Write_PLC_R1100(NudUpIndex, Val(NudUp.Text))
         Write_PLC_R1100(sPIndex, Val(txtP2.Text))
         Write_PLC_R1100(sIIndex, Val(txtI2.Text))
         'Write_PLC_R1100(sDIndex, Val(txtD2.Text))
@@ -90,13 +90,18 @@
         Write_PLC_R1100(IntervalIndex, Val(txtInterval.Text))
         WriteProgData("PID", "P1", txtP1.Text, PIDINIFile)
         WriteProgData("PID", "I1", txtI1.Text, PIDINIFile)
-        WriteProgData("PID", "D1", txtD1.Text, PIDINIFile)
+        WriteProgData("PID", "ModifySec", NudUp.Text, PIDINIFile)
         WriteProgData("PID", "P2", txtP2.Text, PIDINIFile)
         WriteProgData("PID", "I2", txtI2.Text, PIDINIFile)
-        WriteProgData("PID", "D2", txtD2.Text, PIDINIFile)
+        'WriteProgData("PID", "D2", txtD2.Text, PIDINIFile)
         WriteProgData("PID", "Interval", txtInterval.Text, PIDINIFile)
         WriteProgData("PID", "OverPress", txtOverPress.Text, PIDINIFile)
         WriteProgData("PID", "AdjustDA", txtAdjustDA.Text, PIDINIFile)
+    End Sub
+
+    Private Sub NudUp_MouseDown(sender As Object, e As MouseEventArgs) Handles NudUp.MouseDown
+        CallKeyboard2(sender, "20", "0")
+        SavePID()
     End Sub
 
     'Private Sub ControlPressPID_Load(sender As Object, e As EventArgs) Handles MyBase.Load

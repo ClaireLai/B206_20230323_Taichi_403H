@@ -210,7 +210,7 @@
     Public Const DoDPTempAlarmOFFIndex As Integer = 64
 
     Public Const DoPressEndAlarmIndex As Integer = 66        '結束後警聲
-    Public Const DoForceDAOutIndex As Integer = 67        '結束後警聲
+    Public Const DoForceDAOutIndex As Integer = 67        '比例閥強制輸出
     Public Const DoSaftyGateAlarmIndex As Integer = 69        '結束後警聲
 
     Public Const DoTopWPID01Index As Integer = 70       ' 寫入PID
@@ -488,10 +488,7 @@
     '================================================
     Public Const PIndex As Integer = 188 '壓力/P值  R1392
     Public Const IIndex As Integer = 189 '壓力/I值  R1393
-    Public Const DIndex As Integer = 190 '壓力/D值  'R1394
-
-
-
+    Public Const NudUpIndex As Integer = 190 '剎車時間  'R1394
 
     Public Const sPIndex As Integer = 191 '壓力小/P值 'R1395
     Public Const sIIndex As Integer = 182 '壓力小/I值  R1386

@@ -29,14 +29,12 @@
         InitCurveData(sdir)
     End Sub
 
-
-
     Public VideoFileName As String
     Public CsvFilename As String
     Public CsvFilename1 As String
-    Public UserDataFileName As String         '使用者帳密設定檔
-    Public AlarmRecordFileName As String             '異常記錄資料夾
-    Public PLCAlarmRecordFileName As String             'PLC異常記錄資料夾
+    Public UserDataFileName As String           '使用者帳密設定檔
+    Public AlarmRecordFileName As String        '異常記錄資料夾
+    Public PLCAlarmRecordFileName As String     'PLC異常記錄資料夾
     Public OperatorRecordFileName As String     '使用者登入/登出記錄檔
     Public PurgeGasRecordFileName As String     '氣體管路 PURGE 資料夾, PURGE PIPE 
     Public ProcessEeventFileName As String      '製程事件檔名,含路徑,依製程檔名+EVENT建立
