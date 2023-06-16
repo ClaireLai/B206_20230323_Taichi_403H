@@ -66,7 +66,6 @@
 #End If
 
 
-
     Public Const DiBondDown01Index As Integer = 14 '13          'X02
     Public Const DiBondUp01Index As Integer = 15 '12            'X03
     Public Const DiBondDown02Index As Integer = 16 '18          'X02
@@ -83,7 +82,6 @@
     Public Const Di1ATMIndex As Integer = 20 '4               'X01
     Public Const DiPullerOpenIndex As Integer = 21 '4               'X01
     Public Const DiPullerCloseIndex As Integer = 22 '4               'X01
-
 
 
     Public Const DiBondUp04Index As Integer = 27            'X03
@@ -103,8 +101,6 @@
     Public Const DiHeaterOL06Index As Integer = 39               '    X12
     Public Const DiTopWater06Index As Integer = 40             'X07
     Public Const DiBotWater06Indx As Integer = 41              'X10
-
-
 
 
     ' PLC Y Output
@@ -451,10 +447,10 @@
 
     'R1371
     ''' <summary>
-    ''' 油壓缸位置
+    ''' 油壓缸貼合位置
     ''' </summary>
     ''' <remarks>99.02.02</remarks>
-    Public Const DAPositionSet01Index As Integer = 167   '油壓缸位置
+    Public Const DAPositionSet01Index As Integer = 167   '油壓缸貼合位置
     Public Const DAPositionSet02Index As Integer = 168   '
     Public Const DAPositionSet03Index As Integer = 169        '溫度
     Public Const DAPositionSet04Index As Integer = 170    '溫速
@@ -488,7 +484,7 @@
     '================================================
     Public Const PIndex As Integer = 188 '壓力/P值  R1392
     Public Const IIndex As Integer = 189 '壓力/I值  R1393
-    Public Const NudUpIndex As Integer = 190 '剎車時間  'R1394
+    Public Const BrakeIndex As Integer = 190 '剎車時間  'R1394
 
     Public Const sPIndex As Integer = 191 '壓力小/P值 'R1395
     Public Const sIIndex As Integer = 182 '壓力小/I值  R1386

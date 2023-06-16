@@ -813,17 +813,6 @@ Public Class FormParameter
         Me.tabpagePressCal = New System.Windows.Forms.TabPage()
         Me.flwPressCal = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabpagePressControl = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnlog = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtdown = New System.Windows.Forms.TextBox()
-        Me.txtup = New System.Windows.Forms.TextBox()
-        Me.txtinterval = New System.Windows.Forms.TextBox()
-        Me.btDn = New System.Windows.Forms.Button()
-        Me.btUp = New System.Windows.Forms.Button()
         Me.lblNoControlPressText = New System.Windows.Forms.Label()
         Me.lblPressAverageText = New System.Windows.Forms.Label()
         Me.txtNoControlPress = New System.Windows.Forms.TextBox()
@@ -974,6 +963,17 @@ Public Class FormParameter
         Me.lblSec01Text = New System.Windows.Forms.Label()
         Me.lblThresholdText = New System.Windows.Forms.Label()
         Me.lblThresholdPressRatioText = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnlog = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtdown = New System.Windows.Forms.TextBox()
+        Me.txtup = New System.Windows.Forms.TextBox()
+        Me.txtinterval = New System.Windows.Forms.TextBox()
+        Me.btDn = New System.Windows.Forms.Button()
+        Me.btUp = New System.Windows.Forms.Button()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
         Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
@@ -1060,10 +1060,10 @@ Public Class FormParameter
         CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpagePressCal.SuspendLayout()
         Me.tabpagePressControl.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.pnlPressureAverage.SuspendLayout()
         Me.pnl6Plate.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.tabPageIniEdit.SuspendLayout()
         Me.TabPageTempCalTool.SuspendLayout()
         Me.tabpageCycleRun.SuspendLayout()
@@ -4511,131 +4511,6 @@ Public Class FormParameter
         Me.tabpagePressControl.Text = "壓力控制設定"
         Me.tabpagePressControl.UseVisualStyleBackColor = True
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.btnlog)
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.txtdown)
-        Me.GroupBox2.Controls.Add(Me.txtup)
-        Me.GroupBox2.Controls.Add(Me.txtinterval)
-        Me.GroupBox2.Controls.Add(Me.btDn)
-        Me.GroupBox2.Controls.Add(Me.btUp)
-        Me.GroupBox2.Location = New System.Drawing.Point(701, 310)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(168, 177)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Visible = False
-        '
-        'Label3
-        '
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(11, 29)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 32)
-        Me.Label3.TabIndex = 958
-        Me.Label3.Text = "時間間隔"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnlog
-        '
-        Me.btnlog.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnlog.Location = New System.Drawing.Point(16, 75)
-        Me.btnlog.Name = "btnlog"
-        Me.btnlog.Size = New System.Drawing.Size(56, 37)
-        Me.btnlog.TabIndex = 962
-        Me.btnlog.Text = "log"
-        Me.btnlog.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(118, 131)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(41, 37)
-        Me.Button1.TabIndex = 961
-        Me.Button1.Text = "stop"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label9
-        '
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(39, 89)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(59, 32)
-        Me.Label9.TabIndex = 960
-        Me.Label9.Text = "下"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label8
-        '
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(39, 58)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(59, 32)
-        Me.Label8.TabIndex = 959
-        Me.Label8.Text = "上"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtdown
-        '
-        Me.txtdown.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtdown.Location = New System.Drawing.Point(99, 98)
-        Me.txtdown.Name = "txtdown"
-        Me.txtdown.Size = New System.Drawing.Size(60, 23)
-        Me.txtdown.TabIndex = 957
-        Me.txtdown.Text = "1500"
-        Me.txtdown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtup
-        '
-        Me.txtup.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtup.Location = New System.Drawing.Point(99, 64)
-        Me.txtup.Name = "txtup"
-        Me.txtup.Size = New System.Drawing.Size(60, 23)
-        Me.txtup.TabIndex = 956
-        Me.txtup.Text = "2200"
-        Me.txtup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtinterval
-        '
-        Me.txtinterval.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtinterval.Location = New System.Drawing.Point(99, 29)
-        Me.txtinterval.Name = "txtinterval"
-        Me.txtinterval.Size = New System.Drawing.Size(60, 23)
-        Me.txtinterval.TabIndex = 955
-        Me.txtinterval.Text = "3000"
-        Me.txtinterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btDn
-        '
-        Me.btDn.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btDn.Location = New System.Drawing.Point(63, 134)
-        Me.btDn.Name = "btDn"
-        Me.btDn.Size = New System.Drawing.Size(49, 37)
-        Me.btDn.TabIndex = 954
-        Me.btDn.Text = "Down"
-        Me.btDn.UseVisualStyleBackColor = True
-        '
-        'btUp
-        '
-        Me.btUp.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btUp.Location = New System.Drawing.Point(16, 131)
-        Me.btUp.Name = "btUp"
-        Me.btUp.Size = New System.Drawing.Size(41, 37)
-        Me.btUp.TabIndex = 953
-        Me.btUp.Text = "up"
-        Me.btUp.UseVisualStyleBackColor = True
-        '
         'lblNoControlPressText
         '
         Me.lblNoControlPressText.BackColor = System.Drawing.Color.Transparent
@@ -6447,6 +6322,131 @@ Public Class FormParameter
         Me.lblThresholdPressRatioText.Text = "加壓比率:"
         Me.lblThresholdPressRatioText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.btnlog)
+        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.txtdown)
+        Me.GroupBox2.Controls.Add(Me.txtup)
+        Me.GroupBox2.Controls.Add(Me.txtinterval)
+        Me.GroupBox2.Controls.Add(Me.btDn)
+        Me.GroupBox2.Controls.Add(Me.btUp)
+        Me.GroupBox2.Location = New System.Drawing.Point(701, 310)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(168, 177)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(11, 29)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 32)
+        Me.Label3.TabIndex = 958
+        Me.Label3.Text = "時間間隔"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnlog
+        '
+        Me.btnlog.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnlog.Location = New System.Drawing.Point(16, 75)
+        Me.btnlog.Name = "btnlog"
+        Me.btnlog.Size = New System.Drawing.Size(56, 37)
+        Me.btnlog.TabIndex = 962
+        Me.btnlog.Text = "log"
+        Me.btnlog.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(118, 131)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(41, 37)
+        Me.Button1.TabIndex = 961
+        Me.Button1.Text = "stop"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(39, 89)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(59, 32)
+        Me.Label9.TabIndex = 960
+        Me.Label9.Text = "下"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(39, 58)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(59, 32)
+        Me.Label8.TabIndex = 959
+        Me.Label8.Text = "上"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtdown
+        '
+        Me.txtdown.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtdown.Location = New System.Drawing.Point(99, 98)
+        Me.txtdown.Name = "txtdown"
+        Me.txtdown.Size = New System.Drawing.Size(60, 23)
+        Me.txtdown.TabIndex = 957
+        Me.txtdown.Text = "1500"
+        Me.txtdown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtup
+        '
+        Me.txtup.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtup.Location = New System.Drawing.Point(99, 64)
+        Me.txtup.Name = "txtup"
+        Me.txtup.Size = New System.Drawing.Size(60, 23)
+        Me.txtup.TabIndex = 956
+        Me.txtup.Text = "2200"
+        Me.txtup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtinterval
+        '
+        Me.txtinterval.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtinterval.Location = New System.Drawing.Point(99, 29)
+        Me.txtinterval.Name = "txtinterval"
+        Me.txtinterval.Size = New System.Drawing.Size(60, 23)
+        Me.txtinterval.TabIndex = 955
+        Me.txtinterval.Text = "3000"
+        Me.txtinterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btDn
+        '
+        Me.btDn.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btDn.Location = New System.Drawing.Point(63, 134)
+        Me.btDn.Name = "btDn"
+        Me.btDn.Size = New System.Drawing.Size(49, 37)
+        Me.btDn.TabIndex = 954
+        Me.btDn.Text = "Down"
+        Me.btDn.UseVisualStyleBackColor = True
+        '
+        'btUp
+        '
+        Me.btUp.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btUp.Location = New System.Drawing.Point(16, 131)
+        Me.btUp.Name = "btUp"
+        Me.btUp.Size = New System.Drawing.Size(41, 37)
+        Me.btUp.TabIndex = 953
+        Me.btUp.Text = "up"
+        Me.btUp.UseVisualStyleBackColor = True
+        '
         'tabPageIniEdit
         '
         Me.tabPageIniEdit.Controls.Add(Me.ControlINIEdit1)
@@ -7128,14 +7128,14 @@ Public Class FormParameter
         Me.tabpagePressCal.ResumeLayout(False)
         Me.tabpagePressControl.ResumeLayout(False)
         Me.tabpagePressControl.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.pnlPressureAverage.ResumeLayout(False)
         Me.pnlPressureAverage.PerformLayout()
         Me.pnl6Plate.ResumeLayout(False)
         Me.pnl6Plate.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.tabPageIniEdit.ResumeLayout(False)
         Me.tabPageIniEdit.PerformLayout()
         Me.TabPageTempCalTool.ResumeLayout(False)
