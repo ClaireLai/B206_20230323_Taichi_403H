@@ -355,11 +355,11 @@ Public Class FormLoginSetup
     Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If isLoaded Then
 
-            NewX_sub = FormW / X
-            NewY_sub = (FormH - FromStartUpTopPosition) / Y
+            Dim new_x As Single = FormW / X
+            Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
             Me.Height = (FormW - FromStartUpTopPosition)
             Me.Width = FormW
-            SetControls(NewX_sub, NewY_sub, Me, isLoaded)
+            SetControls(new_x, new_Y, Me, isLoaded)
             Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
         End If
     End Sub

@@ -4,11 +4,6 @@ Public Class FormRecipe
     Public TotalStepTime As Integer
     Public RecipePage As Integer
     Dim rwstepindex As Integer
-    Private X As Single '當前窗體的寬度
-    Private Y As Single '當前窗體的高度
-    Private isLoaded As Boolean '// 是否已設定各控制的尺寸資料到Tag屬性
-    Private FormW As Integer
-    Private FormH As Integer
 
 #Region " Windows Form 設計工具產生的程式碼 "
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
@@ -91,7 +86,7 @@ Public Class FormRecipe
 
         '此呼叫為 Windows Form 設計工具的必要項。
         InitializeComponent()
-        isLoaded = False
+
         '在 InitializeComponent() 呼叫之後加入所有的初始設定
 
     End Sub
@@ -124,10 +119,10 @@ Public Class FormRecipe
     Friend WithEvents btnAddStep As System.Windows.Forms.Button
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRecipe))
         Me.btnLoadRecipe = New System.Windows.Forms.Button()
         Me.btnSaveRecipe = New System.Windows.Forms.Button()
@@ -636,33 +631,33 @@ Public Class FormRecipe
         Me.dgRecipeEdit.AllowUserToDeleteRows = False
         Me.dgRecipeEdit.AllowUserToResizeColumns = False
         Me.dgRecipeEdit.AllowUserToResizeRows = False
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgRecipeEdit.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgRecipeEdit.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgRecipeEdit.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgRecipeEdit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgRecipeEdit.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Arial", 9.0!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Blue
-        DataGridViewCellStyle6.NullValue = "0"
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgRecipeEdit.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 9.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle2.NullValue = "0"
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgRecipeEdit.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgRecipeEdit.ColumnHeadersHeight = 30
         Me.dgRecipeEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgRecipeEdit.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial", 9.0!)
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.NullValue = "0"
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgRecipeEdit.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Arial", 9.0!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.NullValue = "0"
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgRecipeEdit.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgRecipeEdit.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgRecipeEdit.EnableHeadersVisualStyles = False
         Me.dgRecipeEdit.GridColor = System.Drawing.Color.Brown
@@ -672,15 +667,15 @@ Public Class FormRecipe
         Me.dgRecipeEdit.MultiSelect = False
         Me.dgRecipeEdit.Name = "dgRecipeEdit"
         Me.dgRecipeEdit.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 9.0!)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Blue
-        DataGridViewCellStyle8.NullValue = "0"
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgRecipeEdit.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Arial", 9.0!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle4.NullValue = "0"
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgRecipeEdit.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgRecipeEdit.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgRecipeEdit.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgRecipeEdit.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1376,12 +1371,6 @@ Public Class FormRecipe
         End If
         Timer1.Interval = 500
         Timer1.Enabled = True
-
-        X = Me.Width '獲取窗體的寬度
-        Y = Me.Height '獲取窗體的高度
-        isLoaded = True '已設定各控制項的尺寸到Tag屬性中
-        SetTag(Me) '調用方法
-        Debug.Print("FormProcess_Load")
     End Sub
 
     Private Sub txtRecipeNote_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtRecipeNote.MouseDown
@@ -2191,26 +2180,5 @@ Public Class FormRecipe
         RecipeMapEditor.txtBarcode.Select()
         RecipeMapEditor.RefreshData()
         RecipeMapEditor.ShowDialog()
-    End Sub
-
-    Private Sub FormRecipe_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        If isLoaded Then
-
-            'Dim new_x As Single = FormW / X
-            'Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
-            Me.Height = (FormW - FromStartUpTopPosition)
-            Me.Width = FormW
-            SetControls(NewX_sub, NewY_sub, Me, isLoaded)
-            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
-        End If
-    End Sub
-
-    Private Sub FormRecipe_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
-        FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
-
-        Me.WindowState = FormWindowState.Normal
-        FormRecipe_Resize(Me, e)
-        'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
     End Sub
 End Class

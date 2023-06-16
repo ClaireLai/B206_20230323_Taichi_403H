@@ -14,8 +14,6 @@ Module Module_Recipe_Public
     Public RowHeadersWidth As Integer = 90
     Public RowColumnWidth As Integer = 80
     Public RecipeTempLowLimit As Integer = 30
-    Public NewX_sub As Single = 1.2
-    Public NewY_sub As Single = 1.2
 
 
     Enum Recipe_Col
@@ -202,8 +200,8 @@ Module Module_Recipe_Public
     '建立配方欄位
     Public Sub RecipeInit(ByVal sfile As String)
         ReadRecipeColumnData(RecipeINIFile)
-        'CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)                  '建立配方欄位
-        'RecipeStructReDim(Recipe_Max)                                   '載入配方資料
+        CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)                  '建立配方欄位
+        RecipeStructReDim(Recipe_Max)                                   '載入配方資料
     End Sub
     '配方資料初始化
     Public Sub RecipeStructReDim(ByVal recipe As Integer)
@@ -280,19 +278,16 @@ Module Module_Recipe_Public
     Public Sub CreateRecipeDataGrid(ByRef dg As DataGridView)
         Dim i, j As Integer
         Dim totaltable As Integer
-        Dim fontsize As Integer = 9
         TableMax = Recipe_Num + 1
         totaltable = TableMax - 1
-
-        TableWidth = 80 * NewX_sub           '資料欄位寬度
-        TableHeight = 31 * NewY_sub '(dg.Height / ((Recipe_Change * 3) + 2))     '資料欄位高度_ '30
-        fontsize = 9 * NewX_sub
-        RowHeaderWidth = 200 * NewX_sub      '資料欄位標題寬度
+        TableWidth = 80           '資料欄位寬度
+        TableHeight = 31 '(dg.Height / ((Recipe_Change * 3) + 2))     '資料欄位高度_ '30
+        RowHeaderWidth = 200      '資料欄位標題寬度
         dg.Height = TableHeight * (Recipe_Change * 3) + dg.ColumnHeadersHeight + 3
         rwstepindex = 1
 
         dg.ColumnCount = rwstepindex
-        dg.ColumnHeadersDefaultCellStyle.Font = New Font("ARIAL", fontsize, System.Drawing.FontStyle.Regular)
+        dg.ColumnHeadersDefaultCellStyle.Font = New Font("ARIAL", 9, System.Drawing.FontStyle.Regular)
         dg.ColumnHeadersDefaultCellStyle.BackColor = Color.Khaki
         dg.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
         dg.ColumnHeadersHeightSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -303,7 +298,7 @@ Module Module_Recipe_Public
         dg.Columns(rwstepindex - 1).Width = TableWidth
         dg.Columns(rwstepindex - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         dg.Columns(rwstepindex - 1).SortMode = DataGridViewColumnSortMode.NotSortable
-        dg.Columns(rwstepindex - 1).DefaultCellStyle.Font = New Font("Arial", fontsize, System.Drawing.FontStyle.Regular)
+        dg.Columns(rwstepindex - 1).DefaultCellStyle.Font = New Font("Arial", 9, System.Drawing.FontStyle.Regular)
         dg.Columns(rwstepindex - 1).DefaultCellStyle.ForeColor = Color.Black
         dg.Columns(rwstepindex - 1).DefaultCellStyle.BackColor = Color.Khaki
         dg.Columns(rwstepindex - 1).SortMode = DataGridViewColumnSortMode.NotSortable
@@ -314,7 +309,7 @@ Module Module_Recipe_Public
         dg.RowHeadersWidth = RowHeaderWidth
         dg.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         dg.RowHeadersDefaultCellStyle.ForeColor = Color.Black
-        dg.DefaultCellStyle.Font = New Font("ARIAL", fontsize, System.Drawing.FontStyle.Regular)
+        dg.DefaultCellStyle.Font = New Font("ARIAL", 9, System.Drawing.FontStyle.Regular)
         dg.RowCount = TableMax
 
         dg.Rows(0).Height = TableHeight
@@ -326,14 +321,14 @@ Module Module_Recipe_Public
 
         dg.Rows(1).Height = TableHeight
         dg.Rows(1).HeaderCell.Value = RecipeRowHeader(SystemLanguage, i)
-        dg.Rows(1).HeaderCell.Style.Font = New Font("Arial", fontsize, System.Drawing.FontStyle.Regular)
+        dg.Rows(1).HeaderCell.Style.Font = New Font("Arial", 9, System.Drawing.FontStyle.Regular)
         dg.Item(rwstepindex - 1, 1).Value = "0"
         dg.Rows(1).DefaultCellStyle.BackColor = Color.White
         j = 0
         For i = 0 To TableMax - 1
             dg.Rows(i).Height = TableHeight
             dg.Rows(i).HeaderCell.Value = RecipeRowHeader(SystemLanguage, i)
-            dg.Rows(i).HeaderCell.Style.Font = New Font("Arial", fontsize, System.Drawing.FontStyle.Regular)
+            dg.Rows(i).HeaderCell.Style.Font = New Font("Arial", 9, System.Drawing.FontStyle.Regular)
             dg.Item(rwstepindex - 1, i).Value = "0"
 
             If j >= Recipe_Change Then
