@@ -234,7 +234,7 @@
             If SystemLanguage = 2 Then Form1s.radChangeToENG.Checked = True
             ClickLanguge(LangCHTINIFile, LangCHSINIFile, LangEngINIFile) ' 設定語言系統參數
             WriteProgData("PROGRAM", "LANGUAGE", SystemLanguage.ToString, ProgramINIFile)  '寫入目前語言設定
-            ChangeLanguage(LanguageFile)                                    '改變程式語系
+            'ChangeLanguage(LanguageFile)                                    '改變程式語系
             ReadRecipeColumnData(RecipeINIFile)
             'ReadRecipeColumnData(RecipeINIFile)                            '讀取配方欄位語言資料
             'ChangeRecipeColumnHeader(FormRecipes.dgRecipeEdit)              '改變配方欄位語系
