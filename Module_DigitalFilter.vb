@@ -76,6 +76,39 @@ Module Module_DigitalFiiter
             LastData = CurrentData
             Return Average
         End Function
+        Public Function GetAverageValueDePeak(ByVal dData As Double, ByVal PeakLimit As Double) As Double
+            Static PeakCount As Integer = 0
+            If AverageTimes <= 0 Then AverageTimes = 1
+            If PeakLimit <= 0 Then PeakLimit = 100
+            CurrentData = dData
+            If AverageCount = 0 Then
+                LastData = dData
+            End If
+            If Math.Abs(CurrentData - LastData) > PeakLimit Then
+                PeakCount += 1
+                If PeakCount < 3 Then
+                    CurrentData = LastData
+                Else
+                    PeakCount = 0
+                End If
+            Else
+                PeakCount = 0
+            End If
+            DataList.Add(CurrentData)
+            If AverageCount >= AverageTimes Then
+                If DataList.Count > 0 Then DataList.RemoveAt(0)
+            Else
+                AverageCount += 1
+            End If
+            Dim i As Integer = 0
+            Average = 0
+            For i = 0 To DataList.Count - 1
+                Average = Average + DataList.Item(i)
+            Next
+            If DataList.Count > 0 Then Average = Math.Round(Average / DataList.Count)
+            LastData = CurrentData
+            Return Average
+        End Function
         Public Function GetAverageValueDePeak(ByVal dData As Double, ByVal PeakLimit As Double, ByVal iPeakTimes As Integer) As Double
             Static PeakCount As Integer = 0
             CurrentData = dData

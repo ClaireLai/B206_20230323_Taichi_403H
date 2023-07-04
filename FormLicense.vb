@@ -25,8 +25,6 @@
     End Sub
 
     Private Sub btnTry_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTry.Click
-        LC.GetTrialDays = Val(txtTrialDays.Text)
-        LC.WriteTrialDays(LC.GetTrialDays)
         LC.SetTrial()
         btnTry.Visible = False
         FormLogins.txtUserName.Text = ""

@@ -144,6 +144,31 @@
         CreateFlowSet(FormParameters.flwFlowSetup, 0, MAXPLATE)
         '建立壓力PID控制項
         CreatePressPID(FormParameters.flwPressPID, 0, 0)
+        If PressPID_Flag Then
+            FormParameters.flwPressPID.Visible = True
+            FormParameters.Panel1.Visible = False
+            FormParameters.pnlPressureAverage.Visible = False
+            FormParameters.lblOutRangAddDAText.Visible = False
+            FormParameters.txtOutRangAddDA1.Visible = False
+            FormParameters.txtOutRangAddDA2.Visible = False
+            FormParameters.txtOutRangAddDA3.Visible = False
+            FormParameters.lblkgDARatioText.Visible = False
+            FormParameters.txtkgDARatio1.Visible = False
+            FormParameters.txtkgDARatio2.Visible = False
+            FormParameters.txtkgDARatio3.Visible = False
+        Else
+            FormParameters.flwPressPID.Visible = False
+            FormParameters.Panel1.Visible = True
+            FormParameters.pnlPressureAverage.Visible = True
+            FormParameters.lblOutRangAddDAText.Visible = True
+            FormParameters.txtOutRangAddDA1.Visible = True
+            FormParameters.txtOutRangAddDA2.Visible = True
+            FormParameters.txtOutRangAddDA3.Visible = True
+            FormParameters.lblkgDARatioText.Visible = True
+            FormParameters.txtkgDARatio1.Visible = True
+            FormParameters.txtkgDARatio2.Visible = True
+            FormParameters.txtkgDARatio3.Visible = True
+        End If
         '建立製程壓頭顯示控制項
         CreatePlateProcess(FormProcesss.flwProcess, 0, MAXPLATE)
         '建立製程壓頭配方顯示控制項

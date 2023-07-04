@@ -8,7 +8,8 @@ Module Module_CurveData
     Public TempInSecondary As Boolean
 
     Public Sub InitCurveData(ByVal sdir As String)
-        CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
+        'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
+        CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
         ReadCurveNames(CurveDataINI)
         ' 建立製程用曲線
         ChartInitial()
@@ -727,20 +728,21 @@ Module Module_CurveData
                     FormRecords.lblCHVac.Text = Format(ChartRecord.Series(0).Points(e.NewPosition).YValues(0), "0.0+E00")
                     FormRecords.lblDPCurrent.Text = Format(ChartRecord.Series(1).Points(e.NewPosition).YValues(0), "0.00")
                     For j = 0 To MAXPLATE
-                        'If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
-                        '    RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
-                        'End If
-                        If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
-                            RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 6 + 3).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPressure = ChartRecord.Series(j * 6 + 4).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPresetDA = ChartRecord.Series(j * 6 + 5).Points(e.NewPosition).YValues(0).ToString 'da值
-                            RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 6 + 6).Points(e.NewPosition).YValues(0).ToString '溫度預設
+                        If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
+                            RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
+                            RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
                         End If
+                        '加上DA值
+                        'If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
+                        '    RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 6 + 3).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetPressure = ChartRecord.Series(j * 6 + 4).Points(e.NewPosition).YValues(0).ToString
+                        '    RecordDataShow(j).SetPresetDA = ChartRecord.Series(j * 6 + 5).Points(e.NewPosition).YValues(0).ToString 'da值
+                        '    RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 6 + 6).Points(e.NewPosition).YValues(0).ToString '溫度預設
+                        'End If
                     Next
                 Else
                     FormRecords.lblCHVac.Text = "xxx"
@@ -820,8 +822,9 @@ Module Module_CurveData
                             datamax += 1
                             data(datamax) = PressPVstr(i)
                             datamax += 1
-                            data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
-                            datamax += 1
+                            ''寫入DA值
+                            'data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
+                            'datamax += 1
                             data(datamax) = PresetTempStr(i)
                             datamax += 1
                             data(datamax) = PresetPressStr(i)

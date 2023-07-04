@@ -276,8 +276,8 @@ Module Module_Parameter
         Public AutoRecordData As String
         Public SplitTopBotTemp As String 'Add  by Vincent 20180419  ------------------- Start
         Public SplitTopBotTempEnable As String
-
-
+        Public RunConfirm As String 'Add  by Claire 20230620 
+        Public WebPath As String
         'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
         Public PressureAverageTimes As String
         Public PressureAverageEnable As String
@@ -290,6 +290,8 @@ Module Module_Parameter
         Public DPWaterFlowHz As String
         Public DPWaterFlowHzMax As String
         Public DPWaterFlowAlarm As String
+        'Add  by claire 20230620  稼動率功能 ------------------- End
+        Public StartLog_Time As String
     End Structure
     Public SystemParameters As SystemParameterss
 
@@ -516,6 +518,11 @@ Module Module_Parameter
         SystemParameters.DPWaterFlowHz = ReadProgData("PARAMETER", "DPWaterFlowHz", "135", sfile)  'Add  by Vincent 20210318
         SystemParameters.DPWaterFlowHzMax = ReadProgData("PARAMETER", "DPWaterFlowHzMax", "20", sfile)  'Add  by Vincent 20210318
         SystemParameters.DPWaterFlowAlarm = ReadProgData("PARAMETER", "DPWaterFlowAlarm", "4.0", sfile)  'Add  by Vincent 20210318
+
+        SystemParameters.StartLog_Time = ReadProgData("PARAMETER", "StartLog_Time", "0", sfile)  'Add  by claire 20230620
+        SystemParameters.RunConfirm = ReadProgData("PARAMETER", "RunConfirm", "0", sfile)
+        SystemParameters.WebPath = ReadProgData("PARAMETER", "WebPath", "", sfile)
+        If (SystemParameters.WebPath = "") Then MessageBox.Show("請檢查遠端 稼動率Log存檔位置")
         If Val(SystemParameters.DPWaterFlowHz) <= 0 Then
             SystemParameters.DPWaterFlowHz = "135"
         End If
@@ -660,7 +667,11 @@ Module Module_Parameter
         WriteProgData("PARAMETER", "RPONPressure", SystemParameters.RPONPressure, sfile) 'Add  by Vincent 20210318  
         WriteProgData("PARAMETER", "DPWaterFlowHz", SystemParameters.DPWaterFlowHz, sfile) 'Add  by Vincent 20210318  
         WriteProgData("PARAMETER", "DPWaterFlowHzMax", SystemParameters.DPWaterFlowHzMax, sfile) 'Add  by Vincent 20210318  
-        WriteProgData("PARAMETER", "DPWaterFlowAlarm", SystemParameters.DPWaterFlowAlarm, sfile) 'Add  by Vincent 20210318  
+        WriteProgData("PARAMETER", "DPWaterFlowAlarm", SystemParameters.DPWaterFlowAlarm, sfile) 'Add  by Vincent 20210318
+        '
+        WriteProgData("PARAMETER", "StartLog_Time", SystemParameters.StartLog_Time, sfile) 'Add  by claire 20230620
+        WriteProgData("PARAMETER", "RunConfirm", SystemParameters.RunConfirm, sfile)
+        WriteProgData("PARAMETER", "WebPath", SystemParameters.WebPath, sfile)
     End Sub
 
 

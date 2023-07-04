@@ -62,7 +62,7 @@ Partial Class ControlPressPID
         Me.PID.Margin = New System.Windows.Forms.Padding(0)
         Me.PID.Name = "PID"
         Me.PID.Padding = New System.Windows.Forms.Padding(0)
-        Me.PID.Size = New System.Drawing.Size(235, 187)
+        Me.PID.Size = New System.Drawing.Size(235, 181)
         Me.PID.TabIndex = 952
         Me.PID.TabStop = False
         Me.PID.Text = "PID"
@@ -70,7 +70,7 @@ Partial Class ControlPressPID
         'txtInterval
         '
         Me.txtInterval.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInterval.Location = New System.Drawing.Point(173, 157)
+        Me.txtInterval.Location = New System.Drawing.Point(173, 151)
         Me.txtInterval.Name = "txtInterval"
         Me.txtInterval.Size = New System.Drawing.Size(34, 26)
         Me.txtInterval.TabIndex = 661
@@ -100,7 +100,7 @@ Partial Class ControlPressPID
         Me.GroupBox5.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox5.Location = New System.Drawing.Point(7, 112)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(141, 71)
+        Me.GroupBox5.Size = New System.Drawing.Size(141, 66)
         Me.GroupBox5.TabIndex = 659
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "手動調整"
@@ -110,7 +110,7 @@ Partial Class ControlPressPID
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(106, 41)
+        Me.Label9.Location = New System.Drawing.Point(106, 36)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(27, 28)
         Me.Label9.TabIndex = 662
@@ -120,7 +120,7 @@ Partial Class ControlPressPID
         'txtAdjustDA
         '
         Me.txtAdjustDA.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAdjustDA.Location = New System.Drawing.Point(70, 49)
+        Me.txtAdjustDA.Location = New System.Drawing.Point(70, 44)
         Me.txtAdjustDA.Name = "txtAdjustDA"
         Me.txtAdjustDA.Size = New System.Drawing.Size(36, 21)
         Me.txtAdjustDA.TabIndex = 661
@@ -132,7 +132,7 @@ Partial Class ControlPressPID
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(9, 45)
+        Me.Label10.Location = New System.Drawing.Point(9, 40)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(62, 28)
         Me.Label10.TabIndex = 660
@@ -265,7 +265,7 @@ Partial Class ControlPressPID
         Me.txtBrake.Name = "txtBrake"
         Me.txtBrake.Size = New System.Drawing.Size(33, 26)
         Me.txtBrake.TabIndex = 956
-        Me.txtBrake.Text = "5"
+        Me.txtBrake.Text = "2"
         Me.txtBrake.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label1

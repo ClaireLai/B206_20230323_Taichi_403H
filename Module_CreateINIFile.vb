@@ -213,5 +213,10 @@
             My.Computer.FileSystem.CreateDirectory(sstr)
         End If
     End Sub
-
+    Public Sub CheckExistDirAndCreateCC(ByVal sstr As String)
+        If Not My.Computer.FileSystem.FileExists(sstr) Then
+            'My.Computer.FileSystem.(sstr)
+            MsgBox("ok")
+        End If
+    End Sub
 End Module

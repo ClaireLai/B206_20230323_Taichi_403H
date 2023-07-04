@@ -64,16 +64,17 @@
 
     '
     ''' <summary>
-    ''' 尋找 表單內的所有控制項, 並將控制項名稱寫入 檔案內, 用來做為 語言切換使用,最多5層容器
+    ''' 尋找 表單內的所有控制項, 並將控制項名稱寫入 檔案內, 用來做為 語言切換使用
     ''' </summary>
     ''' <param name="frm">控制項變數,一般是表單</param>
     ''' <param name="sfile">檔案名稱,一般是INI 檔案</param>
+    ''' <param name="cons">迭代控制像名稱</param>
     ''' <remarks>修改記錄: 99.02.03 </remarks>
-    Public Sub FindControls(ByRef frm As Object, ByVal sfile As String)
+    Public Sub FindControls(ByRef frm As Object, ByVal sfile As String, ByRef cons As Control)
         Dim gg As TabControl
         Dim i As Integer
         On Error Resume Next
-        For Each aa As Control In frm.Controls
+        For Each aa As Control In cons.Controls
             WriteLangIni(frm.Name, aa, sfile)
             If TypeName(aa) = "TabControl" Then
                 gg = aa
@@ -82,185 +83,11 @@
                 Next
             End If
             If aa.Controls.Count > 0 Then
-                For Each bb As Control In aa.Controls
-                    WriteLangIni(frm.Name, bb, sfile)
-                    If TypeName(bb) = "TabControl" Then
-                        gg = bb
-                        For i = 0 To gg.TabCount - 1
-                            WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                        Next
-                    End If
-                    If bb.Controls.Count > 0 Then
-                        For Each cc As Control In bb.Controls
-                            WriteLangIni(frm.Name, cc, sfile)
-                            If TypeName(cc) = "TabControl" Then
-                                gg = cc
-                                For i = 0 To gg.TabCount - 1
-                                    WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                Next
-                            End If
-                            If cc.Controls.Count > 0 Then
-                                If TypeName(cc) = "TabControl" Then
-                                    gg = cc
-                                    For i = 0 To gg.TabCount - 1
-                                        WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                    Next
-                                End If
-                                For Each dd As Control In cc.Controls
-                                    WriteLangIni(frm.Name, dd, sfile)
-                                    If dd.Controls.Count > 0 Then
-                                        WriteLangIni(frm.Name, dd, sfile)
-                                        If TypeName(dd) = "TabControl" Then
-                                            gg = dd
-                                            For i = 0 To gg.TabCount - 1
-                                                WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                            Next
-                                        End If
-                                        For Each ee As Control In dd.Controls
-                                            WriteLangIni(frm.Name, ee, sfile)
-                                            If TypeName(ee) = "TabControl" Then
-                                                gg = ee
-                                                For i = 0 To gg.TabCount - 1
-                                                    WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                                Next
-                                            End If
-                                            For Each ff As Control In ee.Controls
-                                                WriteLangIni(frm.Name, ff, sfile)
-                                                If TypeName(ff) = "TabControl" Then
-                                                    gg = ff
-                                                    For i = 0 To gg.TabCount - 1
-                                                        WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                                    Next
-                                                End If
-                                                For Each hh As Control In ff.Controls
-                                                    WriteLangIni(frm.Name, hh, sfile)
-                                                    If TypeName(hh) = "TabControl" Then
-                                                        gg = hh
-                                                        For i = 0 To gg.TabCount - 1
-                                                            WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                                        Next
-                                                    End If
-                                                    For Each ii As Control In hh.Controls
-                                                        WriteLangIni(frm.Name, ii, sfile)
-                                                        If TypeName(ii) = "TabControl" Then
-                                                            gg = ii
-                                                            For i = 0 To gg.TabCount - 1
-                                                                WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                                            Next
-                                                        End If
-                                                        For Each jj As Control In ii.Controls
-                                                            WriteLangIni(frm.Name, jj, sfile)
-                                                            If TypeName(jj) = "TabControl" Then
-                                                                gg = jj
-                                                                For i = 0 To gg.TabCount - 1
-                                                                    WriteProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                                                                Next
-                                                            End If
-                                                            For Each kk As Control In jj.Controls
-                                                                WriteLangIni(frm.Name, kk, sfile)
-
-                                                            Next
-                                                        Next
-                                                    Next
-                                                Next
-                                            Next
-                                        Next
-
-                                    End If
-
-                                Next
-
-                            End If
-                        Next
-
-                    End If
-                Next
-
+                FindControls(frm, sfile, aa)
             End If
         Next
     End Sub
-    Public Sub FindControlsCHS(ByRef frm As Object, ByVal sfile As String)
-        Dim gg As TabControl
-        Dim i As Integer
-        On Error Resume Next
-        For Each aa As Control In frm.Controls
-            WriteLangIniCHS(frm.Name, aa, sfile)
-            If TypeName(aa) = "TabControl" Then
-                gg = aa
-                For i = 0 To gg.TabCount - 1
-                    WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                Next
-            End If
-            If aa.Controls.Count > 0 Then
-                For Each bb As Control In aa.Controls
-                    WriteLangIniCHS(frm.Name, bb, sfile)
-                    If TypeName(bb) = "TabControl" Then
-                        gg = bb
-                        For i = 0 To gg.TabCount - 1
-                            WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                        Next
-                    End If
-                    If bb.Controls.Count > 0 Then
-                        For Each cc As Control In bb.Controls
-                            WriteLangIniCHS(frm.Name, cc, sfile)
-                            If TypeName(cc) = "TabControl" Then
-                                gg = cc
-                                For i = 0 To gg.TabCount - 1
-                                    WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                                Next
-                            End If
-                            If cc.Controls.Count > 0 Then
-                                If TypeName(cc) = "TabControl" Then
-                                    gg = cc
-                                    For i = 0 To gg.TabCount - 1
-                                        WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                                    Next
-                                End If
-                                For Each dd As Control In cc.Controls
-                                    WriteLangIniCHS(frm.Name, dd, sfile)
-                                    If dd.Controls.Count > 0 Then
-                                        WriteLangIniCHS(frm.Name, dd, sfile)
-                                        If TypeName(dd) = "TabControl" Then
-                                            gg = dd
-                                            For i = 0 To gg.TabCount - 1
-                                                WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                                            Next
-                                        End If
-                                        For Each ee As Control In dd.Controls
-                                            WriteLangIniCHS(frm.Name, ee, sfile)
-                                            If TypeName(ee) = "TabControl" Then
-                                                gg = ee
-                                                For i = 0 To gg.TabCount - 1
-                                                    WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                                                Next
-                                            End If
-                                            For Each ff As Control In ee.Controls
-                                                WriteLangIniCHS(frm.Name, ff, sfile)
-                                                If TypeName(ff) = "TabControl" Then
-                                                    gg = ff
-                                                    For i = 0 To gg.TabCount - 1
-                                                        WriteProgData(frm.Name, gg.TabPages(i).Name, StrConv(gg.TabPages(i).Text, VbStrConv.SimplifiedChinese, 1028), sfile)
-                                                    Next
-                                                End If
-                                                For Each hh As Control In ff.Controls
-                                                    WriteLangIniCHS(frm.Name, hh, sfile)
-                                                Next
-                                            Next
-                                        Next
 
-                                    End If
-
-                                Next
-
-                            End If
-                        Next
-
-                    End If
-                Next
-
-            End If
-        Next
-    End Sub
     '將控制項的名稱及文字寫入檔案
     Public Sub WriteLangIniCHS(ByVal section As String, ByVal obj As Object, ByVal fs As String)
         If obj.Text <> "" Then
@@ -275,6 +102,14 @@
             End If
         End If
     End Sub
+
+
+    ''' <summary>
+    ''' 更換畫面語言
+    ''' </summary>
+    ''' <param name="frm">控制項變數,一般是表單</param>
+    ''' <param name="sfile">檔案名稱,一般是INI 檔案</param>
+    ''' <param name="cons">迭代控制像名稱</param>
     Public Sub ChangeFormLang(ByVal frm As Object, ByVal sfile As String, ByVal cons As Control)
         Dim gg As TabControl
         Dim i As Integer
@@ -299,180 +134,7 @@
             End If
         Next
     End Sub
-    ''自檔案中讀出控制項名稱, 並依據名稱將表單內的所有控制項的文字修改, 最多5層容器
-    'Public Sub ChangeFormLang(ByVal frm As Object, ByVal sfile As String)
-    '    Dim gg As TabControl
-    '    Dim i As Integer
-    '    Dim sstr As String
-    '    If Not FileIO.FileSystem.FileExists(sfile) Then Exit Sub
-    '    For Each aa As Control In frm.Controls
-    '        Application.DoEvents()
-    '        ReadAndSetText(frm.Name, aa, sfile)
-    '        If TypeName(aa) = "TabControl" Then
-    '            gg = aa
-    '            For i = 0 To gg.TabCount - 1
-    '                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                If Len(sstr) > 0 Then
-    '                    gg.TabPages(i).Text = sstr
-    '                End If
-    '            Next
-    '        End If
-    '        If aa.Controls.Count > 0 Then
-    '            For Each bb As Control In aa.Controls
-    '                ReadAndSetText(frm.Name, bb, sfile)
-    '                If TypeName(bb) = "TabControl" Then
-    '                    gg = bb
-    '                    For i = 0 To gg.TabCount - 1
-    '                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                        If Len(sstr) > 0 Then
-    '                            gg.TabPages(i).Text = sstr
-    '                        End If
-    '                    Next
-    '                End If
-    '                If bb.Controls.Count > 0 Then
-    '                    For Each cc As Control In bb.Controls
-    '                        ReadAndSetText(frm.Name, cc, sfile)
-    '                        If TypeName(cc) = "TabControl" Then
-    '                            gg = cc
-    '                            For i = 0 To gg.TabCount - 1
-    '                                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                If Len(sstr) > 0 Then
-    '                                    gg.TabPages(i).Text = sstr
-    '                                End If
-    '                            Next
-    '                        End If
-    '                        If cc.Controls.Count > 0 Then
-    '                            For Each dd As Control In cc.Controls
-    '                                ReadAndSetText(frm.Name, dd, sfile)
-    '                                If TypeName(dd) = "TabControl" Then
-    '                                    gg = dd
-    '                                    For i = 0 To gg.TabCount - 1
-    '                                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                        If Len(sstr) > 0 Then
-    '                                            gg.TabPages(i).Text = sstr
-    '                                        End If
-    '                                    Next
-    '                                End If
-    '                                If dd.Controls.Count > 0 Then
-    '                                    For Each ee As Control In dd.Controls
-    '                                        ReadAndSetText(frm.Name, ee, sfile)
-    '                                        If TypeName(ee) = "TabControl" Then
-    '                                            gg = ee
-    '                                            For i = 0 To gg.TabCount - 1
-    '                                                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                If Len(sstr) > 0 Then
-    '                                                    gg.TabPages(i).Text = sstr
-    '                                                End If
-    '                                            Next
-    '                                        End If
-    '                                        If ee.Controls.Count > 0 Then
-    '                                            For Each ff As Control In ee.Controls
-    '                                                ReadAndSetText(frm.Name, ff, sfile)
-    '                                                If TypeName(ff) = "TabControl" Then
-    '                                                    gg = ff
-    '                                                    For i = 0 To gg.TabCount - 1
-    '                                                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                        If Len(sstr) > 0 Then
-    '                                                            gg.TabPages(i).Text = sstr
-    '                                                        End If
-    '                                                    Next
-    '                                                End If
-    '                                                If ff.Controls.Count > 0 Then
-    '                                                    For Each hh As Control In ff.Controls
-    '                                                        ReadAndSetText(frm.Name, hh, sfile)
-    '                                                        If TypeName(hh) = "TabControl" Then
-    '                                                            gg = hh
-    '                                                            For i = 0 To gg.TabCount - 1
-    '                                                                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                If Len(sstr) > 0 Then
-    '                                                                    gg.TabPages(i).Text = sstr
-    '                                                                End If
-    '                                                            Next
-    '                                                        End If
-    '                                                        If hh.Controls.Count > 0 Then
-    '                                                            For Each ii As Control In hh.Controls
-    '                                                                ReadAndSetText(frm.Name, ii, sfile)
-    '                                                                If TypeName(ff) = "TabControl" Then
-    '                                                                    gg = ii
-    '                                                                    For i = 0 To gg.TabCount - 1
-    '                                                                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                        If Len(sstr) > 0 Then
-    '                                                                            gg.TabPages(i).Text = sstr
-    '                                                                        End If
-    '                                                                    Next
-    '                                                                End If
-    '                                                                If ii.Controls.Count > 0 Then
-    '                                                                    For Each jj As Control In ii.Controls
-    '                                                                        ReadAndSetText(frm.Name, jj, sfile)
-    '                                                                        If TypeName(jj) = "TabControl" Then
-    '                                                                            gg = jj
-    '                                                                            For i = 0 To gg.TabCount - 1
-    '                                                                                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                                If Len(sstr) > 0 Then
-    '                                                                                    gg.TabPages(i).Text = sstr
-    '                                                                                End If
-    '                                                                            Next
-    '                                                                        End If
-    '                                                                        If jj.Controls.Count > 0 Then
-    '                                                                            For Each kk As Control In jj.Controls
-    '                                                                                ReadAndSetText(frm.Name, kk, sfile)
-    '                                                                                If TypeName(kk) = "TabControl" Then
-    '                                                                                    gg = kk
-    '                                                                                    For i = 0 To gg.TabCount - 1
-    '                                                                                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                                        If Len(sstr) > 0 Then
-    '                                                                                            gg.TabPages(i).Text = sstr
-    '                                                                                        End If
-    '                                                                                    Next
-    '                                                                                End If
-    '                                                                                If kk.Controls.Count > 0 Then
-    '                                                                                    For Each ll As Control In kk.Controls
-    '                                                                                        ReadAndSetText(frm.Name, ll, sfile)
-    '                                                                                        If TypeName(ll) = "TabControl" Then
-    '                                                                                            gg = ll
-    '                                                                                            For i = 0 To gg.TabCount - 1
-    '                                                                                                sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                                                If Len(sstr) > 0 Then
-    '                                                                                                    gg.TabPages(i).Text = sstr
-    '                                                                                                End If
-    '                                                                                            Next
-    '                                                                                        End If
-    '                                                                                        If ll.Controls.Count > 0 Then
-    '                                                                                            For Each mm As Control In ll.Controls
-    '                                                                                                ReadAndSetText(frm.Name, mm, sfile)
-    '                                                                                                If TypeName(mm) = "TabControl" Then
-    '                                                                                                    gg = mm
-    '                                                                                                    For i = 0 To gg.TabCount - 1
-    '                                                                                                        sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-    '                                                                                                        If Len(sstr) > 0 Then
-    '                                                                                                            gg.TabPages(i).Text = sstr
-    '                                                                                                        End If
-    '                                                                                                    Next
-    '                                                                                                End If
-    '                                                                                            Next
-    '                                                                                        End If
-    '                                                                                    Next
-    '                                                                                End If
-    '                                                                            Next
-    '                                                                        End If
-    '                                                                    Next
-    '                                                                End If
-    '                                                            Next
-    '                                                        End If
-    '                                                    Next
-    '                                                End If
-    '                                            Next
-    '                                        End If
-    '                                    Next
-    '                                End If
-    '                            Next
-    '                        End If
-    '                    Next
-    '                End If
-    '            Next
-    '        End If
-    '    Next
-    'End Sub
+
 
     ''將控制項的名稱自檔案讀入並比較是否有相同名稱並設定控制項文字
     'Public Sub ReadAndSetText(ByVal section As String, ByVal obj As Object, ByVal fs As String)
@@ -493,7 +155,6 @@
         End If
         If Len(sstr) > 0 Then
             obj.Text = sstr
-            'Debug.Print(obj.Text)
         End If
     End Sub
 
@@ -502,66 +163,33 @@
         If IO.File.Exists(ls) Then
             IO.File.Delete(ls)
         End If
-        FindControls(Form1s, ls)
-        FindControls(FormAlarms, ls)
-        FindControls(FormAlarmPopups, ls)
-        FindControls(FormKeyboard1s, ls)
-        FindControls(FormKeyboard2s, ls)
-        FindControls(FormKeyboard3s, ls)
-        FindControls(FormKeyInDataLogNames, ls)
-        FindControls(FormkeyInFileNames, ls)
-        FindControls(FormKeyInProcessNames, ls)
-        FindControls(FormKeyInRecipeFileNames, ls)
-        FindControls(FormKeyInVideoNames, ls)
-        FindControls(FormLicenses, ls)
-        FindControls(FormLogins, ls)
-        FindControls(FormLoginSetups, ls)
-        FindControls(FormMaintances, ls)
-        FindControls(FormManuals, ls)
-        FindControls(FormMenus, ls)
-        FindControls(FormMsgboxs, ls)
-        FindControls(FormParameters, ls)
-        FindControls(FormProcesss, ls)
-        FindControls(FormRecipeSelects, ls)
-        FindControls(FormRecipes, ls)
-        FindControls(FormRecords, ls)
-        FindControls(FormRecipeMapEdit, ls)
-        FindControls(FormRecipeBarcodeInput, ls)
+        FindControls(Form1s, ls, Form1s)
+        FindControls(FormAlarms, ls, FormAlarms)
+        FindControls(FormAlarmPopups, ls, FormAlarmPopups)
+        FindControls(FormKeyboard1s, ls, FormKeyboard1s)
+        FindControls(FormKeyboard2s, ls, FormKeyboard2s)
+        FindControls(FormKeyboard3s, ls, FormKeyboard3s)
+        FindControls(FormKeyInDataLogNames, ls, FormKeyInDataLogNames)
+        FindControls(FormkeyInFileNames, ls, FormkeyInFileNames)
+        FindControls(FormKeyInProcessNames, ls, FormKeyInProcessNames)
+        FindControls(FormKeyInRecipeFileNames, ls, FormKeyInRecipeFileNames)
+        FindControls(FormKeyInVideoNames, ls, FormKeyInVideoNames)
+        FindControls(FormLicenses, ls, FormLicenses)
+        FindControls(FormLogins, ls, FormLogins)
+        FindControls(FormLoginSetups, ls, FormLoginSetups)
+        FindControls(FormMaintances, ls, FormMaintances)
+        FindControls(FormManuals, ls, FormManuals)
+        FindControls(FormMenus, ls, FormMenus)
+        FindControls(FormMsgboxs, ls, FormMsgboxs)
+        FindControls(FormParameters, ls, FormParameters)
+        FindControls(FormProcesss, ls, FormProcesss)
+        FindControls(FormRecipeSelects, ls, FormRecipeSelects)
+        FindControls(FormRecipes, ls, FormRecipes)
+        FindControls(FormRecords, ls, FormRecords)
+        FindControls(FormRecipeMapEdit, ls, FormRecipeMapEdit)
+        FindControls(FormRecipeBarcodeInput, ls, FormRecipeBarcodeInput)
     End Sub
 
-    '依序將表單內的文字修改
-    'Public Sub ChangeLanguage(ByVal ls As String)
-    '    ChangeListViewColHeater(FormAlarms.ListView1)
-    '    ChangeFormLang(FormAlarms, ls)
-    '    ChangeFormLang(FormAlarmPopups, ls)
-    '    ChangeFormLang(FormKeyboard1s, ls)
-    '    ChangeFormLang(FormKeyboard2s, ls)
-    '    ChangeFormLang(FormKeyboard3s, ls)
-    '    ChangeFormLang(FormKeyInDataLogNames, ls)
-    '    ChangeFormLang(FormkeyInFileNames, ls)
-
-    '    ChangeFormLang(FormKeyInProcessNames, ls)
-    '    ChangeFormLang(FormKeyInRecipeFileNames, ls)
-    '    ChangeFormLang(FormKeyInVideoNames, ls)
-    '    ChangeFormLang(FormLicenses, ls)
-    '    ChangeFormLang(FormLogins, ls)
-    '    ChangeFormLang(FormLoginSetups, ls)
-    '    ChangeFormLang(FormMaintances, ls)
-    '    ChangeFormLang(FormManuals, ls)
-    '    ChangeFormLang(FormMenus, ls)
-    '    ChangeFormLang(FormMsgboxs, ls)
-    '    ChangeFormLang(FormParameters, ls)
-    '    ChangeFormLang(FormProcesss, ls)
-    '    ChangeFormLang(FormRecipeSelects, ls)
-    '    ChangeFormLang(FormRecipes, ls)
-    '    ChangeFormLang(FormRecords, ls)
-    '    ChangeFormLang(FormRecipeMapEdit, ls)
-    '    ChangeFormLang(FormRecipeBarcodeInput, ls)
-    '    ChangeFormLang(Form1s, ls)
-    '    ChangeSeriesRecordName(ChartRecord, CurveName)
-    '    SetLangText(Form1s.chkPLCTest, "PLC 通訊" + Format(PLC_COMPORT, "COM0"), "PLC Comm. " + Format(PLC_COMPORT, "COM0"))
-
-    'End Sub
 
     '依序將表單內的文字修改,並帶有進度列以顯示目前進度
     Public Sub ChangeLanguage(ByVal ls As String, ByVal pg As ProgressBar)

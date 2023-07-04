@@ -201,27 +201,27 @@
             '各頭加壓值
             oriPressPV(i) = Get_PLC_R1000(ADBoundingP01Index + i)
             If oriPressPV(i) < 0 Then oriPressPV(i) = 0
-            PressPV(i) = oriPressPV(i)
-            'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
-            'If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then
-            '    'If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
-            '    AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
-            '    'Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            '    PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(oriPressPV(i), Val(SystemParameters.PeakLimit), Val(SystemParameters.PeakTimes))
-            '    'Else
-            '    '    AvergaeValue(i).ClearAverageTimes()
-            '    '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            '    'End If
-            'Else
-            '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            'End If
-            If GetTrue01Boolean(SystemParameters.PressureAdjust) Then
+
+            If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then '平均次數
+                If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
+                    AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
+                    Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                    PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(ave, Val(SystemParameters.PressAverage))
+                    PressPV(i) = SetInRange(True, PressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                Else
+                    AvergaeValue(i).CLearAverageTimes()
+                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                End If
+            Else
+                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+            End If
+
+            If GetTrue01Boolean(SystemParameters.PressureAdjust) Then '壓力修整
                 Select Case PressState(i)
                     Case 0
-                        'PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
                         If Check_PLC_M(DoBondForce01Index + i) Then
                             OldPressValue(i) = Get_PLC_R1100(DAProcessBond01Index + 4 * i)
-                            If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), PressPV(i), Val(SystemParameters.PressAverage)) Then
+                            If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), PressPV(i), Val(SystemParameters.PressAverage)) Then '均化範圍內
                                 PressStateDelay(i) += 1
                                 If PressStateDelay(i) > 3 Then
                                     PressState(i) = 1
@@ -234,9 +234,9 @@
                             OldPressValue(i) = 0
                         End If
                     Case 1
-                        If Check_PLC_M(DoBondForce01Index + i) Then
+                        If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
                             If Get_PLC_R1100(DAProcessBond01Index + 4 * i) <> OldPressValue(i) Then
-                                'PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
                                 PressStateDelay(i) += 1
                                 If PressStateDelay(i) > 3 Then
                                     PressStateDelay(i) = 0
@@ -252,26 +252,15 @@
                         End If
                 End Select
             Else
-                PressState(i) = 0
-                OldPressValue(i) = 0
+                If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False Then
+                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                End If
             End If
-
-            'If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False And GetTrue01Boolean(SystemParameters.PressureAdjust) = False Then
-            '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '壓力均化範圍
-            'End If
-            PressPV(i) = oriPressPV(i)
-
-            'Remark  by Vincent 20181016  壓力修整功能 -- 下行為原本程式碼:
-            ' PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+            If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
+            Else
+                PressPV(i) = oriPressPV(i)
+            End If
             PressPVstr(i) = PressPV(i).ToString
-            'Add  by Vincent 20181016  壓力修整功能 ------------------- End
-
-            'Remark  by Vincent 20181016  壓力修整功能 -- 下2行為原本程式碼: --------------------Start
-            'PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-            'PressPVstr(i) = PressPV(i).ToString
-            'Remark  by Vincent 20181016  壓力修整功能 -- 上2行為原本程式碼:-------------------- End
-
-
             '各頭加熱器電流
             TopCurrent(i) = Get_PLC_R1000(ADTopCurrent01Index + i * 2) / 100
             BotCurrent(i) = Get_PLC_R1000(ADBotCurrent01Index + i * 2) / 100
@@ -288,14 +277,6 @@
             If Val(SystemParameters.BotFlowMeterHz(i)) = 0 Then
                 SystemParameters.BotFlowMeterHz(i) = 100000
             End If
-            'TopFlowMeter(i) = (Get_PLC_R1000(ADTopFlowMeter01Index + i * 2) / Val(SystemParameters.TopFlowMeterHz(i))) * 60 'L/Min 
-            'BotFlowMeter(i) = (Get_PLC_R1000(ADBotFlowMeter01Index + i * 2) / Val(SystemParameters.BotFlowMeterHz(i))) * 60 'L/Min 
-            'TopFlowMeterStr(i) = Format(TopFlowMeter(i), "0.0")
-            'BotFlowMeterStr(i) = Format(BotFlowMeter(i), "0.0")
-            ''End If
-            'ManualControl(i).TopFlow = TopFlowMeter(i)
-
-            'ManualControl(i).BotFlow = BotFlowMeter(i)
 
             '各頭預設曲線--溫度/壓力
             If ProcessMode_RUN Then

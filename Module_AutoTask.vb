@@ -7,7 +7,7 @@ Module Module_AutoTask
     'Add by Vincent TCPIP 20200716  ---------------- End
 
     'Barcode 20160808 by vincent ---------------- Start
-    Public RunCounts As Integer = 1
+    Public RunCounts As Integer = 0
     Public RunDataINIFile As String
     Public Sub ReadRunData()
         Dim sstr As String
@@ -15,7 +15,6 @@ Module Module_AutoTask
         sfile = RunDataINIFile
         sstr = "RUNDATA"
         RunCounts = Val(ReadProgData(sstr, "RunCounts", "0", sfile))
-
         WriteProgData(sstr, "RunCounts", RunCounts.ToString, sfile)
     End Sub
     Public Sub WriteRunData()
@@ -72,10 +71,10 @@ Module Module_AutoTask
             Return num
         End Function
 
-        'Public Sub LoadRecipe(ByRef sRecipe As sPlateRecipe)
-        '    subPlateRecipe = sRecipe
-        '    subRecipeLoad = True
-        'End Sub
+        ''' <summary>
+        ''' ¤l»sµ{
+        ''' </summary>
+        ''' <param name="sRecipe"></param>
         Public Sub LoadPlateRecipe(ByRef sRecipe As sPlateRecipe)
             subPlateRecipe = sRecipe
 
@@ -115,7 +114,7 @@ Module Module_AutoTask
         Private SiteNum As Integer
         Private RunFlag As Boolean    'À£¦X®É­«¸m¦±½u
         Private RunOKFlag As Boolean    'À£¦X®É­«¸m¦±½u
-        Private AbortFlag As Boolean    'À£¦X®É­«¸m¦±½u
+        Public AbortFlag As Boolean    'À£¦X®É­«¸m¦±½u claire 2023.06.20¬°½[°Ê²v§ï¬°public
         Private SkipFlag As Boolean    'À£¦X®É­«¸m¦±½u
         Public SelectedFlag As Boolean    'À£¦X®É­«¸m¦±½u
 
@@ -400,7 +399,7 @@ Module Module_AutoTask
                             SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
                             SubProcessRunStepIndex = 1
                             If ManualControl(SiteNum).FirstContact = False Then
-                                If Val(subPlateRecipe.Pressure(SubProcessStepIndex)) > 0 And _
+                                If Val(subPlateRecipe.Pressure(SubProcessStepIndex)) > 0 And
                                    Val(subPlateRecipe.Time(SubProcessStepIndex)) > 0 Then
                                     If ManualControl(SiteNum).FirstContact = False Then
                                         ManualControl(SiteNum).SetPlateUp()
@@ -820,25 +819,25 @@ Module Module_AutoTask
                     End If
                     '²M°£»sµ{¨B§Ç
                     ProcessStepIndex = 0
-                        TotalProcessTime = 0
+                    TotalProcessTime = 0
 
-                        ProcessVacuumOK = False
-                        ProcessPressureOK = False
-                        ProcessTopTempOK = False
-                        ProcessBotTempOK = False
-                        ProcessTempOK = False
-                        ProcessFirstConatctOK = False
-                        BondBeforeVacuumOK = False
-                        CurveFreeze = False
-                        CurveFlag = False
-                        ProcessToStepGo = False
-                        For i = 0 To MAXPLATE
-                            PlateOK(i) = False
-                        Next
-                        Control_State = 1
-                    End If
+                    ProcessVacuumOK = False
+                    ProcessPressureOK = False
+                    ProcessTopTempOK = False
+                    ProcessBotTempOK = False
+                    ProcessTempOK = False
+                    ProcessFirstConatctOK = False
+                    BondBeforeVacuumOK = False
+                    CurveFreeze = False
+                    CurveFlag = False
+                    ProcessToStepGo = False
+                    For i = 0 To MAXPLATE
+                        PlateOK(i) = False
+                    Next
+                    Control_State = 1
+                End If
 
-                    Case 1  '¼g¤J¾Þ§@°Ñ¼Æ
+            Case 1  '¼g¤J¾Þ§@°Ñ¼Æ
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
@@ -1056,27 +1055,27 @@ Module Module_AutoTask
                                 PlateCount += 1
                             End If
                         Next
-                        'If PlateCount > (MAXPLATE) Then
-                        ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
-                        'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
-                        If Val(RecipeNum(RecipeRunIndex).BondBeforeVacuum) > 0 And BondBeforeVacuumOK = True Then
-                            '¯uªÅ«e¹wÀ£
-                            If PlateCount = 0 Then
+                        If PlateCount = 0 Then
+                            ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
+                            'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
+                            If Val(RecipeNum(RecipeRunIndex).BondBeforeVacuum) > 0 And BondBeforeVacuumOK = True Then
+                                '¯uªÅ«e¹wÀ£
+                                If PlateCount = 0 Then
+                                    AutoProcessTimerEnabled = True
+                                    AutoProcessTimer = 2
+                                    Last_State = Control_State
+                                    Control_State = 3
+                                End If
+                            Else
+                                '¥ý©â¯uªÅ¦AÀ£
+                                ProcessStepIndex = 0
                                 AutoProcessTimerEnabled = True
                                 AutoProcessTimer = 2
                                 Last_State = Control_State
-                                Control_State = 3
+                                Control_State = 7
                             End If
-                        Else
-                            '¥ý©â¯uªÅ¦AÀ£
-                            ProcessStepIndex = 0
-                            AutoProcessTimerEnabled = True
-                            AutoProcessTimer = 2
-                            Last_State = Control_State
-                            Control_State = 7
-                        End If
 
-                        'End If
+                        End If
                     End If
                 Else
                     ProcessStatusString = AbortStr + State + ProcessStatusList(SystemLanguage, Last_State) + DelayTimer
@@ -1095,15 +1094,15 @@ Module Module_AutoTask
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
                         '³]©w MFC ¬y¶q
                         If MFC01_USED Then
-                            MFC01_Control.Start(Val(RecipeNum(RecipeRunIndex).MFC01Flow), _
-                                                Val(RecipeNum(RecipeRunIndex).MFC01ONTime), _
+                            MFC01_Control.Start(Val(RecipeNum(RecipeRunIndex).MFC01Flow),
+                                                Val(RecipeNum(RecipeRunIndex).MFC01ONTime),
                                                 Val(RecipeNum(RecipeRunIndex).MFC01OFFTime))
                             FormManuals.txtGas01MFCSet.Text = RecipeNum(RecipeRunIndex).MFC01Flow
                             FormProcess.txtGas01MFCSet.Text = RecipeNum(RecipeRunIndex).MFC01Flow
                         End If
                         If MFC02_USED Then
-                            MFC02_Control.Start(Val(RecipeNum(RecipeRunIndex).MFC02Flow), _
-                                                Val(RecipeNum(RecipeRunIndex).MFC02ONTime), _
+                            MFC02_Control.Start(Val(RecipeNum(RecipeRunIndex).MFC02Flow),
+                                                Val(RecipeNum(RecipeRunIndex).MFC02ONTime),
                                                 Val(RecipeNum(RecipeRunIndex).MFC02OFFTime))
 
                             FormManuals.txtGas02MFCSet.Text = RecipeNum(RecipeRunIndex).MFC02Flow

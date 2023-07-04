@@ -127,6 +127,8 @@ Public Class FormProcess
     Friend WithEvents CtlSanAnCIM1 As CtlSanAnCIM
 '#End If
     Friend WithEvents lblCIMError As System.Windows.Forms.Label
+    Friend WithEvents btnEnter As Button
+    Friend WithEvents txtRecipeFile As TextBox
     Friend WithEvents TabPageVacuum As System.Windows.Forms.TabPage
     Public Sub New()
         MyBase.New()
@@ -178,6 +180,8 @@ Public Class FormProcess
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProcess))
         Me.grpProcess = New System.Windows.Forms.GroupBox()
+        Me.btnEnter = New System.Windows.Forms.Button()
+        Me.txtRecipeFile = New System.Windows.Forms.TextBox()
         Me.lblCIMError = New System.Windows.Forms.Label()
         Me.btnOffLine = New System.Windows.Forms.Button()
         Me.btnInLine = New System.Windows.Forms.Button()
@@ -348,6 +352,8 @@ Public Class FormProcess
         'grpProcess
         '
         Me.grpProcess.BackColor = System.Drawing.SystemColors.Control
+        Me.grpProcess.Controls.Add(Me.btnEnter)
+        Me.grpProcess.Controls.Add(Me.txtRecipeFile)
         Me.grpProcess.Controls.Add(Me.lblCIMError)
         Me.grpProcess.Controls.Add(Me.btnOffLine)
         Me.grpProcess.Controls.Add(Me.btnInLine)
@@ -388,6 +394,28 @@ Public Class FormProcess
         Me.grpProcess.TabIndex = 98
         Me.grpProcess.TabStop = False
         Me.grpProcess.Text = "»sµ{±±¨î"
+        '
+        'btnEnter
+        '
+        Me.btnEnter.BackColor = System.Drawing.Color.SkyBlue
+        Me.btnEnter.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEnter.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnter.ForeColor = System.Drawing.Color.Black
+        Me.btnEnter.Location = New System.Drawing.Point(941, 58)
+        Me.btnEnter.Name = "btnEnter"
+        Me.btnEnter.Size = New System.Drawing.Size(71, 27)
+        Me.btnEnter.TabIndex = 683
+        Me.btnEnter.Text = "Enter"
+        Me.btnEnter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnEnter.UseVisualStyleBackColor = False
+        '
+        'txtRecipeFile
+        '
+        Me.txtRecipeFile.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRecipeFile.Location = New System.Drawing.Point(791, 33)
+        Me.txtRecipeFile.Name = "txtRecipeFile"
+        Me.txtRecipeFile.Size = New System.Drawing.Size(221, 26)
+        Me.txtRecipeFile.TabIndex = 682
         '
         'lblCIMError
         '
@@ -470,7 +498,7 @@ Public Class FormProcess
         Me.btnBarcodeReader.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnBarcodeReader.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBarcodeReader.ForeColor = System.Drawing.Color.Black
-        Me.btnBarcodeReader.Location = New System.Drawing.Point(796, 32)
+        Me.btnBarcodeReader.Location = New System.Drawing.Point(792, 31)
         Me.btnBarcodeReader.Name = "btnBarcodeReader"
         Me.btnBarcodeReader.Size = New System.Drawing.Size(112, 41)
         Me.btnBarcodeReader.TabIndex = 547
@@ -2021,6 +2049,7 @@ Public Class FormProcess
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Process"
         Me.grpProcess.ResumeLayout(False)
+        Me.grpProcess.PerformLayout()
         Me.grpDoorControl.ResumeLayout(False)
         Me.pnlProcessCSelect.ResumeLayout(False)
         Me.tabProcessDataCurve.ResumeLayout(False)
@@ -2073,6 +2102,10 @@ Public Class FormProcess
         Me.Top = FromStartUpTopPosition
         Me.Left = 0
 
+
+        txtRecipeFile.Text = ""
+        txtRecipeFile.Focus()
+        txtRecipeFile.SelectAll()
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
 #If SanAn_TCPIP_Used = 0 Then
@@ -2082,7 +2115,7 @@ Public Class FormProcess
         'If TCPIP_Used Then
         'tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
         'End If
-        btnBarcodeReader.Visible = Not TCPIP_Used
+        'btnBarcodeReader.Visible = Not TCPIP_Used
         btnInLine.Visible = Not TCPIP_Used
         btnOffLine.Visible = Not TCPIP_Used
         'Add By Vtncent 20220506  ----------------------------------------------------------  End
@@ -2095,6 +2128,7 @@ Public Class FormProcess
         End If
 
         lblModelname.Text = Program_ModelName
+
         ''Add By Vincent 20190710  ----------------------------------------------------------  Start
         'If CIM_Used Then
         '    lblModelname.Text = RemoteCIM._MachineNo
@@ -2162,6 +2196,9 @@ Public Class FormProcess
         Dim i As Integer
         'Add By Vincent 20190710  ----------------------------------------------------------  Start
         'btnRunProcess.Enabled = Not RemoteCIM.Enable ' Not RemoteCIM.SanAnCIM_Start
+        txtRecipeFile.Enabled = (SystemParameters.BarcodeOnly = "1")
+
+
         If CIM_Used Then
             lblModelname.Text = RemoteCIM._MachineNo
         Else
@@ -2302,7 +2339,7 @@ Public Class FormProcess
         lblProcessRunTime.Text = ConvertSecToTime(TotalProcessTime) + Format(TotalProcessTime, "(0)")
         lblProcessStatus.Text = ProcessStatusString
 
-    
+
 
     End Sub
 
@@ -2449,6 +2486,10 @@ Public Class FormProcess
 
 
         End If
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
     End Sub
 
     Private Sub btnLoadRecipe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadRecipe.Click
@@ -2475,6 +2516,10 @@ Public Class FormProcess
                 Next
                 pnlRecipe.Enabled = False
             End If
+        End If
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
         End If
     End Sub
 
@@ -2658,6 +2703,10 @@ Public Class FormProcess
             '    MsgBoxLangErr("µ¥«Ý·Å«×­°¦Ü: " + sstr, "µ¥«Ý h«×­°¦Ü: " + sstr, "Wait Temp Down: " + sstr)
             'End If
         End If
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
     End Sub
 
     Private Sub btnAbort_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAbort.Click
@@ -2678,6 +2727,10 @@ Public Class FormProcess
             For i = 0 To MAXPLATE
                 CSubAutoProcess(i).Abort()
             Next
+        End If
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
         End If
     End Sub
     Private Function ReadRecipeFile(ByVal iRecipeNum As Integer, ByVal sfile As String) As Boolean 'Add By Vincent 20190710
@@ -2887,6 +2940,10 @@ Public Class FormProcess
         Else
             MsgBoxLangErr("¦w¥þªù 1 ²§±`!", "Safty Gate 1 Error!")
         End If
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
     End Sub
     Private Sub btnDoor1Down_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoor1Down.Click
         If ProcessMode_RUN Then Exit Sub
@@ -2903,7 +2960,10 @@ Public Class FormProcess
             Output(DoDoor1DownIndex).Status = False
             MsgBoxLangErr("­n¦b¤@¤j®ðÀ£¤U¤~¯à¶}ªù!", "Must In 1 Atm.")
         End If
-
+        If SystemParameters.BarcodeOnly = "1" Then
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
     End Sub
 
     Private Sub btnDoor2Up_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoor2Up.Click
@@ -2993,7 +3053,7 @@ Public Class FormProcess
         Dim me_gr As Graphics = obj.CreateGraphics
 
         ' Make a Bitmap to hold the image.
-        Dim bm As New Bitmap(obj.ClientSize.Width, _
+        Dim bm As New Bitmap(obj.ClientSize.Width,
             obj.ClientSize.Height, me_gr)
         Dim bm_gr As Graphics = Graphics.FromImage(bm)
         Dim bm_hdc As IntPtr = bm_gr.GetHdc
@@ -3003,8 +3063,8 @@ Public Class FormProcess
         Dim me_hdc As IntPtr = me_gr.GetHdc
 
         ' BitBlt the form's image onto the Bitmap.
-        BitBlt(bm_hdc, 0, 0, obj.ClientSize.Width, _
-            obj.ClientSize.Height, _
+        BitBlt(bm_hdc, 0, 0, obj.ClientSize.Width,
+            obj.ClientSize.Height,
             me_hdc, 0, 0, SRCCOPY)
         me_gr.ReleaseHdc(me_hdc)
         bm_gr.ReleaseHdc(bm_hdc)
@@ -3237,100 +3297,208 @@ Public Class FormProcess
     Public RecipeShow As Boolean = False
     Public RecipeShowCount As Integer = 0
     Public Sub AutoLoadRecipeThenRun(ByVal recipe As String)
+        'Dim i As Integer
+        ''New
+        'CheckProcessDateAndCreate()
+        'ProcessRecipeFileName = recipe
+        'ProcessRecipeName = recipe
+        'lblRecipeFileName.Text = recipe
+
+        'ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
+        'FormRecipes.ReadRecipeFile(ProcessRecipeLongFileName)
+        'FormRecipes.Show()
+
+        'LoadRecipe(ProcessRecipeLongFileName)
+        'RecipeShow = True
+        'RecipeShowCount = 5
+        'If MsgBoxLangYesNo("½Ð½T»{°t¤è¬O§_¥¿½T¡A" & vbCrLf & "½Ð«ö <¬O> °õ¦æ¡A<§_> Â÷¶}.", "Please Confirm Recipe, Yes for Run, No for stop.") Then
+        '    Application.DoEvents()
+        '    System.Threading.Thread.Sleep(100)
+        '    Application.DoEvents()
+        '    System.Threading.Thread.Sleep(100)
+        '    CheckJPGDirAndCreate()
+        '    Dim SaveName As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".jpg"
+        '    SaveFromToImage(FormRecipes, SaveName)
+        '    FormRecipes.Hide()
+        '    '«Ø¥ß»sµ{°O¿ýÀÉ¦W
+        '    ProcessPN = recipe
+        '    ProcessRecordShortFileName = recipe + ".dat"
+        '    ProcessRecordFileName = ProcessRecordDir + ProcessRecordShortFileName
+        '    ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
+        '    ProcessRecordFileName1 = ProcessRecordDir + recipe + "_A.txt"
+        '    ProcessRecordCurveFileName = ProcessRecordCurveDir + recipe + ".Proc"
+        '    CsvFilename = ProcessCSVDir + recipe + ".csv"
+        '    CsvFilename1 = ProcessCSVDir + recipe + "_A.csv"
+        '    If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
+        '        FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
+        '    End If
+        '    If FileIO.FileSystem.FileExists(ProcessRecordFileName1) Then
+        '        FileIO.FileSystem.DeleteFile(ProcessRecordFileName1)
+        '    End If
+        '    If FileIO.FileSystem.FileExists(ProcessRecordCurveFileName) Then
+        '        FileIO.FileSystem.DeleteFile(ProcessRecordCurveFileName)
+        '    End If
+        '    If FileIO.FileSystem.FileExists(CsvFilename) Then
+        '        FileIO.FileSystem.DeleteFile(CsvFilename)
+        '    End If
+        '    If FileIO.FileSystem.FileExists(CsvFilename1) Then
+        '        FileIO.FileSystem.DeleteFile(CsvFilename1)
+        '    End If
+
+        '    Dim SaveName1 As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".csv"
+        '    AppendDataA(SaveName1, "LogFile," & "=""" & ProcessRecordShortFileName & """")
+        '    AppendDataA(SaveName1, "")
+        '    AppendDataA(SaveName1, "UserID," & "=""" & RecipeMapEditor.RunCard.UserID & """")
+        '    AppendDataA(SaveName1, "RunNo.," & "=""" & Format(RunCounts, "000000") & """")
+        '    AppendDataA(SaveName1, "BarcodeID," & "=""" & RecipeMapEditor.RunCard.BarcodeMap & """")
+        '    AppendDataA(SaveName1, "RecipeFile," & "=""" & RecipeMapEditor.RunCard.RecipeName & """")
+        '    AppendDataA(SaveName1, "CassetteNum," & "=""" & RecipeMapEditor.RunCard.Index & """")
+        '    AppendDataA(SaveName1, "")
+        '    Dim sstr1 As String = "No,ProductID, RunCardID,WaferNum"
+        '    AppendDataA(SaveName1, sstr1)
+        '    For i = 0 To RecipeMapEditor.RunCard.Index - 1
+        '        Dim astr0, astr1, astr2, astr3, astr4 As String
+        '        astr0 = (i + 1).ToString
+        '        astr1 = RecipeMapEditor.RunCard.Data(i).ProductID
+        '        astr2 = RecipeMapEditor.RunCard.Data(i).LotID
+        '        astr3 = RecipeMapEditor.RunCard.Data(i).WaferNum
+        '        astr4 = "=""" & astr0 & """,=""" & astr1 & """,=""" & astr2 & """,=""" & astr3 & """"
+        '        AppendDataA(SaveName1, astr4)
+        '    Next
+
+
+
+
+
+
+        '    lblProcessStartTime.Text = TTime
+        '    lblProcessStopTime.Text = "00:00:00"
+        '    FormProcesss.Text = "Process [" + ProcessPN + "]"
+        '    Timex = 0
+
+        '    lblBasePressureSet.Text = Format(Val(RecipeNum(RecipeRunIndex).BasePressure), "0.0E+00")
+        '    lblRecipeNote.Text = RecipeNum(RecipeRunIndex).RecipeNote
+        '    lblWaferSize.Text = RecipeNum(RecipeRunIndex).WaferSize
+
+        '    SetLangText(btnAbort, "©ñ±ó", "Abort")
+        '    btnRunProcess.Enabled = False
+        '    btnVent.Enabled = False
+        '    FormMenus.btnExit.Enabled = False
+
+        '    ProcessMode_RUN = True
+        '    ProcessNormalEnd = False
+        'Else
+        '    FormRecipes.Hide()
+        '    MsgBoxLangYesNo("»sµ{¤£°õ¦æ!", "Process stop.")
+        'End If
+
         Dim i As Integer
         'New
+        RecipeShow = False
         CheckProcessDateAndCreate()
-        ProcessRecipeFileName = recipe
+
+
+        ProcessRecipeFileName = recipe & ".rcp"
         ProcessRecipeName = recipe
-        lblRecipeFileName.Text = recipe
-
+        lblRecipeFileName.Text = recipe & ".rcp"
+        Debug.Print("lblRecipeFileName  _2=" + lblRecipeFileName.Text)
         ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
-        FormRecipes.ReadRecipeFile(ProcessRecipeLongFileName)
-        FormRecipes.Show()
 
-        LoadRecipe(ProcessRecipeLongFileName)
-        RecipeShow = True
-        RecipeShowCount = 5
-        If MsgBoxLangYesNo("½Ð½T»{°t¤è¬O§_¥¿½T¡A" & vbCrLf & "½Ð«ö <¬O> °õ¦æ¡A<§_> Â÷¶}.", "Please Confirm Recipe, Yes for Run, No for stop.") Then
-            Application.DoEvents()
-            System.Threading.Thread.Sleep(100)
-            Application.DoEvents()
-            System.Threading.Thread.Sleep(100)
-            CheckJPGDirAndCreate()
-            Dim SaveName As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".jpg"
-            SaveFromToImage(FormRecipes, SaveName)
-            FormRecipes.Hide()
-            '«Ø¥ß»sµ{°O¿ýÀÉ¦W
-            ProcessPN = recipe
-            ProcessRecordShortFileName = recipe + ".dat"
-            ProcessRecordFileName = ProcessRecordDir + ProcessRecordShortFileName
-            ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
-            ProcessRecordFileName1 = ProcessRecordDir + recipe + "_A.txt"
-            ProcessRecordCurveFileName = ProcessRecordCurveDir + recipe + ".Proc"
-            CsvFilename = ProcessCSVDir + recipe + ".csv"
-            CsvFilename1 = ProcessCSVDir + recipe + "_A.csv"
-            If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
-                FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
-            End If
-            If FileIO.FileSystem.FileExists(ProcessRecordFileName1) Then
-                FileIO.FileSystem.DeleteFile(ProcessRecordFileName1)
-            End If
-            If FileIO.FileSystem.FileExists(ProcessRecordCurveFileName) Then
-                FileIO.FileSystem.DeleteFile(ProcessRecordCurveFileName)
-            End If
-            If FileIO.FileSystem.FileExists(CsvFilename) Then
-                FileIO.FileSystem.DeleteFile(CsvFilename)
-            End If
-            If FileIO.FileSystem.FileExists(CsvFilename1) Then
-                FileIO.FileSystem.DeleteFile(CsvFilename1)
-            End If
-
-            Dim SaveName1 As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".csv"
-            AppendDataA(SaveName1, "LogFile," & "=""" & ProcessRecordShortFileName & """")
-            AppendDataA(SaveName1, "")
-            AppendDataA(SaveName1, "UserID," & "=""" & RecipeMapEditor.RunCard.UserID & """")
-            AppendDataA(SaveName1, "RunNo.," & "=""" & Format(RunCounts, "000000") & """")
-            AppendDataA(SaveName1, "BarcodeID," & "=""" & RecipeMapEditor.RunCard.BarcodeMap & """")
-            AppendDataA(SaveName1, "RecipeFile," & "=""" & RecipeMapEditor.RunCard.RecipeName & """")
-            AppendDataA(SaveName1, "CassetteNum," & "=""" & RecipeMapEditor.RunCard.Index & """")
-            AppendDataA(SaveName1, "")
-            Dim sstr1 As String = "No,ProductID, RunCardID,WaferNum"
-            AppendDataA(SaveName1, sstr1)
-            For i = 0 To RecipeMapEditor.RunCard.Index - 1
-                Dim astr0, astr1, astr2, astr3, astr4 As String
-                astr0 = (i + 1).ToString
-                astr1 = RecipeMapEditor.RunCard.Data(i).ProductID
-                astr2 = RecipeMapEditor.RunCard.Data(i).LotID
-                astr3 = RecipeMapEditor.RunCard.Data(i).WaferNum
-                astr4 = "=""" & astr0 & """,=""" & astr1 & """,=""" & astr2 & """,=""" & astr3 & """"
-                AppendDataA(SaveName1, astr4)
-            Next
-
-
-
-
-
-
-            lblProcessStartTime.Text = TTime
-            lblProcessStopTime.Text = "00:00:00"
-            FormProcesss.Text = "Process [" + ProcessPN + "]"
-            Timex = 0
-
-            lblBasePressureSet.Text = Format(Val(RecipeNum(RecipeRunIndex).BasePressure), "0.0E+00")
-            lblRecipeNote.Text = RecipeNum(RecipeRunIndex).RecipeNote
-            lblWaferSize.Text = RecipeNum(RecipeRunIndex).WaferSize
-
-            SetLangText(btnAbort, "©ñ±ó", "Abort")
-            btnRunProcess.Enabled = False
-            btnVent.Enabled = False
-            FormMenus.btnExit.Enabled = False
-
-            ProcessMode_RUN = True
-            ProcessNormalEnd = False
-        Else
-            FormRecipes.Hide()
-            MsgBoxLangYesNo("»sµ{¤£°õ¦æ!", "Process stop.")
+        'Show Recipe Form
+        If RecipeShow Then
+            FormRecipes.ReadRecipeFile(ProcessRecipeLongFileName)
+            FormRecipes.Show()
         End If
+        LoadRecipe(ProcessRecipeLongFileName)
+        If GetTrue01Boolean(SystemParameters.RunConfirm) Then
+            'If MsgBoxLangYesNo("½Ð½T»{°t¤è¬O§_¥¿½T¡A" & vbCrLf & "½Ð«ö <¬O> °õ¦æ¡A<§_> Â÷¶}.", "Please Confirm Recipe, Yes for Run, No for stop.") Then
+            If MsgBoxLangYesNo("½T©w­n°õ¦æ»sµ{? (" & lblRecipeFileName.Text & ")", "Confirm to Run Process? (" & lblRecipeFileName.Text & ")") Then
+                If RecipeShow Then
+                    Application.DoEvents()
+                    System.Threading.Thread.Sleep(100)
+                    Application.DoEvents()
+                    System.Threading.Thread.Sleep(100)
+                    CheckJPGDirAndCreate()
+                    Dim SaveName As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".jpg"
+                    SaveFromToImage(FormRecipes, SaveName)
+                    FormRecipes.Hide()
+                End If
+                RunProcess(recipe)
+            Else
+                FormRecipes.Hide()
+                MsgBoxLangYesNo("»sµ{¤£°õ¦æ!", "Process stop.")
+            End If
+        Else
+            RunProcess(recipe)
+        End If
+
+    End Sub
+    Public Sub RunProcess(ByVal Recipe As String)
+        Dim sstr As String = ""
+        Dim sFile As String = ""
+        Dim i As Integer
+        FormKeyInProcessNames.ProcessFileName = FDate + "-" + FTime + "-[" + LoginUserName + "]"
+        'Add By Vincent 20160913 Start  -------------------------------------------------------
+        FormKeyInProcessNames.txtBarcodeInput.Text = ""
+        FormKeyInProcessNames.txtBarcodeInput.Focus()
+        'FormKeyInProcessNames.txtBarcodeInput.SelectAll()
+        'Add By Vincent 20160913 End    -------------------------------------------------------
+        If FormKeyInProcessNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            sstr = System.IO.Path.GetFileNameWithoutExtension(ProcessRecipeFileName)
+            sFile = FormKeyInProcessNames.ProcessFileName ' Now.ToString("yyyyMMdd-HHmmss") & "-" & sstr & "-Lot-" & FormKeyInProcessNames.ProcessFileName
+        Else
+            Exit Sub
+        End If
+
+        'sFile = ProcessRecordFileName 'FormKeyInProcessNames.ProcessFileName
+        ProcessPN = sFile
+        ProcessRecordFileName = ProcessRecordDir + sFile + ".dat"
+        ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
+        ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
+        ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
+        If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
+            If MsgBoxLangYesNo("ÀÉ®×¤w¦s¦b,­nÂÐ»\?", "File Exist, Overwrite?") Then
+                FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
+            Else
+                Exit Sub
+            End If
+        End If
+
+        '«Ø¥ß»sµ{°O¿ýÀÉ¦W
+        CsvFilename = ProcessCSVDir + Recipe + ".csv"
+        If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
+            FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
+        End If
+        If FileIO.FileSystem.FileExists(ProcessRecordFileName1) Then
+            FileIO.FileSystem.DeleteFile(ProcessRecordFileName1)
+        End If
+        If FileIO.FileSystem.FileExists(ProcessRecordCurveFileName) Then
+            FileIO.FileSystem.DeleteFile(ProcessRecordCurveFileName)
+        End If
+        If FileIO.FileSystem.FileExists(CsvFilename) Then
+            FileIO.FileSystem.DeleteFile(CsvFilename)
+        End If
+        lblProcessStartTime.Text = TTime
+        lblProcessStopTime.Text = "00:00:00"
+        FormProcesss.Text = "Process [" + ProcessPN + "]"
+        Timex = 0
+
+        lblBasePressureSet.Text = Format(Val(RecipeNum(RecipeRunIndex).BasePressure), "0.0E+00")
+        lblRecipeNote.Text = RecipeNum(RecipeRunIndex).RecipeNote
+        lblWaferSize.Text = RecipeNum(RecipeRunIndex).WaferSize
+
+        SetLangText(btnAbort, "©ñ±ó", "Abort")
+        btnRunProcess.Enabled = False
+        btnVent.Enabled = False
+        FormMenus.btnExit.Enabled = False
+        '''
+        lblProcessDataFile.Text = ProcessPN + ".dat"
+
+        For i = 0 To MAXPLATE
+            PlateProcess(i).RunMode = ProcessMode_RUN
+            CSubAutoProcess(i).Clear()
+        Next
+        ProcessMode_RUN = True
     End Sub
     Public Function LoadRecipe(ByVal RecipeFile As String) As Boolean
         Dim i As Integer
@@ -3338,13 +3506,14 @@ Public Class FormProcess
         pgbReadCurve.Visible = True
         If Not ProcessMode_RUN Then
             Try
-                lblRecipeFileName.Text = RecipeFile
+                'lblRecipeFileName.Text = RecipeFile
+                Debug.Print("lblRecipeFileName  _1=" + lblRecipeFileName.Text)
                 ProcessRecipeFileName = lblRecipeFileName.Text
                 ProcessRecipeName = Mid(ProcessRecipeFileName, 1, InStr(ProcessRecipeFileName, "."))
-                lblRecipeFileName.Text = ProcessRecipeFileName
+                'lblRecipeFileName.Text = ProcessRecipeFileName
 
                 ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
-                ProcessRecipeLongFileName = FormRecipeSelects.RecipeDir & ProcessRecipeFileName
+                'ProcessRecipeLongFileName = FormRecipeSelects.RecipeDir & ProcessRecipeFileName
                 'ReadRecipeFile(ProcessRecipeLongFileName)'Modified By Vincent 20190710 
                 ReadRecipeFile(i, ProcessRecipeLongFileName) 'Add By Vincent 20190710 
 
@@ -3448,7 +3617,7 @@ Public Class FormProcess
         i = RecipeRunIndex
         pgbReadCurve.Visible = True
         FormRecipeSelects.RecipeDir = RecipeDir
-      
+
         ProcessRecipeFileName = lblRecipeFileName.Text & ".rcp"
         ProcessRecipeName = lblRecipeFileName.Text
 
@@ -3501,7 +3670,7 @@ Public Class FormProcess
 
     Public Function ConfirmLoad() As Boolean
         If RemoteCIM.ConfirmEnable Then
-            If MsgBoxLangYesNo("¬O§_°õ¦æ»sµ{?  °t¤èÀÉ®×: " + RemoteCIM.RecipeData.RecipeName, _
+            If MsgBoxLangYesNo("¬O§_°õ¦æ»sµ{?  °t¤èÀÉ®×: " + RemoteCIM.RecipeData.RecipeName,
                             "Confirm to run process? Recipe: " + RemoteCIM.RecipeData.RecipeName) = False Then
                 'MsgBoxLangErr("»sµ{¥¼°õ¦æ!", "Process not excuted!")
                 RemoteCIM.ErrorString = GetLangText("»sµ{¥¼°õ¦æ!", "Process not excuted!")
@@ -3587,6 +3756,32 @@ Public Class FormProcess
         Return True
 
     End Function
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+        If SystemParameters.BarcodeOnly = "1" Then
+            If txtRecipeFile.Text.Length > 0 Then
+                CheckBarcodeInput()
+            End If
+        End If
+    End Sub
+    Public Function CheeckRecipeExist(ByVal file As String) As Boolean
+        Dim rcp As String = RecipeDir & txtRecipeFile.Text & ".rcp"
+        Return IO.File.Exists(rcp)
+    End Function
+    Public Sub CheckBarcodeInput()
+        Dim rcp As String = RecipeDir & txtRecipeFile.Text & ".rcp"
+        If CheeckRecipeExist(RecipeDir & txtRecipeFile.Text & ".rcp") = False Then
+            txtRecipeFile.Text = ""
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+            MsgBoxLangErr("°t¤èÀÉ¦W¤£¦s¦b!", "Recipe file not exist!")
+        Else
+            AutoLoadRecipeThenRun(txtRecipeFile.Text)
+            txtRecipeFile.Text = ""
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
+    End Sub
     'SanAn CIM  20190710  by vincent ---------------- End
 #End Region
 End Class

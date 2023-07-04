@@ -44,6 +44,7 @@
         Program_Flag = GetTrue01Boolean(ReadProgData("PROGRAM", "FLAG", "0", ProgramINIFile))
         Purge_Flag = GetTrue01Boolean(ReadProgData("PROGRAM", "PURGE", "0", ProgramINIFile))
         Resistance_ruler_Flag = GetTrue01Boolean(ReadProgData("PROGRAM", "Resistance_ruler", "0", ProgramINIFile))
+        PressPID_Flag = GetTrue01Boolean(ReadProgData("PROGRAM", "PressPID", "0", ProgramINIFile))
         TaichiIcon = New Icon(My.Resources.Taichi, 64, 64)
     End Sub
 
@@ -95,6 +96,7 @@
     Public Purge_Flag As Boolean
     '電阻尺  =false=0  =true=1
     Public Resistance_ruler_Flag As Boolean
+    Public PressPID_Flag As Boolean
     ''' <summary>
     ''' 讀取 [PROGRAM] 下 FLAG=0 or 1 決定是否使用 FLAG (主畫面之國旗圖案)
     ''' </summary>
