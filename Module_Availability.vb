@@ -27,6 +27,22 @@
     Public Sub AvailabilityLog()
         Dim i As Integer
         Try
+            If bolRunCrossDay Then '跨天先把天執行時間記下來
+                LastTotalProcessTime = TotalProcessTime
+                TotalRun_Time = TotalRun_Time + LastTotalProcessTime
+            End If
+
+            For i = 0 To MAXPLATE
+                If bolAlarmCrossDay(i) Then '跨天還 alarm 紀錄當天alarm時間
+                    interval = Now() - StartAlarm_Time(i)
+                    TotalAlarmTime(i) = TotalAlarmTime(i) + interval.TotalSeconds
+                    StartAlarm_Time(i) = Now().AddSeconds(1) '今天重算
+                    bolAlarmCrossDay(i) = False
+                End If
+                If TotalAlarmTime(i) > MaxTotalAlarmTime Then
+                    MaxTotalAlarmTime = TotalAlarmTime(i)
+                End If
+            Next
             TotalIdel_Time = 86400 - TotalRun_Time - MaxTotalAlarmTime
             Wafer_Bond = RunCounts
             UtilizationFileName = SystemParameters.WebPath + "\" + FDate + "-" + FTime + ".txt"
@@ -46,14 +62,13 @@
             MaxTotalAlarmTime = 0
             TotalRun_Time = 0
             RunCounts = 0
+            WriteRunData()
             bolNewDay = False '不記錄了
             'RunCounts = Val(ReadProgData("RUNDATA", "RunCounts", "0", RunDataINIFile))
             WriteProgData("RUNDATA", "RunCounts", RunCounts.ToString, RunDataINIFile)
         Catch ex As Exception
             MessageBox.Show("請檢查遠端Log存檔路徑", ex.ToString)
         End Try
-
-
 
     End Sub
     ''' <summary>
@@ -87,10 +102,9 @@
             For i = 0 To MAXPLATE
                 If StartAlarm_Time(i) <> nullDate Then bolAlarmCrossDay(i) = True '有alarm
             Next
-            'If ProcessMode_RUN = False Then
             AvailabilityLog() '紀錄
             LastRecordTime = Now()
-            'End If
+
         End If
 
         '累計執行時間
@@ -118,31 +132,17 @@
 
         '累計Alarm時間
         For i = 0 To MAXPLATE
-            If bolAlarmCrossDay(i) Then '跨天還 alarm
-
-                If CSubAutoProcess(i).AbortStatus Then '持續有alarm
-                    StopAlarm_Time(i) = nullDate
-                Else 'Alarm沒跨天已經復工
-                    StopAlarm_Time(i) = Now()
-                    interval = StopAlarm_Time(i) - NextRecordTime.AddDays(-1)
-                    TotalAlarmTime(i) = TotalAlarmTime(i) + interval.TotalSeconds
-                    StartAlarm_Time(i) = nullDate
-                    bolAlarmCrossDay(i) = False
-                End If
-
-            Else '沒跨天alarm
-
-                If CSubAutoProcess(i).AbortStatus Then '有alarm
-                    StartAlarm_Time(i) = Now()
-                    StopAlarm_Time(i) = nullDate
-                Else 'Alarm沒跨天已經復工
-                    StopAlarm_Time(i) = Now()
-                    interval = StopAlarm_Time(i) - StartAlarm_Time(i)
-                    TotalAlarmTime(i) = TotalAlarmTime(i) + interval.TotalSeconds
-                    StartAlarm_Time(i) = nullDate
-                    bolAlarmCrossDay(i) = False
-                End If
+            If StartAlarm_Time(i) = nullDate And CSubAutoProcess(i).AbortStatus Then '有alarm
+                StartAlarm_Time(i) = Now()
+                StopAlarm_Time(i) = nullDate
+            ElseIf StartAlarm_Time(i) <> nullDate And CSubAutoProcess(i).AbortStatus = False Then  'Alarm解除
+                StopAlarm_Time(i) = Now()
+                interval = StopAlarm_Time(i) - StartAlarm_Time(i)
+                TotalAlarmTime(i) = TotalAlarmTime(i) + interval.TotalSeconds
+                StartAlarm_Time(i) = nullDate
+                bolAlarmCrossDay(i) = False
             End If
+
             If TotalAlarmTime(i) > MaxTotalAlarmTime Then
                 MaxTotalAlarmTime = TotalAlarmTime(i)
             End If
