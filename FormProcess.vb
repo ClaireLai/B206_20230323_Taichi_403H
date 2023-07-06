@@ -3401,7 +3401,7 @@ Public Class FormProcess
         ProcessRecipeFileName = recipe & ".rcp"
         ProcessRecipeName = recipe
         lblRecipeFileName.Text = recipe & ".rcp"
-        Debug.Print("lblRecipeFileName  _2=" + lblRecipeFileName.Text)
+        'Debug.Print("lblRecipeFileName  _2=" + lblRecipeFileName.Text)
         ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
 
         'Show Recipe Form
@@ -3507,7 +3507,7 @@ Public Class FormProcess
         If Not ProcessMode_RUN Then
             Try
                 'lblRecipeFileName.Text = RecipeFile
-                Debug.Print("lblRecipeFileName  _1=" + lblRecipeFileName.Text)
+                'Debug.Print("lblRecipeFileName  _1=" + lblRecipeFileName.Text)
                 ProcessRecipeFileName = lblRecipeFileName.Text
                 ProcessRecipeName = Mid(ProcessRecipeFileName, 1, InStr(ProcessRecipeFileName, "."))
                 'lblRecipeFileName.Text = ProcessRecipeFileName

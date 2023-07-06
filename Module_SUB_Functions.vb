@@ -112,56 +112,6 @@
         Next
     End Sub
 
-    '-------------------------------------------------------------------------------------------------------- Title
-    '函數名稱       :   ProcessTimer  
-    '函數功能       :   倒數計時之計時器
-    '函數傳入參數   :   (傳址之計時器致能旗標= Boolean, 傳址之計時器變數 As Integer)
-    '傳回值         : 無
-    '作者           : Libra
-    '建立日期       : 2009/04/07
-    '修改日期       :
-    '-------------------------------------------------------------------------------------------------------- Start
-    Public Sub ProcessTimer(ByRef bEnable As Boolean, ByRef tCount As Integer)
-        If bEnable Then
-            tCount = tCount - 1
-            If tCount <= 0 Then
-                tCount = 0
-                bEnable = False
-            End If
-        Else
-            tCount = 0
-        End If
-    End Sub
-    Public Sub ProcessTimer(ByRef bEnable As Boolean, ByRef tCount As Long)
-        If bEnable Then
-            tCount = tCount - 1
-            If tCount <= 0 Then
-                tCount = 0
-                bEnable = False
-            End If
-        End If
-    End Sub
-    Public Sub ProcessTimerPlus(ByRef bEnable As Boolean, ByRef tCount As Integer)
-        If bEnable Then
-            tCount = tCount + 1
-        End If
-    End Sub
-    Public Sub ProcessTimerPlus(ByRef bEnable As Boolean, ByRef tCount As Long)
-        If bEnable Then
-            tCount = tCount + 1
-        End If
-    End Sub
-    '--------------------------------------------------------------------------------------------------------  End
-
-    '加入訊息清單,
-    Public Sub ListAdd(ByRef lst As ListBox, ByVal sstr As String)
-        If lst.Items.Count < 20 Then
-            lst.Items.Add(sstr)
-        Else
-            lst.Items.RemoveAt(0)
-            lst.Items.Add(sstr)
-        End If
-    End Sub
 
     '在限制範圍內則傳回
     Public Function SetInRange(ByVal Cond As Boolean, ByVal PV As Integer, ByVal SV As Integer, ByVal iLimit As Integer) As Integer

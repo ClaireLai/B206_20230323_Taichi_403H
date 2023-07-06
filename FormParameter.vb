@@ -773,7 +773,63 @@ Public Class FormParameter
         Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
         Me.TabPageCello = New System.Windows.Forms.TabPage()
         Me.tabSystem = New System.Windows.Forms.TabControl()
+        Me.tabpageTempCal = New System.Windows.Forms.TabPage()
+        Me.pnlHeaterSetup = New System.Windows.Forms.Panel()
+        Me.chkSplitTopBotTempEnable = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtTempRiseComp = New System.Windows.Forms.TextBox()
+        Me.lblTempRiseCompText = New System.Windows.Forms.Label()
+        Me.lblHeaterCountText = New System.Windows.Forms.Label()
+        Me.lblS01Text = New System.Windows.Forms.Label()
+        Me.lblHeaterPowerText = New System.Windows.Forms.Label()
+        Me.txtHeaterAlarmTime = New System.Windows.Forms.TextBox()
+        Me.lblHeaterVoltageText = New System.Windows.Forms.Label()
+        Me.lblHeaterAlarmTimeText = New System.Windows.Forms.Label()
+        Me.txtHeaterVoltage = New System.Windows.Forms.TextBox()
+        Me.lblFullCurrentText = New System.Windows.Forms.Label()
+        Me.txtHeaterPower = New System.Windows.Forms.TextBox()
+        Me.lblA02Text = New System.Windows.Forms.Label()
+        Me.txtHeaterCount = New System.Windows.Forms.TextBox()
+        Me.lblFullCurrent = New System.Windows.Forms.Label()
+        Me.lblW01Text = New System.Windows.Forms.Label()
+        Me.lblHeaterCurrentText = New System.Windows.Forms.Label()
+        Me.lblV02Text = New System.Windows.Forms.Label()
+        Me.lblA03Text = New System.Windows.Forms.Label()
+        Me.lblHeaterMonitorPowerText = New System.Windows.Forms.Label()
+        Me.lblHeaterCurrent = New System.Windows.Forms.Label()
+        Me.txtHeaterMonitorPower = New System.Windows.Forms.TextBox()
+        Me.lblPer01Text = New System.Windows.Forms.Label()
+        Me.lblPer02Text = New System.Windows.Forms.Label()
+        Me.txtHeaterCurrentRate = New System.Windows.Forms.TextBox()
+        Me.lblHeaterCurrentRateText = New System.Windows.Forms.Label()
+        Me.flwTempCal = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabpageVacuum = New System.Windows.Forms.TabPage()
+        Me.grpFlowMeter = New System.Windows.Forms.GroupBox()
+        Me.lblDPWaterFlowMaxText = New System.Windows.Forms.Label()
+        Me.txtDPWaterFlowMax = New System.Windows.Forms.TextBox()
+        Me.lblDPWaterFlowHzText = New System.Windows.Forms.Label()
+        Me.txtDPWaterFlowHz = New System.Windows.Forms.TextBox()
+        Me.btnFlowMode = New System.Windows.Forms.Button()
+        Me.lblFlowModeText = New System.Windows.Forms.Label()
+        Me.lblFlowDescriptionText = New System.Windows.Forms.Label()
+        Me.lblFlowSamplingTimeText = New System.Windows.Forms.Label()
+        Me.txtFlowSamplingTime = New System.Windows.Forms.TextBox()
+        Me.lblSec11Text = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.radPSG500 = New System.Windows.Forms.RadioButton()
+        Me.radPCG550 = New System.Windows.Forms.RadioButton()
+        Me.grpPumpType = New System.Windows.Forms.GroupBox()
+        Me.radUlvacLS120 = New System.Windows.Forms.RadioButton()
+        Me.lblDPTempCalText = New System.Windows.Forms.Label()
+        Me.txtDPTempCalSet = New System.Windows.Forms.TextBox()
+        Me.picC02 = New System.Windows.Forms.PictureBox()
+        Me.radMachinePump = New System.Windows.Forms.RadioButton()
+        Me.radDryPump = New System.Windows.Forms.RadioButton()
+        Me.flwFlowSetup = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabpagePressCal = New System.Windows.Forms.TabPage()
+        Me.flwPressCal = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabpagePressControl = New System.Windows.Forms.TabPage()
+        Me.btnForceDAOut = New System.Windows.Forms.Button()
         Me.pnlPressureAverage = New System.Windows.Forms.Panel()
         Me.txtPeakTimes = New System.Windows.Forms.TextBox()
         Me.lblPeakTimesText = New System.Windows.Forms.Label()
@@ -793,7 +849,6 @@ Public Class FormParameter
         Me.txtRullerLength = New System.Windows.Forms.TextBox()
         Me.lblRullerLengthText = New System.Windows.Forms.Label()
         Me.txtHighPDAOut = New System.Windows.Forms.TextBox()
-        Me.btnForceDAOut = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblPositionSet3 = New System.Windows.Forms.Label()
         Me.lblPositionSet2 = New System.Windows.Forms.Label()
@@ -934,61 +989,6 @@ Public Class FormParameter
         Me.txtinterval = New System.Windows.Forms.TextBox()
         Me.btDn = New System.Windows.Forms.Button()
         Me.btUp = New System.Windows.Forms.Button()
-        Me.tabpageTempCal = New System.Windows.Forms.TabPage()
-        Me.pnlHeaterSetup = New System.Windows.Forms.Panel()
-        Me.chkSplitTopBotTempEnable = New System.Windows.Forms.CheckBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtTempRiseComp = New System.Windows.Forms.TextBox()
-        Me.lblTempRiseCompText = New System.Windows.Forms.Label()
-        Me.lblHeaterCountText = New System.Windows.Forms.Label()
-        Me.lblS01Text = New System.Windows.Forms.Label()
-        Me.lblHeaterPowerText = New System.Windows.Forms.Label()
-        Me.txtHeaterAlarmTime = New System.Windows.Forms.TextBox()
-        Me.lblHeaterVoltageText = New System.Windows.Forms.Label()
-        Me.lblHeaterAlarmTimeText = New System.Windows.Forms.Label()
-        Me.txtHeaterVoltage = New System.Windows.Forms.TextBox()
-        Me.lblFullCurrentText = New System.Windows.Forms.Label()
-        Me.txtHeaterPower = New System.Windows.Forms.TextBox()
-        Me.lblA02Text = New System.Windows.Forms.Label()
-        Me.txtHeaterCount = New System.Windows.Forms.TextBox()
-        Me.lblFullCurrent = New System.Windows.Forms.Label()
-        Me.lblW01Text = New System.Windows.Forms.Label()
-        Me.lblHeaterCurrentText = New System.Windows.Forms.Label()
-        Me.lblV02Text = New System.Windows.Forms.Label()
-        Me.lblA03Text = New System.Windows.Forms.Label()
-        Me.lblHeaterMonitorPowerText = New System.Windows.Forms.Label()
-        Me.lblHeaterCurrent = New System.Windows.Forms.Label()
-        Me.txtHeaterMonitorPower = New System.Windows.Forms.TextBox()
-        Me.lblPer01Text = New System.Windows.Forms.Label()
-        Me.lblPer02Text = New System.Windows.Forms.Label()
-        Me.txtHeaterCurrentRate = New System.Windows.Forms.TextBox()
-        Me.lblHeaterCurrentRateText = New System.Windows.Forms.Label()
-        Me.flwTempCal = New System.Windows.Forms.FlowLayoutPanel()
-        Me.tabpageVacuum = New System.Windows.Forms.TabPage()
-        Me.grpFlowMeter = New System.Windows.Forms.GroupBox()
-        Me.lblDPWaterFlowMaxText = New System.Windows.Forms.Label()
-        Me.txtDPWaterFlowMax = New System.Windows.Forms.TextBox()
-        Me.lblDPWaterFlowHzText = New System.Windows.Forms.Label()
-        Me.txtDPWaterFlowHz = New System.Windows.Forms.TextBox()
-        Me.btnFlowMode = New System.Windows.Forms.Button()
-        Me.lblFlowModeText = New System.Windows.Forms.Label()
-        Me.lblFlowDescriptionText = New System.Windows.Forms.Label()
-        Me.lblFlowSamplingTimeText = New System.Windows.Forms.Label()
-        Me.txtFlowSamplingTime = New System.Windows.Forms.TextBox()
-        Me.lblSec11Text = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.radPSG500 = New System.Windows.Forms.RadioButton()
-        Me.radPCG550 = New System.Windows.Forms.RadioButton()
-        Me.grpPumpType = New System.Windows.Forms.GroupBox()
-        Me.radUlvacLS120 = New System.Windows.Forms.RadioButton()
-        Me.lblDPTempCalText = New System.Windows.Forms.Label()
-        Me.txtDPTempCalSet = New System.Windows.Forms.TextBox()
-        Me.picC02 = New System.Windows.Forms.PictureBox()
-        Me.radMachinePump = New System.Windows.Forms.RadioButton()
-        Me.radDryPump = New System.Windows.Forms.RadioButton()
-        Me.flwFlowSetup = New System.Windows.Forms.FlowLayoutPanel()
-        Me.tabpagePressCal = New System.Windows.Forms.TabPage()
-        Me.flwPressCal = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
         Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
@@ -1069,11 +1069,6 @@ Public Class FormParameter
         Me.TabPageCIM.SuspendLayout()
         Me.TabPageCello.SuspendLayout()
         Me.tabSystem.SuspendLayout()
-        Me.tabpagePressControl.SuspendLayout()
-        Me.pnlPressureAverage.SuspendLayout()
-        Me.pnl6Plate.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.tabpageTempCal.SuspendLayout()
         Me.pnlHeaterSetup.SuspendLayout()
         Me.tabpageVacuum.SuspendLayout()
@@ -1082,6 +1077,11 @@ Public Class FormParameter
         Me.grpPumpType.SuspendLayout()
         CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpagePressCal.SuspendLayout()
+        Me.tabpagePressControl.SuspendLayout()
+        Me.pnlPressureAverage.SuspendLayout()
+        Me.pnl6Plate.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.tabPageIniEdit.SuspendLayout()
         Me.TabPageTempCalTool.SuspendLayout()
         Me.tabpageCycleRun.SuspendLayout()
@@ -3875,6 +3875,665 @@ Public Class FormParameter
         Me.tabSystem.Size = New System.Drawing.Size(1588, 850)
         Me.tabSystem.TabIndex = 536
         '
+        'tabpageTempCal
+        '
+        Me.tabpageTempCal.BackColor = System.Drawing.Color.Transparent
+        Me.tabpageTempCal.Controls.Add(Me.pnlHeaterSetup)
+        Me.tabpageTempCal.Controls.Add(Me.flwTempCal)
+        Me.tabpageTempCal.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tabpageTempCal.Location = New System.Drawing.Point(4, 44)
+        Me.tabpageTempCal.Name = "tabpageTempCal"
+        Me.tabpageTempCal.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpageTempCal.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpageTempCal.TabIndex = 0
+        Me.tabpageTempCal.Text = "溫度校正"
+        Me.tabpageTempCal.UseVisualStyleBackColor = True
+        '
+        'pnlHeaterSetup
+        '
+        Me.pnlHeaterSetup.Controls.Add(Me.chkSplitTopBotTempEnable)
+        Me.pnlHeaterSetup.Controls.Add(Me.Label2)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtTempRiseComp)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblTempRiseCompText)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCountText)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblS01Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterPowerText)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterAlarmTime)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterVoltageText)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterAlarmTimeText)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterVoltage)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblFullCurrentText)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterPower)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblA02Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterCount)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblFullCurrent)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblW01Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrentText)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblV02Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblA03Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterMonitorPowerText)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrent)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterMonitorPower)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblPer01Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblPer02Text)
+        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterCurrentRate)
+        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrentRateText)
+        Me.pnlHeaterSetup.Location = New System.Drawing.Point(817, 6)
+        Me.pnlHeaterSetup.Name = "pnlHeaterSetup"
+        Me.pnlHeaterSetup.Size = New System.Drawing.Size(192, 487)
+        Me.pnlHeaterSetup.TabIndex = 832
+        '
+        'chkSplitTopBotTempEnable
+        '
+        Me.chkSplitTopBotTempEnable.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkSplitTopBotTempEnable.Location = New System.Drawing.Point(18, 458)
+        Me.chkSplitTopBotTempEnable.Name = "chkSplitTopBotTempEnable"
+        Me.chkSplitTopBotTempEnable.Size = New System.Drawing.Size(165, 26)
+        Me.chkSplitTopBotTempEnable.TabIndex = 835
+        Me.chkSplitTopBotTempEnable.Text = "使用上下分區校溫"
+        Me.chkSplitTopBotTempEnable.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(111, 336)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(24, 26)
+        Me.Label2.TabIndex = 834
+        Me.Label2.Text = "%"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label2.Visible = False
+        '
+        'txtTempRiseComp
+        '
+        Me.txtTempRiseComp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTempRiseComp.Location = New System.Drawing.Point(53, 336)
+        Me.txtTempRiseComp.Name = "txtTempRiseComp"
+        Me.txtTempRiseComp.Size = New System.Drawing.Size(57, 26)
+        Me.txtTempRiseComp.TabIndex = 832
+        Me.txtTempRiseComp.Text = "80"
+        Me.txtTempRiseComp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtTempRiseComp.Visible = False
+        '
+        'lblTempRiseCompText
+        '
+        Me.lblTempRiseCompText.BackColor = System.Drawing.Color.Transparent
+        Me.lblTempRiseCompText.Font = New System.Drawing.Font("Arial", 9.0!)
+        Me.lblTempRiseCompText.ForeColor = System.Drawing.Color.Black
+        Me.lblTempRiseCompText.Location = New System.Drawing.Point(4, 307)
+        Me.lblTempRiseCompText.Name = "lblTempRiseCompText"
+        Me.lblTempRiseCompText.Size = New System.Drawing.Size(95, 26)
+        Me.lblTempRiseCompText.TabIndex = 833
+        Me.lblTempRiseCompText.Text = "升溫速率調整:"
+        Me.lblTempRiseCompText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblTempRiseCompText.Visible = False
+        '
+        'lblHeaterCountText
+        '
+        Me.lblHeaterCountText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterCountText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterCountText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterCountText.Location = New System.Drawing.Point(3, 5)
+        Me.lblHeaterCountText.Name = "lblHeaterCountText"
+        Me.lblHeaterCountText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterCountText.TabIndex = 536
+        Me.lblHeaterCountText.Text = "加熱器數量:"
+        Me.lblHeaterCountText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblS01Text
+        '
+        Me.lblS01Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblS01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblS01Text.ForeColor = System.Drawing.Color.Black
+        Me.lblS01Text.Location = New System.Drawing.Point(159, 220)
+        Me.lblS01Text.Name = "lblS01Text"
+        Me.lblS01Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblS01Text.TabIndex = 831
+        Me.lblS01Text.Text = "s"
+        Me.lblS01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblHeaterPowerText
+        '
+        Me.lblHeaterPowerText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterPowerText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterPowerText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterPowerText.Location = New System.Drawing.Point(3, 37)
+        Me.lblHeaterPowerText.Name = "lblHeaterPowerText"
+        Me.lblHeaterPowerText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterPowerText.TabIndex = 535
+        Me.lblHeaterPowerText.Text = "加熱器功率:"
+        Me.lblHeaterPowerText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtHeaterAlarmTime
+        '
+        Me.txtHeaterAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterAlarmTime.Location = New System.Drawing.Point(101, 220)
+        Me.txtHeaterAlarmTime.Name = "txtHeaterAlarmTime"
+        Me.txtHeaterAlarmTime.Size = New System.Drawing.Size(57, 26)
+        Me.txtHeaterAlarmTime.TabIndex = 829
+        Me.txtHeaterAlarmTime.Text = "30"
+        Me.txtHeaterAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblHeaterVoltageText
+        '
+        Me.lblHeaterVoltageText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterVoltageText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterVoltageText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterVoltageText.Location = New System.Drawing.Point(3, 67)
+        Me.lblHeaterVoltageText.Name = "lblHeaterVoltageText"
+        Me.lblHeaterVoltageText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterVoltageText.TabIndex = 537
+        Me.lblHeaterVoltageText.Text = "加熱器電壓:"
+        Me.lblHeaterVoltageText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblHeaterAlarmTimeText
+        '
+        Me.lblHeaterAlarmTimeText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterAlarmTimeText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterAlarmTimeText.Location = New System.Drawing.Point(3, 220)
+        Me.lblHeaterAlarmTimeText.Name = "lblHeaterAlarmTimeText"
+        Me.lblHeaterAlarmTimeText.Size = New System.Drawing.Size(95, 35)
+        Me.lblHeaterAlarmTimeText.TabIndex = 830
+        Me.lblHeaterAlarmTimeText.Text = "電流警報時間:"
+        Me.lblHeaterAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtHeaterVoltage
+        '
+        Me.txtHeaterVoltage.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterVoltage.Location = New System.Drawing.Point(101, 67)
+        Me.txtHeaterVoltage.Name = "txtHeaterVoltage"
+        Me.txtHeaterVoltage.Size = New System.Drawing.Size(57, 26)
+        Me.txtHeaterVoltage.TabIndex = 534
+        Me.txtHeaterVoltage.Text = "220"
+        Me.txtHeaterVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblFullCurrentText
+        '
+        Me.lblFullCurrentText.BackColor = System.Drawing.Color.Transparent
+        Me.lblFullCurrentText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFullCurrentText.ForeColor = System.Drawing.Color.Black
+        Me.lblFullCurrentText.Location = New System.Drawing.Point(3, 130)
+        Me.lblFullCurrentText.Name = "lblFullCurrentText"
+        Me.lblFullCurrentText.Size = New System.Drawing.Size(95, 26)
+        Me.lblFullCurrentText.TabIndex = 828
+        Me.lblFullCurrentText.Text = "額定電流:"
+        Me.lblFullCurrentText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtHeaterPower
+        '
+        Me.txtHeaterPower.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterPower.Location = New System.Drawing.Point(101, 37)
+        Me.txtHeaterPower.Name = "txtHeaterPower"
+        Me.txtHeaterPower.Size = New System.Drawing.Size(57, 26)
+        Me.txtHeaterPower.TabIndex = 532
+        Me.txtHeaterPower.Text = "750"
+        Me.txtHeaterPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblA02Text
+        '
+        Me.lblA02Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblA02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblA02Text.ForeColor = System.Drawing.Color.Black
+        Me.lblA02Text.Location = New System.Drawing.Point(159, 130)
+        Me.lblA02Text.Name = "lblA02Text"
+        Me.lblA02Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblA02Text.TabIndex = 827
+        Me.lblA02Text.Text = "A"
+        Me.lblA02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtHeaterCount
+        '
+        Me.txtHeaterCount.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterCount.Location = New System.Drawing.Point(101, 5)
+        Me.txtHeaterCount.Name = "txtHeaterCount"
+        Me.txtHeaterCount.Size = New System.Drawing.Size(42, 26)
+        Me.txtHeaterCount.TabIndex = 533
+        Me.txtHeaterCount.Text = "4"
+        Me.txtHeaterCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblFullCurrent
+        '
+        Me.lblFullCurrent.BackColor = System.Drawing.Color.Black
+        Me.lblFullCurrent.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblFullCurrent.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFullCurrent.ForeColor = System.Drawing.Color.Lime
+        Me.lblFullCurrent.Location = New System.Drawing.Point(101, 129)
+        Me.lblFullCurrent.Name = "lblFullCurrent"
+        Me.lblFullCurrent.Size = New System.Drawing.Size(58, 26)
+        Me.lblFullCurrent.TabIndex = 826
+        Me.lblFullCurrent.Text = "13"
+        Me.lblFullCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblW01Text
+        '
+        Me.lblW01Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblW01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblW01Text.ForeColor = System.Drawing.Color.Black
+        Me.lblW01Text.Location = New System.Drawing.Point(159, 38)
+        Me.lblW01Text.Name = "lblW01Text"
+        Me.lblW01Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblW01Text.TabIndex = 538
+        Me.lblW01Text.Text = "W"
+        Me.lblW01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblHeaterCurrentText
+        '
+        Me.lblHeaterCurrentText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterCurrentText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterCurrentText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterCurrentText.Location = New System.Drawing.Point(3, 192)
+        Me.lblHeaterCurrentText.Name = "lblHeaterCurrentText"
+        Me.lblHeaterCurrentText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterCurrentText.TabIndex = 825
+        Me.lblHeaterCurrentText.Text = "監測電流:"
+        Me.lblHeaterCurrentText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblV02Text
+        '
+        Me.lblV02Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblV02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblV02Text.ForeColor = System.Drawing.Color.Black
+        Me.lblV02Text.Location = New System.Drawing.Point(159, 67)
+        Me.lblV02Text.Name = "lblV02Text"
+        Me.lblV02Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblV02Text.TabIndex = 539
+        Me.lblV02Text.Text = "V"
+        Me.lblV02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblA03Text
+        '
+        Me.lblA03Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblA03Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblA03Text.ForeColor = System.Drawing.Color.Black
+        Me.lblA03Text.Location = New System.Drawing.Point(159, 192)
+        Me.lblA03Text.Name = "lblA03Text"
+        Me.lblA03Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblA03Text.TabIndex = 824
+        Me.lblA03Text.Text = "A"
+        Me.lblA03Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblHeaterMonitorPowerText
+        '
+        Me.lblHeaterMonitorPowerText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterMonitorPowerText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterMonitorPowerText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterMonitorPowerText.Location = New System.Drawing.Point(3, 99)
+        Me.lblHeaterMonitorPowerText.Name = "lblHeaterMonitorPowerText"
+        Me.lblHeaterMonitorPowerText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterMonitorPowerText.TabIndex = 541
+        Me.lblHeaterMonitorPowerText.Text = "監測功率:"
+        Me.lblHeaterMonitorPowerText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblHeaterCurrent
+        '
+        Me.lblHeaterCurrent.BackColor = System.Drawing.Color.Black
+        Me.lblHeaterCurrent.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblHeaterCurrent.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterCurrent.ForeColor = System.Drawing.Color.Lime
+        Me.lblHeaterCurrent.Location = New System.Drawing.Point(101, 191)
+        Me.lblHeaterCurrent.Name = "lblHeaterCurrent"
+        Me.lblHeaterCurrent.Size = New System.Drawing.Size(58, 26)
+        Me.lblHeaterCurrent.TabIndex = 823
+        Me.lblHeaterCurrent.Text = "10"
+        Me.lblHeaterCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtHeaterMonitorPower
+        '
+        Me.txtHeaterMonitorPower.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterMonitorPower.Location = New System.Drawing.Point(101, 99)
+        Me.txtHeaterMonitorPower.Name = "txtHeaterMonitorPower"
+        Me.txtHeaterMonitorPower.Size = New System.Drawing.Size(57, 26)
+        Me.txtHeaterMonitorPower.TabIndex = 540
+        Me.txtHeaterMonitorPower.Text = "60"
+        Me.txtHeaterMonitorPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblPer01Text
+        '
+        Me.lblPer01Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblPer01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPer01Text.ForeColor = System.Drawing.Color.Black
+        Me.lblPer01Text.Location = New System.Drawing.Point(159, 158)
+        Me.lblPer01Text.Name = "lblPer01Text"
+        Me.lblPer01Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblPer01Text.TabIndex = 545
+        Me.lblPer01Text.Text = "%"
+        Me.lblPer01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblPer02Text
+        '
+        Me.lblPer02Text.BackColor = System.Drawing.Color.Transparent
+        Me.lblPer02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPer02Text.ForeColor = System.Drawing.Color.Black
+        Me.lblPer02Text.Location = New System.Drawing.Point(159, 99)
+        Me.lblPer02Text.Name = "lblPer02Text"
+        Me.lblPer02Text.Size = New System.Drawing.Size(24, 26)
+        Me.lblPer02Text.TabIndex = 542
+        Me.lblPer02Text.Text = "%"
+        Me.lblPer02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtHeaterCurrentRate
+        '
+        Me.txtHeaterCurrentRate.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeaterCurrentRate.Location = New System.Drawing.Point(101, 158)
+        Me.txtHeaterCurrentRate.Name = "txtHeaterCurrentRate"
+        Me.txtHeaterCurrentRate.Size = New System.Drawing.Size(57, 26)
+        Me.txtHeaterCurrentRate.TabIndex = 543
+        Me.txtHeaterCurrentRate.Text = "80"
+        Me.txtHeaterCurrentRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblHeaterCurrentRateText
+        '
+        Me.lblHeaterCurrentRateText.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeaterCurrentRateText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeaterCurrentRateText.ForeColor = System.Drawing.Color.Black
+        Me.lblHeaterCurrentRateText.Location = New System.Drawing.Point(3, 158)
+        Me.lblHeaterCurrentRateText.Name = "lblHeaterCurrentRateText"
+        Me.lblHeaterCurrentRateText.Size = New System.Drawing.Size(95, 26)
+        Me.lblHeaterCurrentRateText.TabIndex = 544
+        Me.lblHeaterCurrentRateText.Text = "監測電流比:"
+        Me.lblHeaterCurrentRateText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'flwTempCal
+        '
+        Me.flwTempCal.Location = New System.Drawing.Point(3, 6)
+        Me.flwTempCal.Name = "flwTempCal"
+        Me.flwTempCal.Size = New System.Drawing.Size(811, 490)
+        Me.flwTempCal.TabIndex = 531
+        '
+        'tabpageVacuum
+        '
+        Me.tabpageVacuum.BackColor = System.Drawing.Color.Transparent
+        Me.tabpageVacuum.Controls.Add(Me.grpFlowMeter)
+        Me.tabpageVacuum.Controls.Add(Me.GroupBox1)
+        Me.tabpageVacuum.Controls.Add(Me.grpPumpType)
+        Me.tabpageVacuum.Controls.Add(Me.flwFlowSetup)
+        Me.tabpageVacuum.Controls.Add(Me.grpVacuumSetup)
+        Me.tabpageVacuum.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tabpageVacuum.Location = New System.Drawing.Point(4, 44)
+        Me.tabpageVacuum.Name = "tabpageVacuum"
+        Me.tabpageVacuum.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpageVacuum.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpageVacuum.TabIndex = 1
+        Me.tabpageVacuum.Text = "真空設定"
+        Me.tabpageVacuum.UseVisualStyleBackColor = True
+        '
+        'grpFlowMeter
+        '
+        Me.grpFlowMeter.Controls.Add(Me.lblDPWaterFlowMaxText)
+        Me.grpFlowMeter.Controls.Add(Me.txtDPWaterFlowMax)
+        Me.grpFlowMeter.Controls.Add(Me.lblDPWaterFlowHzText)
+        Me.grpFlowMeter.Controls.Add(Me.txtDPWaterFlowHz)
+        Me.grpFlowMeter.Controls.Add(Me.btnFlowMode)
+        Me.grpFlowMeter.Controls.Add(Me.lblFlowModeText)
+        Me.grpFlowMeter.Controls.Add(Me.lblFlowDescriptionText)
+        Me.grpFlowMeter.Controls.Add(Me.lblFlowSamplingTimeText)
+        Me.grpFlowMeter.Controls.Add(Me.txtFlowSamplingTime)
+        Me.grpFlowMeter.Controls.Add(Me.lblSec11Text)
+        Me.grpFlowMeter.ForeColor = System.Drawing.Color.Black
+        Me.grpFlowMeter.Location = New System.Drawing.Point(699, 296)
+        Me.grpFlowMeter.Name = "grpFlowMeter"
+        Me.grpFlowMeter.Size = New System.Drawing.Size(306, 194)
+        Me.grpFlowMeter.TabIndex = 594
+        Me.grpFlowMeter.TabStop = False
+        Me.grpFlowMeter.Text = "水流量開關設定"
+        '
+        'lblDPWaterFlowMaxText
+        '
+        Me.lblDPWaterFlowMaxText.BackColor = System.Drawing.Color.Transparent
+        Me.lblDPWaterFlowMaxText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDPWaterFlowMaxText.ForeColor = System.Drawing.Color.Black
+        Me.lblDPWaterFlowMaxText.Location = New System.Drawing.Point(25, 152)
+        Me.lblDPWaterFlowMaxText.Name = "lblDPWaterFlowMaxText"
+        Me.lblDPWaterFlowMaxText.Size = New System.Drawing.Size(151, 34)
+        Me.lblDPWaterFlowMaxText.TabIndex = 599
+        Me.lblDPWaterFlowMaxText.Text = "DP 最大水流量:"
+        Me.lblDPWaterFlowMaxText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtDPWaterFlowMax
+        '
+        Me.txtDPWaterFlowMax.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDPWaterFlowMax.Location = New System.Drawing.Point(182, 156)
+        Me.txtDPWaterFlowMax.Name = "txtDPWaterFlowMax"
+        Me.txtDPWaterFlowMax.Size = New System.Drawing.Size(53, 26)
+        Me.txtDPWaterFlowMax.TabIndex = 600
+        Me.txtDPWaterFlowMax.Text = "20"
+        Me.txtDPWaterFlowMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblDPWaterFlowHzText
+        '
+        Me.lblDPWaterFlowHzText.BackColor = System.Drawing.Color.Transparent
+        Me.lblDPWaterFlowHzText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDPWaterFlowHzText.ForeColor = System.Drawing.Color.Black
+        Me.lblDPWaterFlowHzText.Location = New System.Drawing.Point(25, 120)
+        Me.lblDPWaterFlowHzText.Name = "lblDPWaterFlowHzText"
+        Me.lblDPWaterFlowHzText.Size = New System.Drawing.Size(151, 34)
+        Me.lblDPWaterFlowHzText.TabIndex = 597
+        Me.lblDPWaterFlowHzText.Text = "DP 水流量脈波數:"
+        Me.lblDPWaterFlowHzText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtDPWaterFlowHz
+        '
+        Me.txtDPWaterFlowHz.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDPWaterFlowHz.Location = New System.Drawing.Point(182, 124)
+        Me.txtDPWaterFlowHz.Name = "txtDPWaterFlowHz"
+        Me.txtDPWaterFlowHz.Size = New System.Drawing.Size(53, 26)
+        Me.txtDPWaterFlowHz.TabIndex = 598
+        Me.txtDPWaterFlowHz.Text = "135"
+        Me.txtDPWaterFlowHz.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btnFlowMode
+        '
+        Me.btnFlowMode.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFlowMode.ForeColor = System.Drawing.Color.Black
+        Me.btnFlowMode.Location = New System.Drawing.Point(157, 26)
+        Me.btnFlowMode.Name = "btnFlowMode"
+        Me.btnFlowMode.Size = New System.Drawing.Size(78, 31)
+        Me.btnFlowMode.TabIndex = 587
+        Me.btnFlowMode.Text = "脈波式"
+        '
+        'lblFlowModeText
+        '
+        Me.lblFlowModeText.BackColor = System.Drawing.Color.Transparent
+        Me.lblFlowModeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFlowModeText.ForeColor = System.Drawing.Color.Black
+        Me.lblFlowModeText.Location = New System.Drawing.Point(0, 25)
+        Me.lblFlowModeText.Name = "lblFlowModeText"
+        Me.lblFlowModeText.Size = New System.Drawing.Size(151, 34)
+        Me.lblFlowModeText.TabIndex = 543
+        Me.lblFlowModeText.Text = "流量開關型式:"
+        Me.lblFlowModeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblFlowDescriptionText
+        '
+        Me.lblFlowDescriptionText.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFlowDescriptionText.ForeColor = System.Drawing.Color.Black
+        Me.lblFlowDescriptionText.Location = New System.Drawing.Point(18, 93)
+        Me.lblFlowDescriptionText.Name = "lblFlowDescriptionText"
+        Me.lblFlowDescriptionText.Size = New System.Drawing.Size(273, 18)
+        Me.lblFlowDescriptionText.TabIndex = 542
+        Me.lblFlowDescriptionText.Text = "流量= 每分Pulse 數 / 60 /3"
+        '
+        'lblFlowSamplingTimeText
+        '
+        Me.lblFlowSamplingTimeText.BackColor = System.Drawing.Color.Transparent
+        Me.lblFlowSamplingTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFlowSamplingTimeText.ForeColor = System.Drawing.Color.Black
+        Me.lblFlowSamplingTimeText.Location = New System.Drawing.Point(0, 59)
+        Me.lblFlowSamplingTimeText.Name = "lblFlowSamplingTimeText"
+        Me.lblFlowSamplingTimeText.Size = New System.Drawing.Size(151, 34)
+        Me.lblFlowSamplingTimeText.TabIndex = 540
+        Me.lblFlowSamplingTimeText.Text = "取樣時間:"
+        Me.lblFlowSamplingTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtFlowSamplingTime
+        '
+        Me.txtFlowSamplingTime.Enabled = False
+        Me.txtFlowSamplingTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFlowSamplingTime.Location = New System.Drawing.Point(157, 63)
+        Me.txtFlowSamplingTime.Name = "txtFlowSamplingTime"
+        Me.txtFlowSamplingTime.Size = New System.Drawing.Size(78, 26)
+        Me.txtFlowSamplingTime.TabIndex = 541
+        Me.txtFlowSamplingTime.Text = "3"
+        Me.txtFlowSamplingTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblSec11Text
+        '
+        Me.lblSec11Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSec11Text.ForeColor = System.Drawing.Color.Black
+        Me.lblSec11Text.Location = New System.Drawing.Point(241, 71)
+        Me.lblSec11Text.Name = "lblSec11Text"
+        Me.lblSec11Text.Size = New System.Drawing.Size(81, 18)
+        Me.lblSec11Text.TabIndex = 538
+        Me.lblSec11Text.Text = "sec"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.radPSG500)
+        Me.GroupBox1.Controls.Add(Me.radPCG550)
+        Me.GroupBox1.Controls.Add(Me.radAPG100)
+        Me.GroupBox1.Controls.Add(Me.radZSE40)
+        Me.GroupBox1.Controls.Add(Me.radAP2004)
+        Me.GroupBox1.Controls.Add(Me.radGP275)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox1.Location = New System.Drawing.Point(699, 134)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(303, 156)
+        Me.GroupBox1.TabIndex = 542
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "真空計型式設定"
+        '
+        'radPSG500
+        '
+        Me.radPSG500.AutoSize = True
+        Me.radPSG500.Font = New System.Drawing.Font("Arial", 14.0!)
+        Me.radPSG500.Location = New System.Drawing.Point(163, 112)
+        Me.radPSG500.Name = "radPSG500"
+        Me.radPSG500.Size = New System.Drawing.Size(102, 26)
+        Me.radPSG500.TabIndex = 535
+        Me.radPSG500.Text = "PSG500"
+        Me.radPSG500.UseVisualStyleBackColor = True
+        '
+        'radPCG550
+        '
+        Me.radPCG550.AutoSize = True
+        Me.radPCG550.Font = New System.Drawing.Font("Arial", 14.0!)
+        Me.radPCG550.Location = New System.Drawing.Point(26, 112)
+        Me.radPCG550.Name = "radPCG550"
+        Me.radPCG550.Size = New System.Drawing.Size(103, 26)
+        Me.radPCG550.TabIndex = 534
+        Me.radPCG550.Text = "PCG550"
+        Me.radPCG550.UseVisualStyleBackColor = True
+        '
+        'grpPumpType
+        '
+        Me.grpPumpType.Controls.Add(Me.radUlvacLS120)
+        Me.grpPumpType.Controls.Add(Me.lblDPTempCalText)
+        Me.grpPumpType.Controls.Add(Me.txtDPTempCalSet)
+        Me.grpPumpType.Controls.Add(Me.picC02)
+        Me.grpPumpType.Controls.Add(Me.radMachinePump)
+        Me.grpPumpType.Controls.Add(Me.radDryPump)
+        Me.grpPumpType.ForeColor = System.Drawing.Color.Black
+        Me.grpPumpType.Location = New System.Drawing.Point(681, 6)
+        Me.grpPumpType.Name = "grpPumpType"
+        Me.grpPumpType.Size = New System.Drawing.Size(321, 122)
+        Me.grpPumpType.TabIndex = 541
+        Me.grpPumpType.TabStop = False
+        Me.grpPumpType.Text = "幫浦型式設定"
+        '
+        'radUlvacLS120
+        '
+        Me.radUlvacLS120.AutoSize = True
+        Me.radUlvacLS120.Location = New System.Drawing.Point(26, 55)
+        Me.radUlvacLS120.Name = "radUlvacLS120"
+        Me.radUlvacLS120.Size = New System.Drawing.Size(136, 26)
+        Me.radUlvacLS120.TabIndex = 515
+        Me.radUlvacLS120.Text = "Ulvac LS120"
+        Me.radUlvacLS120.UseVisualStyleBackColor = True
+        '
+        'lblDPTempCalText
+        '
+        Me.lblDPTempCalText.BackColor = System.Drawing.Color.Transparent
+        Me.lblDPTempCalText.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDPTempCalText.ForeColor = System.Drawing.Color.Black
+        Me.lblDPTempCalText.Location = New System.Drawing.Point(0, 85)
+        Me.lblDPTempCalText.Name = "lblDPTempCalText"
+        Me.lblDPTempCalText.Size = New System.Drawing.Size(158, 36)
+        Me.lblDPTempCalText.TabIndex = 513
+        Me.lblDPTempCalText.Text = "DP 溫度 OFFSET"
+        Me.lblDPTempCalText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtDPTempCalSet
+        '
+        Me.txtDPTempCalSet.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDPTempCalSet.Location = New System.Drawing.Point(163, 90)
+        Me.txtDPTempCalSet.Name = "txtDPTempCalSet"
+        Me.txtDPTempCalSet.Size = New System.Drawing.Size(80, 26)
+        Me.txtDPTempCalSet.TabIndex = 512
+        Me.txtDPTempCalSet.Text = "0"
+        Me.txtDPTempCalSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'picC02
+        '
+        Me.picC02.BackColor = System.Drawing.SystemColors.Control
+        Me.picC02.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.picC02.Image = Global.CELLO.My.Resources.Resources.tempc
+        Me.picC02.Location = New System.Drawing.Point(252, 90)
+        Me.picC02.Name = "picC02"
+        Me.picC02.Size = New System.Drawing.Size(29, 26)
+        Me.picC02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picC02.TabIndex = 514
+        Me.picC02.TabStop = False
+        '
+        'radMachinePump
+        '
+        Me.radMachinePump.AutoSize = True
+        Me.radMachinePump.Checked = True
+        Me.radMachinePump.Location = New System.Drawing.Point(163, 26)
+        Me.radMachinePump.Name = "radMachinePump"
+        Me.radMachinePump.Size = New System.Drawing.Size(148, 26)
+        Me.radMachinePump.TabIndex = 511
+        Me.radMachinePump.TabStop = True
+        Me.radMachinePump.Text = "油式機械幫浦"
+        Me.radMachinePump.UseVisualStyleBackColor = True
+        '
+        'radDryPump
+        '
+        Me.radDryPump.AutoSize = True
+        Me.radDryPump.Location = New System.Drawing.Point(26, 26)
+        Me.radDryPump.Name = "radDryPump"
+        Me.radDryPump.Size = New System.Drawing.Size(108, 26)
+        Me.radDryPump.TabIndex = 510
+        Me.radDryPump.Text = "乾式幫浦"
+        Me.radDryPump.UseVisualStyleBackColor = True
+        '
+        'flwFlowSetup
+        '
+        Me.flwFlowSetup.Location = New System.Drawing.Point(6, 231)
+        Me.flwFlowSetup.Name = "flwFlowSetup"
+        Me.flwFlowSetup.Size = New System.Drawing.Size(684, 259)
+        Me.flwFlowSetup.TabIndex = 536
+        '
+        'tabpagePressCal
+        '
+        Me.tabpagePressCal.BackColor = System.Drawing.Color.Transparent
+        Me.tabpagePressCal.Controls.Add(Me.flwPressCal)
+        Me.tabpagePressCal.Location = New System.Drawing.Point(4, 44)
+        Me.tabpagePressCal.Name = "tabpagePressCal"
+        Me.tabpagePressCal.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpagePressCal.TabIndex = 2
+        Me.tabpagePressCal.Text = "壓力校正"
+        Me.tabpagePressCal.UseVisualStyleBackColor = True
+        '
+        'flwPressCal
+        '
+        Me.flwPressCal.Location = New System.Drawing.Point(3, 3)
+        Me.flwPressCal.Name = "flwPressCal"
+        Me.flwPressCal.Size = New System.Drawing.Size(1001, 489)
+        Me.flwPressCal.TabIndex = 847
+        '
         'tabpagePressControl
         '
         Me.tabpagePressControl.BackColor = System.Drawing.Color.Transparent
@@ -3977,6 +4636,17 @@ Public Class FormParameter
         Me.tabpagePressControl.TabIndex = 3
         Me.tabpagePressControl.Text = "壓力控制設定"
         Me.tabpagePressControl.UseVisualStyleBackColor = True
+        '
+        'btnForceDAOut
+        '
+        Me.btnForceDAOut.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnForceDAOut.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnForceDAOut.Location = New System.Drawing.Point(713, 357)
+        Me.btnForceDAOut.Name = "btnForceDAOut"
+        Me.btnForceDAOut.Size = New System.Drawing.Size(128, 31)
+        Me.btnForceDAOut.TabIndex = 849
+        Me.btnForceDAOut.Text = "比例閥輸出鎖"
+        Me.btnForceDAOut.UseVisualStyleBackColor = False
         '
         'pnlPressureAverage
         '
@@ -4186,17 +4856,6 @@ Public Class FormParameter
         Me.txtHighPDAOut.TabIndex = 807
         Me.txtHighPDAOut.Text = "100"
         Me.txtHighPDAOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnForceDAOut
-        '
-        Me.btnForceDAOut.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.btnForceDAOut.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnForceDAOut.Location = New System.Drawing.Point(713, 357)
-        Me.btnForceDAOut.Name = "btnForceDAOut"
-        Me.btnForceDAOut.Size = New System.Drawing.Size(128, 31)
-        Me.btnForceDAOut.TabIndex = 849
-        Me.btnForceDAOut.Text = "比例閥輸出鎖"
-        Me.btnForceDAOut.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -5905,665 +6564,6 @@ Public Class FormParameter
         Me.btUp.Text = "up"
         Me.btUp.UseVisualStyleBackColor = True
         '
-        'tabpageTempCal
-        '
-        Me.tabpageTempCal.BackColor = System.Drawing.Color.Transparent
-        Me.tabpageTempCal.Controls.Add(Me.pnlHeaterSetup)
-        Me.tabpageTempCal.Controls.Add(Me.flwTempCal)
-        Me.tabpageTempCal.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tabpageTempCal.Location = New System.Drawing.Point(4, 44)
-        Me.tabpageTempCal.Name = "tabpageTempCal"
-        Me.tabpageTempCal.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpageTempCal.Size = New System.Drawing.Size(1580, 802)
-        Me.tabpageTempCal.TabIndex = 0
-        Me.tabpageTempCal.Text = "溫度校正"
-        Me.tabpageTempCal.UseVisualStyleBackColor = True
-        '
-        'pnlHeaterSetup
-        '
-        Me.pnlHeaterSetup.Controls.Add(Me.chkSplitTopBotTempEnable)
-        Me.pnlHeaterSetup.Controls.Add(Me.Label2)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtTempRiseComp)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblTempRiseCompText)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCountText)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblS01Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterPowerText)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterAlarmTime)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterVoltageText)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterAlarmTimeText)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterVoltage)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblFullCurrentText)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterPower)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblA02Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterCount)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblFullCurrent)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblW01Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrentText)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblV02Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblA03Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterMonitorPowerText)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrent)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterMonitorPower)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblPer01Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblPer02Text)
-        Me.pnlHeaterSetup.Controls.Add(Me.txtHeaterCurrentRate)
-        Me.pnlHeaterSetup.Controls.Add(Me.lblHeaterCurrentRateText)
-        Me.pnlHeaterSetup.Location = New System.Drawing.Point(817, 6)
-        Me.pnlHeaterSetup.Name = "pnlHeaterSetup"
-        Me.pnlHeaterSetup.Size = New System.Drawing.Size(192, 487)
-        Me.pnlHeaterSetup.TabIndex = 832
-        '
-        'chkSplitTopBotTempEnable
-        '
-        Me.chkSplitTopBotTempEnable.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSplitTopBotTempEnable.Location = New System.Drawing.Point(18, 458)
-        Me.chkSplitTopBotTempEnable.Name = "chkSplitTopBotTempEnable"
-        Me.chkSplitTopBotTempEnable.Size = New System.Drawing.Size(165, 26)
-        Me.chkSplitTopBotTempEnable.TabIndex = 835
-        Me.chkSplitTopBotTempEnable.Text = "使用上下分區校溫"
-        Me.chkSplitTopBotTempEnable.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(111, 336)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 26)
-        Me.Label2.TabIndex = 834
-        Me.Label2.Text = "%"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label2.Visible = False
-        '
-        'txtTempRiseComp
-        '
-        Me.txtTempRiseComp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTempRiseComp.Location = New System.Drawing.Point(53, 336)
-        Me.txtTempRiseComp.Name = "txtTempRiseComp"
-        Me.txtTempRiseComp.Size = New System.Drawing.Size(57, 26)
-        Me.txtTempRiseComp.TabIndex = 832
-        Me.txtTempRiseComp.Text = "80"
-        Me.txtTempRiseComp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtTempRiseComp.Visible = False
-        '
-        'lblTempRiseCompText
-        '
-        Me.lblTempRiseCompText.BackColor = System.Drawing.Color.Transparent
-        Me.lblTempRiseCompText.Font = New System.Drawing.Font("Arial", 9.0!)
-        Me.lblTempRiseCompText.ForeColor = System.Drawing.Color.Black
-        Me.lblTempRiseCompText.Location = New System.Drawing.Point(4, 307)
-        Me.lblTempRiseCompText.Name = "lblTempRiseCompText"
-        Me.lblTempRiseCompText.Size = New System.Drawing.Size(95, 26)
-        Me.lblTempRiseCompText.TabIndex = 833
-        Me.lblTempRiseCompText.Text = "升溫速率調整:"
-        Me.lblTempRiseCompText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.lblTempRiseCompText.Visible = False
-        '
-        'lblHeaterCountText
-        '
-        Me.lblHeaterCountText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterCountText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterCountText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterCountText.Location = New System.Drawing.Point(3, 5)
-        Me.lblHeaterCountText.Name = "lblHeaterCountText"
-        Me.lblHeaterCountText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterCountText.TabIndex = 536
-        Me.lblHeaterCountText.Text = "加熱器數量:"
-        Me.lblHeaterCountText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblS01Text
-        '
-        Me.lblS01Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblS01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblS01Text.ForeColor = System.Drawing.Color.Black
-        Me.lblS01Text.Location = New System.Drawing.Point(159, 220)
-        Me.lblS01Text.Name = "lblS01Text"
-        Me.lblS01Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblS01Text.TabIndex = 831
-        Me.lblS01Text.Text = "s"
-        Me.lblS01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblHeaterPowerText
-        '
-        Me.lblHeaterPowerText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterPowerText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterPowerText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterPowerText.Location = New System.Drawing.Point(3, 37)
-        Me.lblHeaterPowerText.Name = "lblHeaterPowerText"
-        Me.lblHeaterPowerText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterPowerText.TabIndex = 535
-        Me.lblHeaterPowerText.Text = "加熱器功率:"
-        Me.lblHeaterPowerText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtHeaterAlarmTime
-        '
-        Me.txtHeaterAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterAlarmTime.Location = New System.Drawing.Point(101, 220)
-        Me.txtHeaterAlarmTime.Name = "txtHeaterAlarmTime"
-        Me.txtHeaterAlarmTime.Size = New System.Drawing.Size(57, 26)
-        Me.txtHeaterAlarmTime.TabIndex = 829
-        Me.txtHeaterAlarmTime.Text = "30"
-        Me.txtHeaterAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblHeaterVoltageText
-        '
-        Me.lblHeaterVoltageText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterVoltageText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterVoltageText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterVoltageText.Location = New System.Drawing.Point(3, 67)
-        Me.lblHeaterVoltageText.Name = "lblHeaterVoltageText"
-        Me.lblHeaterVoltageText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterVoltageText.TabIndex = 537
-        Me.lblHeaterVoltageText.Text = "加熱器電壓:"
-        Me.lblHeaterVoltageText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblHeaterAlarmTimeText
-        '
-        Me.lblHeaterAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterAlarmTimeText.Location = New System.Drawing.Point(3, 220)
-        Me.lblHeaterAlarmTimeText.Name = "lblHeaterAlarmTimeText"
-        Me.lblHeaterAlarmTimeText.Size = New System.Drawing.Size(95, 35)
-        Me.lblHeaterAlarmTimeText.TabIndex = 830
-        Me.lblHeaterAlarmTimeText.Text = "電流警報時間:"
-        Me.lblHeaterAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtHeaterVoltage
-        '
-        Me.txtHeaterVoltage.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterVoltage.Location = New System.Drawing.Point(101, 67)
-        Me.txtHeaterVoltage.Name = "txtHeaterVoltage"
-        Me.txtHeaterVoltage.Size = New System.Drawing.Size(57, 26)
-        Me.txtHeaterVoltage.TabIndex = 534
-        Me.txtHeaterVoltage.Text = "220"
-        Me.txtHeaterVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblFullCurrentText
-        '
-        Me.lblFullCurrentText.BackColor = System.Drawing.Color.Transparent
-        Me.lblFullCurrentText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullCurrentText.ForeColor = System.Drawing.Color.Black
-        Me.lblFullCurrentText.Location = New System.Drawing.Point(3, 130)
-        Me.lblFullCurrentText.Name = "lblFullCurrentText"
-        Me.lblFullCurrentText.Size = New System.Drawing.Size(95, 26)
-        Me.lblFullCurrentText.TabIndex = 828
-        Me.lblFullCurrentText.Text = "額定電流:"
-        Me.lblFullCurrentText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtHeaterPower
-        '
-        Me.txtHeaterPower.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterPower.Location = New System.Drawing.Point(101, 37)
-        Me.txtHeaterPower.Name = "txtHeaterPower"
-        Me.txtHeaterPower.Size = New System.Drawing.Size(57, 26)
-        Me.txtHeaterPower.TabIndex = 532
-        Me.txtHeaterPower.Text = "750"
-        Me.txtHeaterPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblA02Text
-        '
-        Me.lblA02Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblA02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblA02Text.ForeColor = System.Drawing.Color.Black
-        Me.lblA02Text.Location = New System.Drawing.Point(159, 130)
-        Me.lblA02Text.Name = "lblA02Text"
-        Me.lblA02Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblA02Text.TabIndex = 827
-        Me.lblA02Text.Text = "A"
-        Me.lblA02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtHeaterCount
-        '
-        Me.txtHeaterCount.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterCount.Location = New System.Drawing.Point(101, 5)
-        Me.txtHeaterCount.Name = "txtHeaterCount"
-        Me.txtHeaterCount.Size = New System.Drawing.Size(42, 26)
-        Me.txtHeaterCount.TabIndex = 533
-        Me.txtHeaterCount.Text = "4"
-        Me.txtHeaterCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblFullCurrent
-        '
-        Me.lblFullCurrent.BackColor = System.Drawing.Color.Black
-        Me.lblFullCurrent.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblFullCurrent.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullCurrent.ForeColor = System.Drawing.Color.Lime
-        Me.lblFullCurrent.Location = New System.Drawing.Point(101, 129)
-        Me.lblFullCurrent.Name = "lblFullCurrent"
-        Me.lblFullCurrent.Size = New System.Drawing.Size(58, 26)
-        Me.lblFullCurrent.TabIndex = 826
-        Me.lblFullCurrent.Text = "13"
-        Me.lblFullCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblW01Text
-        '
-        Me.lblW01Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblW01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblW01Text.ForeColor = System.Drawing.Color.Black
-        Me.lblW01Text.Location = New System.Drawing.Point(159, 38)
-        Me.lblW01Text.Name = "lblW01Text"
-        Me.lblW01Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblW01Text.TabIndex = 538
-        Me.lblW01Text.Text = "W"
-        Me.lblW01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblHeaterCurrentText
-        '
-        Me.lblHeaterCurrentText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterCurrentText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterCurrentText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterCurrentText.Location = New System.Drawing.Point(3, 192)
-        Me.lblHeaterCurrentText.Name = "lblHeaterCurrentText"
-        Me.lblHeaterCurrentText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterCurrentText.TabIndex = 825
-        Me.lblHeaterCurrentText.Text = "監測電流:"
-        Me.lblHeaterCurrentText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblV02Text
-        '
-        Me.lblV02Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblV02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblV02Text.ForeColor = System.Drawing.Color.Black
-        Me.lblV02Text.Location = New System.Drawing.Point(159, 67)
-        Me.lblV02Text.Name = "lblV02Text"
-        Me.lblV02Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblV02Text.TabIndex = 539
-        Me.lblV02Text.Text = "V"
-        Me.lblV02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblA03Text
-        '
-        Me.lblA03Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblA03Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblA03Text.ForeColor = System.Drawing.Color.Black
-        Me.lblA03Text.Location = New System.Drawing.Point(159, 192)
-        Me.lblA03Text.Name = "lblA03Text"
-        Me.lblA03Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblA03Text.TabIndex = 824
-        Me.lblA03Text.Text = "A"
-        Me.lblA03Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblHeaterMonitorPowerText
-        '
-        Me.lblHeaterMonitorPowerText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterMonitorPowerText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterMonitorPowerText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterMonitorPowerText.Location = New System.Drawing.Point(3, 99)
-        Me.lblHeaterMonitorPowerText.Name = "lblHeaterMonitorPowerText"
-        Me.lblHeaterMonitorPowerText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterMonitorPowerText.TabIndex = 541
-        Me.lblHeaterMonitorPowerText.Text = "監測功率:"
-        Me.lblHeaterMonitorPowerText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblHeaterCurrent
-        '
-        Me.lblHeaterCurrent.BackColor = System.Drawing.Color.Black
-        Me.lblHeaterCurrent.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblHeaterCurrent.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterCurrent.ForeColor = System.Drawing.Color.Lime
-        Me.lblHeaterCurrent.Location = New System.Drawing.Point(101, 191)
-        Me.lblHeaterCurrent.Name = "lblHeaterCurrent"
-        Me.lblHeaterCurrent.Size = New System.Drawing.Size(58, 26)
-        Me.lblHeaterCurrent.TabIndex = 823
-        Me.lblHeaterCurrent.Text = "10"
-        Me.lblHeaterCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtHeaterMonitorPower
-        '
-        Me.txtHeaterMonitorPower.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterMonitorPower.Location = New System.Drawing.Point(101, 99)
-        Me.txtHeaterMonitorPower.Name = "txtHeaterMonitorPower"
-        Me.txtHeaterMonitorPower.Size = New System.Drawing.Size(57, 26)
-        Me.txtHeaterMonitorPower.TabIndex = 540
-        Me.txtHeaterMonitorPower.Text = "60"
-        Me.txtHeaterMonitorPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblPer01Text
-        '
-        Me.lblPer01Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblPer01Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPer01Text.ForeColor = System.Drawing.Color.Black
-        Me.lblPer01Text.Location = New System.Drawing.Point(159, 158)
-        Me.lblPer01Text.Name = "lblPer01Text"
-        Me.lblPer01Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblPer01Text.TabIndex = 545
-        Me.lblPer01Text.Text = "%"
-        Me.lblPer01Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblPer02Text
-        '
-        Me.lblPer02Text.BackColor = System.Drawing.Color.Transparent
-        Me.lblPer02Text.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPer02Text.ForeColor = System.Drawing.Color.Black
-        Me.lblPer02Text.Location = New System.Drawing.Point(159, 99)
-        Me.lblPer02Text.Name = "lblPer02Text"
-        Me.lblPer02Text.Size = New System.Drawing.Size(24, 26)
-        Me.lblPer02Text.TabIndex = 542
-        Me.lblPer02Text.Text = "%"
-        Me.lblPer02Text.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtHeaterCurrentRate
-        '
-        Me.txtHeaterCurrentRate.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeaterCurrentRate.Location = New System.Drawing.Point(101, 158)
-        Me.txtHeaterCurrentRate.Name = "txtHeaterCurrentRate"
-        Me.txtHeaterCurrentRate.Size = New System.Drawing.Size(57, 26)
-        Me.txtHeaterCurrentRate.TabIndex = 543
-        Me.txtHeaterCurrentRate.Text = "80"
-        Me.txtHeaterCurrentRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblHeaterCurrentRateText
-        '
-        Me.lblHeaterCurrentRateText.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeaterCurrentRateText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeaterCurrentRateText.ForeColor = System.Drawing.Color.Black
-        Me.lblHeaterCurrentRateText.Location = New System.Drawing.Point(3, 158)
-        Me.lblHeaterCurrentRateText.Name = "lblHeaterCurrentRateText"
-        Me.lblHeaterCurrentRateText.Size = New System.Drawing.Size(95, 26)
-        Me.lblHeaterCurrentRateText.TabIndex = 544
-        Me.lblHeaterCurrentRateText.Text = "監測電流比:"
-        Me.lblHeaterCurrentRateText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'flwTempCal
-        '
-        Me.flwTempCal.Location = New System.Drawing.Point(3, 6)
-        Me.flwTempCal.Name = "flwTempCal"
-        Me.flwTempCal.Size = New System.Drawing.Size(811, 490)
-        Me.flwTempCal.TabIndex = 531
-        '
-        'tabpageVacuum
-        '
-        Me.tabpageVacuum.BackColor = System.Drawing.Color.Transparent
-        Me.tabpageVacuum.Controls.Add(Me.grpFlowMeter)
-        Me.tabpageVacuum.Controls.Add(Me.GroupBox1)
-        Me.tabpageVacuum.Controls.Add(Me.grpPumpType)
-        Me.tabpageVacuum.Controls.Add(Me.flwFlowSetup)
-        Me.tabpageVacuum.Controls.Add(Me.grpVacuumSetup)
-        Me.tabpageVacuum.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tabpageVacuum.Location = New System.Drawing.Point(4, 44)
-        Me.tabpageVacuum.Name = "tabpageVacuum"
-        Me.tabpageVacuum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpageVacuum.Size = New System.Drawing.Size(1580, 802)
-        Me.tabpageVacuum.TabIndex = 1
-        Me.tabpageVacuum.Text = "真空設定"
-        Me.tabpageVacuum.UseVisualStyleBackColor = True
-        '
-        'grpFlowMeter
-        '
-        Me.grpFlowMeter.Controls.Add(Me.lblDPWaterFlowMaxText)
-        Me.grpFlowMeter.Controls.Add(Me.txtDPWaterFlowMax)
-        Me.grpFlowMeter.Controls.Add(Me.lblDPWaterFlowHzText)
-        Me.grpFlowMeter.Controls.Add(Me.txtDPWaterFlowHz)
-        Me.grpFlowMeter.Controls.Add(Me.btnFlowMode)
-        Me.grpFlowMeter.Controls.Add(Me.lblFlowModeText)
-        Me.grpFlowMeter.Controls.Add(Me.lblFlowDescriptionText)
-        Me.grpFlowMeter.Controls.Add(Me.lblFlowSamplingTimeText)
-        Me.grpFlowMeter.Controls.Add(Me.txtFlowSamplingTime)
-        Me.grpFlowMeter.Controls.Add(Me.lblSec11Text)
-        Me.grpFlowMeter.ForeColor = System.Drawing.Color.Black
-        Me.grpFlowMeter.Location = New System.Drawing.Point(699, 296)
-        Me.grpFlowMeter.Name = "grpFlowMeter"
-        Me.grpFlowMeter.Size = New System.Drawing.Size(306, 194)
-        Me.grpFlowMeter.TabIndex = 594
-        Me.grpFlowMeter.TabStop = False
-        Me.grpFlowMeter.Text = "水流量開關設定"
-        '
-        'lblDPWaterFlowMaxText
-        '
-        Me.lblDPWaterFlowMaxText.BackColor = System.Drawing.Color.Transparent
-        Me.lblDPWaterFlowMaxText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDPWaterFlowMaxText.ForeColor = System.Drawing.Color.Black
-        Me.lblDPWaterFlowMaxText.Location = New System.Drawing.Point(25, 152)
-        Me.lblDPWaterFlowMaxText.Name = "lblDPWaterFlowMaxText"
-        Me.lblDPWaterFlowMaxText.Size = New System.Drawing.Size(151, 34)
-        Me.lblDPWaterFlowMaxText.TabIndex = 599
-        Me.lblDPWaterFlowMaxText.Text = "DP 最大水流量:"
-        Me.lblDPWaterFlowMaxText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtDPWaterFlowMax
-        '
-        Me.txtDPWaterFlowMax.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDPWaterFlowMax.Location = New System.Drawing.Point(182, 156)
-        Me.txtDPWaterFlowMax.Name = "txtDPWaterFlowMax"
-        Me.txtDPWaterFlowMax.Size = New System.Drawing.Size(53, 26)
-        Me.txtDPWaterFlowMax.TabIndex = 600
-        Me.txtDPWaterFlowMax.Text = "20"
-        Me.txtDPWaterFlowMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblDPWaterFlowHzText
-        '
-        Me.lblDPWaterFlowHzText.BackColor = System.Drawing.Color.Transparent
-        Me.lblDPWaterFlowHzText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDPWaterFlowHzText.ForeColor = System.Drawing.Color.Black
-        Me.lblDPWaterFlowHzText.Location = New System.Drawing.Point(25, 120)
-        Me.lblDPWaterFlowHzText.Name = "lblDPWaterFlowHzText"
-        Me.lblDPWaterFlowHzText.Size = New System.Drawing.Size(151, 34)
-        Me.lblDPWaterFlowHzText.TabIndex = 597
-        Me.lblDPWaterFlowHzText.Text = "DP 水流量脈波數:"
-        Me.lblDPWaterFlowHzText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtDPWaterFlowHz
-        '
-        Me.txtDPWaterFlowHz.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDPWaterFlowHz.Location = New System.Drawing.Point(182, 124)
-        Me.txtDPWaterFlowHz.Name = "txtDPWaterFlowHz"
-        Me.txtDPWaterFlowHz.Size = New System.Drawing.Size(53, 26)
-        Me.txtDPWaterFlowHz.TabIndex = 598
-        Me.txtDPWaterFlowHz.Text = "135"
-        Me.txtDPWaterFlowHz.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFlowMode
-        '
-        Me.btnFlowMode.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFlowMode.ForeColor = System.Drawing.Color.Black
-        Me.btnFlowMode.Location = New System.Drawing.Point(157, 26)
-        Me.btnFlowMode.Name = "btnFlowMode"
-        Me.btnFlowMode.Size = New System.Drawing.Size(78, 31)
-        Me.btnFlowMode.TabIndex = 587
-        Me.btnFlowMode.Text = "脈波式"
-        '
-        'lblFlowModeText
-        '
-        Me.lblFlowModeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblFlowModeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFlowModeText.ForeColor = System.Drawing.Color.Black
-        Me.lblFlowModeText.Location = New System.Drawing.Point(0, 25)
-        Me.lblFlowModeText.Name = "lblFlowModeText"
-        Me.lblFlowModeText.Size = New System.Drawing.Size(151, 34)
-        Me.lblFlowModeText.TabIndex = 543
-        Me.lblFlowModeText.Text = "流量開關型式:"
-        Me.lblFlowModeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblFlowDescriptionText
-        '
-        Me.lblFlowDescriptionText.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFlowDescriptionText.ForeColor = System.Drawing.Color.Black
-        Me.lblFlowDescriptionText.Location = New System.Drawing.Point(18, 93)
-        Me.lblFlowDescriptionText.Name = "lblFlowDescriptionText"
-        Me.lblFlowDescriptionText.Size = New System.Drawing.Size(273, 18)
-        Me.lblFlowDescriptionText.TabIndex = 542
-        Me.lblFlowDescriptionText.Text = "流量= 每分Pulse 數 / 60 /3"
-        '
-        'lblFlowSamplingTimeText
-        '
-        Me.lblFlowSamplingTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblFlowSamplingTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFlowSamplingTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblFlowSamplingTimeText.Location = New System.Drawing.Point(0, 59)
-        Me.lblFlowSamplingTimeText.Name = "lblFlowSamplingTimeText"
-        Me.lblFlowSamplingTimeText.Size = New System.Drawing.Size(151, 34)
-        Me.lblFlowSamplingTimeText.TabIndex = 540
-        Me.lblFlowSamplingTimeText.Text = "取樣時間:"
-        Me.lblFlowSamplingTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFlowSamplingTime
-        '
-        Me.txtFlowSamplingTime.Enabled = False
-        Me.txtFlowSamplingTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFlowSamplingTime.Location = New System.Drawing.Point(157, 63)
-        Me.txtFlowSamplingTime.Name = "txtFlowSamplingTime"
-        Me.txtFlowSamplingTime.Size = New System.Drawing.Size(78, 26)
-        Me.txtFlowSamplingTime.TabIndex = 541
-        Me.txtFlowSamplingTime.Text = "3"
-        Me.txtFlowSamplingTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblSec11Text
-        '
-        Me.lblSec11Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSec11Text.ForeColor = System.Drawing.Color.Black
-        Me.lblSec11Text.Location = New System.Drawing.Point(241, 71)
-        Me.lblSec11Text.Name = "lblSec11Text"
-        Me.lblSec11Text.Size = New System.Drawing.Size(81, 18)
-        Me.lblSec11Text.TabIndex = 538
-        Me.lblSec11Text.Text = "sec"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.radPSG500)
-        Me.GroupBox1.Controls.Add(Me.radPCG550)
-        Me.GroupBox1.Controls.Add(Me.radAPG100)
-        Me.GroupBox1.Controls.Add(Me.radZSE40)
-        Me.GroupBox1.Controls.Add(Me.radAP2004)
-        Me.GroupBox1.Controls.Add(Me.radGP275)
-        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox1.Location = New System.Drawing.Point(699, 134)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(303, 156)
-        Me.GroupBox1.TabIndex = 542
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "真空計型式設定"
-        '
-        'radPSG500
-        '
-        Me.radPSG500.AutoSize = True
-        Me.radPSG500.Font = New System.Drawing.Font("Arial", 14.0!)
-        Me.radPSG500.Location = New System.Drawing.Point(163, 112)
-        Me.radPSG500.Name = "radPSG500"
-        Me.radPSG500.Size = New System.Drawing.Size(102, 26)
-        Me.radPSG500.TabIndex = 535
-        Me.radPSG500.Text = "PSG500"
-        Me.radPSG500.UseVisualStyleBackColor = True
-        '
-        'radPCG550
-        '
-        Me.radPCG550.AutoSize = True
-        Me.radPCG550.Font = New System.Drawing.Font("Arial", 14.0!)
-        Me.radPCG550.Location = New System.Drawing.Point(26, 112)
-        Me.radPCG550.Name = "radPCG550"
-        Me.radPCG550.Size = New System.Drawing.Size(103, 26)
-        Me.radPCG550.TabIndex = 534
-        Me.radPCG550.Text = "PCG550"
-        Me.radPCG550.UseVisualStyleBackColor = True
-        '
-        'grpPumpType
-        '
-        Me.grpPumpType.Controls.Add(Me.radUlvacLS120)
-        Me.grpPumpType.Controls.Add(Me.lblDPTempCalText)
-        Me.grpPumpType.Controls.Add(Me.txtDPTempCalSet)
-        Me.grpPumpType.Controls.Add(Me.picC02)
-        Me.grpPumpType.Controls.Add(Me.radMachinePump)
-        Me.grpPumpType.Controls.Add(Me.radDryPump)
-        Me.grpPumpType.ForeColor = System.Drawing.Color.Black
-        Me.grpPumpType.Location = New System.Drawing.Point(681, 6)
-        Me.grpPumpType.Name = "grpPumpType"
-        Me.grpPumpType.Size = New System.Drawing.Size(321, 122)
-        Me.grpPumpType.TabIndex = 541
-        Me.grpPumpType.TabStop = False
-        Me.grpPumpType.Text = "幫浦型式設定"
-        '
-        'radUlvacLS120
-        '
-        Me.radUlvacLS120.AutoSize = True
-        Me.radUlvacLS120.Location = New System.Drawing.Point(26, 55)
-        Me.radUlvacLS120.Name = "radUlvacLS120"
-        Me.radUlvacLS120.Size = New System.Drawing.Size(136, 26)
-        Me.radUlvacLS120.TabIndex = 515
-        Me.radUlvacLS120.Text = "Ulvac LS120"
-        Me.radUlvacLS120.UseVisualStyleBackColor = True
-        '
-        'lblDPTempCalText
-        '
-        Me.lblDPTempCalText.BackColor = System.Drawing.Color.Transparent
-        Me.lblDPTempCalText.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDPTempCalText.ForeColor = System.Drawing.Color.Black
-        Me.lblDPTempCalText.Location = New System.Drawing.Point(0, 85)
-        Me.lblDPTempCalText.Name = "lblDPTempCalText"
-        Me.lblDPTempCalText.Size = New System.Drawing.Size(158, 36)
-        Me.lblDPTempCalText.TabIndex = 513
-        Me.lblDPTempCalText.Text = "DP 溫度 OFFSET"
-        Me.lblDPTempCalText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtDPTempCalSet
-        '
-        Me.txtDPTempCalSet.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDPTempCalSet.Location = New System.Drawing.Point(163, 90)
-        Me.txtDPTempCalSet.Name = "txtDPTempCalSet"
-        Me.txtDPTempCalSet.Size = New System.Drawing.Size(80, 26)
-        Me.txtDPTempCalSet.TabIndex = 512
-        Me.txtDPTempCalSet.Text = "0"
-        Me.txtDPTempCalSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'picC02
-        '
-        Me.picC02.BackColor = System.Drawing.SystemColors.Control
-        Me.picC02.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picC02.Image = Global.CELLO.My.Resources.Resources.tempc
-        Me.picC02.Location = New System.Drawing.Point(252, 90)
-        Me.picC02.Name = "picC02"
-        Me.picC02.Size = New System.Drawing.Size(29, 26)
-        Me.picC02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picC02.TabIndex = 514
-        Me.picC02.TabStop = False
-        '
-        'radMachinePump
-        '
-        Me.radMachinePump.AutoSize = True
-        Me.radMachinePump.Checked = True
-        Me.radMachinePump.Location = New System.Drawing.Point(163, 26)
-        Me.radMachinePump.Name = "radMachinePump"
-        Me.radMachinePump.Size = New System.Drawing.Size(148, 26)
-        Me.radMachinePump.TabIndex = 511
-        Me.radMachinePump.TabStop = True
-        Me.radMachinePump.Text = "油式機械幫浦"
-        Me.radMachinePump.UseVisualStyleBackColor = True
-        '
-        'radDryPump
-        '
-        Me.radDryPump.AutoSize = True
-        Me.radDryPump.Location = New System.Drawing.Point(26, 26)
-        Me.radDryPump.Name = "radDryPump"
-        Me.radDryPump.Size = New System.Drawing.Size(108, 26)
-        Me.radDryPump.TabIndex = 510
-        Me.radDryPump.Text = "乾式幫浦"
-        Me.radDryPump.UseVisualStyleBackColor = True
-        '
-        'flwFlowSetup
-        '
-        Me.flwFlowSetup.Location = New System.Drawing.Point(6, 231)
-        Me.flwFlowSetup.Name = "flwFlowSetup"
-        Me.flwFlowSetup.Size = New System.Drawing.Size(684, 259)
-        Me.flwFlowSetup.TabIndex = 536
-        '
-        'tabpagePressCal
-        '
-        Me.tabpagePressCal.BackColor = System.Drawing.Color.Transparent
-        Me.tabpagePressCal.Controls.Add(Me.flwPressCal)
-        Me.tabpagePressCal.Location = New System.Drawing.Point(4, 44)
-        Me.tabpagePressCal.Name = "tabpagePressCal"
-        Me.tabpagePressCal.Size = New System.Drawing.Size(1580, 802)
-        Me.tabpagePressCal.TabIndex = 2
-        Me.tabpagePressCal.Text = "壓力校正"
-        Me.tabpagePressCal.UseVisualStyleBackColor = True
-        '
-        'flwPressCal
-        '
-        Me.flwPressCal.Location = New System.Drawing.Point(3, 3)
-        Me.flwPressCal.Name = "flwPressCal"
-        Me.flwPressCal.Size = New System.Drawing.Size(1001, 489)
-        Me.flwPressCal.TabIndex = 847
-        '
         'tabPageIniEdit
         '
         Me.tabPageIniEdit.Controls.Add(Me.ControlINIEdit1)
@@ -7238,16 +7238,6 @@ Public Class FormParameter
         Me.TabPageCIM.ResumeLayout(False)
         Me.TabPageCello.ResumeLayout(False)
         Me.tabSystem.ResumeLayout(False)
-        Me.tabpagePressControl.ResumeLayout(False)
-        Me.tabpagePressControl.PerformLayout()
-        Me.pnlPressureAverage.ResumeLayout(False)
-        Me.pnlPressureAverage.PerformLayout()
-        Me.pnl6Plate.ResumeLayout(False)
-        Me.pnl6Plate.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.tabpageTempCal.ResumeLayout(False)
         Me.pnlHeaterSetup.ResumeLayout(False)
         Me.pnlHeaterSetup.PerformLayout()
@@ -7260,6 +7250,16 @@ Public Class FormParameter
         Me.grpPumpType.PerformLayout()
         CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpagePressCal.ResumeLayout(False)
+        Me.tabpagePressControl.ResumeLayout(False)
+        Me.tabpagePressControl.PerformLayout()
+        Me.pnlPressureAverage.ResumeLayout(False)
+        Me.pnlPressureAverage.PerformLayout()
+        Me.pnl6Plate.ResumeLayout(False)
+        Me.pnl6Plate.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.tabPageIniEdit.ResumeLayout(False)
         Me.tabPageIniEdit.PerformLayout()
         Me.TabPageTempCalTool.ResumeLayout(False)
@@ -9381,6 +9381,15 @@ Public Class FormParameter
     End Sub
 
     Private Sub btnShowPicControl_Click(sender As Object, e As EventArgs) Handles btnShowPicControl.Click
+        Dim show As New FormMesgBox_passward
+
+        'show.ShowDialog()
+        If show.ShowDialog(Me) = System.Windows.Forms.DialogResult.Yes Then
+        Else
+            'MessageBox.Show("密碼錯誤")
+            Exit Sub
+        End If
+
         PressPID_Flag = Not PressPID_Flag
         If PressPID_Flag Then
             FormParameters.flwPressPID.Visible = True

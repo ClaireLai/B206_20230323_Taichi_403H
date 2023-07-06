@@ -514,11 +514,11 @@ Module Module_Alarm_Task
 
         SerialNo = 0
         For i = 0 To Total_Alarm_Num
-            'AlarmError(i) = False
             If AlarmError(i) Or AlarmState(i) = 1 Then
+                'Debug.Print("i=" + i.ToString + "  ,AlarmError(i)=" + AlarmError(i).ToString + " ,AlarmState(i)=" + AlarmState(i).ToString)
                 astr = LoginUserName + vbTab + AlarmRecord(i).Time + vbTab + Format(i, " [000]  ") + vbTab + AlarmList1(SystemLanguage, i) + vbCrLf
                 Alarm_String = Alarm_String + astr
-                If AlarmState(i) = 0 Then
+                If AlarmState(i) = 0 Then '沒紀錄過
                     'FormAlarms.txtAlarmList.Text = Alarm_String
                     AlarmRecord(i).Time = ADate + "   " + TTime
 

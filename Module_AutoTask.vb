@@ -114,7 +114,7 @@ Module Module_AutoTask
         Private SiteNum As Integer
         Private RunFlag As Boolean    '壓合時重置曲線
         Private RunOKFlag As Boolean    '壓合時重置曲線
-        Public AbortFlag As Boolean    '壓合時重置曲線 claire 2023.06.20為稼動率改為public
+        Private AbortFlag As Boolean    '壓合時重置曲線 claire 2023.06.20為稼動率改為public
         Private SkipFlag As Boolean    '壓合時重置曲線
         Public SelectedFlag As Boolean    '壓合時重置曲線
 
