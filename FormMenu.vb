@@ -205,7 +205,7 @@
             End If
             Select Case LastMenuIndex
                 Case 1
-                    FormProcess.Timer1.Enabled = False
+                    'FormProcess.Timer1.Enabled = False
                 Case 2
                     FormRecipe.Timer1.Enabled = False
                 Case 3

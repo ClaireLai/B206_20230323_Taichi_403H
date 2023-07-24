@@ -61,6 +61,38 @@
         LangEngINIFile = sdir + "LANG_ENG.INI"        '程式資料INI檔案
 
     End Sub
+    Public Sub ChangeLanguage(ByVal ls As String)
+        ChangeListViewColHeater(FormAlarms.ListView1)
+        ChangeFormLang(FormAlarms, ls, FormAlarms)
+        ChangeFormLang(FormAlarmPopups, ls, FormAlarmPopups)
+        ChangeFormLang(FormKeyboard1s, ls, FormKeyboard1s)
+        ChangeFormLang(FormKeyboard2s, ls, FormKeyboard2s)
+        ChangeFormLang(FormKeyboard3s, ls, FormKeyboard3s)
+        ChangeFormLang(FormKeyInDataLogNames, ls, FormKeyInDataLogNames)
+        ChangeFormLang(FormkeyInFileNames, ls, FormkeyInFileNames)
+
+        ChangeFormLang(FormKeyInProcessNames, ls, FormKeyInProcessNames)
+        ChangeFormLang(FormKeyInRecipeFileNames, ls, FormKeyInRecipeFileNames)
+        ChangeFormLang(FormKeyInVideoNames, ls, FormKeyInVideoNames)
+        ChangeFormLang(FormLicenses, ls, FormLicenses)
+        ChangeFormLang(FormLogins, ls, FormLogins)
+        ChangeFormLang(FormLoginSetups, ls, FormLoginSetups)
+        ChangeFormLang(FormMaintances, ls, FormMaintances)
+        ChangeFormLang(FormManuals, ls, FormManuals)
+        ChangeFormLang(FormMenus, ls, FormMenus)
+        ChangeFormLang(FormMsgboxs, ls, FormMsgboxs)
+        ChangeFormLang(FormParameters, ls, FormParameters)
+        ChangeFormLang(FormProcesss, ls, FormProcesss)
+        ChangeFormLang(FormRecipeSelects, ls, FormRecipeSelects)
+        ChangeFormLang(FormRecipes, ls, FormRecipes)
+        ChangeFormLang(FormRecords, ls, FormRecords)
+        ChangeFormLang(FormRecipeMapEdit, ls, FormRecipeMapEdit)
+        ChangeFormLang(FormRecipeBarcodeInput, ls, FormRecipeBarcodeInput)
+        ChangeFormLang(Form1s, ls, Form1s)
+        ChangeSeriesRecordName(ChartRecord, CurveName)
+        SetLangText(Form1s.chkPLCTest, "PLC 通訊" + Format(PLC_COMPORT, "COM0"), "PLC Comm. " + Format(PLC_COMPORT, "COM0"))
+
+    End Sub
 
     '
     ''' <summary>
@@ -104,36 +136,6 @@
     End Sub
 
 
-    ''' <summary>
-    ''' 更換畫面語言
-    ''' </summary>
-    ''' <param name="frm">控制項變數,一般是表單</param>
-    ''' <param name="sfile">檔案名稱,一般是INI 檔案</param>
-    ''' <param name="cons">迭代控制像名稱</param>
-    Public Sub ChangeFormLang(ByVal frm As Object, ByVal sfile As String, ByVal cons As Control)
-        Dim gg As TabControl
-        Dim i As Integer
-        Dim sstr As String
-        If Not FileIO.FileSystem.FileExists(sfile) Then Exit Sub
-        If frm Is Nothing Then Exit Sub
-
-        For Each aa As Control In cons.Controls
-            'Application.DoEvents()
-            ReadAndSetText(frm.Name, aa, sfile)
-            If TypeName(aa) = "TabControl" Then
-                gg = aa
-                For i = 0 To gg.TabCount - 1
-                    sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
-                    If Len(sstr) > 0 Then
-                        gg.TabPages(i).Text = sstr
-                    End If
-                Next
-            End If
-            If aa.Controls.Count > 0 Then
-                ChangeFormLang(frm, sfile, aa)
-            End If
-        Next
-    End Sub
 
 
     ''將控制項的名稱自檔案讀入並比較是否有相同名稱並設定控制項文字
@@ -190,7 +192,36 @@
         FindControls(FormRecipeBarcodeInput, ls, FormRecipeBarcodeInput)
     End Sub
 
+    ''' <summary>
+    ''' 更換畫面語言
+    ''' </summary>
+    ''' <param name="frm">控制項變數,一般是表單</param>
+    ''' <param name="sfile">檔案名稱,一般是INI 檔案</param>
+    ''' <param name="cons">迭代控制像名稱</param>
+    Public Sub ChangeFormLang(ByVal frm As Object, ByVal sfile As String, ByVal cons As Control)
+        Dim gg As TabControl
+        Dim i As Integer
+        Dim sstr As String
+        If Not FileIO.FileSystem.FileExists(sfile) Then Exit Sub
+        If frm Is Nothing Then Exit Sub
 
+        For Each aa As Control In cons.Controls
+            'Application.DoEvents()
+            ReadAndSetText(frm.Name, aa, sfile)
+            If TypeName(aa) = "TabControl" Then
+                gg = aa
+                For i = 0 To gg.TabCount - 1
+                    sstr = ReadProgData(frm.Name, gg.TabPages(i).Name, gg.TabPages(i).Text, sfile)
+                    If Len(sstr) > 0 Then
+                        gg.TabPages(i).Text = sstr
+                    End If
+                Next
+            End If
+            If aa.Controls.Count > 0 Then
+                ChangeFormLang(frm, sfile, aa)
+            End If
+        Next
+    End Sub
     '依序將表單內的文字修改,並帶有進度列以顯示目前進度
     Public Sub ChangeLanguage(ByVal ls As String, ByVal pg As ProgressBar)
         Dim i As Integer = 0
@@ -260,7 +291,7 @@
         If SystemLanguage = 1 Then Form1s.radChangeToCHS.Checked = True
         If SystemLanguage = 2 Then Form1s.radChangeToENG.Checked = True
         ClickLanguge(cht, chs, eng)  '設定語言系統參數
-        'ChangeLanguage(LanguageFile)
+        ChangeLanguage(LanguageFile)
         SetLangText(Form1s.chkPLCTest, "PLC 通訊" + Format(PLC_COMPORT, "COM0"), "PLC Comm. " + Format(PLC_COMPORT, "COM0"))
 
     End Sub

@@ -3758,6 +3758,11 @@ Public Class FormProcess
     End Function
 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+        If ProcessMode_RUN Then
+            MsgBoxLangErr("»sµ{¤¤", "Processing!")
+            Exit Sub
+        End If
+
         If SystemParameters.BarcodeOnly = "1" Then
             If txtRecipeFile.Text.Length > 0 Then
                 CheckBarcodeInput()

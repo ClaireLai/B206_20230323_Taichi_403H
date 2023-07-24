@@ -69,12 +69,12 @@
         Timer1.Enabled = True
     End Sub
 
-    Public Sub ChangeLanguage(ByVal lang As Integer)
-        Select Case lang
+    'Public Sub ChangeLanguage(ByVal lang As Integer)
+    '    Select Case lang
 
 
-        End Select
-    End Sub
+    '    End Select
+    'End Sub
 
     '屬性
     Property Title() As String

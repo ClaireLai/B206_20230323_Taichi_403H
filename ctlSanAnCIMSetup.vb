@@ -14,7 +14,6 @@ Public Class ctlSanAnCIMSetup
         cmoE2H_CHK_RSOL.SelectedIndex = 0
         cmoE2H_RPT_EVT.SelectedIndex = 0
 
-
         cmoAlarmAction.SelectedIndex = 0
         cmoAlarmType.SelectedIndex = 0
         cmoE2H_RPT_ALM.Items.Clear()

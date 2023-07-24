@@ -1245,17 +1245,19 @@ Public Class FormRecord
             Record_Series(1).chkEnable.Checked = checked
         Else
             If IsNothing(CelloCurve.Record) = False Then
-                If ChartRecord.Series(index * 6 + 2).Points.Count = 0 Then
-                    For j = (2 + index * 6) To (6 + index * 6)
+                If ChartRecord.Series(index * 5 + 2).Points.Count = 0 Then
+                    For j = (2 + index * 5) To (6 + index * 5)
+                        'For j = (2 + index * 5) To (5 + index * 5)
                         PointsBindY(CelloCurve.Record(j), ChartRecord, j)
                     Next
                 End If
             End If
 
-            For i = 0 To 5
-                If Not IsNothing(ChartRecord.Series(i + index * 6 + 2)) Then
-                    ChartRecord.Series(i + index * 6 + 2).Enabled = checked
-                    Record_Series(i + index * 6 + 2).chkEnable.Checked = checked
+            For i = 0 To 4
+                If Not IsNothing(ChartRecord.Series(i + index * 5 + 2)) Then
+                    ChartRecord.Series(i + index * 5 + 2).Enabled = checked
+                    Record_Series(i + index * 5 + 2).chkEnable.Checked = checked
+                    'Debug.Print("i + index * 5 + 2=" + (i + index * 5 + 2).ToString)
                 End If
             Next
         End If
