@@ -3,7 +3,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Public Class FormProcess
     Inherits System.Windows.Forms.Form
     Public RecipeLoaded As Boolean
-#Const SanAn_TCPIP_Used = 0
+    '#Const SanAn_TCPIP_Used = 0
 #Region " Windows Form 設計工具產生的程式碼 "
     Friend WithEvents lblHoldTime02Text As System.Windows.Forms.Label
     Friend WithEvents pgbReadCurve As System.Windows.Forms.ProgressBar
@@ -2109,9 +2109,9 @@ Public Class FormProcess
         End If
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
-#If SanAn_TCPIP_Used = 0 Then
-        tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
-#End If
+        If SanAn_TCPIP_Used_Flag = 0 Then
+            tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
+        End If
 
         'If TCPIP_Used Then
         'tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
@@ -3093,190 +3093,6 @@ Public Class FormProcess
 
 
 
-#Region "Recipe Map CIM"
-    'Remark By Vincent 20200716 ---------------- Start
-    'Recipe Map 用 
-    'Private Sub btnBarcodeReader_Click(sender As System.Object, e As System.EventArgs) Handles btnBarcodeReader.Click
-    '    If LC.IsExpired Then
-    '        MsgBoxLangErr("註冊後才能使用!", "Please Register!")
-    '        Exit Sub
-    '    End If
-    '    BarcodeReadStart()
-    'End Sub
-    'Public Sub BarcodeReadStart()
-    '    RecipeMapEditor.RunCard.Clear()
-    '    RecipeMapEditor.ChangeLanguage()
-    '    RecipeMapEditor.BarcodeInput()
-    'End Sub
-
-    'Barcode 20160808 by vincent ---------------- Start
-    'Public RecipeShow As Boolean = False
-    'Public RecipeShowCount As Integer = 0
-    'Public Sub AutoLoadRecipeThenRun(ByVal recipe As String)
-    '    Dim i As Integer
-    '    'New
-    '    CheckProcessDateAndCreate()
-
-
-    '    ProcessRecipeFileName = recipe
-    '    ProcessRecipeName = recipe
-    '    lblRecipeFileName.Text = recipe
-
-    '    ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
-    '    FormRecipes.ReadRecipeFile(ProcessRecipeLongFileName)
-    '    FormRecipes.Show()
-
-    '    LoadRecipe(ProcessRecipeLongFileName)
-    '    RecipeShow = True
-    '    RecipeShowCount = 5
-    '    If MsgBoxLangYesNo("請確認配方是否正確，" & vbCrLf & "請按 <是> 執行，<否> 離開.", "Please Confirm Recipe, Yes for Run, No for stop.") Then
-    '        Application.DoEvents()
-    '        System.Threading.Thread.Sleep(100)
-    '        Application.DoEvents()
-    '        System.Threading.Thread.Sleep(100)
-    '        CheckJPGDirAndCreate()
-    '        Dim SaveName As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".jpg"
-    '        SaveFromToImage(FormRecipes, SaveName)
-    '        FormRecipes.Hide()
-    '        '建立製程記錄檔名
-    '        ProcessPN = recipe
-    '        ProcessRecordShortFileName = recipe + ".dat"
-    '        ProcessRecordFileName = ProcessRecordDir + ProcessRecordShortFileName
-    '        ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
-    '        ProcessRecordFileName1 = ProcessRecordDir + recipe + "_A.txt"
-    '        ProcessRecordCurveFileName = ProcessRecordCurveDir + recipe + ".Proc"
-    '        CsvFilename = ProcessCSVDir + recipe + ".csv"
-
-    '        If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
-    '            FileIO.FileSystem.DeleteFile(ProcessRecordFileName)
-    '        End If
-    '        If FileIO.FileSystem.FileExists(ProcessRecordFileName1) Then
-    '            FileIO.FileSystem.DeleteFile(ProcessRecordFileName1)
-    '        End If
-    '        If FileIO.FileSystem.FileExists(ProcessRecordCurveFileName) Then
-    '            FileIO.FileSystem.DeleteFile(ProcessRecordCurveFileName)
-    '        End If
-    '        If FileIO.FileSystem.FileExists(CsvFilename) Then
-    '            FileIO.FileSystem.DeleteFile(CsvFilename)
-    '        End If
-
-
-    '        Dim SaveName1 As String = JPGDir & FDate & "_" & FTime & "_" & Format(RunCounts, "000000") & ".csv"
-    '        AppendDataA(SaveName1, "LogFile," & "=""" & ProcessRecordShortFileName & """")
-    '        AppendDataA(SaveName1, "")
-    '        AppendDataA(SaveName1, "UserID," & "=""" & RecipeMapEditor.RunCard.UserID & """")
-    '        AppendDataA(SaveName1, "RunNo.," & "=""" & Format(RunCounts, "000000") & """")
-    '        AppendDataA(SaveName1, "BarcodeID," & "=""" & RecipeMapEditor.RunCard.BarcodeMap & """")
-    '        AppendDataA(SaveName1, "RecipeFile," & "=""" & RecipeMapEditor.RunCard.RecipeName & """")
-    '        AppendDataA(SaveName1, "CassetteNum," & "=""" & RecipeMapEditor.RunCard.Index & """")
-    '        AppendDataA(SaveName1, "")
-    '        Dim sstr1 As String = "No,ProductID, RunCardID,WaferNum"
-    '        AppendDataA(SaveName1, sstr1)
-    '        For i = 0 To RecipeMapEditor.RunCard.Index - 1
-    '            Dim astr0, astr1, astr2, astr3, astr4 As String
-    '            astr0 = (i + 1).ToString
-    '            astr1 = RecipeMapEditor.RunCard.Data(i).ProductID
-    '            astr2 = RecipeMapEditor.RunCard.Data(i).LotID
-    '            astr3 = RecipeMapEditor.RunCard.Data(i).WaferNum
-    '            astr4 = "=""" & astr0 & """,=""" & astr1 & """,=""" & astr2 & """,=""" & astr3 & """"
-    '            AppendDataA(SaveName1, astr4)
-    '        Next
-
-
-
-
-
-
-    '        lblProcessStartTime.Text = TTime
-    '        lblProcessStopTime.Text = "00:00:00"
-    '        FormProcesss.Text = "Process [" + ProcessPN + "]"
-    '        Timex = 0
-
-    '        lblBasePressureSet.Text = Format(Val(RecipeNum(RecipeRunIndex).BasePressure), "0.0E+00")
-    '        lblRecipeNote.Text = RecipeNum(RecipeRunIndex).RecipeNote
-    '        lblWaferSize.Text = RecipeNum(RecipeRunIndex).WaferSize
-
-    '        SetLangText(btnAbort, "放棄", "Abort")
-    '        btnRunProcess.Enabled = False
-    '        btnVent.Enabled = False
-    '        FormMenus.btnExit.Enabled = False
-
-    '        ProcessMode_RUN = True
-    '    Else
-    '        FormRecipes.Hide()
-    '        MsgBoxLangYesNo("製程不執行!", "Process stop.")
-    '    End If
-    'End Sub
-    'Public Function LoadRecipe(ByVal RecipeFile As String) As Boolean
-    '    Dim i As Integer
-    '    i = RecipeRunIndex
-    '    pgbReadCurve.Visible = True
-    '    If Not ProcessMode_RUN Then
-    '        Try
-    '            lblRecipeFileName.Text = RecipeFile
-    '            ProcessRecipeFileName = lblRecipeFileName.Text
-    '            ProcessRecipeName = Mid(ProcessRecipeFileName, 1, InStr(ProcessRecipeFileName, "."))
-    '            lblRecipeFileName.Text = ProcessRecipeFileName
-
-    '            ProcessRecipeLongFileName = RecipeDir & ProcessRecipeFileName
-    '            ProcessRecipeLongFileName = FormRecipeSelects.RecipeDir & ProcessRecipeFileName
-    '            ReadRecipeFile(ProcessRecipeLongFileName)
-
-    '            FormProcesss.lblRecipeNote.Text = RecipeNum(i).RecipeNote
-    '            FormProcesss.lblBasePressureSet.Text = Format(Val(RecipeNum(i).BasePressure), "0.0E+00")
-    '            FormProcesss.lblWaferSize.Text = RecipeNum(i).WaferSize
-
-
-    '            chkBondBeforeVacuum.Checked = GetTrue01Boolean(RecipeNum(i).BondBeforeVacuum)
-    '            chkKeepBonding.Checked = GetTrue01Boolean(RecipeNum(i).KeepBonding)
-    '            chkVacuumMode.Checked = GetTrue01Boolean(RecipeNum(i).PumpingMode)
-    '            chkVacuumPurge.Checked = GetTrue01Boolean(RecipeNum(i).VacuumPurge)
-    '            chkAutoVent.Checked = GetTrue01Boolean(RecipeNum(i).AutoVent)
-    '            chkAfterPurge.Checked = GetTrue01Boolean(RecipeNum(i).AfterPurge)
-    '            chkAutoDoorOpen.Checked = GetTrue01Boolean(RecipeNum(i).AutoDoorOpen)
-
-    '            'Purge Function Start
-    '            chkBondBeforeVacuum.Checked = GetTrue01Boolean(RecipeNum(i).BondBeforeVacuum)
-    '            chkKeepBonding.Checked = GetTrue01Boolean(RecipeNum(i).KeepBonding)
-    '            chkVacuumMode.Checked = GetTrue01Boolean(RecipeNum(i).PumpingMode)
-    '            chkVacuumPurge.Checked = GetTrue01Boolean(RecipeNum(i).VacuumPurge)
-    '            chkAutoVent.Checked = GetTrue01Boolean(RecipeNum(i).AutoVent)
-
-
-    '            chkPurgeCooling.Checked = GetTrue01Boolean(RecipeNum(i).PurgeCooling)
-    '            txtAfterPurgeTemp.Text = RecipeNum(i).PurgeCoolingTemp
-    '            txtPurgeONTime.Text = RecipeNum(i).PurgeONTime
-    '            txtPurgeOFFTime.Text = RecipeNum(i).PurgeOFFTime
-    '            chkPurgeKeepBonding.Checked = GetTrue01Boolean(RecipeNum(i).PurgeKeepBonding)
-    '            'Purge Function Start
-    '            If RecipeNum(i).BondingSync = "0" Then radBoth.Checked = True
-    '            If RecipeNum(i).BondingSync = "1" Then radTemp.Checked = True
-    '            If RecipeNum(i).BondingSync = "2" Then radPress.Checked = True
-    '            RecipeLoaded = True
-    '            Cal_PresetData(RecipeNum(i).TotalTime)
-    '            For i = 0 To MAXPLATE
-    '                CSubAutoProcess(i).LoadPlateRecipe(RecipeNum(RecipeRunIndex).Plate(i))
-    '                PlateProcess(i).SetTempPress(Val(RecipeNum(RecipeRunIndex).Plate(i).Pressure(0)), Val(RecipeNum(RecipeRunIndex).Plate(i).Temperature(0)))
-    '            Next
-    '            pgbReadCurve.Visible = False
-
-    '        Catch ex As Exception
-
-    '            'MsgBoxLangErr(ex.Message)
-    '            Return False
-    '        End Try
-    '    Else
-    '        Return False
-    '    End If
-    '    Return True
-    'End Function
-    'Barcode 20160808 by vincent ---------------- End
-    'Remark By Vincent 20200716 ---------------- End
-
-
-    'By chesly 20181023 壓缸自動循環動作 Start 
-#End Region
-
 #Region "SanAn CIM Function 20190710"
     'Add By Vincent 20190710  ----------------------------------------------------------  Start
     'EPILEDS BARCODE ---------------------- Start
@@ -3288,13 +3104,13 @@ Public Class FormProcess
         If RemoteCIM.Enable = False Then
             MsgBoxLangOK("請先設為 IN-LINE 模式!", "Please change to IN-LINE mode.")
         Else
-#If SanAn_TCPIP_Used = 1 Then
-            tabProcessDataCurve.SelectTab(tpCIMInput)
-            CtlSanAnCIM1.txtOpID.SelectAll()
-            CtlSanAnCIM1.txtOpID.Focus()
-#End If
+            If SanAn_TCPIP_Used_Flag = 1 Then
+                tabProcessDataCurve.SelectTab(tpCIMInput)
+                CtlSanAnCIM1.txtOpID.SelectAll()
+                CtlSanAnCIM1.txtOpID.Focus()
+            End If
             MsgBoxLangOK("請刷入條碼!", "Please use barcode reader!")
-        End If
+            End If
         'BarcodeReadStart()
     End Sub
     Public Sub BarcodeReadStart()
@@ -3596,15 +3412,15 @@ Public Class FormProcess
         If RemoteCIM.Enable = False Then
             If MsgBoxLangYesNo("是否要啟動遠端連線模式?", "Change mode to IN-LINE?") = True Then
                 RemoteCIM.ChangeToInLine()
-#If SanAn_TCPIP_Used = 1 Then
-                tabProcessDataCurve.SelectTab(tpCIMInput)
-                CtlSanAnCIM1.Timer1.Enabled = True
-                CtlSanAnCIM1.txtOpID.Enabled = True
-                CtlSanAnCIM1.txtOpID.SelectAll()
-                CtlSanAnCIM1.txtOpID.Focus()
-#End If
+                If SanAn_TCPIP_Used_Flag = 1 Then
+                    tabProcessDataCurve.SelectTab(tpCIMInput)
+                    CtlSanAnCIM1.Timer1.Enabled = True
+                    CtlSanAnCIM1.txtOpID.Enabled = True
+                    CtlSanAnCIM1.txtOpID.SelectAll()
+                    CtlSanAnCIM1.txtOpID.Focus()
+                End If
             End If
-        End If
+            End If
     End Sub
 
     Private Sub btnOffLine_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOffLine.Click

@@ -7,7 +7,7 @@ Public Class FormParameter
     Private tempi As Integer
     Private bolUp As Boolean
     'Public Resistance_ruler_Flag As Boolean
-#Const SanAn_TCPIP_Used = 0
+    '#Const SanAn_TCPIP_Used = 0
 #Region " Windows Form 設計工具產生的程式碼 "
     Friend WithEvents lblPress1stText As System.Windows.Forms.Label
     Friend WithEvents txtPress2nd1 As System.Windows.Forms.TextBox
@@ -7313,9 +7313,9 @@ Public Class FormParameter
         Me.Top = FromStartUpTopPosition
         Me.Left = 0
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
-#If SanAn_TCPIP_Used = 0 Then
-        tabParameter.TabPages.RemoveByKey("TabPageCIM")
-#End If
+        If SanAn_TCPIP_Used_Flag = 0 Then
+            tabParameter.TabPages.RemoveByKey("TabPageCIM")
+        End If
 
         'If TCPIP_Used Then
         'tabParameter.TabPages.RemoveByKey("TabPageCIM")
@@ -7413,9 +7413,10 @@ Public Class FormParameter
         pnlDPWaterFlow.Visible = DP_Flow_Used
         chkCIMUsed.Checked = CIM_Used
         chkAvailBarCode.Checked = BarCodeFile_Flag
-#If SanAn_TCPIP_Used = 0 Then
-        tabParameter.TabPages.RemoveByKey("TabPageCIM")
-#End If
+        If SanAn_TCPIP_Used_Flag = 0 Then
+            tabParameter.TabPages.RemoveByKey("TabPageCIM")
+        End If
+
         'If CIM_Used = False Then
         'tabParameter.TabPages.RemoveByKey("TabPageCIM")
         'End If
@@ -8018,9 +8019,9 @@ Public Class FormParameter
 
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
 
-#If SanAn_TCPIP_Used = 1 Then
-        Panel2.Visible=True
-#End If
+        If SanAn_TCPIP_Used_Flag = 1 Then
+            Panel2.Visible = True
+        End If
 
         If BarCodeFile_Flag Then
             Panel2.Visible = True

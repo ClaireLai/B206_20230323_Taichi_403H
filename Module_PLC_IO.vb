@@ -1,7 +1,7 @@
 ﻿Module Module_PLC_IO
     'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
-#Const SanAn_TCPIP_Used = 0
+    '#Const SanAn_TCPIP_Used = 0
     'Add By Vtncent 20220506  ----------------------------------------------------------  End
 
     'Add By Vincent 20190710  ----------------------------------------------------------  Start

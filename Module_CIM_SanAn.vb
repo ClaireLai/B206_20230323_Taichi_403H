@@ -13,7 +13,7 @@ Imports System.Collections.Generic
 
 Module Module_CIM_SanAn
     Public TCPIP_Used As Boolean = False  '0=NO TCPIP, 1=SananTCP
-#Const SanAn_TCPIP_Used = 0
+    '#Const SanAn_TCPIP_Used = 0
 
     Public WithEvents RemoteCIM As New CRemoteClass
     Public CIM_Used As Boolean = False
@@ -27,11 +27,11 @@ Module Module_CIM_SanAn
     Public TCP_SendMessage As String = ""
     Public TCP_ReceiveMessage As String = ""
 
-#If SanAn_TCPIP_Used = 1 Then
-   Public WithEvents SanAnTCP As New CSanAnTCPProcotol
-#Else
-    Public WithEvents SanAnTCP As CSanAnTCPProcotol
-#End If
+    '#If SanAn_TCPIP_Used = 1 Then
+    '   Public WithEvents SanAnTCP As New CSanAnTCPProcotol
+    '#Else
+    Public WithEvents SanAnTCP As New CSanAnTCPProcotol
+    '#End If
     Public Sub ServerError(ByVal code As Integer) Handles SanAnTCP.ServerError
         RemoteCIM.ChangeToOffLine()
     End Sub
@@ -353,31 +353,31 @@ Module Module_CIM_SanAn
         ''' <remarks></remarks>
         Public Sub Initial()
             'TCPIP Use  ----------- Start
-#If SanAn_TCPIP_Used = 0 Then
-            TCPIP_Used = False 'True  'Modified by Vincent 20220506 
-#Else
-            TCPIP_Used = True
-            _INIFILE = Application.StartupPath + "\" + "CIMDATA.INI"
-            ReadINIFile()
+            If SanAn_TCPIP_Used_Flag = 0 Then
+                TCPIP_Used = False 'True  'Modified by Vincent 20220506 
+            Else
+                TCPIP_Used = True
+                _INIFILE = Application.StartupPath + "\" + "CIMDATA.INI"
+                ReadINIFile()
 
-            'TCPIP Use  ----------- Start
-            If TCPIP_Used Then
-                SanAnTCP.ReadTCPIPSetup()
-                SanAnTCP.EQPID = _MachineNo
-                'Client Mode
-                'SanAnTCP.Connect(SanAnTCP.ServerIP, SanAnTCP.ServerPort)
-                'If SanAnTCP.Connected Then
-                '    SanAnTCP.E2H_CHK_ALIVE(RemoteCIM.EQID)
-                'End If
+                'TCPIP Use  ----------- Start
+                If TCPIP_Used Then
+                    SanAnTCP.ReadTCPIPSetup()
+                    SanAnTCP.EQPID = _MachineNo
+                    'Client Mode
+                    'SanAnTCP.Connect(SanAnTCP.ServerIP, SanAnTCP.ServerPort)
+                    'If SanAnTCP.Connected Then
+                    '    SanAnTCP.E2H_CHK_ALIVE(RemoteCIM.EQID)
+                    'End If
 
-                'Server Mode
-                SanAnTCP.StartServer(SanAnTCP.ServerPort)
+                    'Server Mode
+                    SanAnTCP.StartServer(SanAnTCP.ServerPort)
+                End If
+                'TCPIP Use  ----------- End
+                WriteINIFile()
+                _state = 0
+
             End If
-            'TCPIP Use  ----------- End
-            WriteINIFile()
-            _state = 0
-
-#End If
             'TCPIP Use  ----------- End
         End Sub
 
@@ -536,7 +536,7 @@ Module Module_CIM_SanAn
             Dim TableName As String = "TX"
             Dim RowIndex As Integer = 0
             Dim i As Integer
-            Dim xdoc As Object = _
+            Dim xdoc As Object =
             <?xml version="1.0" encoding="utf-8"?>
             <message>
                 <msg_id>H2E_CMD_EXE</msg_id>
