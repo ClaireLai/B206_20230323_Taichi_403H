@@ -125,7 +125,7 @@ Public Class FormProcess
 
     Friend WithEvents tpCIMInput As TabPage
     Friend WithEvents CtlSanAnCIM1 As CtlSanAnCIM
-'#End If
+    '#End If
     Friend WithEvents lblCIMError As System.Windows.Forms.Label
     Friend WithEvents btnEnter As Button
     Friend WithEvents txtRecipeFile As TextBox
@@ -2102,10 +2102,11 @@ Public Class FormProcess
         Me.Top = FromStartUpTopPosition
         Me.Left = 0
 
-
-        txtRecipeFile.Text = ""
-        txtRecipeFile.Focus()
-        txtRecipeFile.SelectAll()
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
+            txtRecipeFile.Text = ""
+            txtRecipeFile.Focus()
+            txtRecipeFile.SelectAll()
+        End If
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
 #If SanAn_TCPIP_Used = 0 Then
@@ -2142,6 +2143,13 @@ Public Class FormProcess
         'lblBasePressureSet.Text = ChangeKPa(PressureUnit_Status, Val(RecipeNum(0).BasePressure))
         'lblProcessStepStatus.Text = RecipeNum(0).STEPNote(ProcessStepIndex)
         'lblTotalStepSet.Text = Str$(ProcessStepIndex + 1)
+        If BarCodeFile_Flag Then '½[°Ê²v BarBode
+            btnEnter.Visible = True
+            txtRecipeFile.Visible = True
+        Else
+            btnEnter.Visible = False
+            txtRecipeFile.Visible = False
+        End If
         Timer1.Interval = 1000
         Timer1.Enabled = True
 
@@ -2486,7 +2494,7 @@ Public Class FormProcess
 
 
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If
@@ -2517,7 +2525,7 @@ Public Class FormProcess
                 pnlRecipe.Enabled = False
             End If
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If
@@ -2703,7 +2711,7 @@ Public Class FormProcess
             '    MsgBoxLangErr("µ¥«Ý·Å«×­°¦Ü: " + sstr, "µ¥«Ý h«×­°¦Ü: " + sstr, "Wait Temp Down: " + sstr)
             'End If
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If
@@ -2728,7 +2736,7 @@ Public Class FormProcess
                 CSubAutoProcess(i).Abort()
             Next
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If
@@ -2940,7 +2948,7 @@ Public Class FormProcess
         Else
             MsgBoxLangErr("¦w¥þªù 1 ²§±`!", "Safty Gate 1 Error!")
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If
@@ -2960,7 +2968,7 @@ Public Class FormProcess
             Output(DoDoor1DownIndex).Status = False
             MsgBoxLangErr("­n¦b¤@¤j®ðÀ£¤U¤~¯à¶}ªù!", "Must In 1 Atm.")
         End If
-        If SystemParameters.BarcodeOnly = "1" Then
+        If SystemParameters.BarcodeOnly = "1" And BarCodeFile_Flag Then
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
         End If

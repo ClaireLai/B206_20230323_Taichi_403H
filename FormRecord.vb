@@ -1018,7 +1018,7 @@ Public Class FormRecord
         On Error Resume Next
         For j = 0 To CelloCurve.CAPTION_NUM - 1
             'For j = 0 To 6
-            If j < MAX_CURVES Then 'CelloCurve.Record.Length Then
+            If j <= MAX_CURVES Then 'CelloCurve.Record.Length Then
                 PointsBindY(CelloCurve.Record(j), ChartRecord, j)
                 SeriesEnabled(ChartRecord, j, True)
                 'UpdateProgressBar(0, pgbReadCurve, 5)
@@ -1235,10 +1235,10 @@ Public Class FormRecord
         Dim checked As Boolean
         On Error Resume Next
         index = sender.TabIndex
-        checked = sender.Checked
+        checked = sender.Checked '第幾個被打勾
 
 
-        If index = 6 Then
+        If index = 6 Then '真空值
             ChartRecord.Series(0).Enabled = checked
             ChartRecord.Series(1).Enabled = checked
             Record_Series(0).chkEnable.Checked = checked
