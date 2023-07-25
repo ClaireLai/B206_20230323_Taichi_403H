@@ -2143,13 +2143,13 @@ Public Class FormProcess
         'lblBasePressureSet.Text = ChangeKPa(PressureUnit_Status, Val(RecipeNum(0).BasePressure))
         'lblProcessStepStatus.Text = RecipeNum(0).STEPNote(ProcessStepIndex)
         'lblTotalStepSet.Text = Str$(ProcessStepIndex + 1)
-        If BarCodeFile_Flag Then '稼動率 BarBode
-            btnEnter.Visible = True
-            txtRecipeFile.Visible = True
-        Else
-            btnEnter.Visible = False
-            txtRecipeFile.Visible = False
-        End If
+        'If BarCodeFile_Flag Then '稼動率 BarBode
+        '    btnEnter.Visible = True
+        '    txtRecipeFile.Visible = True
+        'Else
+        '    btnEnter.Visible = False
+        '    txtRecipeFile.Visible = False
+        'End If
         Timer1.Interval = 1000
         Timer1.Enabled = True
 
@@ -2347,8 +2347,18 @@ Public Class FormProcess
         lblProcessRunTime.Text = ConvertSecToTime(TotalProcessTime) + Format(TotalProcessTime, "(0)")
         lblProcessStatus.Text = ProcessStatusString
 
-
-
+        If BarCodeFile_Flag = False And SystemParameters.BarcodeOnly Then
+            btnBarcodeReader.Visible = True
+        Else
+            btnBarcodeReader.Visible = False
+        End If
+        If BarCodeFile_Flag Then '稼動率 BarBode
+            btnEnter.Visible = True
+            txtRecipeFile.Visible = True
+        Else
+            btnEnter.Visible = False
+            txtRecipeFile.Visible = False
+        End If
     End Sub
 
     Public Sub ShowInit()
