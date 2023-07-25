@@ -8016,6 +8016,11 @@ Public Class FormParameter
 
 
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
+        If BarCodeFile_Flag Then
+            Panel3.Visible = True
+        Else
+            Panel3.Visible = False
+        End If
 
     End Sub
     'Modified 990203 Vincent Start
