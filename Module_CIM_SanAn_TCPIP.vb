@@ -290,7 +290,7 @@ Module Module_CIM_SanAn_TCPIP
                                     FormSanAnBarcodeInputConfirm.txtLotID.Text = RemoteCIM.RecipeData.LOTID
                                     FormSanAnBarcodeInputConfirm.lblRecipeName.Text = RemoteCIM.RecipeData.RecipeName
                                     FormSanAnBarcodeInputConfirm.lstWaferID.Items.Clear()
-                                    If SanAn_TCPIP_Used_Flag = 1 Then
+                                    If SanAn_TCPIP_Used_Flag Then
                                         FormProcesss.CtlSanAnCIM1.lstWaferID.Items.Clear()
                                     End If
 
@@ -300,13 +300,13 @@ Module Module_CIM_SanAn_TCPIP
                                             Dim sstr As String
                                             sstr = (i + 1).ToString("00") & ". " & RemoteCIM.RecipeData.ProductID(0).WaferID(i)
                                             FormSanAnBarcodeInputConfirm.lstWaferID.Items.Add(sstr)
-                                            If SanAn_TCPIP_Used_Flag = 1 Then
+                                            If SanAn_TCPIP_Used_Flag Then
                                                 FormProcesss.CtlSanAnCIM1.lstWaferID.Items.Add(sstr)
                                             End If
                                         Next
                                     End If
                                     FormSanAnBarcodeInputConfirm.lblWaferCount.Text = RemoteCIM.RecipeData.ProductID(0).WaferCount.ToString
-                                    If SanAn_TCPIP_Used_Flag = 1 Then
+                                    If SanAn_TCPIP_Used_Flag Then
                                         FormProcesss.CtlSanAnCIM1.lblRecipeName.Text = RemoteCIM.RecipeData.RecipeName
                                     End If
 
@@ -369,7 +369,7 @@ Module Module_CIM_SanAn_TCPIP
                                 H2E_CMD_EXE_R_NG(EQPID, "User Cancel process.")
                                 ConfirmRunProcess = False
                                 ConfirmRunProcessCancel = False
-                                If SanAn_TCPIP_Used_Flag = 1 Then
+                                If SanAn_TCPIP_Used_Flag Then
                                     FormProcesss.CtlSanAnCIM1.ClearData()
                                     FormProcesss.CtlSanAnCIM1.Restart()
                                 End If
@@ -428,7 +428,7 @@ Module Module_CIM_SanAn_TCPIP
                             DelayTimer = 0
                             DelayTimerEnabled = False
                             Control_State = 0
-                            If SanAn_TCPIP_Used_Flag = 1 Then
+                            If SanAn_TCPIP_Used_Flag Then
                                 FormProcesss.CtlSanAnCIM1.ClearData()
                                 FormProcesss.CtlSanAnCIM1.Restart()
                             End If
@@ -503,7 +503,7 @@ Module Module_CIM_SanAn_TCPIP
                                 Case "REMOTE"
                                     E2H_CHK_ALIVE_R_OK(EQPID)
 
-                                    If SanAn_TCPIP_Used_Flag = 1 Then
+                                    If SanAn_TCPIP_Used_Flag Then
                                         FormProcesss.tabProcessDataCurve.SelectTab(FormProcesss.tpCIMInput)
                                         FormProcesss.CtlSanAnCIM1.txtOpID.SelectAll()
                                         FormProcesss.CtlSanAnCIM1.txtOpID.Focus()

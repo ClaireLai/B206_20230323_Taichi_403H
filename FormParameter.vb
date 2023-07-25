@@ -7313,7 +7313,7 @@ Public Class FormParameter
         Me.Top = FromStartUpTopPosition
         Me.Left = 0
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
-        If SanAn_TCPIP_Used_Flag = 0 Then
+        If SanAn_TCPIP_Used_Flag = False Then
             tabParameter.TabPages.RemoveByKey("TabPageCIM")
         End If
 
@@ -7413,7 +7413,7 @@ Public Class FormParameter
         pnlDPWaterFlow.Visible = DP_Flow_Used
         chkCIMUsed.Checked = CIM_Used
         chkAvailBarCode.Checked = BarCodeFile_Flag
-        If SanAn_TCPIP_Used_Flag = 0 Then
+        If SanAn_TCPIP_Used_Flag = False Then
             tabParameter.TabPages.RemoveByKey("TabPageCIM")
         End If
 
@@ -8019,12 +8019,13 @@ Public Class FormParameter
 
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
 
-        If SanAn_TCPIP_Used_Flag = 1 Then
+        If SanAn_TCPIP_Used_Flag Or BarCodeFile_Flag Then
             Panel2.Visible = True
+        Else
+            Panel2.Visible = False
         End If
 
         If BarCodeFile_Flag Then
-            Panel2.Visible = True
             Panel3.Visible = True
         Else
             Panel3.Visible = False

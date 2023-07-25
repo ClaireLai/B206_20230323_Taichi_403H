@@ -353,7 +353,7 @@ Module Module_CIM_SanAn
         ''' <remarks></remarks>
         Public Sub Initial()
             'TCPIP Use  ----------- Start
-            If SanAn_TCPIP_Used_Flag = 0 Then
+            If SanAn_TCPIP_Used_Flag = False Then
                 TCPIP_Used = False 'True  'Modified by Vincent 20220506 
             Else
                 TCPIP_Used = True

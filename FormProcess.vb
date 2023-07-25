@@ -2109,7 +2109,7 @@ Public Class FormProcess
         End If
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
 
-        If SanAn_TCPIP_Used_Flag = 0 Then
+        If SanAn_TCPIP_Used_Flag = False Then
             tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
         End If
 
@@ -2347,7 +2347,7 @@ Public Class FormProcess
         lblProcessRunTime.Text = ConvertSecToTime(TotalProcessTime) + Format(TotalProcessTime, "(0)")
         lblProcessStatus.Text = ProcessStatusString
 
-        If BarCodeFile_Flag = False And SystemParameters.BarcodeOnly Then
+        If BarCodeFile_Flag = False And SanAn_TCPIP_Used_Flag Then
             btnBarcodeReader.Visible = True
         Else
             btnBarcodeReader.Visible = False
@@ -3104,7 +3104,7 @@ Public Class FormProcess
         If RemoteCIM.Enable = False Then
             MsgBoxLangOK("請先設為 IN-LINE 模式!", "Please change to IN-LINE mode.")
         Else
-            If SanAn_TCPIP_Used_Flag = 1 Then
+            If SanAn_TCPIP_Used_Flag Then
                 tabProcessDataCurve.SelectTab(tpCIMInput)
                 CtlSanAnCIM1.txtOpID.SelectAll()
                 CtlSanAnCIM1.txtOpID.Focus()
@@ -3412,7 +3412,7 @@ Public Class FormProcess
         If RemoteCIM.Enable = False Then
             If MsgBoxLangYesNo("是否要啟動遠端連線模式?", "Change mode to IN-LINE?") = True Then
                 RemoteCIM.ChangeToInLine()
-                If SanAn_TCPIP_Used_Flag = 1 Then
+                If SanAn_TCPIP_Used_Flag Then
                     tabProcessDataCurve.SelectTab(tpCIMInput)
                     CtlSanAnCIM1.Timer1.Enabled = True
                     CtlSanAnCIM1.txtOpID.Enabled = True

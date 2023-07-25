@@ -53,6 +53,11 @@ Module Module_Recipe_Public
     Public TIME_MIN As String
     Public NORMAL_MAX As String
     Public NORMAL_MIN As String
+    'PID控壓部分
+    Public AdjustDA_Max As String
+    Public AdjustOverPress_Max As String
+    Public PressPID_P_Max As String
+    Public PressPID_I_Max As String
     '配方結構
     <StructLayout(LayoutKind.Sequential)> Structure sPlateRecipe
         Public Pressure() As String         '壓力設定
@@ -148,6 +153,16 @@ Module Module_Recipe_Public
         NORMAL_MIN = ReadProgData("LIMIT_SETUP", "MORMAL_MIN", "0", ProgramINIFile)
         VACUUM_MAX = ReadProgData("LIMIT_SETUP", "VACUUM_MAX", "9999", ProgramINIFile)
         VACUUM_MIN = ReadProgData("LIMIT_SETUP", "VACUUM_MIN", "0", ProgramINIFile)
+        AdjustDA_Max = ReadProgData("LIMIT_SETUP", "AdjustDA_Max", "15", ProgramINIFile)
+        AdjustOverPress_Max = ReadProgData("LIMIT_SETUP", "AdjustOverPress_Max", "15", ProgramINIFile)
+        PressPID_P_Max = ReadProgData("LIMIT_SETUP", "PressPID_P_Max", "50", ProgramINIFile)
+        PressPID_I_Max = ReadProgData("LIMIT_SETUP", "PressPID_I_Max", "50", ProgramINIFile)
+        'Public AdjustDA_Max As String
+        'Public AdjustOverPress_Max As String
+        'Public PressPID_P_Max As String
+        'Public PressPID_I_Max As String
+
+
     End Sub
     Public Function GetStepTimeI0(ByVal a As Integer, ByVal b As Integer, ByVal c As Integer, ByVal d As Single, ByVal e As Integer) As Integer
         Dim i, j, k As Single

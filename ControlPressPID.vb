@@ -6,13 +6,13 @@
     Public FormH As Integer
     Dim II As Integer = 0
     Private Sub txtP1_MouseDown(sender As Object, e As MouseEventArgs) Handles txtP1.MouseDown
-        CallKeyboard2(sender, "30", "0")
+        CallKeyboard2(sender, PressPID_P_Max, "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
 
     Private Sub txtI1_MouseDown(sender As Object, e As MouseEventArgs) Handles txtI1.MouseDown
-        CallKeyboard2(sender, "40", "0")
+        CallKeyboard2(sender, PressPID_I_Max, "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
@@ -24,13 +24,13 @@
     'End Sub
 
     Private Sub txtP2_MouseDown(sender As Object, e As MouseEventArgs) Handles txtP2.MouseDown
-        CallKeyboard2(sender, "15", "0")
+        CallKeyboard2(sender, PressPID_P_Max, "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
 
     Private Sub txtI2_MouseDown(sender As Object, e As MouseEventArgs) Handles txtI2.MouseDown
-        CallKeyboard2(sender, "20", "0")
+        CallKeyboard2(sender, PressPID_I_Max, "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
@@ -42,13 +42,13 @@
     'End Sub
 
     Private Sub txtOverPress_MouseDown(sender As Object, e As MouseEventArgs) Handles txtOverPress.MouseDown
-        CallKeyboard2(sender, "15", "2")
+        CallKeyboard2(sender, AdjustOverPress_Max, "2")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
 
     Private Sub txtAdjustDA_MouseDown(sender As Object, e As MouseEventArgs) Handles txtAdjustDA.MouseDown
-        CallKeyboard2(sender, "5", "0")
+        CallKeyboard2(sender, AdjustDA_Max, "0")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
