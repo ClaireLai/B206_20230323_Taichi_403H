@@ -774,6 +774,7 @@ Public Class FormParameter
         Me.flwPressCalUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPageSystem = New System.Windows.Forms.TabPage()
         Me.TabPageCIM = New System.Windows.Forms.TabPage()
+        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
         Me.TabPageCello = New System.Windows.Forms.TabPage()
         Me.tabSystem = New System.Windows.Forms.TabControl()
         Me.tabpageTempCal = New System.Windows.Forms.TabPage()
@@ -993,6 +994,7 @@ Public Class FormParameter
         Me.lblThresholdPressRatioText = New System.Windows.Forms.Label()
         Me.flwPressPID = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
+        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtTICComport = New System.Windows.Forms.TextBox()
@@ -1040,8 +1042,6 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
-        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.pnlParaSet.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -1408,6 +1408,7 @@ Public Class FormParameter
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(553, 65)
         Me.Panel2.TabIndex = 630
+        Me.Panel2.Visible = False
         '
         'chkAvailBarCode
         '
@@ -3863,6 +3864,14 @@ Public Class FormParameter
         Me.TabPageCIM.Size = New System.Drawing.Size(1592, 875)
         Me.TabPageCIM.TabIndex = 5
         Me.TabPageCIM.Text = "CIM Setup"
+        '
+        'CtlSanAnCIMSetup1
+        '
+        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
+        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
+        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
+        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
+        Me.CtlSanAnCIMSetup1.TabIndex = 0
         '
         'TabPageCello
         '
@@ -6594,6 +6603,15 @@ Public Class FormParameter
         Me.tabPageIniEdit.Text = "設定檔編輯"
         Me.tabPageIniEdit.UseVisualStyleBackColor = True
         '
+        'ControlINIEdit1
+        '
+        Me.ControlINIEdit1.AutoSize = True
+        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
+        Me.ControlINIEdit1.Name = "ControlINIEdit1"
+        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
+        Me.ControlINIEdit1.TabIndex = 0
+        '
         'TabPageTempCalTool
         '
         Me.TabPageTempCalTool.Controls.Add(Me.Label1)
@@ -7189,23 +7207,6 @@ Public Class FormParameter
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'CtlSanAnCIMSetup1
-        '
-        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
-        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
-        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
-        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
-        Me.CtlSanAnCIMSetup1.TabIndex = 0
-        '
-        'ControlINIEdit1
-        '
-        Me.ControlINIEdit1.AutoSize = True
-        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
-        Me.ControlINIEdit1.Name = "ControlINIEdit1"
-        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
-        Me.ControlINIEdit1.TabIndex = 0
-        '
         'FormParameter
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -7411,7 +7412,7 @@ Public Class FormParameter
         pnlDPTemp.Visible = DP_Pump_Used
         pnlDPWaterFlow.Visible = DP_Flow_Used
         chkCIMUsed.Checked = CIM_Used
-
+        chkAvailBarCode.Checked = BarCodeFile_Flag
 #If SanAn_TCPIP_Used = 0 Then
         tabParameter.TabPages.RemoveByKey("TabPageCIM")
 #End If
@@ -8016,7 +8017,13 @@ Public Class FormParameter
 
 
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
+
+#If SanAn_TCPIP_Used = 1 Then
+        Panel2.Visible=True
+#End If
+
         If BarCodeFile_Flag Then
+            Panel2.Visible = True
             Panel3.Visible = True
         Else
             Panel3.Visible = False
@@ -9470,9 +9477,10 @@ Public Class FormParameter
 
     Private Sub chkAvailBarCode_Click(sender As Object, e As EventArgs) Handles chkAvailBarCode.Click
         BarCodeFile_Flag = chkAvailBarCode.Checked
-
+        'Panel3.Visible = BarCodeFile_Flag
         If BarCodeFile_Flag Then
             WriteProgData("PROGRAM", "BarCodeFile", 1, ProgramINIFile)  '寫入稼動率設定
+
         Else
             WriteProgData("PROGRAM", "BarCodeFile", 0, ProgramINIFile)  '寫入稼動率設定
         End If
