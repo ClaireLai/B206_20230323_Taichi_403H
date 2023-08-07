@@ -1,3 +1,5 @@
+
+
 Public Class FormParameter
     Inherits System.Windows.Forms.Form
     Dim TempTab1 As TabPage
@@ -7559,54 +7561,14 @@ Public Class FormParameter
 #End Region
 
 #Region "把计纗"
+
     Public Sub SaveParameter()
-        '放北竟把计
-        'SystemParameters.TopP1 = txtTopPL.Text
-        'SystemParameters.TopI1 = txtTopIL.Text
-        'SystemParameters.TopD1 = txtTopDL.Text
-        'SystemParameters.TopP2 = txtTopPM.Text
-        'SystemParameters.TopI2 = txtTopIM.Text
-        'SystemParameters.TopD2 = txtTopDM.Text
-        'SystemParameters.TopP3 = txtTopPH.Text
-        'SystemParameters.TopI3 = txtTopIH.Text
-        'SystemParameters.TopD3 = txtTopDH.Text
+        Dim thread As New System.Threading.Thread(AddressOf SaveParameter_Thread)
+        thread.Start()
+    End Sub
 
-        'SystemParameters.BotP1 = txtBotPL.Text
-        'SystemParameters.BotI1 = txtBotIL.Text
-        'SystemParameters.BotD1 = txtBotDL.Text
-        'SystemParameters.BotP2 = txtBotPM.Text
-        'SystemParameters.BotI2 = txtBotIM.Text
-        'SystemParameters.BotD2 = txtBotDM.Text
-        'SystemParameters.BotP3 = txtBotPH.Text
-        'SystemParameters.BotI3 = txtBotIH.Text
-        'SystemParameters.BotD3 = txtBotDH.Text
+    Public Sub SaveParameter_Thread()
 
-        'SystemParameters.TopMax1 = txtTopMaxL.Text
-        'SystemParameters.TopMin1 = txtTopMinL.Text
-        'SystemParameters.BotMax1 = txtBotMaxL.Text
-        'SystemParameters.BotMin1 = txtBotMinL.Text
-        'SystemParameters.TopMax2 = txtTopMaxM.Text
-        'SystemParameters.TopMin2 = txtTopMinM.Text
-        'SystemParameters.BotMax2 = txtBotMaxM.Text
-        'SystemParameters.BotMin2 = txtBotMinM.Text
-        'SystemParameters.TopMax3 = txtTopMaxH.Text
-        'SystemParameters.TopMin3 = txtTopMinH.Text
-        'SystemParameters.BotMax3 = txtBotMaxH.Text
-        'SystemParameters.BotMin3 = txtBotMinH.Text
-
-        'SystemParameters.TopLowRange = txtTopLowRange.Text
-        'SystemParameters.TopHighRange = txtTopHighRange.Text
-        'SystemParameters.BotLowRange = txtBotLowRange.Text
-        'SystemParameters.BotHighRange = txtBotTempRage2.Text
-
-
-        'SystemParameters.TopLimitPowerTemp = txtTopLowLimitTemp.Text
-        'SystemParameters.TopLimitPower = txtTopLowLimitPower.Text
-        'SystemParameters.BotLimitPowerTemp = txtBotLowLimitTemp.Text
-        'SystemParameters.BotLimitPower = txtBotLowLimitPower.Text
-
-        'SystemParameters.TopFlowMeterHz = FlowRead(0)
-        'SystemParameters.BotFlowMeterHz = txtBotFlowMeter1.Text
         SystemParameters.LowFlowAlarm = txtLowFlowAlarm.Text
 
 
