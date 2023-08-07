@@ -800,6 +800,12 @@ Module Module_AutoTask
                 ProcessMode_RUN = False
             End If
         End If
+        For i = 0 To MAXPLATE
+            If AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2) Then
+                CSubAutoProcess(2).Abort()
+                ProcessMode_RUN = False
+            End If
+        Next
         Select Case Control_State
             Case 0  '製程初始化
                 If ProcessMode_RUN Then
