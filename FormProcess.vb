@@ -2113,6 +2113,10 @@ Public Class FormProcess
             tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
         End If
 
+        If BarCodeFile_Flag = False And TCPIP_Used = False Then
+            SystemParameters.BarcodeOnly = 0
+            WriteProgData("PARAMETER", "BarcodeOnly", SystemParameters.BarcodeOnly, ParameterINIFile)
+        End If
         'If TCPIP_Used Then
         'tabProcessDataCurve.TabPages.RemoveByKey("tpCIMInput")
         'End If
@@ -2393,12 +2397,12 @@ Public Class FormProcess
             'Add By Vincent 20190710  ----------------------------------------------------------  End
         Else
             If RecipeLoaded = False Then
-                LoadRecipe()
+                If SystemParameters.BarcodeOnly = False Then LoadRecipe()
                 If RecipeLoaded = False Then
-                    Exit Sub
+                        Exit Sub
+                    End If
                 End If
-            End If
-            CheckProcessDateAndCreate()
+                CheckProcessDateAndCreate()
             Cal_PresetData(RecipeNum(RecipeRunIndex).TotalTime)
             'Add By vincent  20150125  Start
             If GetTrue01Boolean(SystemParameters.AutoRecordData) Then

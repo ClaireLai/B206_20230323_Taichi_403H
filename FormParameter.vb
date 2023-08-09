@@ -7371,7 +7371,7 @@ Public Class FormParameter
 
         txtOutRangAddDA1.Text = Get_PLC_R1100(DAOutRangAddDA1Index).ToString
         txtOutRangAddDA2.Text = Get_PLC_R1100(DAOutRangAddDA2Index).ToString
-        'txtOutRangAddDA3.Text = Get_PLC_R1100(DAOutRangAddDA3Index).ToString
+        txtOutRangAddDA3.Text = Get_PLC_R1100(DAOutRangAddDA3Index).ToString
         'txtOutRangAddDA4.Text = Get_PLC_R1100(DAOutRangAddDA4Index).ToString
         'txtOutRangAddDA5.Text = Get_PLC_R1100(DAOutRangAddDA5Index).ToString
         'txtOutRangAddDA6.Text = Get_PLC_R1100(DAOutRangAddDA6Index).ToString

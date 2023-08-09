@@ -461,7 +461,7 @@
     '================================================
     Public Const DAOutRangAddDA1Index As Integer = 179 '壓力/DA值比例
     Public Const DAOutRangAddDA2Index As Integer = 180 '壓力/DA值比例
-    'Public Const DAOutRangAddDA3Index As Integer = 181 '壓力/DA值比例
+    Public Const DAOutRangAddDA3Index As Integer = 181 '壓力/DA值比例
     'Public Const DAOutRangAddDA4Index As Integer = 182 '壓力/DA值比例
     'Public Const DAOutRangAddDA5Index As Integer = 183 '壓力/DA值比例
     'Public Const DAOutRangAddDA6Index As Integer = 184 '壓力/DA值比例
