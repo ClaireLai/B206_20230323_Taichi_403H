@@ -2399,10 +2399,10 @@ Public Class FormProcess
             If RecipeLoaded = False Then
                 If SystemParameters.BarcodeOnly = False Then LoadRecipe()
                 If RecipeLoaded = False Then
-                        Exit Sub
-                    End If
+                    Exit Sub
                 End If
-                CheckProcessDateAndCreate()
+            End If
+            CheckProcessDateAndCreate()
             Cal_PresetData(RecipeNum(RecipeRunIndex).TotalTime)
             'Add By vincent  20150125  Start
             If GetTrue01Boolean(SystemParameters.AutoRecordData) Then
