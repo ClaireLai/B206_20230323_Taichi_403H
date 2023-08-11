@@ -1336,7 +1336,7 @@ Module Module_AutoTask
                     Last_State = Control_State
                     Control_State = 99
                 End If
-            Case 11 '
+            Case 11
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Last_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -1442,7 +1442,18 @@ Module Module_AutoTask
                                     Output(DoDoor2DownIndex).Status = True
                                 End If
                                 AutoProcessTimerEnabled = True
-                                AutoProcessTimer = 2
+                                AutoProcessTimer = 3
+
+                                '*****claire add 闽 purge 恢 2023.8.11
+                                Output(DoTopPurge1Index).Status = False
+                                Output(DoTopPurge2Index).Status = False
+                                Output(DoTopPurge3Index).Status = False
+                                Output(DoBotPurge1Index).Status = False
+                                Output(DoBotPurge2Index).Status = False
+                                Output(DoBotPurge3Index).Status = False
+
+                                '*****claire add 2023.8.11
+
                                 Control_State = 14
                             End If
                         Else
@@ -1519,6 +1530,7 @@ Module Module_AutoTask
                     Output(DoBotPurge1Index).Status = False
                     Output(DoBotPurge2Index).Status = False
                     Output(DoBotPurge3Index).Status = False
+
                 End If
                 'If SystemParameters.BarcodeOnly = "1" Then 'Add By Vincent 20160913
                 '    FormProcesss.RecipeLoaded = False
@@ -2386,12 +2398,12 @@ Module Module_AutoTask
 
 
         'GP275 弄跑计 (更的ㄏノぇ痷璸),0-10V (0.3~5.659V)琩猭 
-        Private Gp275PressureIndex() As Single = {1000, 900, 800, 760, 700, 600, 500, 400, 300, 200, _
-                                                 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, _
+        Private Gp275PressureIndex() As Single = {1000, 900, 800, 760, 700, 600, 500, 400, 300, 200,
+                                                 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1,
                                                  0.05, 0.02, 0.01, 0.005, 0.002, 0.001}
         'AD 计, ぃ锣传 0-10V, 0-8191
-        Private Gp275VoltageIndex() As Integer = {4635, 4598, 4553, 4533, 4501, 4439, 4365, 4279, 4186, 4111, _
-                                                 4050, 3969, 3749, 3445, 3010, 2328, 1816, 1379, 946, 718, _
+        Private Gp275VoltageIndex() As Integer = {4635, 4598, 4553, 4533, 4501, 4439, 4365, 4279, 4186, 4111,
+                                                 4050, 3969, 3749, 3445, 3010, 2328, 1816, 1379, 946, 718,
                                                  559, 428, 373, 342, 321, 315}
         Private Function GP275_Convert(ByVal ADCount As Integer) As Double
             Dim i As Integer
@@ -2637,7 +2649,7 @@ Module Module_AutoTask
                                             Output(DoBotPurge3Index).Status = False
                                         End If
                                     End If
-                                        Set_MBit(RV_Index, DEVICE_ON)
+                                    Set_MBit(RV_Index, DEVICE_ON)
                                     SetTimer(PurgeOFFTime)
                                 End If
                                 Control_State = 4
@@ -2675,9 +2687,9 @@ Module Module_AutoTask
                                         Output(DoBotPurge3Index).Status = True
                                     End If
                                     SetTimer(PurgeONTime)
-                                        Control_State = 6
-                                    Else
-                                        Control_State = 4
+                                    Control_State = 6
+                                Else
+                                    Control_State = 4
                                 End If
 
                             Else
@@ -2699,7 +2711,7 @@ Module Module_AutoTask
                                         Output(DoBotPurge3Index).Status = False
                                     End If
                                 End If
-                                    SetTimer(2)
+                                SetTimer(2)
                                 PurgeCount += 1
                                 If PurgeCount >= PurgeCycle Then
                                     PurgeOK = True

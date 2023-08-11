@@ -2864,9 +2864,9 @@ Public Class FormParameter
         Me.lblPurgeOffText.BackColor = System.Drawing.Color.Transparent
         Me.lblPurgeOffText.Font = New System.Drawing.Font("新細明體", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.lblPurgeOffText.ForeColor = System.Drawing.Color.Black
-        Me.lblPurgeOffText.Location = New System.Drawing.Point(381, 35)
+        Me.lblPurgeOffText.Location = New System.Drawing.Point(406, 40)
         Me.lblPurgeOffText.Name = "lblPurgeOffText"
-        Me.lblPurgeOffText.Size = New System.Drawing.Size(100, 50)
+        Me.lblPurgeOffText.Size = New System.Drawing.Size(68, 34)
         Me.lblPurgeOffText.TabIndex = 508
         Me.lblPurgeOffText.Text = "抽氣時間(s)"
         Me.lblPurgeOffText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
