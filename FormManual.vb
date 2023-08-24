@@ -1602,6 +1602,10 @@ Public Class FormManual
 
     Private Sub picDP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picDP.Click
         If ProcessMode_RUN Then Exit Sub
+        If Check_PLC_X(DiPullerCloseIndex) = False Then
+            MsgBoxLangErr("½ÐÃö³¬ªù©Ô¬û")
+            Exit Sub
+        End If
         CAutoPumping.Start = False
         Output(DoMPIndex).Status = Not Output(DoMPIndex).Status
         'DPPb_Status = Not DPPb_Status

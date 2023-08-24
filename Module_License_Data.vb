@@ -966,7 +966,7 @@ Module Module_License_Data
             Static interval As Integer = 0
             Dim a As Long
             Dim b As Long
-            a = DatePart(DateInterval.Minute, Now())
+            a = DatePart(DateInterval.Minute, Now()) '現在幾分
 
             If a <> Timered Then
                 If LicenseOKFlag Then
@@ -987,10 +987,10 @@ Module Module_License_Data
             If b <> Timeredb Then
                 If interval >= 3 Then
                     CheckCurrentDate = Format((DatePart(DateInterval.Year, Now()) - 2000) * 1000) + DatePart(DateInterval.DayOfYear, Now())
-                    Notice_Code()
-                    Cal_Code()
-                    ReadLicense()
-                    CompareLicense()
+                    Notice_Code() '計算由硬碟序號計算而來的提示碼
+                    Cal_Code() '計算正確之註冊碼
+                    ReadLicense() ' 讀取註冊表中之註冊碼
+                    CompareLicense() '比較註冊碼是否正確
                     interval = 0
                 Else
                     interval += 1
@@ -1282,6 +1282,7 @@ Module Module_License_Data
 
         Private Function GetCurrentDate() As String
             Return Format(((DatePart(DateInterval.Year, Now()) - 2000) * 1000) + DatePart(DateInterval.DayOfYear, Now()))
+            '回傳23000+今年過幾天
         End Function
         Public Sub SetTrial()
             If LicenseOKFlag = False Then

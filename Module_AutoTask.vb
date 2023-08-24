@@ -2519,7 +2519,7 @@ Module Module_AutoTask
             'CurrentVac = ChamberVacuum(Get_PLC_R1000(ADVacuumIndex), GaugeName) 'GP275_Convert(Get_PLC_R1000(ADVacuumIndex))
             CurrentVac = GaugeCHVac
             If Not (DP_Pump_Used Or Ulvac_LS120_Used) Then AutoBasePressure = True
-            Interlock = Check_PLC_X(CDAIndex) And Check_PLC_X(MPOLIndex) = False And Check_PLC_X(EMOIndex)
+            Interlock = Check_PLC_X(CDAIndex) And Check_PLC_X(MPOLIndex) = False And Check_PLC_X(EMOIndex) And Check_PLC_X(DiPullerCloseIndex)
             If Interlock = False Then
                 RunStatus = False
             End If
@@ -3046,8 +3046,8 @@ Module Module_AutoTask
             timer1.Enabled = True
             _Out1Index = OutIndex1 'UP
             _Out2Index = OutIndex2 'Down
-            _Input1Index = InputIndex1
-            _Input2Index = InputIndex2
+            _Input1Index = InputIndex1 'UP
+            _Input2Index = InputIndex2 'Down
             _DelayTime1 = DelayTime1
             _DelayTime2 = DelayTime2
             StartRun = False
@@ -3065,13 +3065,13 @@ Module Module_AutoTask
             Select Case State
                 Case 0
                     If StartRun Then
-                        DelayTimerEndbled = True
+                        DelayTimerEndbled = True '計時開始
                         DelayTimer = 10
                         State = 1
                     End If
                 Case 1 'down
                     If StartRun Then
-                        If DelayTimerEndbled = False Then
+                        If DelayTimerEndbled = False Then '計時到
                             Output(_Out1Index).Status = False
                             Output(_Out2Index).Status = True
                             'ChuckUpPb_Status = False
