@@ -1165,14 +1165,44 @@ Public Class FormRecord
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnOpenCurve1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenCurve1.Click
+        Dim ii As Integer
         OpenFileDialog4.Filter = "Curve files (*.cuv)|*.cuv"
         OpenFileDialog4.InitialDirectory = WorkingDir & "Records\ProcessrecordCurves\"
         If OpenFileDialog4.ShowDialog = DialogResult.OK Then
             File1Name = OpenFileDialog4.FileName
             lblFileCurve1.Text = My.Computer.FileSystem.GetName(File1Name)
-
+            Dim str As String
+            str = ReadProgData("CURVE_SETUP", "CAPTION", "NoData", File1Name)
+            Title = str.Split(",")
+            If Title.Length > 17 Then
+                CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案
+                bolDA = True
+            Else
+                CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
+                bolDA = False
+            End If
+            '' 建立製程用曲線
+            ChartInitial()
+            '讀title
+            InitCurveData(ProgramDir)
+            '清除舊資料
+            Do
+                ii = 0
+                For Each aa As Control In pnlRecordCSelect1.Controls
+                    ii = ii + 1
+                    pnlRecordCSelect1.Controls.Remove(aa)
+                Next
+                Debug.Print("ii=" + ii.ToString)
+            Loop Until ii = 0
+            '建立曲線實體
+            CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)
+            '建立記錄畫面曲線選擇區
+            InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
+            '改名稱語言
+            ChangeSeriesRecordName(ChartRecord, CurveName)
             Dim i As Integer
-            For i = 0 To ChartRecord.Series.Count - 1
+            'For i = 0 To ChartRecord.Series.Count - 1
+            For i = 0 To Title.Length - 1
                 ChartRecord.Series(i).Points.Clear()
                 ChartRecord.Series(i).YAxisType = AxisType.Primary
             Next
@@ -1252,14 +1282,24 @@ Public Class FormRecord
                     Next
                 End If
             End If
+            If bolDA Then
+                For i = 0 To 5
+                    If Not IsNothing(ChartRecord.Series(i + index * 6 + 2)) Then
+                        ChartRecord.Series(i + index * 6 + 2).Enabled = checked
+                        Record_Series(i + index * 6 + 2).chkEnable.Checked = checked
+                        'Debug.Print("i + index * 5 + 2=" + (i + index * 5 + 2).ToString)
+                    End If
+                Next
+            Else
+                For i = 0 To 4
+                    If Not IsNothing(ChartRecord.Series(i + index * 5 + 2)) Then
+                        ChartRecord.Series(i + index * 5 + 2).Enabled = checked
+                        Record_Series(i + index * 5 + 2).chkEnable.Checked = checked
+                        'Debug.Print("i + index * 5 + 2=" + (i + index * 5 + 2).ToString)
+                    End If
+                Next
+            End If
 
-            For i = 0 To 4
-                If Not IsNothing(ChartRecord.Series(i + index * 5 + 2)) Then
-                    ChartRecord.Series(i + index * 5 + 2).Enabled = checked
-                    Record_Series(i + index * 5 + 2).chkEnable.Checked = checked
-                    'Debug.Print("i + index * 5 + 2=" + (i + index * 5 + 2).ToString)
-                End If
-            Next
         End If
         If chkSite1.Checked = True Then
             ChartRecord.ChartAreas(0).AxisY.Title = "Site1"
@@ -1300,7 +1340,7 @@ Public Class FormRecord
 
         pnlShowRecordData.Visible = ShowDataFlag
         pnlRecordCSelect1.Visible = ShowSelectFlag
-        ChartRecord.Width = pnlRecordCurve.Width
+        'ChartRecord.Width = pnlRecordCurve.Width
     End Sub
 
     'Private Sub SaveChartToJPG(ByVal cChart As Chart)
@@ -1327,7 +1367,9 @@ Public Class FormRecord
             k = 0
             j = 0
             For i = 2 To MAX_CURVES - 1
-                ChartRecord.Series(i).ChartArea = ChartRecord.ChartAreas(k).Name
+                If k < ChartRecord.ChartAreas.Count Then
+                    ChartRecord.Series(i).ChartArea = ChartRecord.ChartAreas(k).Name
+                End If
                 If j >= 4 Then
                     j = 0
                     k += 1

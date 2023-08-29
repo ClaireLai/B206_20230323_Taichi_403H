@@ -89,7 +89,7 @@
         ChangeFormLang(FormRecipeMapEdit, ls, FormRecipeMapEdit)
         ChangeFormLang(FormRecipeBarcodeInput, ls, FormRecipeBarcodeInput)
         ChangeFormLang(Form1s, ls, Form1s)
-        ChangeSeriesRecordName(ChartRecord, CurveName)
+        'ChangeSeriesRecordName(ChartRecord, CurveName)
         SetLangText(Form1s.chkPLCTest, "PLC 通訊" + Format(PLC_COMPORT, "COM0"), "PLC Comm. " + Format(PLC_COMPORT, "COM0"))
 
     End Sub
@@ -281,7 +281,7 @@
         pg.Value = pg.Maximum
         pg.Value = 0
         pg.Visible = False
-        ChangeSeriesRecordName(ChartRecord, CurveName)
+        'ChangeSeriesRecordName(ChartRecord, CurveName)
         SetLangText(Form1s.chkPLCTest, "PLC 通訊" + Format(PLC_COMPORT, "COM0"), "PLC Comm. " + Format(PLC_COMPORT, "COM0"))
 
     End Sub

@@ -6,13 +6,15 @@ Module Module_CurveData
     Public Const CURVE_FIRST As Integer = 0
     Public Const CURVE_SECOND As Integer = 8
     Public TempInSecondary As Boolean
+    Public Title() As String
+    Public bolDA As Boolean
 
     Public Sub InitCurveData(ByVal sdir As String)
         'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
-        CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
+        'CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
         ReadCurveNames(CurveDataINI)
-        ' 建立製程用曲線
-        ChartInitial()
+        '' 建立製程用曲線
+        'ChartInitial()
     End Sub
     Public CurveName(2, 31) As String
     Public MAX_CURVES As Integer = 1
@@ -229,7 +231,7 @@ Module Module_CurveData
         CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
 
         '建立記錄畫面曲線選擇區
-        InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
+        'InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
         '建立手動畫面真空計曲線圖
         CreateManualVacuumChart(FormManuals.pnlVacuumCurve)
         ChartManualVacuum.ChartAreas(0).CursorX.Interval = 1
@@ -301,6 +303,11 @@ Module Module_CurveData
         ''Optional ByVal iX As Integer = 3, Optional ByVal iY As Integer = 15, Optional ByVal iW As Integer = 97, Optional ByVal iH As Integer = 100)
         Dim i As Integer
         Dim Index As Integer = 0
+
+        If IsNothing(cChart) = False Then
+            cChart.Dispose()
+        End If
+
         cChart = New Chart
         cChart.Palette = ChartColorPalette.Bright
         frm.Controls.Add(cChart)
@@ -728,21 +735,26 @@ Module Module_CurveData
                     FormRecords.lblCHVac.Text = Format(ChartRecord.Series(0).Points(e.NewPosition).YValues(0), "0.0+E00")
                     FormRecords.lblDPCurrent.Text = Format(ChartRecord.Series(1).Points(e.NewPosition).YValues(0), "0.00")
                     For j = 0 To MAXPLATE
-                        If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
-                            RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
-                            RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
+                        If bolDA Then
+                            '加上DA值
+                            If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
+                                RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 6 + 3).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetPressure = ChartRecord.Series(j * 6 + 4).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetPresetDA = ChartRecord.Series(j * 6 + 5).Points(e.NewPosition).YValues(0).ToString 'da值
+                                RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 6 + 6).Points(e.NewPosition).YValues(0).ToString '溫度預設
+                            End If
+                        Else
+                            If ChartRecord.Series(j * 5 + 2).Points.Count >= j Then
+                                RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 5 + 2).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 5 + 3).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetPressure = ChartRecord.Series(j * 5 + 4).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 5 + 5).Points(e.NewPosition).YValues(0).ToString
+                                RecordDataShow(j).SetPressurePreset = ChartRecord.Series(k + 6).Points(e.NewPosition).YValues(0).ToString
+                            End If
                         End If
-                        '加上DA值
-                        'If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
-                        '    RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetBotTemp = ChartRecord.Series(j * 6 + 3).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetPressure = ChartRecord.Series(j * 6 + 4).Points(e.NewPosition).YValues(0).ToString
-                        '    RecordDataShow(j).SetPresetDA = ChartRecord.Series(j * 6 + 5).Points(e.NewPosition).YValues(0).ToString 'da值
-                        '    RecordDataShow(j).SetTempPreset = ChartRecord.Series(j * 6 + 6).Points(e.NewPosition).YValues(0).ToString '溫度預設
-                        'End If
+
+
                     Next
                 Else
                     FormRecords.lblCHVac.Text = "xxx"
@@ -868,8 +880,9 @@ Module Module_CurveData
     '建立曲線實體
     Public Sub CreateSeriesRecord(ByRef cChart As Chart, ByVal sCurve(,) As String, ByVal iStart As Integer, ByVal iNum As Integer)
         Dim i As Integer
+
         cChart.Palette = ChartColorPalette.Excel
-        For i = iStart To iStart + iNum
+        For i = iStart To iStart + iNum - 1
             cChart.Series.Add(sCurve(SystemLanguage, i))
             cChart.Series(i - iStart).ChartType = SeriesChartType.FastLine
             'cChart.Series(i).Color = Color.FromArgb(cChart.Series(i).Color.R, cChart.Series(i).Color.G, cChart.Series(i).Color.B)
@@ -932,7 +945,7 @@ Module Module_CurveData
         'ChartRecord.ChartAreas("Vacuum").Visible = False
         SetChartAreaFormat(ChartRecord)
         'CreateSeries2(ChartRecord, CurveName, 0, MAX_CURVES + 1, MAX_CURVES)
-        CreateSeriesRecord(ChartRecord, CurveName, 0, MAX_CURVES)
+        'CreateSeriesRecord(ChartRecord, CurveName, 0, MAX_CURVES)
         'ChartRecord.Series(0).ChartArea = ChartRecord.ChartAreas(0).Name
         'ChartRecord.Series(1).ChartArea = ChartRecord.ChartAreas(0).Name
         'k = 1
@@ -956,8 +969,6 @@ Module Module_CurveData
             ChartRecord.ChartAreas(i).BackColor = Color.AliceBlue
             ChartRecord.ChartAreas(i).BackGradientStyle = DataVisualization.Charting.GradientStyle.DiagonalRight
         Next
-
-
 
         AddHandler ChartRecord.CursorPositionChanging, AddressOf ChartRecord_CursorPositionChanging
 
