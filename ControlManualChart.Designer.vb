@@ -46,8 +46,8 @@ Partial Class ControlManualChart
         Me.btnSaveAs = New System.Windows.Forms.Button()
         Me.btnShowSeriesName = New System.Windows.Forms.Button()
         Me.pnlChart = New System.Windows.Forms.Panel()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ControlDataShowVertical1 = New CELLO.ControlDataShowVertical()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.pnlProcessCSelect.SuspendLayout()
         Me.pnlControl.SuspendLayout()
         Me.pnlChart.SuspendLayout()
@@ -323,9 +323,6 @@ Partial Class ControlManualChart
         Me.pnlChart.Size = New System.Drawing.Size(332, 238)
         Me.pnlChart.TabIndex = 545
         '
-        'Timer1
-        '
-        '
         'ControlDataShowVertical1
         '
         Me.ControlDataShowVertical1.AutoSize = True
@@ -335,6 +332,9 @@ Partial Class ControlManualChart
         Me.ControlDataShowVertical1.Name = "ControlDataShowVertical1"
         Me.ControlDataShowVertical1.Size = New System.Drawing.Size(77, 102)
         Me.ControlDataShowVertical1.TabIndex = 544
+        '
+        'Timer1
+        '
         '
         'ControlManualChart
         '
