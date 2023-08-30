@@ -9,13 +9,13 @@ Module Module_CurveData
     Public Title() As String
     Public bolDA As Boolean
 
-    Public Sub InitCurveData(ByVal sdir As String)
-        'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
-        'CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
-        ReadCurveNames(CurveDataINI)
-        '' 建立製程用曲線
-        'ChartInitial()
-    End Sub
+    'Public Sub InitCurveData(ByVal sdir As String)
+    '    'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
+    '    'CurveDataINI = sdir + "CURVEDATA.INI"        '程式資料INI檔案
+    '    ReadCurveNames(CurveDataINI)
+    '    '' 建立製程用曲線
+    '    'ChartInitial()
+    'End Sub
     Public CurveName(2, 31) As String
     Public MAX_CURVES As Integer = 1
     Public MAX_X_SCALE As Integer = 2000
@@ -227,8 +227,8 @@ Module Module_CurveData
     Public Sub ChartInitial()
         Dim i As Integer
         On Error Resume Next
-        '建立記錄畫面曲線圖
-        CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
+        ''建立記錄畫面曲線圖
+        'CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
 
         '建立記錄畫面曲線選擇區
         'InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)

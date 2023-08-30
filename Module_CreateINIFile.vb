@@ -26,7 +26,8 @@
         RunDataINIFile = ProgramDir + "RUNDATA.INI"  'Barcode 20160808 by vincent ----------------
         InitRecipe(sdir)
         InitLanguage(sdir)
-        'InitCurveData(sdir)
+        ' 建立製程用曲線
+        ChartInitial()
     End Sub
 
     Public VideoFileName As String

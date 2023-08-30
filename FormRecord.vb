@@ -1181,10 +1181,11 @@ Public Class FormRecord
                 CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
                 bolDA = False
             End If
-            '' 建立製程用曲線
-            ChartInitial()
+
+            '建立記錄畫面曲線圖
+            CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
             '讀title
-            InitCurveData(ProgramDir)
+            ReadCurveNames(CurveDataINI)
             '清除舊資料
             Do
                 ii = 0
