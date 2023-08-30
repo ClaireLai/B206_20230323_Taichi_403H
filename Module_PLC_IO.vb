@@ -476,7 +476,7 @@
     Public Const RampRateIndex As Integer = 176  '壓速
     'Public Const SetPrePressIndex As Integer = 177 '設定前壓力 R1381
     Public Const SetPressIndex As Integer = 178 '設定壓力 R1382
-    Public Const OverPressIndex As Integer = 181 '超出壓力 R1385
+    Public Const OverPressIndex As Integer = 185 '超出壓力 R1389
     Public Const AdjustDAIndex As Integer = 184 'DA調整 R1388
     Public Const IntervalIndex As Integer = 186  '控壓時間間隔
 

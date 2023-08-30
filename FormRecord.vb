@@ -1175,7 +1175,7 @@ Public Class FormRecord
             str = ReadProgData("CURVE_SETUP", "CAPTION", "NoData", File1Name)
             Title = str.Split(",")
             If Title.Length > 17 Then
-                CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案
+                CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
                 bolDA = True
             Else
                 CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
