@@ -9,6 +9,8 @@ Module Module_AutoTask
     'Barcode 20160808 by vincent ---------------- Start
     Public RunCounts As Integer = 0
     Public RunDataINIFile As String
+    Public bolVaccTest As Boolean
+
     Public Sub ReadRunData()
         Dim sstr As String
         Dim sfile As String
@@ -2065,24 +2067,26 @@ Module Module_AutoTask
                     Data(datamax) = "Vacuum"
                     datamax += 1
                     Data(datamax) = "MPCurrent"
-                    For i = 0 To MAXPLATE
-                        datamax += 1
-                        Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
-                        datamax += 1
-                        Data(datamax) = "TopTemp" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "BotTemp" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "Pressure" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "TopCurrent" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "BotCurrent" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "TopWater" + Format(i + 1, "00")
-                        datamax += 1
-                        Data(datamax) = "BotWater" + Format(i + 1, "00")
-                    Next
+                    If bolVaccTest = False Then
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
+                            datamax += 1
+                            Data(datamax) = "TopTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "Pressure" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopWater" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotWater" + Format(i + 1, "00")
+                        Next
+                    End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
                     Next
@@ -2104,25 +2108,27 @@ Module Module_AutoTask
                     Data(datamax) = GaugeCHVacStr
                     datamax += 1
                     Data(datamax) = MPCurrentStr
-                    For i = 0 To MAXPLATE
-                        datamax += 1
-                        Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
-                        datamax += 1
-                        Data(datamax) = TopTempPVStr(i)
-                        datamax += 1
-                        Data(datamax) = BotTempPVStr(i)
-                        datamax += 1
-                        Data(datamax) = PressPVstr(i)
-                        datamax += 1
-                        Data(datamax) = TopCurrentStr(i)
-                        datamax += 1
-                        Data(datamax) = BotCurrentStr(i)
-                        datamax += 1
-                        Data(datamax) = FlowRead(i).GetTopFLowStr
-                        datamax += 1
-                        Data(datamax) = FlowRead(i).GetBotFLowStr
+                    If bolVaccTest = False Then
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
+                            datamax += 1
+                            Data(datamax) = TopTempPVStr(i)
+                            datamax += 1
+                            Data(datamax) = BotTempPVStr(i)
+                            datamax += 1
+                            Data(datamax) = PressPVstr(i)
+                            datamax += 1
+                            Data(datamax) = TopCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = BotCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetTopFLowStr
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetBotFLowStr
 
-                    Next
+                        Next
+                    End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
                     Next
@@ -2287,6 +2293,13 @@ Module Module_AutoTask
                     '計時已到
                     Timercount_now = 0          '清除計時變數
                     Timercount_enable = False   '停止計時
+                    If bolVaccTest And Timercount_enable = False Then
+                        CAutoPumping.Start = False
+                        bolVaccTest = False
+                        Output(DoMPIndex).Status = False
+                        Output(DoRVIndex).Status = False
+                        CSVTimerStartPb_Status = False
+                    End If
                     Timercount_up = False       '
                     Timercount_down = False
                     '更新表單計時值

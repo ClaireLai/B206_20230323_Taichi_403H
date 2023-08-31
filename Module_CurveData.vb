@@ -798,10 +798,16 @@ Module Module_CurveData
                 Case 0
                     If Cond Then
                         ShowData = ""
-                        For i = 0 To iTotalCurveNum - 1
-                            ShowData = ShowData + CurveName(SystemLanguage, i) + ","
-                        Next
-                        ShowData = ShowData + CurveName(2, i)
+                        If bolVaccTest Then
+                            For i = 0 To 1
+                                ShowData = ShowData + CurveName(SystemLanguage, i) + ","
+                            Next
+                        Else
+                            For i = 0 To iTotalCurveNum - 1
+                                ShowData = ShowData + CurveName(SystemLanguage, i) + ","
+                            Next
+                        End If
+                        'ShowData = ShowData + CurveName(2, i)
                         WriteProgData("CURVE_SETUP", "CAPTION", ShowData, sfile)
                         WriteProgData("CURVE_SETUP", "DEVICENAME", Program_DeviceName, sfile)
                         WriteProgData("CURVE_SETUP", "MODELNAME", Program_ModelName, sfile)
@@ -826,21 +832,23 @@ Module Module_CurveData
                         data(datamax) = GaugeCHVacStr
                         datamax += 1
                         data(datamax) = MPCurrentStr
-                        For i = 0 To MAXPLATE
-                            datamax += 1
-                            data(datamax) = TopTempPVStr(i)
-                            datamax += 1
-                            data(datamax) = BotTempPVStr(i)
-                            datamax += 1
-                            data(datamax) = PressPVstr(i)
-                            datamax += 1
-                            ''寫入DA值
-                            'data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
-                            'datamax += 1
-                            data(datamax) = PresetTempStr(i)
-                            datamax += 1
-                            data(datamax) = PresetPressStr(i)
-                        Next
+                        If bolVaccTest = False Then
+                            For i = 0 To MAXPLATE
+                                datamax += 1
+                                data(datamax) = TopTempPVStr(i)
+                                datamax += 1
+                                data(datamax) = BotTempPVStr(i)
+                                datamax += 1
+                                data(datamax) = PressPVstr(i)
+                                datamax += 1
+                                ''寫入DA值
+                                'data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
+                                'datamax += 1
+                                data(datamax) = PresetTempStr(i)
+                                datamax += 1
+                                data(datamax) = PresetPressStr(i)
+                            Next
+                        End If
                         For i = 0 To datamax - 1
                             ShowData = ShowData + data(i) + ","
                         Next

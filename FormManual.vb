@@ -85,7 +85,15 @@ Public Class FormManual
     Friend WithEvents btnPullerClose As System.Windows.Forms.Button
     Friend WithEvents picC05 As System.Windows.Forms.PictureBox
     Friend WithEvents lblDPTemp As System.Windows.Forms.Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents btnLeakRateTest As Button
+    Friend WithEvents btnMaxVaccTest As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtVacuumTestTimeMin As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtVacuumTestTimeHr As TextBox
     Dim maxvalue(10) As Double
+
 #Region " Windows Form 設計工具產生的程式碼 "
 
     Public Sub New()
@@ -118,99 +126,107 @@ Public Class FormManual
     Friend WithEvents btnYReset As System.Windows.Forms.Button
     Friend WithEvents btnPrintCurve As System.Windows.Forms.Button
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormManual))
-        Me.pnlVacuumCurve = New System.Windows.Forms.Panel
-        Me.lblPumpingStatus = New System.Windows.Forms.Label
-        Me.lblCUPUsage = New System.Windows.Forms.Label
-        Me.btnAutoPurge = New System.Windows.Forms.Button
-        Me.tabManualLog = New System.Windows.Forms.TabControl
-        Me.tabPageDataLog = New System.Windows.Forms.TabPage
-        Me.lblSec02Text = New System.Windows.Forms.Label
-        Me.lblDataLogStepTimeText = New System.Windows.Forms.Label
-        Me.btnOpenLogFile = New System.Windows.Forms.Button
-        Me.btnStartLog = New System.Windows.Forms.Button
-        Me.lblDatalogFileName = New System.Windows.Forms.Label
-        Me.txtDataLogStepTime = New System.Windows.Forms.TextBox
-        Me.tabPageTimer = New System.Windows.Forms.TabPage
-        Me.lblTimerMin = New System.Windows.Forms.Label
-        Me.txtTimerSec = New System.Windows.Forms.TextBox
-        Me.btnTimerStart = New System.Windows.Forms.Button
-        Me.lblTimerSec = New System.Windows.Forms.Label
-        Me.lblMin01Text = New System.Windows.Forms.Label
-        Me.lblTimerMinText = New System.Windows.Forms.Label
-        Me.txtTimerMin = New System.Windows.Forms.TextBox
-        Me.lblSec01Text = New System.Windows.Forms.Label
-        Me.lblTimerSecText = New System.Windows.Forms.Label
-        Me.btnTimerReset = New System.Windows.Forms.Button
+        Me.pnlVacuumCurve = New System.Windows.Forms.Panel()
+        Me.lblPumpingStatus = New System.Windows.Forms.Label()
+        Me.lblCUPUsage = New System.Windows.Forms.Label()
+        Me.btnAutoPurge = New System.Windows.Forms.Button()
+        Me.tabManualLog = New System.Windows.Forms.TabControl()
+        Me.tabPageDataLog = New System.Windows.Forms.TabPage()
+        Me.lblSec02Text = New System.Windows.Forms.Label()
+        Me.lblDataLogStepTimeText = New System.Windows.Forms.Label()
+        Me.btnOpenLogFile = New System.Windows.Forms.Button()
+        Me.btnStartLog = New System.Windows.Forms.Button()
+        Me.lblDatalogFileName = New System.Windows.Forms.Label()
+        Me.txtDataLogStepTime = New System.Windows.Forms.TextBox()
+        Me.tabPageTimer = New System.Windows.Forms.TabPage()
+        Me.lblTimerMin = New System.Windows.Forms.Label()
+        Me.txtTimerSec = New System.Windows.Forms.TextBox()
+        Me.btnTimerStart = New System.Windows.Forms.Button()
+        Me.lblTimerSec = New System.Windows.Forms.Label()
+        Me.lblMin01Text = New System.Windows.Forms.Label()
+        Me.lblTimerMinText = New System.Windows.Forms.Label()
+        Me.txtTimerMin = New System.Windows.Forms.TextBox()
+        Me.lblSec01Text = New System.Windows.Forms.Label()
+        Me.lblTimerSecText = New System.Windows.Forms.Label()
+        Me.btnTimerReset = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnYReset = New System.Windows.Forms.Button
-        Me.btnPrintCurve = New System.Windows.Forms.Button
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
-        Me.btnAutoVacuum = New System.Windows.Forms.Button
-        Me.btnPumpProtection = New System.Windows.Forms.Button
-        Me.lblCursorValue = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.pnlMFC02 = New System.Windows.Forms.Panel
-        Me.lblV11TText = New System.Windows.Forms.Label
-        Me.lblMFCTime02 = New System.Windows.Forms.Label
-        Me.picGas02T = New System.Windows.Forms.PictureBox
-        Me.txtGas02MFCSet = New System.Windows.Forms.TextBox
-        Me.lblGas02MFC = New System.Windows.Forms.Label
-        Me.lblGas02Text = New System.Windows.Forms.Label
-        Me.PictureBox100 = New System.Windows.Forms.PictureBox
-        Me.pnlMFC01 = New System.Windows.Forms.Panel
-        Me.lblMFCTime01 = New System.Windows.Forms.Label
-        Me.lblGas01Text = New System.Windows.Forms.Label
-        Me.txtGas01MFCSet = New System.Windows.Forms.TextBox
-        Me.lblGas01MFC = New System.Windows.Forms.Label
-        Me.picGas01T = New System.Windows.Forms.PictureBox
-        Me.lblV10TText = New System.Windows.Forms.Label
-        Me.PictureBox94 = New System.Windows.Forms.PictureBox
-        Me.picDoor2 = New System.Windows.Forms.PictureBox
-        Me.picDoor1 = New System.Windows.Forms.PictureBox
-        Me.pnlChamberLeft = New System.Windows.Forms.Panel
-        Me.lblVentText = New System.Windows.Forms.Label
-        Me.picDP = New System.Windows.Forms.PictureBox
-        Me.lblN2Text = New System.Windows.Forms.Label
-        Me.picRVP = New System.Windows.Forms.PictureBox
-        Me.lblDPText = New System.Windows.Forms.Label
-        Me.picPipeV02 = New System.Windows.Forms.PictureBox
-        Me.picV4P = New System.Windows.Forms.PictureBox
-        Me.picPipeV01 = New System.Windows.Forms.PictureBox
-        Me.lblRVText = New System.Windows.Forms.Label
-        Me.pnlChamberRight = New System.Windows.Forms.Panel
-        Me.pnlDoor2 = New System.Windows.Forms.Panel
-        Me.pnlDoor1 = New System.Windows.Forms.Panel
-        Me.lblDPCurrent = New System.Windows.Forms.Label
-        Me.lblA03Text = New System.Windows.Forms.Label
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.lblCHVac = New System.Windows.Forms.Label
-        Me.lbl1ATM = New System.Windows.Forms.Label
-        Me.lblTorr02Text = New System.Windows.Forms.Label
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.btnSaveAs = New System.Windows.Forms.Button
-        Me.tabManual = New System.Windows.Forms.TabControl
-        Me.tabPageVacuum = New System.Windows.Forms.TabPage
-        Me.btnChamberLight = New System.Windows.Forms.Button
-        Me.grpDoorControl = New System.Windows.Forms.GroupBox
-        Me.btnPullerClose = New System.Windows.Forms.Button
-        Me.btnDoor2Down = New System.Windows.Forms.Button
-        Me.btnDoor1Down = New System.Windows.Forms.Button
-        Me.btnDoor2Up = New System.Windows.Forms.Button
-        Me.btnDoor1Up = New System.Windows.Forms.Button
-        Me.tabPage1to3 = New System.Windows.Forms.TabPage
-        Me.flwManualChart1 = New System.Windows.Forms.FlowLayoutPanel
-        Me.flwManualPage1 = New System.Windows.Forms.FlowLayoutPanel
-        Me.tabPage4to6 = New System.Windows.Forms.TabPage
-        Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel
-        Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel
-        Me.picC05 = New System.Windows.Forms.PictureBox
-        Me.lblDPTemp = New System.Windows.Forms.Label
+        Me.btnYReset = New System.Windows.Forms.Button()
+        Me.btnPrintCurve = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnAutoVacuum = New System.Windows.Forms.Button()
+        Me.btnPumpProtection = New System.Windows.Forms.Button()
+        Me.lblCursorValue = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.picC05 = New System.Windows.Forms.PictureBox()
+        Me.lblDPTemp = New System.Windows.Forms.Label()
+        Me.pnlMFC02 = New System.Windows.Forms.Panel()
+        Me.lblV11TText = New System.Windows.Forms.Label()
+        Me.lblMFCTime02 = New System.Windows.Forms.Label()
+        Me.picGas02T = New System.Windows.Forms.PictureBox()
+        Me.txtGas02MFCSet = New System.Windows.Forms.TextBox()
+        Me.lblGas02MFC = New System.Windows.Forms.Label()
+        Me.lblGas02Text = New System.Windows.Forms.Label()
+        Me.PictureBox100 = New System.Windows.Forms.PictureBox()
+        Me.pnlMFC01 = New System.Windows.Forms.Panel()
+        Me.lblMFCTime01 = New System.Windows.Forms.Label()
+        Me.lblGas01Text = New System.Windows.Forms.Label()
+        Me.txtGas01MFCSet = New System.Windows.Forms.TextBox()
+        Me.lblGas01MFC = New System.Windows.Forms.Label()
+        Me.picGas01T = New System.Windows.Forms.PictureBox()
+        Me.lblV10TText = New System.Windows.Forms.Label()
+        Me.PictureBox94 = New System.Windows.Forms.PictureBox()
+        Me.picDoor2 = New System.Windows.Forms.PictureBox()
+        Me.picDoor1 = New System.Windows.Forms.PictureBox()
+        Me.pnlChamberLeft = New System.Windows.Forms.Panel()
+        Me.lblVentText = New System.Windows.Forms.Label()
+        Me.picDP = New System.Windows.Forms.PictureBox()
+        Me.lblN2Text = New System.Windows.Forms.Label()
+        Me.picRVP = New System.Windows.Forms.PictureBox()
+        Me.lblDPText = New System.Windows.Forms.Label()
+        Me.picPipeV02 = New System.Windows.Forms.PictureBox()
+        Me.picV4P = New System.Windows.Forms.PictureBox()
+        Me.picPipeV01 = New System.Windows.Forms.PictureBox()
+        Me.lblRVText = New System.Windows.Forms.Label()
+        Me.pnlChamberRight = New System.Windows.Forms.Panel()
+        Me.pnlDoor2 = New System.Windows.Forms.Panel()
+        Me.pnlDoor1 = New System.Windows.Forms.Panel()
+        Me.lblDPCurrent = New System.Windows.Forms.Label()
+        Me.lblA03Text = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lblCHVac = New System.Windows.Forms.Label()
+        Me.lbl1ATM = New System.Windows.Forms.Label()
+        Me.lblTorr02Text = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnSaveAs = New System.Windows.Forms.Button()
+        Me.tabManual = New System.Windows.Forms.TabControl()
+        Me.tabPageVacuum = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtVacuumTestTimeMin = New System.Windows.Forms.TextBox()
+        Me.btnLeakRateTest = New System.Windows.Forms.Button()
+        Me.btnMaxVaccTest = New System.Windows.Forms.Button()
+        Me.btnChamberLight = New System.Windows.Forms.Button()
+        Me.grpDoorControl = New System.Windows.Forms.GroupBox()
+        Me.btnPullerClose = New System.Windows.Forms.Button()
+        Me.btnDoor2Down = New System.Windows.Forms.Button()
+        Me.btnDoor1Down = New System.Windows.Forms.Button()
+        Me.btnDoor2Up = New System.Windows.Forms.Button()
+        Me.btnDoor1Up = New System.Windows.Forms.Button()
+        Me.tabPage1to3 = New System.Windows.Forms.TabPage()
+        Me.flwManualChart1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flwManualPage1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabPage4to6 = New System.Windows.Forms.TabPage()
+        Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMFC02.SuspendLayout()
         CType(Me.picGas02T, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox100, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,10 +244,10 @@ Public Class FormManual
         Me.Panel1.SuspendLayout()
         Me.tabManual.SuspendLayout()
         Me.tabPageVacuum.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.grpDoorControl.SuspendLayout()
         Me.tabPage1to3.SuspendLayout()
         Me.tabPage4to6.SuspendLayout()
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlVacuumCurve
@@ -526,7 +542,7 @@ Public Class FormManual
         'btnYReset
         '
         Me.btnYReset.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.btnYReset.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular)
+        Me.btnYReset.Font = New System.Drawing.Font("Arial", 12.0!)
         Me.btnYReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnYReset.Location = New System.Drawing.Point(227, 2)
         Me.btnYReset.Name = "btnYReset"
@@ -538,7 +554,7 @@ Public Class FormManual
         'btnPrintCurve
         '
         Me.btnPrintCurve.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.btnPrintCurve.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular)
+        Me.btnPrintCurve.Font = New System.Drawing.Font("Arial", 12.0!)
         Me.btnPrintCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnPrintCurve.Location = New System.Drawing.Point(3, 4)
         Me.btnPrintCurve.Name = "btnPrintCurve"
@@ -622,6 +638,31 @@ Public Class FormManual
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(449, 367)
         Me.Panel2.TabIndex = 541
+        '
+        'picC05
+        '
+        Me.picC05.BackColor = System.Drawing.SystemColors.Control
+        Me.picC05.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.picC05.Image = Global.CELLO.My.Resources.Resources.tempc
+        Me.picC05.Location = New System.Drawing.Point(283, 323)
+        Me.picC05.Name = "picC05"
+        Me.picC05.Size = New System.Drawing.Size(29, 26)
+        Me.picC05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picC05.TabIndex = 561
+        Me.picC05.TabStop = False
+        '
+        'lblDPTemp
+        '
+        Me.lblDPTemp.BackColor = System.Drawing.Color.Black
+        Me.lblDPTemp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDPTemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDPTemp.ForeColor = System.Drawing.Color.Lime
+        Me.lblDPTemp.Location = New System.Drawing.Point(214, 323)
+        Me.lblDPTemp.Name = "lblDPTemp"
+        Me.lblDPTemp.Size = New System.Drawing.Size(63, 24)
+        Me.lblDPTemp.TabIndex = 560
+        Me.lblDPTemp.Text = "0"
+        Me.lblDPTemp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'pnlMFC02
         '
@@ -862,7 +903,7 @@ Public Class FormManual
         'lblN2Text
         '
         Me.lblN2Text.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblN2Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular)
+        Me.lblN2Text.Font = New System.Drawing.Font("Arial", 12.0!)
         Me.lblN2Text.ForeColor = System.Drawing.Color.Blue
         Me.lblN2Text.Location = New System.Drawing.Point(64, 271)
         Me.lblN2Text.Name = "lblN2Text"
@@ -1000,7 +1041,7 @@ Public Class FormManual
         '
         Me.lblCHVac.BackColor = System.Drawing.Color.Black
         Me.lblCHVac.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblCHVac.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular)
+        Me.lblCHVac.Font = New System.Drawing.Font("Arial", 12.0!)
         Me.lblCHVac.ForeColor = System.Drawing.Color.Lime
         Me.lblCHVac.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCHVac.Location = New System.Drawing.Point(22, 35)
@@ -1076,6 +1117,7 @@ Public Class FormManual
         'tabPageVacuum
         '
         Me.tabPageVacuum.BackColor = System.Drawing.SystemColors.Control
+        Me.tabPageVacuum.Controls.Add(Me.Panel4)
         Me.tabPageVacuum.Controls.Add(Me.btnChamberLight)
         Me.tabPageVacuum.Controls.Add(Me.grpDoorControl)
         Me.tabPageVacuum.Controls.Add(Me.Panel2)
@@ -1087,6 +1129,63 @@ Public Class FormManual
         Me.tabPageVacuum.Size = New System.Drawing.Size(1016, 671)
         Me.tabPageVacuum.TabIndex = 2
         Me.tabPageVacuum.Text = "真空抽氣及記錄"
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.Label2)
+        Me.Panel4.Controls.Add(Me.txtVacuumTestTimeHr)
+        Me.Panel4.Controls.Add(Me.Label1)
+        Me.Panel4.Controls.Add(Me.txtVacuumTestTimeMin)
+        Me.Panel4.Controls.Add(Me.btnLeakRateTest)
+        Me.Panel4.Controls.Add(Me.btnMaxVaccTest)
+        Me.Panel4.Location = New System.Drawing.Point(782, 427)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(149, 225)
+        Me.Panel4.TabIndex = 547
+        '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(67, 114)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(38, 20)
+        Me.Label1.TabIndex = 550
+        Me.Label1.Text = "min"
+        '
+        'txtVacuumTestTimeMin
+        '
+        Me.txtVacuumTestTimeMin.Location = New System.Drawing.Point(26, 108)
+        Me.txtVacuumTestTimeMin.Name = "txtVacuumTestTimeMin"
+        Me.txtVacuumTestTimeMin.Size = New System.Drawing.Size(35, 29)
+        Me.txtVacuumTestTimeMin.TabIndex = 549
+        Me.txtVacuumTestTimeMin.Text = "1"
+        '
+        'btnLeakRateTest
+        '
+        Me.btnLeakRateTest.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnLeakRateTest.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLeakRateTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLeakRateTest.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 157)
+        Me.btnLeakRateTest.Name = "btnLeakRateTest"
+        Me.btnLeakRateTest.Size = New System.Drawing.Size(122, 44)
+        Me.btnLeakRateTest.TabIndex = 548
+        Me.btnLeakRateTest.Text = "洩漏率測試"
+        Me.btnLeakRateTest.UseVisualStyleBackColor = False
+        '
+        'btnMaxVaccTest
+        '
+        Me.btnMaxVaccTest.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnMaxVaccTest.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnMaxVaccTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMaxVaccTest.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnMaxVaccTest.Location = New System.Drawing.Point(14, 23)
+        Me.btnMaxVaccTest.Name = "btnMaxVaccTest"
+        Me.btnMaxVaccTest.Size = New System.Drawing.Size(122, 44)
+        Me.btnMaxVaccTest.TabIndex = 547
+        Me.btnMaxVaccTest.Text = "極限壓力測試"
+        Me.btnMaxVaccTest.UseVisualStyleBackColor = False
         '
         'btnChamberLight
         '
@@ -1236,30 +1335,23 @@ Public Class FormManual
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
-        'picC05
+        'Label2
         '
-        Me.picC05.BackColor = System.Drawing.SystemColors.Control
-        Me.picC05.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picC05.Image = Global.CELLO.My.Resources.Resources.tempc
-        Me.picC05.Location = New System.Drawing.Point(283, 323)
-        Me.picC05.Name = "picC05"
-        Me.picC05.Size = New System.Drawing.Size(29, 26)
-        Me.picC05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picC05.TabIndex = 561
-        Me.picC05.TabStop = False
+        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(67, 79)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(38, 20)
+        Me.Label2.TabIndex = 552
+        Me.Label2.Text = "Hr"
         '
-        'lblDPTemp
+        'txtVacuumTestTimeHr
         '
-        Me.lblDPTemp.BackColor = System.Drawing.Color.Black
-        Me.lblDPTemp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblDPTemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDPTemp.ForeColor = System.Drawing.Color.Lime
-        Me.lblDPTemp.Location = New System.Drawing.Point(214, 323)
-        Me.lblDPTemp.Name = "lblDPTemp"
-        Me.lblDPTemp.Size = New System.Drawing.Size(63, 24)
-        Me.lblDPTemp.TabIndex = 560
-        Me.lblDPTemp.Text = "0"
-        Me.lblDPTemp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
+        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
+        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
+        Me.txtVacuumTestTimeHr.TabIndex = 551
+        Me.txtVacuumTestTimeHr.Text = "0"
         '
         'FormManual
         '
@@ -1280,6 +1372,7 @@ Public Class FormManual
         Me.tabPageTimer.ResumeLayout(False)
         Me.tabPageTimer.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlMFC02.ResumeLayout(False)
         Me.pnlMFC02.PerformLayout()
         CType(Me.picGas02T, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1299,10 +1392,11 @@ Public Class FormManual
         Me.Panel1.ResumeLayout(False)
         Me.tabManual.ResumeLayout(False)
         Me.tabPageVacuum.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.grpDoorControl.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1477,9 +1571,15 @@ Public Class FormManual
         'lblPressureRead.Text = PressPVstr
         'lblPressureRead1.Text = PressPVstr
 
-
-
-
+        'for B222 claire
+        Panel2.Enabled = Not Timercount_enable
+        'tabPageTimer.Enabled = Not Timercount_enable
+        txtTimerMin.Enabled = Not Timercount_enable
+        txtTimerSec.Enabled = Not Timercount_enable
+        btnTimerStart.Enabled = Not Timercount_enable
+        btnTimerReset.Enabled = Not Timercount_enable
+        tabPageDataLog.Enabled = Not Timercount_enable
+        ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
     End Sub
 
     'Private Sub txtTempSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempSet.MouseDown
@@ -1690,21 +1790,29 @@ Public Class FormManual
 
 
     Private Sub btnStartLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartLog.Click
-        Dim tempstr As String
-        tempstr = DataLogRecordFileName
+
         If CSVTimerStartPb_Status = True Then
             CSVTimerStartPb_Status = False
         Else
-            DataLogRecordFileName = ""
-            If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                If Len(DataLogShortFileName) > 0 Then
-                    CheckDataLogDirAndCreate()
+            If bolVaccTest Then
+                DataLogShortFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
+                CheckDataLogDirAndCreate()
+                DataLogCUVFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
+                DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
 
-                    lblDatalogFileName.Text = DataLogRecordFileName
-                    DatalogTime = Val(txtDataLogStepTime.Text)
-                    CSVTimerStartPb_Status = True
+                DatalogTime = Val(txtDataLogStepTime.Text)
+                CSVTimerStartPb_Status = True
+            Else
+                DataLogRecordFileName = ""
+                If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    If Len(DataLogShortFileName) > 0 Then
+                        CheckDataLogDirAndCreate()
+                        DatalogTime = Val(txtDataLogStepTime.Text)
+                        CSVTimerStartPb_Status = True
+                    End If
                 End If
             End If
+            lblDatalogFileName.Text = DataLogRecordFileName
         End If
         DatalogStart = CSVTimerStartPb_Status
     End Sub
@@ -1997,5 +2105,52 @@ Public Class FormManual
     Private Sub btnPullerClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPullerClose.Click
         Output(DoPullerCloseIndex).Status = Not Output(DoPullerCloseIndex).Status
         'watdog_Restart()
+    End Sub
+
+    Private Sub btnMaxVaccTest_Click(sender As Object, e As EventArgs) Handles btnMaxVaccTest.Click
+        If ProcessMode_RUN Then Exit Sub
+        CAutoPumping.AutoProtection = False
+        CAutoPumping.Start = Not CAutoPumping.Start
+        If CAutoPumping.Start Then
+            bolVaccTest = True
+            'Timercount_enable = True
+            Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+            txtTimerMin.Text = Timercount.set_min.ToString
+            btnTImerStart_Click(vbNull, e) '開始計時
+            Panel2.Enabled = False
+            'tabPageDataLog.Enabled = False
+            'tabPageTimer.Enabled = False
+            'lblTimerSec.Enabled = True
+            'lblTimerMin.Enabled = True
+
+            btnStartLog_Click(vbNull, e) '開始紀錄
+
+        Else
+            Timercount_enable = False
+            bolVaccTest = False
+            btnStartLog_Click(vbNull, e) '開始紀錄
+            Output(DoMPIndex).Status = False
+            Output(DoRVIndex).Status = False
+            CSVTimerStartPb_Status = False
+
+        End If
+
+
+    End Sub
+
+    Private Sub txtVacuumTestTimeMin_MouseDown(sender As Object, e As MouseEventArgs) Handles txtVacuumTestTimeMin.MouseDown
+        FormKeyboard2s.KeyInString(sender, "59", "0")
+        'CallKeyboard2(sender, "59", "0")
+        If Val(sender.Text) > 59 Then
+            sender.Text = "59"
+        End If
+    End Sub
+
+    Private Sub txtVacuumTestTimeHr_MouseDown(sender As Object, e As MouseEventArgs) Handles txtVacuumTestTimeHr.MouseDown
+        FormKeyboard2s.KeyInString(sender, "24", "0")
+        'CallKeyboard2(sender, "59", "0")
+        If Val(sender.Text) > 24 Then
+            sender.Text = "24"
+        End If
     End Sub
 End Class
