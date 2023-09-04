@@ -150,7 +150,7 @@ Partial Class FormMenu
         Me.btnFormLoginsetup.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnFormLoginsetup.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnFormLoginsetup.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFormLoginsetup.Image = Global.CELLO.My.Resources.Resources.buttonRed
+        Me.btnFormLoginsetup.Image = Global.CELLO.My.Resources.Resources.button
         Me.btnFormLoginsetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFormLoginsetup.Location = New System.Drawing.Point(615, 0)
         Me.btnFormLoginsetup.Margin = New System.Windows.Forms.Padding(0)
