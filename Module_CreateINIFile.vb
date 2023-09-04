@@ -26,7 +26,11 @@
         RunDataINIFile = ProgramDir + "RUNDATA.INI"  'Barcode 20160808 by vincent ----------------
         InitRecipe(sdir)
         InitLanguage(sdir)
-        ReadCurveNames(ProgramDir + "CURVEDATA.INI")
+        'If SystemParameters.bolDAlog Then
+        '    ReadCurveNames(ProgramDir + "CURVEDATA_DA.INI")
+        'Else
+        '    ReadCurveNames(ProgramDir + "CURVEDATA.INI")
+        'End If
         ' 建立製程用曲線
         ChartInitial()
     End Sub

@@ -292,6 +292,7 @@ Module Module_Parameter
         Public DPWaterFlowAlarm As String
         'Add  by claire 20230620  稼動率功能 ------------------- End
         Public StartLog_Time As String
+        Public bolDAlog As Boolean
     End Structure
     Public SystemParameters As SystemParameterss
 
@@ -315,87 +316,8 @@ Module Module_Parameter
     Public ProcessRecordShow As ProcessRecord
 
     Public Sub ReadParameterFromFile(ByVal sfile As String)
-        'SystemParameters.TopP1 = ReadProgData("PARAMETER", "TOPP1", "30", sfile)
-        'SystemParameters.TopI1 = ReadProgData("PARAMETER", "TOPI1", "120", sfile)
-        'SystemParameters.TopD1 = ReadProgData("PARAMETER", "TOPD1", "30", sfile)
-        'SystemParameters.TopP2 = ReadProgData("PARAMETER", "TOPP2", "30", sfile)
-        'SystemParameters.TopI2 = ReadProgData("PARAMETER", "TOPI2", "120", sfile)
-        'SystemParameters.TopD2 = ReadProgData("PARAMETER", "TOPD2", "30", sfile)
-        'SystemParameters.TopP3 = ReadProgData("PARAMETER", "TOPP3", "30", sfile)
-        'SystemParameters.TopI3 = ReadProgData("PARAMETER", "TOPI3", "120", sfile)
-        'SystemParameters.TopD3 = ReadProgData("PARAMETER", "TOPD3", "30", sfile)
-        'SystemParameters.BotP1 = ReadProgData("PARAMETER", "BOTP1", "30", sfile)
-        'SystemParameters.BotI1 = ReadProgData("PARAMETER", "BOTI1", "120", sfile)
-        'SystemParameters.BotD1 = ReadProgData("PARAMETER", "BOTD1", "30", sfile)
-        'SystemParameters.BotP2 = ReadProgData("PARAMETER", "BOTP2", "30", sfile)
-        'SystemParameters.BotI2 = ReadProgData("PARAMETER", "BOTI2", "120", sfile)
-        'SystemParameters.BotD2 = ReadProgData("PARAMETER", "BOTD2", "30", sfile)
-        'SystemParameters.BotP3 = ReadProgData("PARAMETER", "BOTP3", "30", sfile)
-        'SystemParameters.BotI3 = ReadProgData("PARAMETER", "BOTI3", "120", sfile)
-        'SystemParameters.BotD3 = ReadProgData("PARAMETER", "BOTD3", "30", sfile)
-        'SystemParameters.TopMax1 = ReadProgData("PARAMETER", "TOPMAX1", "100", sfile)
-        'SystemParameters.TopMin1 = ReadProgData("PARAMETER", "TOPMIN1", "0", sfile)
-        'SystemParameters.BotMax1 = ReadProgData("PARAMETER", "BOTMAX1", "100", sfile)
-        'SystemParameters.BotMin1 = ReadProgData("PARAMETER", "BOTMIN1", "0", sfile)
-        'SystemParameters.TopMax2 = ReadProgData("PARAMETER", "TOPMAX2", "100", sfile)
-        'SystemParameters.TopMin2 = ReadProgData("PARAMETER", "TOPMIN2", "0", sfile)
-        'SystemParameters.BotMax2 = ReadProgData("PARAMETER", "BOTMAX2", "100", sfile)
-        'SystemParameters.BotMin2 = ReadProgData("PARAMETER", "BOTMIN2", "0", sfile)
-        'SystemParameters.TopMax3 = ReadProgData("PARAMETER", "TOPMAX3", "100", sfile)
-        'SystemParameters.TopMin3 = ReadProgData("PARAMETER", "TOPMIN3", "0", sfile)
-        'SystemParameters.BotMax3 = ReadProgData("PARAMETER", "BOTMAX3", "100", sfile)
-        'SystemParameters.BotMin3 = ReadProgData("PARAMETER", "BOTMIN3", "0", sfile)
-        'SystemParameters.TopLowRange = ReadProgData("PARAMETER", "TOPLOWRANGE", "200", sfile)
-        'SystemParameters.TopHighRange = ReadProgData("PARAMETER", "TOPHIGHRANGE", "400", sfile)
-        'SystemParameters.BotLowRange = ReadProgData("PARAMETER", "BOTLOWRANGE", "200", sfile)
-        'SystemParameters.BotHighRange = ReadProgData("PARAMETER", "BOTHIGHRANGE", "400", sfile)
-        'SystemParameters.TopLimitPowerTemp = ReadProgData("PARAMETER", "TOPLIMITPOWERTEMP", "60", sfile)
-        'SystemParameters.TopLimitPower = ReadProgData("PARAMETER", "TOPLIMITPOWER", "15", sfile)
-        'SystemParameters.BotLimitPowerTemp = ReadProgData("PARAMETER", "BOTLIMITPOWERTEMP", "60", sfile)
-        'SystemParameters.BotLimitPower = ReadProgData("PARAMETER", "BOTLIMITPOWER", "15", sfile)
 
-
-        'SystemParameters.TopFlowMeterHz(0) = ReadProgData("PARAMETER", "TOPFLOWMETERHZ00", "200", sfile)
-        'SystemParameters.BotFlowMeterHz(0) = ReadProgData("PARAMETER", "BOTFLOWMETERHZ00", "200", sfile)
-        'SystemParameters.TopFlowMeterHz(1) = ReadProgData("PARAMETER", "TOPFLOWMETERHZ01", "200", sfile)
-        'SystemParameters.BotFlowMeterHz(1) = ReadProgData("PARAMETER", "BOTFLOWMETERHZ01", "200", sfile)
-        'SystemParameters.TopFlowMeterHz(2) = ReadProgData("PARAMETER", "TOPFLOWMETERHZ02", "200", sfile)
-        'SystemParameters.BotFlowMeterHz(2) = ReadProgData("PARAMETER", "BOTFLOWMETERHZ02", "200", sfile)
         SystemParameters.LowFlowAlarm = ReadProgData("PARAMETER", "LOWFLOWALARM", "60", sfile)
-
-
-
-        'SystemParameters.TopTempCal1 = ReadProgData("PARAMETER", "TOPTEMPCAL1", "0", sfile)
-        'SystemParameters.TopTempCal2 = ReadProgData("PARAMETER", "TOPTEMPCAL2", "0", sfile)
-        'SystemParameters.TopTempCal3 = ReadProgData("PARAMETER", "TOPTEMPCAL3", "0", sfile)
-        'SystemParameters.TopTempCal4 = ReadProgData("PARAMETER", "TOPTEMPCAL4", "0", sfile)
-        'SystemParameters.TopTempCal5 = ReadProgData("PARAMETER", "TOPTEMPCAL5", "0", sfile)
-        'SystemParameters.TopTempCalX1 = ReadProgData("PARAMETER", "TOPTEMPCALX1", "0", sfile)
-        'SystemParameters.TopTempCalX2 = ReadProgData("PARAMETER", "TOPTEMPCALX2", "0", sfile)
-        'SystemParameters.TopTempCalX3 = ReadProgData("PARAMETER", "TOPTEMPCALX3", "0", sfile)
-        'SystemParameters.TopTempCalX4 = ReadProgData("PARAMETER", "TOPTEMPCALX4", "0", sfile)
-        'SystemParameters.TopTempCalX5 = ReadProgData("PARAMETER", "TOPTEMPCALX5", "0", sfile)
-        'SystemParameters.BotTempCal1 = ReadProgData("PARAMETER", "BOTTEMPCAL1", "0", sfile)
-        'SystemParameters.BotTempCal2 = ReadProgData("PARAMETER", "BOTTEMPCAL2", "0", sfile)
-        'SystemParameters.BotTempCal3 = ReadProgData("PARAMETER", "BOTTEMPCAL3", "0", sfile)
-        'SystemParameters.BotTempCal4 = ReadProgData("PARAMETER", "BOTTEMPCAL4", "0", sfile)
-        'SystemParameters.BotTempCal5 = ReadProgData("PARAMETER", "BOTTEMPCAL5", "0", sfile)
-        'SystemParameters.BotTempCalX1 = ReadProgData("PARAMETER", "BOTTEMPCALX1", "0", sfile)
-        'SystemParameters.BotTempCalX2 = ReadProgData("PARAMETER", "BOTTEMPCALX2", "0", sfile)
-        'SystemParameters.BotTempCalX3 = ReadProgData("PARAMETER", "BOTTEMPCALX3", "0", sfile)
-        'SystemParameters.BotTempCalX4 = ReadProgData("PARAMETER", "BOTTEMPCALX4", "0", sfile)
-        'SystemParameters.BotTempCalX5 = ReadProgData("PARAMETER", "BOTTEMPCALX5", "0", sfile)
-        'SystemParameters.PressureCal1 = ReadProgData("PARAMETER", "PRESSURECAL1", "0", sfile)
-        'SystemParameters.PressureCal2 = ReadProgData("PARAMETER", "PRESSURECAL2", "0", sfile)
-        'SystemParameters.PressureCal3 = ReadProgData("PARAMETER", "PRESSURECAL3", "0", sfile)
-        'SystemParameters.PressureCal4 = ReadProgData("PARAMETER", "PRESSURECAL4", "0", sfile)
-        'SystemParameters.PressureCal5 = ReadProgData("PARAMETER", "PRESSURECAL5", "0", sfile)
-        'SystemParameters.PressureCalX1 = ReadProgData("PARAMETER", "PRESSURECALX1", "0", sfile)
-        'SystemParameters.PressureCalX2 = ReadProgData("PARAMETER", "PRESSURECALX2", "0", sfile)
-        'SystemParameters.PressureCalX3 = ReadProgData("PARAMETER", "PRESSURECALX3", "0", sfile)
-        'SystemParameters.PressureCalX4 = ReadProgData("PARAMETER", "PRESSURECALX4", "0", sfile)
-        'SystemParameters.PressureCalX5 = ReadProgData("PARAMETER", "PRESSURECALX5", "0", sfile)
-
         SystemParameters.PressFullScale = ReadProgData("PARAMETER", "PRESSFULLSCALE", "15000", sfile)
         SystemParameters.PressZero = ReadProgData("PARAMETER", "PRESSZERO", "0", sfile)
         SystemParameters.PressureRamp = ReadProgData("PARAMETER", "PRESSURERAMP", "0", sfile)
@@ -424,7 +346,6 @@ Module Module_Parameter
         SystemParameters.HighTempLimit = ReadProgData("PARAMETER", "HIGHTEMPLIMIT", "0", sfile)
         SystemParameters.HighPressureLimit = ReadProgData("PARAMETER", "HighPressureLimit", "16000", sfile)
 
-
         SystemParameters.PumpingTime = ReadProgData("PARAMETER", "PUMPINGTIME", "0", sfile)
         SystemParameters.ProcessEndBZonTime = ReadProgData("PARAMETER", "PROCESSENDBZONTIME", "0", sfile)
         SystemParameters.ProcessEndAlarm = ReadProgData("PARAMETER", "PROCESSENDALARM", "0", sfile)
@@ -441,19 +362,13 @@ Module Module_Parameter
         SystemParameters.ProcessVacuumAutoVacLo = ReadProgData("PARAMETER", "PROCESSAUTOVACUUMVACLO", "1.0E-01", sfile)
         SystemParameters.Vac1ATM_Select = ReadProgData("PARAMETER", "VAC1ATMSELECT", "0", sfile)
         Vac1ATM_Select = GetTrue01Boolean(SystemParameters.Vac1ATM_Select)
-        'SystemParameters.AutoVent = ReadProgData("PARAMETER", "AUTOVENT", "0", sfile)
-        'SystemParameters.BondBeforeVacuum = ReadProgData("PARAMETER", "BONDBEFOREVACUUM", "0", sfile)
+
         '----------------------------------------
 
         ReadHeaterCalData(ParameterINIFile)       '讀取溫度校正資料
-        'ReadPressCalData(ParameterINIFile)        '讀取壓力校正資料
 
         ProcessOkALMEnabled_Status = GetTrue01Boolean(SystemParameters.ProcessEndAlarm)
-        'AutoPurge_Status = GetTrue01Boolean(SystemParameters.AutoPurge)
-        'AutoVacuum_Status = GetTrue01Boolean(SystemParameters.AutoVacuum)
         ProcessAutoVacuum_Status = GetTrue01Boolean(SystemParameters.ProcessAutoVacuum)
-        'AutoVent_Status = GetTrue01Boolean(SystemParameters.AutoVent)
-        'BondBeforeVacuum_Status = GetTrue01Boolean(SystemParameters.BondBeforeVacuum)
 
         SystemParameters.HeaterCount = ReadProgData("PARAMETER", "HEATERCOUNT", "4", sfile)
         SystemParameters.HeaterPower = ReadProgData("PARAMETER", "HEATERPOWER", "750", sfile)
@@ -529,55 +444,14 @@ Module Module_Parameter
         If Val(SystemParameters.DPWaterFlowHzMax) <= 0 Then
             SystemParameters.DPWaterFlowHzMax = "20"
         End If
+        SystemParameters.bolDAlog = ReadProgData("PARAMETER", "DALog", "0", sfile)  'Add  by claire 20230901
+
+
+
     End Sub
     '將資料結構寫入檔案內
     Public Sub WriteParameterToFile(ByVal sfile As String)
         Dim i As Integer
-        'WriteProgData("PARAMETER", "TOPP1", SystemParameters.TopP1, sfile)
-        'WriteProgData("PARAMETER", "TOPI1", SystemParameters.TopI1, sfile)
-        'WriteProgData("PARAMETER", "TOPD1", SystemParameters.TopD1, sfile)
-        'WriteProgData("PARAMETER", "TOPP2", SystemParameters.TopP2, sfile)
-        'WriteProgData("PARAMETER", "TOPI2", SystemParameters.TopI2, sfile)
-        'WriteProgData("PARAMETER", "TOPD2", SystemParameters.TopD2, sfile)
-        'WriteProgData("PARAMETER", "TOPP3", SystemParameters.TopP3, sfile)
-        'WriteProgData("PARAMETER", "TOPI3", SystemParameters.TopI3, sfile)
-        'WriteProgData("PARAMETER", "TOPD3", SystemParameters.TopD3, sfile)
-        'WriteProgData("PARAMETER", "BOTP1", SystemParameters.BotP1, sfile)
-        'WriteProgData("PARAMETER", "BOTI1", SystemParameters.BotI1, sfile)
-        'WriteProgData("PARAMETER", "BOTD1", SystemParameters.BotD1, sfile)
-        'WriteProgData("PARAMETER", "BOTP2", SystemParameters.BotP2, sfile)
-        'WriteProgData("PARAMETER", "BOTI2", SystemParameters.BotI2, sfile)
-        'WriteProgData("PARAMETER", "BOTD2", SystemParameters.BotD2, sfile)
-        'WriteProgData("PARAMETER", "BOTP3", SystemParameters.BotP3, sfile)
-        'WriteProgData("PARAMETER", "BOTI3", SystemParameters.BotI3, sfile)
-        'WriteProgData("PARAMETER", "BOTD3", SystemParameters.BotD3, sfile)
-        'WriteProgData("PARAMETER", "TOPMAX1", SystemParameters.TopMax1, sfile)
-        'WriteProgData("PARAMETER", "TOPMIN1", SystemParameters.TopMin1, sfile)
-        'WriteProgData("PARAMETER", "BOTMAX1", SystemParameters.BotMax1, sfile)
-        'WriteProgData("PARAMETER", "BOTMIN1", SystemParameters.BotMin1, sfile)
-        'WriteProgData("PARAMETER", "TOPMAX2", SystemParameters.TopMax2, sfile)
-        'WriteProgData("PARAMETER", "TOPMIN2", SystemParameters.TopMin2, sfile)
-        'WriteProgData("PARAMETER", "BOTMAX2", SystemParameters.BotMax2, sfile)
-        'WriteProgData("PARAMETER", "BOTMIN2", SystemParameters.BotMin2, sfile)
-        'WriteProgData("PARAMETER", "TOPMAX3", SystemParameters.TopMax3, sfile)
-        'WriteProgData("PARAMETER", "TOPMIN3", SystemParameters.TopMin3, sfile)
-        'WriteProgData("PARAMETER", "BOTMAX3", SystemParameters.BotMax3, sfile)
-        'WriteProgData("PARAMETER", "BOTMIN3", SystemParameters.BotMin3, sfile)
-        'WriteProgData("PARAMETER", "TOPLOWRANGE", SystemParameters.TopLowRange, sfile)
-        'WriteProgData("PARAMETER", "TOPHIGHRANGE", SystemParameters.TopHighRange, sfile)
-        'WriteProgData("PARAMETER", "BOTLOWRANGE", SystemParameters.BotLowRange, sfile)
-        'WriteProgData("PARAMETER", "BOTHIGHRANGE", SystemParameters.BotHighRange, sfile)
-        'WriteProgData("PARAMETER", "TOPLIMITPOWERTEMP", SystemParameters.TopLimitPowerTemp, sfile)
-        'WriteProgData("PARAMETER", "TOPLIMITPOWER", SystemParameters.TopLimitPower, sfile)
-        'WriteProgData("PARAMETER", "BOTLIMITPOWERTEMP", SystemParameters.BotLimitPowerTemp, sfile)
-        'WriteProgData("PARAMETER", "BOTLIMITPOWER", SystemParameters.BotLimitPower, sfile)
-
-        'WriteProgData("PARAMETER", "TOPFLOWMETERHZ00", SystemParameters.TopFlowMeterHz(0), sfile)
-        'WriteProgData("PARAMETER", "BOTFLOWMETERHZ00", SystemParameters.BotFlowMeterHz(0), sfile)
-        'WriteProgData("PARAMETER", "TOPFLOWMETERHZ01", SystemParameters.TopFlowMeterHz(1), sfile)
-        'WriteProgData("PARAMETER", "BOTFLOWMETERHZ01", SystemParameters.BotFlowMeterHz(1), sfile)
-        'WriteProgData("PARAMETER", "TOPFLOWMETERHZ02", SystemParameters.TopFlowMeterHz(2), sfile)
-        'WriteProgData("PARAMETER", "BOTFLOWMETERHZ02", SystemParameters.BotFlowMeterHz(2), sfile)
 
 
         WriteProgData("PARAMETER", "LOWFLOWALARM", SystemParameters.LowFlowAlarm, sfile)
@@ -630,18 +504,12 @@ Module Module_Parameter
         WriteProgData("PARAMETER", "AUTOPURGEOFFTIME", SystemParameters.AutoPurgeOFFTime, sfile)
         WriteProgData("PARAMETER", "AUTOPURGEONTIME", SystemParameters.AutoPurgeOnTime, sfile)
         WriteProgData("PARAMETER", "AUTOPURGECYCLE", SystemParameters.AutoPurgeCycle, sfile)
-        'WriteProgData("PARAMETER", "AUTOVACUUM", SystemParameters.AutoVacuum, sfile)
-        'WriteProgData("PARAMETER", "PROCESSAUTOVACUUMVAC", SystemParameters.ProcessVacuumAutoVac, sfile)
-        'WriteProgData("PARAMETER", "BONDBEFOREVACUUM", SystemParameters.BondBeforeVacuum, sfile)
-        'WriteHeaterCalData(ParameterINIFile)
-        'WritePressCalData(ParameterINIFile)
 
         WriteProgData("PARAMETER", "HEATERCOUNT", SystemParameters.HeaterCount, sfile)
         WriteProgData("PARAMETER", "HEATERPOWER", SystemParameters.HeaterPower, sfile)
         WriteProgData("PARAMETER", "HEATERVOLTAGE", SystemParameters.HeaterVoltage, sfile)
         WriteProgData("PARAMETER", "HEATERMONITORPOWER", SystemParameters.HeaterMonitorPower, sfile)
         WriteProgData("PARAMETER", "HEATERCURRENTRATE", SystemParameters.HeaterCurrentRate, sfile)
-
 
         '製程中斷設定
         WriteProgData("PARAMETER", "ABORTPRESSURERANGE", SystemParameters.AbortPressureRange, sfile)
@@ -672,6 +540,8 @@ Module Module_Parameter
         WriteProgData("PARAMETER", "StartLog_Time", SystemParameters.StartLog_Time, sfile) 'Add  by claire 20230620
         WriteProgData("PARAMETER", "RunConfirm", SystemParameters.RunConfirm, sfile)
         WriteProgData("PARAMETER", "WebPath", SystemParameters.WebPath, sfile)
+
+        WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, sfile)
     End Sub
 
 

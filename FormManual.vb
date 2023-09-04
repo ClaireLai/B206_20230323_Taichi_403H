@@ -2041,10 +2041,12 @@ Public Class FormManual
         If Check_PLC_X(DiSaftyGate01Index) Then
             Output(DoDoor1UpIndex).Status = Not Output(DoDoor1UpIndex).Status
             Output(DoDoor1DownIndex).Status = False
+            Set_MBit(DoBZIndex, DEVICE_ON)
         Else
             MsgBoxLangErr("安全門 1 異常!", "Safty Gate 1 Error!")
         End If
     End Sub
+
     Private Sub btnDoor1Down_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoor1Down.Click
         If ProcessMode_RUN Then Exit Sub
         Dim sstr As String

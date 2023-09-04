@@ -168,6 +168,13 @@ Public Class FormStartup
         CreateInitialDirectory()                'ミ戈Ж
         pgbSystemLoad.PerformStep()
         InitProgramIniFile(ProgramDir)          '﹍て INI 砞﹚郎
+        ReadParameterFromFile(ParameterINIFile) '更把计郎
+        '更Ρ絬夹繷郎
+        If SystemParameters.bolDAlog Then
+            ReadCurveNames(ProgramDir + "CURVEDATA_DA.INI")
+        Else
+            ReadCurveNames(ProgramDir + "CURVEDATA.INI")
+        End If
         ReadFormAlarmstring(AlarmINIFile)
         ReadProgramCaption(ProgramINIFile)
         ReadProgramMode(ProgramINIFile)
@@ -195,7 +202,6 @@ Public Class FormStartup
         '把计弄
         ReadFlowMeterMode(ParameterINIFile)
         pgbSystemLoad.PerformStep()
-        ReadParameterFromFile(ParameterINIFile) '更把计郎
 
         CreateUserControlData()
         RecipeInit(RecipeINIFile)

@@ -492,6 +492,7 @@ Public Class FormParameter
     Friend WithEvents dudLogStartTime As DomainUpDown
     Friend WithEvents btnSelPath As Button
     Friend WithEvents chkAvailBarCode As CheckBox
+    Friend WithEvents chkDa As CheckBox
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -1044,58 +1045,59 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.pnlParaSet.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.grpVacuum.SuspendLayout()
-        Me.pnlDPWaterFlow.SuspendLayout()
-        Me.pnlDPTemp.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpProcessCondition.SuspendLayout()
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpAlarmSetup.SuspendLayout()
-        Me.pnlFlowShow.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpPurgeSetup.SuspendLayout()
-        Me.grpPIDLoadSave.SuspendLayout()
-        Me.grpVacuumSetup.SuspendLayout()
-        Me.tabParameter.SuspendLayout()
-        Me.TabPageTIC.SuspendLayout()
-        Me.tabPIDSetup.SuspendLayout()
-        Me.tabPage1to3.SuspendLayout()
-        Me.tabPage4to6.SuspendLayout()
-        Me.TabPageTCal.SuspendLayout()
-        Me.pnlSplitTopBotTemp.SuspendLayout()
-        Me.TabPagePCal.SuspendLayout()
-        Me.TabPageSystem.SuspendLayout()
-        Me.TabPageCIM.SuspendLayout()
-        Me.TabPageCello.SuspendLayout()
-        Me.tabSystem.SuspendLayout()
-        Me.tabpageTempCal.SuspendLayout()
-        Me.pnlHeaterSetup.SuspendLayout()
-        Me.tabpageVacuum.SuspendLayout()
-        Me.grpFlowMeter.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.grpPumpType.SuspendLayout()
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpagePressCal.SuspendLayout()
-        Me.tabpagePressControl.SuspendLayout()
-        Me.pnlPressureAverage.SuspendLayout()
-        Me.pnl6Plate.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.tabPageIniEdit.SuspendLayout()
-        Me.TabPageTempCalTool.SuspendLayout()
-        Me.tabpageCycleRun.SuspendLayout()
-        Me.pnl6Plate1.SuspendLayout()
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.chkDa = New System.Windows.Forms.CheckBox()
+        Me.pnlParaSet.SuspendLayout
+        Me.Panel3.SuspendLayout
+        Me.Panel2.SuspendLayout
+        Me.grpVacuum.SuspendLayout
+        Me.pnlDPWaterFlow.SuspendLayout
+        Me.pnlDPTemp.SuspendLayout
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.grpProcessCondition.SuspendLayout
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.grpAlarmSetup.SuspendLayout
+        Me.pnlFlowShow.SuspendLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.grpPurgeSetup.SuspendLayout
+        Me.grpPIDLoadSave.SuspendLayout
+        Me.grpVacuumSetup.SuspendLayout
+        Me.tabParameter.SuspendLayout
+        Me.TabPageTIC.SuspendLayout
+        Me.tabPIDSetup.SuspendLayout
+        Me.tabPage1to3.SuspendLayout
+        Me.tabPage4to6.SuspendLayout
+        Me.TabPageTCal.SuspendLayout
+        Me.pnlSplitTopBotTemp.SuspendLayout
+        Me.TabPagePCal.SuspendLayout
+        Me.TabPageSystem.SuspendLayout
+        Me.TabPageCIM.SuspendLayout
+        Me.TabPageCello.SuspendLayout
+        Me.tabSystem.SuspendLayout
+        Me.tabpageTempCal.SuspendLayout
+        Me.pnlHeaterSetup.SuspendLayout
+        Me.tabpageVacuum.SuspendLayout
+        Me.grpFlowMeter.SuspendLayout
+        Me.GroupBox1.SuspendLayout
+        Me.grpPumpType.SuspendLayout
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpagePressCal.SuspendLayout
+        Me.tabpagePressControl.SuspendLayout
+        Me.pnlPressureAverage.SuspendLayout
+        Me.pnl6Plate.SuspendLayout
+        Me.GroupBox2.SuspendLayout
+        Me.Panel1.SuspendLayout
+        Me.tabPageIniEdit.SuspendLayout
+        Me.TabPageTempCalTool.SuspendLayout
+        Me.tabpageCycleRun.SuspendLayout
+        Me.pnl6Plate1.SuspendLayout
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'Timer1
         '
@@ -4568,6 +4570,7 @@ Public Class FormParameter
         'tabpagePressControl
         '
         Me.tabpagePressControl.BackColor = System.Drawing.Color.Transparent
+        Me.tabpagePressControl.Controls.Add(Me.chkDa)
         Me.tabpagePressControl.Controls.Add(Me.btnForceDAOut)
         Me.tabpagePressControl.Controls.Add(Me.pnlPressureAverage)
         Me.tabpagePressControl.Controls.Add(Me.lblNoControlPressText)
@@ -7209,6 +7212,17 @@ Public Class FormParameter
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'chkDa
+        '
+        Me.chkDa.AutoSize = True
+        Me.chkDa.Font = New System.Drawing.Font("·s²Ó©úÅé", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.chkDa.Location = New System.Drawing.Point(532, 358)
+        Me.chkDa.Name = "chkDa"
+        Me.chkDa.Size = New System.Drawing.Size(50, 14)
+        Me.chkDa.TabIndex = 953
+        Me.chkDa.Text = "DALog"
+        Me.chkDa.UseVisualStyleBackColor = True
+        '
         'FormParameter
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -7227,43 +7241,43 @@ Public Class FormParameter
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "ParameterSet"
         Me.pnlParaSet.ResumeLayout(False)
-        Me.pnlParaSet.PerformLayout()
+        Me.pnlParaSet.PerformLayout
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
+        Me.Panel3.PerformLayout
         Me.Panel2.ResumeLayout(False)
         Me.grpVacuum.ResumeLayout(False)
-        Me.grpVacuum.PerformLayout()
+        Me.grpVacuum.PerformLayout
         Me.pnlDPWaterFlow.ResumeLayout(False)
-        Me.pnlDPWaterFlow.PerformLayout()
+        Me.pnlDPWaterFlow.PerformLayout
         Me.pnlDPTemp.ResumeLayout(False)
-        Me.pnlDPTemp.PerformLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlDPTemp.PerformLayout
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
         Me.grpProcessCondition.ResumeLayout(False)
-        Me.grpProcessCondition.PerformLayout()
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpProcessCondition.PerformLayout
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit
         Me.grpAlarmSetup.ResumeLayout(False)
-        Me.grpAlarmSetup.PerformLayout()
+        Me.grpAlarmSetup.PerformLayout
         Me.pnlFlowShow.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit
         Me.grpPurgeSetup.ResumeLayout(False)
-        Me.grpPurgeSetup.PerformLayout()
+        Me.grpPurgeSetup.PerformLayout
         Me.grpPIDLoadSave.ResumeLayout(False)
-        Me.grpPIDLoadSave.PerformLayout()
+        Me.grpPIDLoadSave.PerformLayout
         Me.grpVacuumSetup.ResumeLayout(False)
-        Me.grpVacuumSetup.PerformLayout()
+        Me.grpVacuumSetup.PerformLayout
         Me.tabParameter.ResumeLayout(False)
         Me.TabPageTIC.ResumeLayout(False)
-        Me.TabPageTIC.PerformLayout()
+        Me.TabPageTIC.PerformLayout
         Me.tabPIDSetup.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
         Me.TabPageTCal.ResumeLayout(False)
         Me.pnlSplitTopBotTemp.ResumeLayout(False)
-        Me.pnlSplitTopBotTemp.PerformLayout()
+        Me.pnlSplitTopBotTemp.PerformLayout
         Me.TabPagePCal.ResumeLayout(False)
         Me.TabPageSystem.ResumeLayout(False)
         Me.TabPageCIM.ResumeLayout(False)
@@ -7271,37 +7285,37 @@ Public Class FormParameter
         Me.tabSystem.ResumeLayout(False)
         Me.tabpageTempCal.ResumeLayout(False)
         Me.pnlHeaterSetup.ResumeLayout(False)
-        Me.pnlHeaterSetup.PerformLayout()
+        Me.pnlHeaterSetup.PerformLayout
         Me.tabpageVacuum.ResumeLayout(False)
         Me.grpFlowMeter.ResumeLayout(False)
-        Me.grpFlowMeter.PerformLayout()
+        Me.grpFlowMeter.PerformLayout
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBox1.PerformLayout
         Me.grpPumpType.ResumeLayout(False)
-        Me.grpPumpType.PerformLayout()
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpPumpType.PerformLayout
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpagePressCal.ResumeLayout(False)
         Me.tabpagePressControl.ResumeLayout(False)
-        Me.tabpagePressControl.PerformLayout()
+        Me.tabpagePressControl.PerformLayout
         Me.pnlPressureAverage.ResumeLayout(False)
-        Me.pnlPressureAverage.PerformLayout()
+        Me.pnlPressureAverage.PerformLayout
         Me.pnl6Plate.ResumeLayout(False)
-        Me.pnl6Plate.PerformLayout()
+        Me.pnl6Plate.PerformLayout
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBox2.PerformLayout
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.Panel1.PerformLayout
         Me.tabPageIniEdit.ResumeLayout(False)
-        Me.tabPageIniEdit.PerformLayout()
+        Me.tabPageIniEdit.PerformLayout
         Me.TabPageTempCalTool.ResumeLayout(False)
-        Me.TabPageTempCalTool.PerformLayout()
+        Me.TabPageTempCalTool.PerformLayout
         Me.tabpageCycleRun.ResumeLayout(False)
-        Me.tabpageCycleRun.PerformLayout()
+        Me.tabpageCycleRun.PerformLayout
         Me.pnl6Plate1.ResumeLayout(False)
-        Me.pnl6Plate1.PerformLayout()
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnl6Plate1.PerformLayout
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
 
     End Sub
@@ -7423,6 +7437,7 @@ Public Class FormParameter
         'tabParameter.TabPages.RemoveByKey("TabPageCIM")
         'End If
         'Add By Vincent 20190710  ----------------------------------------------------------  End
+        chkDa.Checked = SystemParameters.bolDAlog
 
         Timer1.Interval = 300
         Timer1.Enabled = True
@@ -7571,49 +7586,6 @@ Public Class FormParameter
 
         SystemParameters.LowFlowAlarm = txtLowFlowAlarm.Text
 
-
-        'SystemParameters.TopTempCal1 = txtTopTempCal1.Text
-        'SystemParameters.TopTempCal2 = txtTopTempCal2.Text
-        'SystemParameters.TopTempCal3 = txtTopTempCal3.Text
-        'SystemParameters.TopTempCal4 = txtTopTempCal4.Text
-        'SystemParameters.TopTempCal5 = txtTopTempCal5.Text
-        'SystemParameters.TopTempCalX1 = txtTopTempCalX1.Text
-        'SystemParameters.TopTempCalX2 = txtTopTempCalX2.Text
-        'SystemParameters.TopTempCalX3 = txtTopTempCalX3.Text
-        'SystemParameters.TopTempCalX4 = txtTopTempCalX4.Text
-        'SystemParameters.TopTempCalX5 = txtTopTempCalX5.Text
-
-        ''¤U·Å«×®Õ¥¿(PC ºÝ®Õ¥¿)
-        'SystemParameters.BotTempCal1 = txtBotTempCal1.Text
-        'SystemParameters.BotTempCal2 = txtBotTempCal2.Text
-        'SystemParameters.BotTempCal3 = txtBotTempCal3.Text
-        'SystemParameters.BotTempCal4 = txtBotTempCal4.Text
-        'SystemParameters.BotTempCal5 = txtBotTempCal5.Text
-        'SystemParameters.BotTempCalX1 = txtBotTempCalX1.Text
-        'SystemParameters.BotTempCalX2 = txtBotTempCalX2.Text
-        'SystemParameters.BotTempCalX3 = txtBotTempCalX3.Text
-        'SystemParameters.BotTempCalX4 = txtBotTempCalX4.Text
-        'SystemParameters.BotTempCalX5 = txtBotTempCalX5.Text
-
-        ''À£¤O®Õ¥¿ (¦s©ó PLC)
-        'SystemParameters.PressureCal1 = txtPlatePressureCal1.Text
-        'SystemParameters.PressureCal2 = txtPlatePressureCal2.Text
-        'SystemParameters.PressureCal3 = txtPlatePressureCal3.Text
-        'SystemParameters.PressureCal4 = txtPlatePressureCal4.Text
-        'SystemParameters.PressureCal5 = txtPlatePressureCal5.Text
-
-        'SystemParameters.PressureCalX1 = txtPlatePressureCalX1.Text
-        'SystemParameters.PressureCalX2 = txtPlatePressureCalX2.Text
-        'SystemParameters.PressureCalX3 = txtPlatePressureCalX3.Text
-        'SystemParameters.PressureCalX4 = txtPlatePressureCalX4.Text
-        'SystemParameters.PressureCalX5 = txtPlatePressureCalX5.Text
-
-        'SystemParameters.PressFullScale = txtFullScaleKg.Text
-        'SystemParameters.PressZero = txtZeroKg.Text
-
-        'SystemParameters.PressureRamp = txtPressureRamp.Text    '±×²v
-        'SystemParameters.PressOffset = txtPressureConstant.Text '•Z²¾­È
-        'SystemParameters.PressureNet = txtPressureOffset.Text   '¦©­«
         SystemParameters.KgDARatio = txtkgDARatio1.Text
 
         SystemParameters.Ctrl1stRange = txtCtrl1stRange.Text
@@ -7697,7 +7669,10 @@ Public Class FormParameter
 
         SystemParameters.DistanceSet = txtDistanceSet.Text
 
+        '½[°Ê²v¶}©l°O¿ý®É¶¡
         SystemParameters.StartLog_Time = dudLogStartTime.Text
+        'log¸ê®Æ¬O§_­nDA
+        SystemParameters.bolDAlog = chkDa.Checked
 
         WriteAlarmTimeSetup(AlarmINIFile)
         WriteParameterToFile(ParameterINIFile)
@@ -8649,56 +8624,6 @@ Public Class FormParameter
         End If
     End Sub
 
-    Public Sub WritePID(ByVal Index As Integer, ByVal sFile As String)
-        Dim section As String
-        section = "PID" + Format(Index, "00")
-        'WriteProgData(section, "TOP_P11", txtTopPL.Text, sFile)
-        'WriteProgData(section, "TOP_I11", txtTopIL.Text, sFile)
-        'WriteProgData(section, "TOP_D11", txtTopDL.Text, sFile)
-        'WriteProgData(section, "BOT_P11", txtBotPL.Text, sFile)
-        'WriteProgData(section, "BOT_I11", txtBotIL.Text, sFile)
-        'WriteProgData(section, "BOT_D11", txtBotDL.Text, sFile)
-
-        'WriteProgData(section, "TOP_P12", txtTopPM.Text, sFile)
-        'WriteProgData(section, "TOP_I12", txtTopIM.Text, sFile)
-        'WriteProgData(section, "TOP_D12", txtTopDM.Text, sFile)
-        'WriteProgData(section, "BOT_P12", txtBotPM.Text, sFile)
-        'WriteProgData(section, "BOT_I12", txtBotIM.Text, sFile)
-        'WriteProgData(section, "BOT_D12", txtBotDM.Text, sFile)
-
-        'WriteProgData(section, "TOP_P13", txtTopPH.Text, sFile)
-        'WriteProgData(section, "TOP_I13", txtTopIH.Text, sFile)
-        'WriteProgData(section, "TOP_D13", txtTopDH.Text, sFile)
-        'WriteProgData(section, "BOT_P13", txtBotPH.Text, sFile)
-        'WriteProgData(section, "BOT_I13", txtBotIH.Text, sFile)
-        'WriteProgData(section, "BOT_D13", txtBotDH.Text, sFile)
-
-    End Sub
-    Public Sub ReadPID(ByVal Index As Integer, ByVal sFile As String)
-        Dim section As String
-        section = "PID" + Format(Index, "00")
-        'txtTopPL.Text = ReadProgData(section, "TOP_P11", "30", sFile)
-        'txtTopIL.Text = ReadProgData(section, "TOP_I11", "120", sFile)
-        'txtTopDL.Text = ReadProgData(section, "TOP_D11", "30", sFile)
-        'txtBotPL.Text = ReadProgData(section, "BOT_P11", "30", sFile)
-        'txtBotIL.Text = ReadProgData(section, "BOT_I11", "120", sFile)
-        'txtBotDL.Text = ReadProgData(section, "BOT_D11", "30", sFile)
-
-        'txtTopPM.Text = ReadProgData(section, "TOP_P12", "30", sFile)
-        'txtTopIM.Text = ReadProgData(section, "TOP_I12", "120", sFile)
-        'txtTopDM.Text = ReadProgData(section, "TOP_D12", "30", sFile)
-        'txtBotPM.Text = ReadProgData(section, "BOT_P12", "30", sFile)
-        'txtBotIM.Text = ReadProgData(section, "BOT_I12", "120", sFile)
-        'txtBotDM.Text = ReadProgData(section, "BOT_D12", "30", sFile)
-
-        'txtTopPH.Text = ReadProgData(section, "TOP_P13", "30", sFile)
-        'txtTopIH.Text = ReadProgData(section, "TOP_I13", "120", sFile)
-        'txtTopDH.Text = ReadProgData(section, "TOP_D13", "30", sFile)
-        'txtBotPH.Text = ReadProgData(section, "BOT_P13", "30", sFile)
-        'txtBotIH.Text = ReadProgData(section, "BOT_I13", "120", sFile)
-        'txtBotDH.Text = ReadProgData(section, "BOT_D13", "30", sFile)
-
-    End Sub
 
     Private Sub txtPIDFileName_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtPIDFileName.MouseDown
         CallKeyboard1(sender)
@@ -9450,4 +9375,11 @@ Public Class FormParameter
         End If
 
     End Sub
+
+
+    Private Sub chkDa_CheckedChanged(sender As Object, e As EventArgs) Handles chkDa.CheckedChanged
+        SystemParameters.bolDAlog = chkDa.Checked
+        WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, ParameterINIFile)
+    End Sub
+
 End Class

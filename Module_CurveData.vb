@@ -803,7 +803,7 @@ Module Module_CurveData
                                 ShowData = ShowData + CurveName(SystemLanguage, i) + ","
                             Next
                         Else
-                            For i = 0 To iTotalCurveNum - 1
+                            For i = 0 To iTotalCurveNum
                                 ShowData = ShowData + CurveName(SystemLanguage, i) + ","
                             Next
                         End If
@@ -841,9 +841,11 @@ Module Module_CurveData
                                 datamax += 1
                                 data(datamax) = PressPVstr(i)
                                 datamax += 1
-                                ''寫入DA值
-                                'data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
-                                'datamax += 1
+                                '寫入DA值
+                                If SystemParameters.bolDAlog Then
+                                    data(datamax) = Get_PLC_R1000(ADScalerB01Index + i).ToString
+                                    datamax += 1
+                                End If
                                 data(datamax) = PresetTempStr(i)
                                 datamax += 1
                                 data(datamax) = PresetPressStr(i)

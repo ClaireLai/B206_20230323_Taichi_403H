@@ -14,7 +14,7 @@ Module Module_Alarm_Task
 
     'ALARM TASK 使用
 
-    Public User As String
+    Public bolAlarmBZ As Boolean
     Public Alarm_String As String
 
     Public Alarm_status As Boolean
@@ -508,6 +508,7 @@ Module Module_Alarm_Task
             Next
         End If
         AlarmMapping()
+
         'AlarmStringList.Clear()
         Alarm_String = ""
         CheckAlarmDateAndCreate()
@@ -536,26 +537,9 @@ Module Module_Alarm_Task
             End If
         Next
 
+        '門上升警報
+        CheckDoorUpAlarm()
 
-
-
-        'For i = 0 To Total_Alarm_Num
-        '    'AlarmError(i) = False
-        '    If AlarmError(i) Then
-        '        astr = LoginUserName + vbTab + ADate + "   " + TTime + vbTab + Format(i, " [000]  ") + vbTab + AlarmList1(SystemLanguage, i) + vbCrLf
-        '        Alarm_String = Alarm_String + astr
-        '        FormAlarms.txtAlarmList.Text = Alarm_String
-        '        If AlarmState(i) = 0 Then
-        '            AddAlarmToListView(FormAlarms.ListView1, LoginUserName, ADate, TTime, Format(i, "[000]"), AlarmList1(SystemLanguage, i))
-        '            AppendMultiData(AlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), AlarmList1(SystemLanguage, i))
-        '            AlarmState(i) = 1
-        '        End If
-        '        SerialNo += 1
-        '    Else
-        '        FormAlarms.txtAlarmList.Text = Alarm_String
-        '        AlarmState(i) = 0
-        '    End If
-        'Next
 
         '聲音控制
         Select Case Control_State
@@ -575,22 +559,25 @@ Module Module_Alarm_Task
                     Control_State = 11
                 End If
             Case 11
-                If Alarm_status = False Then
+                If Alarm_status = False Then '已沒有ALARM..>閉嘴
                     Set_MBit(DoBZIndex, DEVICE_OFF)
                     Control_State = 2
                 Else
-                    If Check_PLC_Y(DoBZIndex) = False Then
+                    If Check_PLC_Y(DoBZIndex) = False Then '有alarm但是被叫閉嘴
                         Control_State = 2
                     End If
                 End If
             Case 2      'BZ 已 OFF, 等待 ALARM 消失
+                bolAlarmBZ = False
                 If Alarm_status = False Then
                     Control_State = 0
                     Set_MBit(DoBZIndex, DEVICE_OFF)
                     'BZ_Status = False
                 End If
+                '有新的Alarm產生
                 If (OldSerialNo <> SerialNo) And Alarm_status Then
                     Control_State = 0
+                    bolAlarmBZ = True '又開始叫了
                 End If
         End Select
 
@@ -614,6 +601,8 @@ Module Module_Alarm_Task
                 FormAlarmPopups.Left = 50
                 PopupFlag = True
             End If
+            'ElseIf (Output(DoDoor1UpIndex).Status = True And Check_PLC_X(DiDoor1UpIndex) = False) Then
+            '    Alarm_status = True
         Else
             Alarm_status = False
             'FormAlarms.txtAlarmList.Text = ""
@@ -768,7 +757,15 @@ Module Module_Alarm_Task
         AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), PLCAlarm_String)
         i += 1
     End Sub
+    '門上升警報 for B222
+    Public Sub CheckDoorUpAlarm()
+        If Output(DoDoor1UpIndex).Status = True And Check_PLC_X(DiDoor1UpIndex) = False Then
+            Set_MBit(DoBZIndex, DEVICE_ON)
+        ElseIf bolAlarmBZ = False Then 'Alarm也不叫了
+            Set_MBit(DoBZIndex, DEVICE_OFF)
+        End If
 
+    End Sub
 
     '對應警報 的狀態點
     Public Sub AlarmMapping()
