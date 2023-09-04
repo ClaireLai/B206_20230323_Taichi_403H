@@ -538,7 +538,7 @@ Module Module_Alarm_Task
         Next
 
         '門上升警報
-        CheckDoorUpAlarm()
+        'CheckDoorUpAlarm()
 
 
         '聲音控制

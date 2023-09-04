@@ -203,6 +203,8 @@ Public Class FormManual
         Me.tabManual = New System.Windows.Forms.TabControl()
         Me.tabPageVacuum = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtVacuumTestTimeMin = New System.Windows.Forms.TextBox()
         Me.btnLeakRateTest = New System.Windows.Forms.Button()
@@ -220,8 +222,6 @@ Public Class FormManual
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -1142,6 +1142,25 @@ Public Class FormManual
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(149, 225)
         Me.Panel4.TabIndex = 547
+        Me.Panel4.Visible = False
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(67, 79)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(38, 20)
+        Me.Label2.TabIndex = 552
+        Me.Label2.Text = "Hr"
+        '
+        'txtVacuumTestTimeHr
+        '
+        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
+        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
+        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
+        Me.txtVacuumTestTimeHr.TabIndex = 551
+        Me.txtVacuumTestTimeHr.Text = "0"
         '
         'Label1
         '
@@ -1334,24 +1353,6 @@ Public Class FormManual
         Me.flwManualPage2.Name = "flwManualPage2"
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(67, 79)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 20)
-        Me.Label2.TabIndex = 552
-        Me.Label2.Text = "Hr"
-        '
-        'txtVacuumTestTimeHr
-        '
-        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
-        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
-        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
-        Me.txtVacuumTestTimeHr.TabIndex = 551
-        Me.txtVacuumTestTimeHr.Text = "0"
         '
         'FormManual
         '
