@@ -55,27 +55,27 @@ Public Class FormLoginSetup
     Friend WithEvents pgbShowAuthority As System.Windows.Forms.ProgressBar
     Friend WithEvents pnlAuthorityTitle As System.Windows.Forms.Panel
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLoginSetup))
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.lblAlarmText = New System.Windows.Forms.Label
-        Me.lblManualText = New System.Windows.Forms.Label
-        Me.lblRecipeText = New System.Windows.Forms.Label
-        Me.lblProcessText = New System.Windows.Forms.Label
-        Me.lblPassText = New System.Windows.Forms.Label
-        Me.lblUserText = New System.Windows.Forms.Label
-        Me.lblAuthorityText = New System.Windows.Forms.Label
-        Me.lblParameterText = New System.Windows.Forms.Label
-        Me.lblRecordText = New System.Windows.Forms.Label
-        Me.lblMaintainText = New System.Windows.Forms.Label
-        Me.pnlAuthority = New System.Windows.Forms.Panel
-        Me.pnlAuthorityTitle = New System.Windows.Forms.Panel
-        Me.btnReload = New System.Windows.Forms.Button
-        Me.picCelloTitleEng = New System.Windows.Forms.PictureBox
-        Me.picCelloTitle = New System.Windows.Forms.PictureBox
-        Me.picCelloLogo = New System.Windows.Forms.PictureBox
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.lblAlarmText = New System.Windows.Forms.Label()
+        Me.lblManualText = New System.Windows.Forms.Label()
+        Me.lblRecipeText = New System.Windows.Forms.Label()
+        Me.lblProcessText = New System.Windows.Forms.Label()
+        Me.lblPassText = New System.Windows.Forms.Label()
+        Me.lblUserText = New System.Windows.Forms.Label()
+        Me.lblAuthorityText = New System.Windows.Forms.Label()
+        Me.lblParameterText = New System.Windows.Forms.Label()
+        Me.lblRecordText = New System.Windows.Forms.Label()
+        Me.lblMaintainText = New System.Windows.Forms.Label()
+        Me.pnlAuthority = New System.Windows.Forms.Panel()
+        Me.pnlAuthorityTitle = New System.Windows.Forms.Panel()
+        Me.btnReload = New System.Windows.Forms.Button()
+        Me.picCelloTitleEng = New System.Windows.Forms.PictureBox()
+        Me.picCelloTitle = New System.Windows.Forms.PictureBox()
+        Me.picCelloLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.pgbShowAuthority = New System.Windows.Forms.ProgressBar
+        Me.pgbShowAuthority = New System.Windows.Forms.ProgressBar()
         Me.pnlAuthorityTitle.SuspendLayout()
         CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -290,6 +290,9 @@ Public Class FormLoginSetup
         Me.picCelloLogo.TabIndex = 523
         Me.picCelloLogo.TabStop = False
         '
+        'Timer1
+        '
+        '
         'pgbShowAuthority
         '
         Me.pgbShowAuthority.Location = New System.Drawing.Point(375, 101)
@@ -352,26 +355,32 @@ Public Class FormLoginSetup
         SetFromRights()                                     '設定表單內之資料
         ResetModifiedButton(btnSave, "*")
     End Sub
-    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub FormLogin_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If isLoaded Then
 
             Dim new_x As Single = FormW / X
             Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
-            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Height = (FormH - FromStartUpTopPosition)
             Me.Width = FormW
             SetControls(new_x, new_Y, Me, isLoaded)
-            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+            Debug.Print("FormLogin_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
         End If
     End Sub
-
-    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+    Public Sub ShowInit()
+        Me.Show()
+        Timer1.Enabled = True
+    End Sub
+    Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
         FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
 
         Me.WindowState = FormWindowState.Normal
-        FormProcess_Resize(Me, e)
+        FormLogin_Resize(Me, e)
         'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
     End Sub
 
-
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Me.Top = FromStartUpTopPosition
+        Me.Left = 0
+    End Sub
 End Class

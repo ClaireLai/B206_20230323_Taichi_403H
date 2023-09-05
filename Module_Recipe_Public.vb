@@ -200,7 +200,7 @@ Module Module_Recipe_Public
     '建立配方欄位
     Public Sub RecipeInit(ByVal sfile As String)
         ReadRecipeColumnData(RecipeINIFile)
-        CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)                  '建立配方欄位
+        'CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)                  '建立配方欄位
         RecipeStructReDim(Recipe_Max)                                   '載入配方資料
     End Sub
     '配方資料初始化
@@ -280,10 +280,10 @@ Module Module_Recipe_Public
         Dim totaltable As Integer
         TableMax = Recipe_Num + 1
         totaltable = TableMax - 1
-        TableWidth = 80           '資料欄位寬度
-        TableHeight = 31 '(dg.Height / ((Recipe_Change * 3) + 2))     '資料欄位高度_ '30
-        RowHeaderWidth = 200      '資料欄位標題寬度
-        dg.Height = TableHeight * (Recipe_Change * 3) + dg.ColumnHeadersHeight + 3
+        TableWidth = 70 * FormRecipe.new_x      '資料欄位寬度
+        TableHeight = 31 * FormRecipe.new_y '(dg.Height / ((Recipe_Change * 3) + 2))     '資料欄位高度_ '30
+        RowHeaderWidth = 200 * FormRecipe.new_x      '資料欄位標題寬度
+        dg.Height = (TableHeight * (Recipe_Change * 3) + dg.ColumnHeadersHeight + 3) * FormRecipe.new_y
         rwstepindex = 1
 
         dg.ColumnCount = rwstepindex

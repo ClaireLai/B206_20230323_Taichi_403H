@@ -45,9 +45,9 @@ Module Module_FormReSize
         g.InterpolationMode = InterpolationMode.HighQualityBicubic
 
         g.DrawImage(imagetoresize, New System.Drawing.Rectangle(0, 0, showW, showH), New System.Drawing.Rectangle(0, 0, imagetoresize.Width, imagetoresize.Height), GraphicsUnit.Pixel)
-        Debug.Print("w=" + imagetoresize.Width.ToString + ", h=" + imagetoresize.Height.ToString)
+        'Debug.Print("w=" + imagetoresize.Width.ToString + ", h=" + imagetoresize.Height.ToString)
         g.Dispose()
-        bmp.Save("D:\temp.png")
+        'bmp.Save("D:\temp.png")
         Return (bmp)
 
     End Function

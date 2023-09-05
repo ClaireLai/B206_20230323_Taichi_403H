@@ -68,10 +68,10 @@
         For i = FORM_MENU.PROCESS To FORM_MENU.MAINTANCE
             ButtonPtr(i).BackColor = offcolor
             'ButtonPtr(i).Image = Resize_Image(My.Resources.button, size)
-            ButtonPtr(i).Image = ImageList1.Images(1)
+            ButtonPtr(i).BackgroundImage = ImageList1.Images(1)
         Next
         'ButtonPtr(index).Image = Resize_Image(My.Resources.buttonRed, size)
-        ButtonPtr(index).Image = ImageList1.Images(0)
+        ButtonPtr(index).BackgroundImage = ImageList1.Images(0)
         ButtonPtr(index).BackColor = oncolor
 
     End Sub
@@ -212,7 +212,7 @@
         CurrentMenuIndex = iCurrentMenu
         SetActiveButton(CurrentMenuIndex, Color.FromArgb(255, 192, 192), Color.FromArgb(255, 255, 192))
         If CurrentMenuIndex <> LastMenuIndex Then
-            If CurrentMenuIndex = 5 Or CurrentMenuIndex = 7 Then
+            If CurrentMenuIndex = 5 Then
                 FormPtr(CurrentMenuIndex).Show()
             ElseIf CurrentMenuIndex = 1 Then
                 FormProcess.ShowInit()
@@ -224,6 +224,8 @@
                 FormAlarm.ShowInit()
             ElseIf CurrentMenuIndex = 6 Then
                 FormParameter.ShowInit()
+            ElseIf CurrentMenuIndex = 7 Then
+                FormLoginSetup.ShowInit()
             ElseIf CurrentMenuIndex = 8 Then
                 FormMaintance.ShowInit()
             End If
@@ -240,6 +242,7 @@
                 Case 6
                     FormParameter.Timer1.Enabled = False
                 Case 7
+                    FormLoginSetup.Timer1.Enabled = False
                 Case 8
                     FormMaintance.Timer1.Enabled = False
             End Select

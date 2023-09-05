@@ -236,24 +236,24 @@
             Help.SetToolTip(OutStatus(i), Microsoft.VisualBasic.Right(OutStatus(i).Name, 3))
         Next
     End Sub
-    Private Sub FormProcess_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub FormMaintance_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If isLoaded Then
 
             Dim new_x As Single = FormW / X
             Dim new_Y As Single = (FormH - FromStartUpTopPosition) / Y
-            Me.Height = (FormW - FromStartUpTopPosition)
+            Me.Height = (FormH - FromStartUpTopPosition)
             Me.Width = FormW
             SetControls(new_x, new_Y, Me, isLoaded)
-            Debug.Print("Form1_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+            Debug.Print("FormMaintance_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
         End If
     End Sub
 
-    Private Sub FormProcess_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+    Private Sub FormMaintance_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         FormW = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
         FormH = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
 
         Me.WindowState = FormWindowState.Normal
-        FormProcess_Resize(Me, e)
+        FormMaintance_Resize(Me, e)
         'Debug.Print("Form1_Shown" + ",screen.Width=" + FormW.ToString + ",screen.Height=" + FormH.ToString)
     End Sub
 End Class

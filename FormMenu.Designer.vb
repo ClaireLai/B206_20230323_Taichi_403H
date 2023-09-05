@@ -64,6 +64,8 @@ Partial Class FormMenu
         'btnProcess
         '
         Me.btnProcess.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnProcess.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnProcess.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnProcess.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnProcess.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnProcess.ForeColor = System.Drawing.Color.Navy
@@ -78,6 +80,8 @@ Partial Class FormMenu
         'btnProcessPara
         '
         Me.btnProcessPara.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnProcessPara.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnProcessPara.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnProcessPara.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnProcessPara.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnProcessPara.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -92,6 +96,8 @@ Partial Class FormMenu
         'BtnTest
         '
         Me.BtnTest.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.BtnTest.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.BtnTest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnTest.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -106,6 +112,8 @@ Partial Class FormMenu
         'btnAlarm
         '
         Me.btnAlarm.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnAlarm.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnAlarm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnAlarm.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAlarm.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAlarm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -120,6 +128,8 @@ Partial Class FormMenu
         'btnRecord
         '
         Me.btnRecord.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnRecord.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnRecord.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnRecord.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -134,6 +144,8 @@ Partial Class FormMenu
         'btnParameter
         '
         Me.btnParameter.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnParameter.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnParameter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnParameter.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnParameter.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnParameter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -148,9 +160,10 @@ Partial Class FormMenu
         'btnFormLoginsetup
         '
         Me.btnFormLoginsetup.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnFormLoginsetup.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnFormLoginsetup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFormLoginsetup.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnFormLoginsetup.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFormLoginsetup.Image = Global.CELLO.My.Resources.Resources.button
         Me.btnFormLoginsetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFormLoginsetup.Location = New System.Drawing.Point(615, 0)
         Me.btnFormLoginsetup.Margin = New System.Windows.Forms.Padding(0)
@@ -163,6 +176,8 @@ Partial Class FormMenu
         'btnMaintance
         '
         Me.btnMaintance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnMaintance.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnMaintance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMaintance.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnMaintance.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMaintance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -177,6 +192,8 @@ Partial Class FormMenu
         'btnExit
         '
         Me.btnExit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnExit.BackgroundImage = Global.CELLO.My.Resources.Resources.button
+        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnExit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnExit.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
