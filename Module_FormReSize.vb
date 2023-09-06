@@ -4,10 +4,18 @@ Imports System.IO
 Module Module_FormReSize
     'Public ScreenW As Integer = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width
     'Public ScreenH As Integer = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+    ''' <summary>
+    ''' 設定每個元件的長寬
+    ''' </summary>
+    ''' <param name="newx">寬倍率</param>
+    ''' <param name="newy">高的倍率</param>
+    ''' <param name="cons">control元件</param>
+    ''' <param name="isLoaded">是否載入</param>
     Public Sub SetControls(ByVal newx As Single, ByVal newy As Single, ByVal cons As Control, ByVal isLoaded As Boolean)
         If isLoaded Then
 
             For Each con As Control In cons.Controls
+                Debug.Print("SetControls=" + con.Name)
                 Dim mytag As String() = con.Tag.ToString().Split(New Char() {":"c})
                 Dim a As Single = System.Convert.ToSingle(mytag(0)) * newx
                 con.Width = CInt(a)
@@ -21,6 +29,7 @@ Module Module_FormReSize
                 con.Font = New Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit)
                 If con.Controls.Count > 0 Then
                     SetControls(newx, newy, con, isLoaded)
+
                 End If
             Next
         End If
@@ -42,8 +51,8 @@ Module Module_FormReSize
         'System.Drawing.Image
         'Dim g As Graphics = Graphics.FromImage((System.Drawing.Image)bmp)
         Dim g As Graphics = Graphics.FromImage((bmp))
-        g.InterpolationMode = InterpolationMode.HighQualityBicubic
-
+        'g.InterpolationMode = InterpolationMode.HighQualityBicubic
+        g.InterpolationMode = 0
         g.DrawImage(imagetoresize, New System.Drawing.Rectangle(0, 0, showW, showH), New System.Drawing.Rectangle(0, 0, imagetoresize.Width, imagetoresize.Height), GraphicsUnit.Pixel)
         'Debug.Print("w=" + imagetoresize.Width.ToString + ", h=" + imagetoresize.Height.ToString)
         g.Dispose()

@@ -2011,7 +2011,7 @@ Public Class FormManual
             Me.Height = (FormW - FromStartUpTopPosition)
             Me.Width = FormW
             SetControls(new_x, new_Y, Me, isLoaded)
-            Debug.Print("FormProcess_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
+            Debug.Print("FormManual_Resize  ,Me.Width=" + Me.Width.ToString + ",Me.Height=" + Me.Height.ToString)
         End If
     End Sub
 

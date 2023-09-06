@@ -88,8 +88,8 @@ Module Comm_PLC_SERIAL
     'claire..........
     Private arr(100) As Int32
     Private wdog As New Stopwatch
-    Private wdog1 As New Stopwatch
-    Private swdog As New Stopwatch
+    'Private wdog1 As New Stopwatch
+    Public swdog As New Stopwatch
     'Public WithEvents RS232_BackWork As System.ComponentModel.BackgroundWorker
 
     'Public Rs232Thread As New System.Threading.Thread(AddressOf Rs232ThreadWork)
@@ -1168,11 +1168,11 @@ Module Comm_PLC_SERIAL
         wdog.Reset()
         wdog.Start()
     End Sub
-    Public Sub wdog1_Restart()
-        wdog1.Stop()
-        wdog1.Reset()
-        wdog1.Start()
-    End Sub
+    'Public Sub wdog1_Restart()
+    '    wdog1.Stop()
+    '    wdog1.Reset()
+    '    wdog1.Start()
+    'End Sub
     Public Sub swdog_Restart()
         swdog.Stop()
         swdog.Reset()
