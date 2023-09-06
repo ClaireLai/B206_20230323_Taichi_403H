@@ -203,6 +203,8 @@ Public Class FormManual
         Me.tabManual = New System.Windows.Forms.TabControl()
         Me.tabPageVacuum = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtVacuumTestTimeMin = New System.Windows.Forms.TextBox()
         Me.btnLeakRateTest = New System.Windows.Forms.Button()
@@ -220,8 +222,6 @@ Public Class FormManual
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -1116,7 +1116,7 @@ Public Class FormManual
         '
         'tabPageVacuum
         '
-        Me.tabPageVacuum.BackColor = System.Drawing.SystemColors.Control
+        Me.tabPageVacuum.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.tabPageVacuum.Controls.Add(Me.Panel4)
         Me.tabPageVacuum.Controls.Add(Me.btnChamberLight)
         Me.tabPageVacuum.Controls.Add(Me.grpDoorControl)
@@ -1132,6 +1132,7 @@ Public Class FormManual
         '
         'Panel4
         '
+        Me.Panel4.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.txtVacuumTestTimeHr)
         Me.Panel4.Controls.Add(Me.Label1)
@@ -1142,6 +1143,24 @@ Public Class FormManual
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(149, 225)
         Me.Panel4.TabIndex = 547
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(67, 79)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(38, 20)
+        Me.Label2.TabIndex = 552
+        Me.Label2.Text = "Hr"
+        '
+        'txtVacuumTestTimeHr
+        '
+        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
+        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
+        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
+        Me.txtVacuumTestTimeHr.TabIndex = 551
+        Me.txtVacuumTestTimeHr.Text = "0"
         '
         'Label1
         '
@@ -1167,7 +1186,7 @@ Public Class FormManual
         Me.btnLeakRateTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLeakRateTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeakRateTest.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 157)
+        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 143)
         Me.btnLeakRateTest.Name = "btnLeakRateTest"
         Me.btnLeakRateTest.Size = New System.Drawing.Size(122, 44)
         Me.btnLeakRateTest.TabIndex = 548
@@ -1335,24 +1354,6 @@ Public Class FormManual
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(67, 79)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 20)
-        Me.Label2.TabIndex = 552
-        Me.Label2.Text = "Hr"
-        '
-        'txtVacuumTestTimeHr
-        '
-        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
-        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
-        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
-        Me.txtVacuumTestTimeHr.TabIndex = 551
-        Me.txtVacuumTestTimeHr.Text = "0"
-        '
         'FormManual
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1510,15 +1511,6 @@ Public Class FormManual
         ObjShow.Show(PLC_Y(DoRVIndex) = "1", picRVP, My.Resources.hvon, My.Resources.hvoff)
         ObjShow.Show(PLC_Y(DoVentIndex) = "1", picV4P, My.Resources.hvon, My.Resources.hvoff)
 
-        'ObjShow.Show(PLC_Y(DoHeater01Index) = "1", picTopPlate, My.Resources.HEAT_ON, My.Resources.HEAT_OFF)
-        'ObjShow.Show(PLC_Y(DoHeater01Index) = "1", picBotPlate, My.Resources.HEAT_ON, My.Resources.HEAT_OFF)
-
-        'ObjShow.Show(PLC_Y(DoHeater01Index) = "1", btnTempON, ColorOn, "ON", ColorOff, "OFF")
-        'ObjShow.Show(PLC_Y(DoBondDown01Index) = "1", btnPlateDown, ColorOn, ColorOff)
-        'ObjShow.Show(PLC_M(DoBondUp01Index) = "1", btnPlateUp, ColorOn, ColorOff)
-        'ObjShow.Show(PLC_M(DoBondForce01Index) = "1", btnBondingForce, ColorOn, "ON", ColorOff, "OFF")
-        'ObjShow.Show(PLC_Y(DoOilPumpIndex) = "1", btnOilPump, ColorOn, ColorOff)
-
         'MFC 流量顯示
         lblGas01MFC.Text = MFCReadValueStr(ADMFC01Index)
         lblGas02MFC.Text = MFCReadValueStr(ADMFC02Index)
@@ -1531,15 +1523,7 @@ Public Class FormManual
 
         lblPumpingStatus.Visible = CelloUsbFlag
         lblPumpingStatus.Text = Format(CAutoPumping.State, "S:0 ") + Format(CAutoPumping.Timer, "T:0 ") + Format(CAutoPumping.PurgeCounter, "P:0 ")
-        'If PLC_X(DiBondUp01Index) = "1" Then
-        '    picBotPlate.Top = picBotPlate2.Top
-        '    picWaferChip.Top = picWaferChip2.Top
-        '    pnlCylinderAxis.Top = pnlCylinderAxis2.Top
-        'Else
-        '    picBotPlate.Top = picBotPlate1.Top
-        '    picWaferChip.Top = picWaferChip1.Top
-        '    pnlCylinderAxis.Top = pnlCylinderAxis1.Top
-        'End If
+
 
         If PLC_X(DiDoor1UpIndex) = "1" Then
             pnlDoor1.BackColor = Color.Red
@@ -1557,29 +1541,22 @@ Public Class FormManual
 
 
         '各頭資料顯示============================================
-        'lblTopFlow.Text = TopFlowMeterStr
-        'lblBotFlow.Text = BotFlowMeterStr
 
-        'lblTopTemp.Text = TopTempPVStr
-        'lblTopTemp.Text = TopTempPVStr
-        'lblBottomTemp.Text = BotTempPVStr
-        'lblBotTemp.Text = BotTempPV.ToString
-        'lblTopCurrent.Text = TopCurrentStr
-        'lblBotCurrent.Text = BotCurrentStr
         lblDPCurrent.Text = MPCurrentStr
         lblCHVac.Text = GaugeCHVacStr
-        'lblPressureRead.Text = PressPVstr
-        'lblPressureRead1.Text = PressPVstr
 
         'for B222 claire
         Panel2.Enabled = Not Timercount_enable
-        'tabPageTimer.Enabled = Not Timercount_enable
         txtTimerMin.Enabled = Not Timercount_enable
         txtTimerSec.Enabled = Not Timercount_enable
         btnTimerStart.Enabled = Not Timercount_enable
         btnTimerReset.Enabled = Not Timercount_enable
         tabPageDataLog.Enabled = Not Timercount_enable
         ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
+        ObjShow.Show(bolLeakTest, btnLeakRateTest, ColorOn, ColorOff)
+        btnMaxVaccTest.Enabled = Not bolLeakTest
+        btnLeakRateTest.Enabled = Not bolVaccTest
+
     End Sub
 
     'Private Sub txtTempSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempSet.MouseDown
@@ -1802,6 +1779,15 @@ Public Class FormManual
 
                 DatalogTime = Val(txtDataLogStepTime.Text)
                 CSVTimerStartPb_Status = True
+            ElseIf bolLeakTest Then
+                DataLogShortFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
+                CheckDataLogDirAndCreate()
+                DataLogCUVFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
+                DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
+
+                DatalogTime = Val(txtDataLogStepTime.Text)
+                CSVTimerStartPb_Status = True
+
             Else
                 DataLogRecordFileName = ""
                 If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -2120,10 +2106,6 @@ Public Class FormManual
             txtTimerMin.Text = Timercount.set_min.ToString
             btnTImerStart_Click(vbNull, e) '開始計時
             Panel2.Enabled = False
-            'tabPageDataLog.Enabled = False
-            'tabPageTimer.Enabled = False
-            'lblTimerSec.Enabled = True
-            'lblTimerMin.Enabled = True
 
             btnStartLog_Click(vbNull, e) '開始紀錄
 
@@ -2154,5 +2136,27 @@ Public Class FormManual
         If Val(sender.Text) > 24 Then
             sender.Text = "24"
         End If
+    End Sub
+
+    Private Sub btnLeakRateTest_Click(sender As Object, e As EventArgs) Handles btnLeakRateTest.Click
+        If ProcessMode_RUN Then Exit Sub
+        bolLeakTest = Not bolLeakTest
+        If bolLeakTest Then
+            '關valve
+            Output(DoRVIndex).Status = False
+            Output(DoVentIndex).Status = False
+            'log 壓力
+            Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+            txtTimerMin.Text = Timercount.set_min.ToString
+            btnTImerStart_Click(vbNull, e) '開始計時
+            Panel2.Enabled = False
+            btnStartLog_Click(vbNull, e) '開始紀錄
+        Else
+            Timercount_enable = False
+            btnStartLog_Click(vbNull, e) '開始紀錄
+            CSVTimerStartPb_Status = False
+
+        End If
+
     End Sub
 End Class

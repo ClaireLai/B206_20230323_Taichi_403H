@@ -10,6 +10,7 @@ Module Module_AutoTask
     Public RunCounts As Integer = 0
     Public RunDataINIFile As String
     Public bolVaccTest As Boolean
+    Public bolLeakTest As Boolean = False
 
     Public Sub ReadRunData()
         Dim sstr As String
@@ -2067,7 +2068,7 @@ Module Module_AutoTask
                     Data(datamax) = "Vacuum"
                     datamax += 1
                     Data(datamax) = "MPCurrent"
-                    If bolVaccTest = False Then
+                    If (bolVaccTest Or bolLeakTest) = False Then
                         For i = 0 To MAXPLATE
                             datamax += 1
                             Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
@@ -2108,7 +2109,7 @@ Module Module_AutoTask
                     Data(datamax) = GaugeCHVacStr
                     datamax += 1
                     Data(datamax) = MPCurrentStr
-                    If bolVaccTest = False Then
+                    If (bolVaccTest Or bolLeakTest) = False Then
                         For i = 0 To MAXPLATE
                             datamax += 1
                             Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
@@ -2298,6 +2299,10 @@ Module Module_AutoTask
                         bolVaccTest = False
                         Output(DoMPIndex).Status = False
                         Output(DoRVIndex).Status = False
+                        CSVTimerStartPb_Status = False
+                    End If
+                    If bolLeakTest And Timercount_enable = False Then
+                        bolLeakTest = False
                         CSVTimerStartPb_Status = False
                     End If
                     Timercount_up = False       '

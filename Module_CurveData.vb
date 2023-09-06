@@ -798,7 +798,7 @@ Module Module_CurveData
                 Case 0
                     If Cond Then
                         ShowData = ""
-                        If bolVaccTest Then
+                        If bolVaccTest Or bolLeakTest Then
                             For i = 0 To 1
                                 ShowData = ShowData + CurveName(SystemLanguage, i) + ","
                             Next
@@ -832,7 +832,8 @@ Module Module_CurveData
                         data(datamax) = GaugeCHVacStr
                         datamax += 1
                         data(datamax) = MPCurrentStr
-                        If bolVaccTest = False Then
+                        'If bolVaccTest = False Then
+                        If (bolVaccTest Or bolLeakTest) = False Then
                             For i = 0 To MAXPLATE
                                 datamax += 1
                                 data(datamax) = TopTempPVStr(i)
