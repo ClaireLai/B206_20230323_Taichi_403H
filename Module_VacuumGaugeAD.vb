@@ -24,7 +24,7 @@
     ''' </summary>
     ''' <remarks></remarks>
     Public DP_Pump_Used As Boolean
-    Public DP_Temp_Used As Boolean
+    'Public DP_Temp_Used As Boolean
     Public DP_Flow_Used As Boolean
     Public DP_Flow_IO_Used As Boolean
     Public RP_Used As Boolean
@@ -34,7 +34,7 @@
         Ulvac_LS120_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "Ulvac_LS120_Used", "0", sfile))
 
         'DP_Pump_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "DPPUMP", "1", sfile))
-        DP_Temp_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "DP_Temp_Used", "0", sfile))
+        'DP_Temp_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "DP_Temp_Used", "0", sfile))
         DP_Flow_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "DP_Flow_Used", "0", sfile))
         DP_Flow_IO_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "DP_Flow_IO_Used", "0", sfile))
         RP_Used = GetTrue01Boolean(ReadProgData("PUMP_SETUP", "RP_Used", "0", sfile))
@@ -51,7 +51,7 @@
         WriteProgData("PUMP_SETUP", "DPPUMP", GetTrue01String(DP_Pump_Used), sfile)
         WriteProgData("PUMP_SETUP", "Ulvac_LS120_Used", GetTrue01String(Ulvac_LS120_Used), sfile)
         WriteProgData("PUMP_SETUP", "DPPUMP", GetTrue01String(DP_Pump_Used), sfile)
-        WriteProgData("PUMP_SETUP", "DP_Temp_Used", GetTrue01String(DP_Temp_Used), sfile)
+        'WriteProgData("PUMP_SETUP", "DP_Temp_Used", GetTrue01String(DP_Temp_Used), sfile)
         WriteProgData("PUMP_SETUP", "DP_Flow_Used", GetTrue01String(DP_Flow_Used), sfile)
         WriteProgData("PUMP_SETUP", "RP_Used", GetTrue01String(RP_Used), sfile)
     End Sub
