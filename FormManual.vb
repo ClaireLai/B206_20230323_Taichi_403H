@@ -1573,14 +1573,14 @@ Public Class FormManual
         'lblPressureRead1.Text = PressPVstr
 
         'for B222 claire
-        Panel2.Enabled = Not Timercount_enable
-        'tabPageTimer.Enabled = Not Timercount_enable
-        txtTimerMin.Enabled = Not Timercount_enable
-        txtTimerSec.Enabled = Not Timercount_enable
-        btnTimerStart.Enabled = Not Timercount_enable
-        btnTimerReset.Enabled = Not Timercount_enable
-        tabPageDataLog.Enabled = Not Timercount_enable
-        ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
+        'Panel2.Enabled = Not Timercount_enable
+        ''tabPageTimer.Enabled = Not Timercount_enable
+        'txtTimerMin.Enabled = Not Timercount_enable
+        'txtTimerSec.Enabled = Not Timercount_enable
+        'btnTimerStart.Enabled = Not Timercount_enable
+        'btnTimerReset.Enabled = Not Timercount_enable
+        'tabPageDataLog.Enabled = Not Timercount_enable
+        'ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
     End Sub
 
     'Private Sub txtTempSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempSet.MouseDown
