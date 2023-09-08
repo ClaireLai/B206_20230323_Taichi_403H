@@ -1546,17 +1546,18 @@ Public Class FormManual
         lblCHVac.Text = GaugeCHVacStr
 
         'for B222 claire
-        Panel2.Enabled = Not Timercount_enable
-        txtTimerMin.Enabled = Not Timercount_enable
-        txtTimerSec.Enabled = Not Timercount_enable
-        btnTimerStart.Enabled = Not Timercount_enable
-        btnTimerReset.Enabled = Not Timercount_enable
-        tabPageDataLog.Enabled = Not Timercount_enable
+        If bolLeakTest Or bolVaccTest Then
+            Panel2.Enabled = Not Timercount_enable
+            txtTimerMin.Enabled = Not Timercount_enable
+            txtTimerSec.Enabled = Not Timercount_enable
+            btnTimerStart.Enabled = Not Timercount_enable
+            btnTimerReset.Enabled = Not Timercount_enable
+            tabPageDataLog.Enabled = Not Timercount_enable
+            btnMaxVaccTest.Enabled = Not bolLeakTest
+            btnLeakRateTest.Enabled = Not bolVaccTest
+        End If
         ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
         ObjShow.Show(bolLeakTest, btnLeakRateTest, ColorOn, ColorOff)
-        btnMaxVaccTest.Enabled = Not bolLeakTest
-        btnLeakRateTest.Enabled = Not bolVaccTest
-
     End Sub
 
     'Private Sub txtTempSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempSet.MouseDown
