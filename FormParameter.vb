@@ -9380,6 +9380,13 @@ Public Class FormParameter
     Private Sub chkDa_CheckedChanged(sender As Object, e As EventArgs) Handles chkDa.CheckedChanged
         SystemParameters.bolDAlog = chkDa.Checked
         WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, ParameterINIFile)
+        If SystemParameters.bolDAlog Then
+            CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
+            bolDA = True
+        Else
+            CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
+            bolDA = False
+        End If
     End Sub
 
 End Class
