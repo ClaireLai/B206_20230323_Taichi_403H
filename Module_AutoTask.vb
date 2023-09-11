@@ -309,6 +309,7 @@ Module Module_AutoTask
 
         Public Sub Initial(ByVal iSiteNum As Integer)
             SiteNum = iSiteNum
+            AbortFlag = False
             AddHandler Timer1.Tick, AddressOf Timer1_Tick
             Timer1.Interval = 800
             Timer1.Enabled = True
