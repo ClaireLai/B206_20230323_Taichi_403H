@@ -1173,6 +1173,10 @@ Public Class FormRecord
             lblFileCurve1.Text = My.Computer.FileSystem.GetName(File1Name)
             Dim str As String
             str = ReadProgData("CURVE_SETUP", "CAPTION", "NoData", File1Name)
+            Dim subString As String = Mid(str, str.Length, str.Length)
+            If subString = "," Then
+                str = Mid(str, 1, str.Length - 1)
+            End If
             Title = str.Split(",")
             If Title.Length > 17 Then
                 CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
