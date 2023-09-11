@@ -4570,7 +4570,6 @@ Public Class FormParameter
         'tabpagePressControl
         '
         Me.tabpagePressControl.BackColor = System.Drawing.Color.Transparent
-        Me.tabpagePressControl.Controls.Add(Me.chkDa)
         Me.tabpagePressControl.Controls.Add(Me.btnForceDAOut)
         Me.tabpagePressControl.Controls.Add(Me.pnlPressureAverage)
         Me.tabpagePressControl.Controls.Add(Me.lblNoControlPressText)
@@ -6619,6 +6618,7 @@ Public Class FormParameter
         '
         'TabPageTempCalTool
         '
+        Me.TabPageTempCalTool.Controls.Add(Me.chkDa)
         Me.TabPageTempCalTool.Controls.Add(Me.Label1)
         Me.TabPageTempCalTool.Controls.Add(Me.txtTICComport)
         Me.TabPageTempCalTool.Controls.Add(Me.chkTICMonitorUsed)
@@ -7216,10 +7216,10 @@ Public Class FormParameter
         '
         Me.chkDa.AutoSize = True
         Me.chkDa.Font = New System.Drawing.Font("·s²Ó©úÅé", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkDa.Location = New System.Drawing.Point(532, 358)
+        Me.chkDa.Location = New System.Drawing.Point(757, 93)
         Me.chkDa.Name = "chkDa"
-        Me.chkDa.Size = New System.Drawing.Size(50, 14)
-        Me.chkDa.TabIndex = 953
+        Me.chkDa.Size = New System.Drawing.Size(63, 17)
+        Me.chkDa.TabIndex = 954
         Me.chkDa.Text = "DALog"
         Me.chkDa.UseVisualStyleBackColor = True
         '
@@ -7967,7 +7967,7 @@ Public Class FormParameter
         Else
             Panel3.Visible = False
         End If
-
+        If CelloUsbFlag Then chkDa.Visible = True
     End Sub
     'Modified 990203 Vincent Start
 
