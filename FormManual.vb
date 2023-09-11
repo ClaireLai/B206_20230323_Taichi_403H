@@ -1532,15 +1532,7 @@ Public Class FormManual
 
         lblPumpingStatus.Visible = CelloUsbFlag
         lblPumpingStatus.Text = Format(CAutoPumping.State, "S:0 ") + Format(CAutoPumping.Timer, "T:0 ") + Format(CAutoPumping.PurgeCounter, "P:0 ")
-        'If PLC_X(DiBondUp01Index) = "1" Then
-        '    picBotPlate.Top = picBotPlate2.Top
-        '    picWaferChip.Top = picWaferChip2.Top
-        '    pnlCylinderAxis.Top = pnlCylinderAxis2.Top
-        'Else
-        '    picBotPlate.Top = picBotPlate1.Top
-        '    picWaferChip.Top = picWaferChip1.Top
-        '    pnlCylinderAxis.Top = pnlCylinderAxis1.Top
-        'End If
+
 
         If PLC_X(DiDoor1UpIndex) = "1" Then
             pnlDoor1.BackColor = Color.Red
@@ -1549,118 +1541,12 @@ Public Class FormManual
             pnlDoor1.BackColor = Color.Transparent
         End If
         pnlDoor2.BackColor = Color.Red
-        'If PLC_X(DiDoor2UpIndex) = "1" Then
-        '    pnlDoor2.BackColor = Color.Red
 
-        'Else
-        '    pnlDoor2.BackColor = Color.Transparent
-        'End If
-
-
-        '¦UÀY¸ê®ÆÅã¥Ü============================================
-        'lblTopFlow.Text = TopFlowMeterStr
-        'lblBotFlow.Text = BotFlowMeterStr
-
-        'lblTopTemp.Text = TopTempPVStr
-        'lblTopTemp.Text = TopTempPVStr
-        'lblBottomTemp.Text = BotTempPVStr
-        'lblBotTemp.Text = BotTempPV.ToString
-        'lblTopCurrent.Text = TopCurrentStr
-        'lblBotCurrent.Text = BotCurrentStr
         lblDPCurrent.Text = MPCurrentStr
         lblCHVac.Text = GaugeCHVacStr
-        'lblPressureRead.Text = PressPVstr
-        'lblPressureRead1.Text = PressPVstr
 
-        'for B222 claire
-        'Panel2.Enabled = Not Timercount_enable
-        ''tabPageTimer.Enabled = Not Timercount_enable
-        'txtTimerMin.Enabled = Not Timercount_enable
-        'txtTimerSec.Enabled = Not Timercount_enable
-        'btnTimerStart.Enabled = Not Timercount_enable
-        'btnTimerReset.Enabled = Not Timercount_enable
-        'tabPageDataLog.Enabled = Not Timercount_enable
-        'ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
     End Sub
 
-    'Private Sub txtTempSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempSet.MouseDown
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If CallKeyboard2(sender, TEMP_MAX, TEMP_MIN) <> "" Then
-    '        'TopTempSV = SetCalibratedTemp(Val(sender.Text), tempTopX, tempTopY, 5)
-    '        'BotTempSV = TopTempSV
-    '        'BotTempSV = SetCalibratedTemp(Val(sender.Text), tempTopX, tempTopY, 5)
-    '        'Write_PLC_R1100(DAProcessTemp01Index, TopTempSV)
-    '        'Write_PLC_R1100(DABotTempCaledIndex, BotTempSV)
-    '    End If
-    'End Sub
-
-    'Private Sub txtTempRateSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTempRateSet.MouseDown
-    '    Dim max As String
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If CelloUsbFlag Then
-    '        max = "20"
-    '    Else
-    '        max = TEMPRATE_MAX
-    '    End If
-    '    If CallKeyboard2(sender, max, TEMPRATE_MIN) <> "" Then
-    '        Write_PLC_R1100(DAProcessTempRate01Index, Val(sender.Text) * 100)
-    '    End If
-    'End Sub
-
-    'Private Sub txtPressureSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtPressureSet.MouseDown
-    '    If CallKeyboard2(sender, PRESS_MAX, PRESS_MIN) <> "" Then
-    '        'PressSV = Val(sender.Text) ' SetCalibratedTemp(Val(sender.Text), PressX, PressY, 5)
-    '        'Write_PLC_R1100(DAProcessBond01Index, PressSV)
-    '    End If
-    'End Sub
-
-    'Private Sub txtPressureRateSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtPressureRateSet.MouseDown
-    '    If CallKeyboard2(sender, PRESSRATE_MAX, PRESSRATE_MIN) <> "" Then
-    '        Write_PLC_R1100(DAProcessBondRate01Index, Val(sender.Text))
-    '    End If
-    'End Sub
-
-    'Private Sub btnTempON_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTempON.Click
-    '    Dim VacLimit As String = "1.0E-01"
-
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If HeaterPb_Status = False Then
-    '        If Not Check_PLC_X(DiDoor1UpIndex) Then
-    '            MsgBoxLangErr("µÄªù¥¼Ãö³¬,½ÐÃö³¬µÄªù!", "µÄƒd¥¼‹×„¸,ˆ[‹×„¸µÄƒd!", "Door not Close!")
-    '        ElseIf GaugeCHVac > Val(VacLimit) Then
-    '            If CelloUsbFlag Then
-    '                If AlarmError(Alarm_Name.TOP_FLOW_Error) = False And AlarmError(Alarm_Name.BOT_FLOW_Error) = False And Check_PLC_X(DiWater01Index) = False Then
-    '                    MsgBoxLangErr("§N«o¤ôÀ£¶}Ãö²§±`!!", "§Nƒj¤ô‰Í…{‹×ÉÝ±`!!", "Water Pressure Error!!")
-    '                Else
-
-    '                    If MsgBoxLangYesNo("¯uªÅ­È­n<" + VacLimit + " Torr, ½T»{­n¶}±Ò¥[¼ö?", "¯uªÅ­È­n<" + VacLimit + " Torr, ÚÌ‡P­n…{„Q¥[‡ñ?", "Vacuum Need <" + VacLimit + " Torr, Still Force ON?") Then
-    '                        'TopTempSV = SetCalibratedTemp(Val(txtTempSet.Text), tempTopX, tempTopY, 5)
-    '                        'BotTempSV = TopTempSV
-    '                        'BotTempSV = SetCalibratedTemp(Val(sender.Text), tempTopX, tempTopY, 5)
-    '                        'Write_PLC_R1100(DAProcessTemp01Index, TopTempSV)
-    '                        'Write_PLC_R1100(DABotTempCaledIndex, BotTempSV)
-    '                        Write_PLC_R1100(DAProcessTempRate01Index, Val(txtTempRateSet.Text) * 100)
-    '                        HeaterPb_Status = True
-    '                    End If
-    '                End If
-    '            Else
-    '                MsgBoxLangErr("¯uªÅ­È­n<" + VacLimit + " Torr", "¯uªÅ­È­n<" + VacLimit + " Torr", "Vacuum Need <" + VacLimit + " Torr")
-    '            End If
-    '        ElseIf AlarmError(Alarm_Name.TOP_FLOW_Error) = False And AlarmError(Alarm_Name.BOT_FLOW_Error) = False And Check_PLC_X(DiWater01Index) Then
-    '            'TopTempSV = SetCalibratedTemp(Val(txtTempSet.Text), tempTopX, tempTopY, 5)
-    '            BotTempSV = TopTempSV
-    '            'BotTempSV = SetCalibratedTemp(Val(sender.Text), tempTopX, tempTopY, 5)
-    '            'Write_PLC_R1100(DAProcessTemp01Index, TopTempSV)
-    '            'Write_PLC_R1100(DABotTempCaledIndex, BotTempSV)
-    '            Write_PLC_R1100(DAProcessTempRate01Index, Val(txtTempRateSet.Text) * 100)
-    '            HeaterPb_Status = True
-    '        Else
-    '            MsgBoxLangErr("µL§N«o¤ô!!", "ÆÓ§Nƒj¤ô!!", "No Cooling Water!!")
-    '        End If
-    '    Else
-    '        HeaterPb_Status = False
-    '    End If
-    'End Sub
 
     Private Sub picRVP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picRVP.Click
         If ProcessMode_RUN Then Exit Sub
@@ -1693,10 +1579,7 @@ Public Class FormManual
             CAutoPumping.Start = False
             Output(DoRVIndex).Status = False
             Output(DoVentIndex).Status = True
-            '                Else
-            '    sstr = SystemParameters.CoolingTemperature
-            '    MsgBoxLangErr("µ¥«Ý·Å«×­°¦Ü: " + sstr, "µ¥«Ý h«×­°¦Ü: " + sstr, "Wait Temp Down: " + sstr)
-            'End If
+
         End If
 
     End Sub
@@ -1711,71 +1594,6 @@ Public Class FormManual
         Output(DoMPIndex).Status = Not Output(DoMPIndex).Status
         'DPPb_Status = Not DPPb_Status
     End Sub
-
-
-
-    'Private Sub btnPlateUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPlateUp.Click
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If ChuckUpPb_Status Then
-    '        ChuckUpPb_Status = False
-    '    Else
-    '        If PLC_X(DiDoor1UpIndex) = "0" Then
-    '            MsgBoxLangErr("µÄªù¥¼Ãö³¬,½ÐÃö³¬µÄªù!", "µÄƒd¥¼‹×„¸,ˆ[‹×„¸µÄƒd!", "Door not Close!")
-    '        Else
-    '            'If Check_PLC_M(DoOilPumpIndex) Then
-    '            If MsgBoxLangYesNo("½Ð½T»{¸ü½L¤w¸m©ñ!", "ˆ[ÚÌ‡P†^‡÷¤w¸m©ñ!", "Please Cormfirm Plate Up!") Then
-    '                ChuckUpPb_Status = Not ChuckUpPb_Status
-    '                ChuckDnPb_Status = False
-    '                BoundingPb_Status = False
-    '            End If
-    '            'Else
-    '            '    MsgBoxLangErr("ªoÀ£À°®ú¥¼±Ò°Ê!", "ªo‰Í‰Ö®ú¥¼„Qƒð!", "Oil Pump need ON!")
-    '            'End If
-    '        End If
-    '    End If
-
-    'End Sub
-
-    'Private Sub btnPlateDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPlateDown.Click
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If ChuckDnPb_Status Then
-    '        ChuckDnPb_Status = False
-    '    Else
-    '        'If Check_PLC_M(DoOilPumpIndex) Then
-    '        ChuckDnPb_Status = Not ChuckDnPb_Status
-    '        ChuckUpPb_Status = False
-    '        BoundingPb_Status = False
-    '        '    Else
-    '        '    MsgBoxLangErr("ªoÀ£À°®ú¥¼±Ò°Ê!", "ªo‰Í‰Ö®ú¥¼„Qƒð!", "Oil Pump need ON!")
-    '        'End If
-    '    End If
-    'End Sub
-
-    'Private Sub btnBondingForce_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBondingForce.Click
-    '    If ProcessMode_RUN Then Exit Sub
-    '    If BoundingPb_Status Then
-    '        BoundingPb_Status = False
-    '    Else
-    '        If PLC_X(DiDoor1UpIndex) = "0" Then
-    '            MsgBoxLangErr("µÄªù¥¼Ãö³¬,½ÐÃö³¬µÄªù!", "µÄƒd¥¼‹×„¸,ˆ[‹×„¸µÄƒd!", "Door not Close!")
-    '        Else
-    '            'If Check_PLC_M(DoOilPumpIndex) Then
-    '            If MsgBoxLangYesNo("½Ð½T»{¸ü½L¤w¸m©ñ!", "ˆ[ÚÌ‡P†^‡÷¤w¸m©ñ!", "Please Cormfirm Plate Up!") Then
-    '                BoundingPb_Status = Not BoundingPb_Status
-    '                ChuckUpPb_Status = True
-    '                ChuckDnPb_Status = False
-    '                PressSV(0) = Val(txtPressureSet.Text) ' SetCalibratedTemp(Val(sender.Text), PressX, PressY, 5)
-    '                Write_PLC_R1100(DAProcessBond01Index, PressSV(0))
-    '                Write_PLC_R1100(DAProcessBondRate01Index, Val(txtPressureRateSet.Text))
-
-    '            End If
-    '            '    Else
-    '            '    MsgBoxLangErr("ªoÀ£À°®ú¥¼±Ò°Ê!", "ªo‰Í‰Ö®ú¥¼„Qƒð!", "Oil Pump need ON!")
-    '            'End If
-    '        End If
-    '    End If
-    'End Sub
-
 
 
     Private Sub btnYReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnYReset.Click
@@ -1818,22 +1636,6 @@ Public Class FormManual
         DatalogStart = CSVTimerStartPb_Status
     End Sub
 
-    'Private Sub lblDatalogFileName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDatalogFileName.Click
-    '    Shell("Notepad.exe " + DataLogRecordFileName, AppWinStyle.NormalFocus)
-    'End Sub
-
-    'Private Sub btnOpenLogFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenLogFile.Click
-    '    OpenFileDialog1.Filter = "csv files (*.csv)|*.csv"
-    '    OpenFileDialog1.InitialDirectory = DataLogRecordDir
-    '    OpenFileDialog1.Multiselect = False
-    '    OpenFileDialog1.RestoreDirectory = True
-    '    OpenFileDialog1.CheckPathExists = True
-    '    OpenFileDialog1.CheckFileExists = True
-    '    OpenFileDialog1.FileName = ""
-    '    If OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-    '        Shell("Notepad.exe " + OpenFileDialog1.FileName, AppWinStyle.NormalFocus)
-    '    End If
-    'End Sub
     Private Sub btnOpenLogFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenLogFile.Click
         OpenFileDialog1.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*"
         OpenFileDialog1.InitialDirectory = DataLogRecordDir
@@ -1933,12 +1735,7 @@ Public Class FormManual
             sender.Text = "59"
         End If
     End Sub
-    '­p®É¾¹===========================================================
 
-    'Private Sub btnOilPump_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    If ProcessMode_RUN Then Exit Sub
-    '    OilPump_Status = Not OilPump_Status
-    'End Sub
 
     Private Sub btnAutoVacuum_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAutoVacuum.Click
         If ProcessMode_RUN Then Exit Sub
@@ -1969,23 +1766,13 @@ Public Class FormManual
         ProcessAutoVacuum_Status = Not ProcessAutoVacuum_Status
         CAutoPumping.AutoProtection = Not CAutoPumping.AutoProtection
         SystemParameters.ProcessAutoVacuum = GetTrue01String(ProcessAutoVacuum_Status)
-        'CAutoPumping.SetBasePressure(CAutoPumping.AutoProtection, Val(SystemParameters.ProcessVacuumAutoVac), Val(SystemParameters.ProcessVacuumAutoVacLo))
 
         If ProcessMode_RUN Then
             CAutoPumping.SetBasePressure(CAutoPumping.AutoProtection, Val(SystemParameters.ProcessVacuumAutoVac), Val(RecipeNum(RecipeRunIndex).BasePressure) - Val(RecipeNum(RecipeRunIndex).BasePressure) * 0.2)
         Else
             CAutoPumping.SetBasePressure(CAutoPumping.AutoProtection, Val(SystemParameters.ProcessVacuumAutoVac), Val(SystemParameters.ProcessVacuumAutoVacLo))
         End If
-        ''ProcessAutoVacuum_Status = Not ProcessAutoVacuum_Status
-        'CAutoPumping.AutoProtection = Not CAutoPumping.AutoProtection
-        'If ProcessMode_RUN Then
-        '    CAutoPumping.SetBasePressure(CAutoPumping.AutoProtection, Val(SystemParameters.ProcessVacuumAutoVac), Val(RecipeNum(RecipeRunIndex).BasePressure))
-        'Else
-        '    If CAutoPumping.AutoProtection Then
-        '        'CAutoPumping.Start = True
-        '        CAutoPumping.SetBasePressure(CAutoPumping.AutoProtection, Val(SystemParameters.ProcessVacuumAutoVac), Val("1.0E-1"))
-        '    End If
-        'End If
+
     End Sub
 
     Private Sub btnAutoPurge_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAutoPurge.Click
@@ -1998,12 +1785,7 @@ Public Class FormManual
             CAutoPumping.SetAutoPurge(CAutoPumping.AutoPurge, Val(SystemParameters.AutoPurgeOnTime), Val(SystemParameters.AutoPurgeOFFTime), Val(SystemParameters.AutoPurgeCycle))
             CAutoPumping.AutoPurge = True
         End If
-        'cond = PLC_Y(DoMPIndex) = "1"
-        'If cond Then
-        '    AutoPurge_Status = Not AutoPurge_Status
-        'Else
-        '    MsgBoxLangErr("½Ð¥ý¶}±Ò¯uªÅÀ°®ú¤ÎRV.", "ˆ[¥ý…{„Q¯uªÅ‰Ö®ú¤ÎRV.", "Pump, RV On first.")
-        'End If
+
     End Sub
     'MFC SET
     Private Sub txtGas01MFCSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtGas01MFCSet.MouseDown

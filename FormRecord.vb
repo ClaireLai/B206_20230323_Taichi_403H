@@ -1,4 +1,5 @@
 Imports System.Windows.Forms.DataVisualization.Charting
+
 Public Class FormRecord
     Inherits System.Windows.Forms.Form
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -1173,67 +1174,72 @@ Public Class FormRecord
             lblFileCurve1.Text = My.Computer.FileSystem.GetName(File1Name)
             Dim str As String
             str = ReadProgData("CURVE_SETUP", "CAPTION", "NoData", File1Name)
-            Title = str.Split(",")
-            If Title.Length > 17 Then
-                CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-                bolDA = True
-            Else
-                CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-                bolDA = False
+            Dim subString As String = Mid(str, str.Length, str.Length)
+            If subString = "," Then
+                str = Mid(str, 1, str.Length - 1)
             End If
+            Title = str.Split(",")
 
-            '建立記錄畫面曲線圖
-            CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
-            '讀title
-            ReadCurveNames(CurveDataINI)
-            '清除舊資料
-            Do
-                ii = 0
-                For Each aa As Control In pnlRecordCSelect1.Controls
-                    ii = ii + 1
-                    pnlRecordCSelect1.Controls.Remove(aa)
+                If Title.Length > 18 Then
+                    CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
+                    bolDA = True
+                Else
+                    CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
+                    bolDA = False
+                End If
+
+                '建立記錄畫面曲線圖
+                CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
+                '讀title
+                ReadCurveNames(CurveDataINI)
+                '清除舊資料
+                Do
+                    ii = 0
+                    For Each aa As Control In pnlRecordCSelect1.Controls
+                        ii = ii + 1
+                        pnlRecordCSelect1.Controls.Remove(aa)
+                    Next
+                    Debug.Print("ii=" + ii.ToString)
+                Loop Until ii = 0
+                '建立曲線實體
+                CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)
+                '建立記錄畫面曲線選擇區
+                InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
+                '改名稱語言
+                ChangeSeriesRecordName(ChartRecord, CurveName)
+                Dim i As Integer
+                'For i = 0 To ChartRecord.Series.Count - 1
+                For i = 0 To Title.Length - 1
+                    ChartRecord.Series(i).Points.Clear()
+                    ChartRecord.Series(i).YAxisType = AxisType.Primary
                 Next
-                Debug.Print("ii=" + ii.ToString)
-            Loop Until ii = 0
-            '建立曲線實體
-            CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)
-            '建立記錄畫面曲線選擇區
-            InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
-            '改名稱語言
-            ChangeSeriesRecordName(ChartRecord, CurveName)
-            Dim i As Integer
-            'For i = 0 To ChartRecord.Series.Count - 1
-            For i = 0 To Title.Length - 1
-                ChartRecord.Series(i).Points.Clear()
-                ChartRecord.Series(i).YAxisType = AxisType.Primary
-            Next
-            For i = 0 To ChartRecord.ChartAreas.Count - 1
-                ChartRecord.ChartAreas(i).AxisX.Maximum = [Double].NaN
-            Next
+                For i = 0 To ChartRecord.ChartAreas.Count - 1
+                    ChartRecord.ChartAreas(i).AxisX.Maximum = [Double].NaN
+                Next
 
-            chkSite1.Checked = True
-            chkSite2.Checked = True
-            chkSite3.Checked = True
-            'chkSite4.Checked = False
-            'chkSite5.Checked = False
-            'chkSite6.Checked = False
-            chkVacuum.Checked = True
-            lblMessage.Text = "Reading Data"
-            pgbReadCurve.Visible = True
-            btnOpenCurve1.Enabled = False
-            For i = 0 To Record_Series.Length - 1
-                Record_Series(i).chkEnable.Checked = True
-                Record_Series(i).lblAxis.Text = "1"
-            Next
-            'CurveSelectChecked(chkSite1)
-            ReadCurveData = New System.Threading.Thread(AddressOf ReadCurveDataThread)
-            ReadCurveData.Priority = Threading.ThreadPriority.Highest
-            ReadCurveData.Start()
+                chkSite1.Checked = True
+                chkSite2.Checked = True
+                chkSite3.Checked = True
+                'chkSite4.Checked = False
+                'chkSite5.Checked = False
+                'chkSite6.Checked = False
+                chkVacuum.Checked = True
+                lblMessage.Text = "Reading Data"
+                pgbReadCurve.Visible = True
+                btnOpenCurve1.Enabled = False
+                For i = 0 To Record_Series.Length - 1
+                    Record_Series(i).chkEnable.Checked = True
+                    Record_Series(i).lblAxis.Text = "1"
+                Next
+                'CurveSelectChecked(chkSite1)
+                ReadCurveData = New System.Threading.Thread(AddressOf ReadCurveDataThread)
+                ReadCurveData.Priority = Threading.ThreadPriority.Highest
+                ReadCurveData.Start()
 
-            'ReadCurveBackWorker = New System.ComponentModel.BackgroundWorker()
-            'ReadCurveBackWorker.WorkerReportsProgress = True
-            'ReadCurveBackWorker.RunWorkerAsync()
-        End If
+                'ReadCurveBackWorker = New System.ComponentModel.BackgroundWorker()
+                'ReadCurveBackWorker.WorkerReportsProgress = True
+                'ReadCurveBackWorker.RunWorkerAsync()
+            End If
     End Sub
 
     Private Sub btnYReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnYReset.Click
