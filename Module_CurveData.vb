@@ -49,6 +49,13 @@ Module Module_CurveData
     '讀取曲線名稱
     Public Sub ReadCurveNames(ByVal sfile As String)
         Dim i As Integer
+        If SystemParameters.bolDAlog Then
+            CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
+            bolDA = True
+        Else
+            CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
+            bolDA = False
+        End If
         MAX_CURVES = Val(ReadProgData("CURVENAME_CHT", "CURVE_NUM", "1", sfile))
         If MAX_CURVES > 0 Then
             For i = 0 To MAX_CURVES

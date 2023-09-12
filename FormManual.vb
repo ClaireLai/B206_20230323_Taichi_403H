@@ -1609,7 +1609,7 @@ Public Class FormManual
 
 
     Private Sub btnStartLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartLog.Click
-
+        ReadCurveNames(CurveDataINI)
         If CSVTimerStartPb_Status = True Then
             CSVTimerStartPb_Status = False
         Else
