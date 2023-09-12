@@ -1,4 +1,5 @@
 Imports System.Windows.Forms.DataVisualization.Charting
+
 Public Class FormRecord
     Inherits System.Windows.Forms.Form
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -1178,18 +1179,19 @@ Public Class FormRecord
                 str = Mid(str, 1, str.Length - 1)
             End If
             Title = str.Split(",")
-            If Title.Length > 17 Then
+
+            If Title.Length > 18 Then
                 CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-                bolDA = True
+                bolDAShow = True
             Else
                 CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-                bolDA = False
+                bolDAShow = False
             End If
-
-            '建立記錄畫面曲線圖
-            CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
             '讀title
             ReadCurveNames(CurveDataINI)
+            '建立記錄畫面曲線圖
+            CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
+
             '清除舊資料
             Do
                 ii = 0
@@ -1203,6 +1205,7 @@ Public Class FormRecord
             CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)
             '建立記錄畫面曲線選擇區
             InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
+
             '改名稱語言
             ChangeSeriesRecordName(ChartRecord, CurveName)
             Dim i As Integer
@@ -1287,7 +1290,7 @@ Public Class FormRecord
                     Next
                 End If
             End If
-            If bolDA Then
+            If bolDAShow Then
                 For i = 0 To 5
                     If Not IsNothing(ChartRecord.Series(i + index * 6 + 2)) Then
                         ChartRecord.Series(i + index * 6 + 2).Enabled = checked

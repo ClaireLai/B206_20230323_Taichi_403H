@@ -1512,6 +1512,7 @@ Module Module_AutoTask
                 ProcessTempOK = False
                 ProcessFirstConatctOK = False
                 CurveFlag = False
+                ProcessToStepGo = False
                 For i = 0 To MAXPLATE
                     ManualControl(i).SetHeater(False)
                     ManualControl(i).RunMode = False

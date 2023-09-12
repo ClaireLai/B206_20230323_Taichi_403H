@@ -1667,7 +1667,7 @@ Module Comm_PLC_SERIAL
 
             Catch __unusedThreadAbortException2__ As ThreadAbortException
                 Debug.Print("thread_ abort " + strErr)
-                PLCAlarm_Log(strErr)
+                If PLCWatchDog = 0 Then PLCAlarm_Log(strErr)
             End Try
         End If
     End Sub

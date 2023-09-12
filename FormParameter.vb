@@ -7216,7 +7216,7 @@ Public Class FormParameter
         '
         Me.chkDa.AutoSize = True
         Me.chkDa.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkDa.Location = New System.Drawing.Point(715, 88)
+        Me.chkDa.Location = New System.Drawing.Point(757, 93)
         Me.chkDa.Name = "chkDa"
         Me.chkDa.Size = New System.Drawing.Size(63, 17)
         Me.chkDa.TabIndex = 954
@@ -9382,10 +9382,10 @@ Public Class FormParameter
         WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, ParameterINIFile)
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-            bolDA = True
+            'bolDAShow = True
         Else
             CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-            bolDA = False
+            'bolDAShow = False
         End If
     End Sub
 
