@@ -1205,7 +1205,7 @@ Public Class FormRecord
             CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)
             '建立記錄畫面曲線選擇區
             InitSeriesSelect(FormRecords.pnlRecordCSelect1, Record_Series, ChartRecord, 0)
-            ReadCurveNames(CurveDataINI)
+
             '改名稱語言
             ChangeSeriesRecordName(ChartRecord, CurveName)
             Dim i As Integer

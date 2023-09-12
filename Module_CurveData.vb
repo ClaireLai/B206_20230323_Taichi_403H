@@ -7,7 +7,7 @@ Module Module_CurveData
     Public Const CURVE_SECOND As Integer = 8
     Public TempInSecondary As Boolean
     Public Title() As String
-    Public bolDA As Boolean
+    Public bolDA As Boolean '載入的 CRV Record 圖示是否要顯示DA
 
     'Public Sub InitCurveData(ByVal sdir As String)
     '    'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
@@ -51,7 +51,7 @@ Module Module_CurveData
         Dim i As Integer
         'If SystemParameters.bolDAlog Then
         '    CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-        '    bolDA = True
+        'bolDA = True
         'Else
         '    CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
         '    bolDA = False

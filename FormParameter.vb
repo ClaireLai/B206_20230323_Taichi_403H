@@ -9382,10 +9382,10 @@ Public Class FormParameter
         WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, ParameterINIFile)
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-            bolDA = True
+            'bolDA = True
         Else
             CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-            bolDA = False
+            'bolDA = False
         End If
     End Sub
 

@@ -292,7 +292,7 @@ Module Module_Parameter
         Public DPWaterFlowAlarm As String
         'Add  by claire 20230620  稼動率功能 ------------------- End
         Public StartLog_Time As String
-        Public bolDAlog As Boolean
+        Public bolDAlog As Boolean '在Log時是否要紀錄DA值
     End Structure
     Public SystemParameters As SystemParameterss
 
