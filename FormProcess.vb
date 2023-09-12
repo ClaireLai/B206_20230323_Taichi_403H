@@ -2375,6 +2375,7 @@ Public Class FormProcess
             MsgBoxLangErr("系統未註冊!", "Not Register!")
             Exit Sub
         End If
+        ReadCurveNames(CurveDataINI)
         'Add  by Vincent 20180419  ------------------- Start
         'If Get_PLC_R1100(DAProgramVersionIndex) <> 2 Then
         '    MsgBoxLangErr("程式版本不同，不能執行!", "Program version not matched!")
