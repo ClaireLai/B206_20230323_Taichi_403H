@@ -2413,7 +2413,7 @@ Public Class FormProcess
             CheckProcessDateAndCreate()
             Cal_PresetData(RecipeNum(RecipeRunIndex).TotalTime)
             'Add By vincent  20150125  Start
-            If GetTrue01Boolean(SystemParameters.AutoRecordData) Then
+            If GetTrue01Boolean(SystemParameters.AutoRecordData) And (SanAn_TCPIP_Used_Flag Or BarCodeFile_Flag) Then
                 Dim aa As String = FDate + "-" + FTime + "-[" + LoginUserName + "]"
                 Dim bb As String = ProcessRecordDir + aa + ".dat"
                 ProcessRecordFileName = bb
