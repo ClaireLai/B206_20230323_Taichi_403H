@@ -2375,6 +2375,13 @@ Public Class FormProcess
             MsgBoxLangErr("系統未註冊!", "Not Register!")
             Exit Sub
         End If
+        If SystemParameters.bolDAlog Then
+            CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
+            bolDA = True
+        Else
+            CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
+            bolDA = False
+        End If
         ReadCurveNames(CurveDataINI)
         'Add  by Vincent 20180419  ------------------- Start
         'If Get_PLC_R1100(DAProgramVersionIndex) <> 2 Then
