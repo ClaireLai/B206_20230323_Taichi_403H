@@ -1182,16 +1182,16 @@ Public Class FormRecord
 
             If Title.Length > 18 Then
                 CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-                bolDA = True
+                bolDAShow = True
             Else
                 CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-                bolDA = False
+                bolDAShow = False
             End If
+            '讀title
             ReadCurveNames(CurveDataINI)
             '建立記錄畫面曲線圖
             CreateChartRecords(FormRecords.pnlRecordCurve, MAX_CURVES)
-            '讀title
-            ReadCurveNames(CurveDataINI)
+
             '清除舊資料
             Do
                 ii = 0
@@ -1290,7 +1290,7 @@ Public Class FormRecord
                     Next
                 End If
             End If
-            If bolDA Then
+            If bolDAShow Then
                 For i = 0 To 5
                     If Not IsNothing(ChartRecord.Series(i + index * 6 + 2)) Then
                         ChartRecord.Series(i + index * 6 + 2).Enabled = checked

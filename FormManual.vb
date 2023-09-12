@@ -1611,10 +1611,10 @@ Public Class FormManual
     Private Sub btnStartLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartLog.Click
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-            'bolDA = True
+            'bolDAShow = True
         Else
             CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-            'bolDA = False
+            'bolDAShow = False
         End If
         ReadCurveNames(CurveDataINI)
         If CSVTimerStartPb_Status = True Then

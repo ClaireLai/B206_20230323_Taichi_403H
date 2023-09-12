@@ -7,7 +7,7 @@ Module Module_CurveData
     Public Const CURVE_SECOND As Integer = 8
     Public TempInSecondary As Boolean
     Public Title() As String
-    Public bolDA As Boolean '載入的 CRV Record 圖示是否要顯示DA
+    Public bolDAShow As Boolean '載入的 CRV Record 圖示是否要顯示DA
 
     'Public Sub InitCurveData(ByVal sdir As String)
     '    'CurveDataINI = sdir + "CURVEDATA_DA.INI"        '程式資料INI檔案
@@ -51,10 +51,10 @@ Module Module_CurveData
         Dim i As Integer
         'If SystemParameters.bolDAlog Then
         '    CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-        'bolDA = True
+        'bolDAShow = True
         'Else
         '    CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-        '    bolDA = False
+        '    bolDAShow = False
         'End If
         MAX_CURVES = Val(ReadProgData("CURVENAME_CHT", "CURVE_NUM", "1", sfile))
         If MAX_CURVES > 0 Then
@@ -742,7 +742,7 @@ Module Module_CurveData
                     FormRecords.lblCHVac.Text = Format(ChartRecord.Series(0).Points(e.NewPosition).YValues(0), "0.0+E00")
                     FormRecords.lblDPCurrent.Text = Format(ChartRecord.Series(1).Points(e.NewPosition).YValues(0), "0.00")
                     For j = 0 To MAXPLATE
-                        If bolDA Then
+                        If bolDAShow Then
                             '加上DA值
                             If ChartRecord.Series(j * 6 + 2).Points.Count >= j Then
                                 RecordDataShow(j).SetTopTemp = ChartRecord.Series(j * 6 + 2).Points(e.NewPosition).YValues(0).ToString

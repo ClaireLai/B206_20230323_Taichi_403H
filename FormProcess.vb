@@ -2377,10 +2377,10 @@ Public Class FormProcess
         End If
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
-            'bolDA = True
+            'bolDAShow = True
         Else
             CurveDataINI = ProgramDir + "CURVEDATA.INI"        '程式資料INI檔案
-            'bolDA = False
+            'bolDAShow = False
         End If
         ReadCurveNames(CurveDataINI)
         'Add  by Vincent 20180419  ------------------- Start
