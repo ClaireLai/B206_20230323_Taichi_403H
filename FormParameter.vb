@@ -9283,13 +9283,13 @@ Public Class FormParameter
                 If Len(DataLogShortFileName) > 0 Then
                     CheckDataLogDirAndCreate()
 
-                    FormManual.lblDatalogFileName.Text = DataLogRecordFileName
-                    DatalogTime = Val(FormManual.txtDataLogStepTime.Text)
+                    FormManuals.lblDatalogFileName.Text = DataLogRecordFileName
+                    DatalogTime = Val(FormManuals.txtDataLogStepTime.Text)
                     CSVTimerStartPb_Status = True
                 End If
             End If
         End If
-        DatalogStart = CSVTimerStartPb_Status
+        'CSVTimerStartPb_Status = Module_Button.CSVTimerStartPb_Status
 
     End Sub
 
@@ -9303,14 +9303,6 @@ Public Class FormParameter
         WriteProgData("PARAMETER", "RunConfirm", SystemParameters.RunConfirm, ParameterINIFile)
     End Sub
 
-    'Private Sub txtWebPath_MouseDown(sender As Object, e As MouseEventArgs) Handles txtWebPath.MouseDown
-    '    Dim folderBrowserDialog1 As New FolderBrowserDialog
-
-    '    folderBrowserDialog1.ShowDialog()
-    '    txtWebPath.Text = folderBrowserDialog1.SelectedPath
-    '    SystemParameters.WebPath = txtWebPath.Text
-    '    WriteProgData("PARAMETER", "WebPath", SystemParameters.WebPath, ParameterINIFile)
-    'End Sub
 
     Private Sub btnShowPicControl_Click(sender As Object, e As EventArgs) Handles btnShowPicControl.Click
         Dim show As New FormMesgBox_passward

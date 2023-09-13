@@ -1142,7 +1142,6 @@ Public Class FormManual
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(149, 225)
         Me.Panel4.TabIndex = 547
-        Me.Panel4.Visible = False
         '
         'Label2
         '
@@ -1544,7 +1543,19 @@ Public Class FormManual
 
         lblDPCurrent.Text = MPCurrentStr
         lblCHVac.Text = GaugeCHVacStr
-
+        'for B222 claire
+        If bolLeakTest Or bolVaccTest Or Not Timercount_enable Then
+            Panel2.Enabled = Not Timercount_enable
+            txtTimerMin.Enabled = Not Timercount_enable
+            txtTimerSec.Enabled = Not Timercount_enable
+            btnTimerStart.Enabled = Not Timercount_enable
+            btnTimerReset.Enabled = Not Timercount_enable
+            tabPageDataLog.Enabled = Not Timercount_enable
+            btnMaxVaccTest.Enabled = Not bolLeakTest
+            btnLeakRateTest.Enabled = Not bolVaccTest
+        End If
+        ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
+        ObjShow.Show(bolLeakTest, btnLeakRateTest, ColorOn, ColorOff)
     End Sub
 
 
@@ -1628,6 +1639,15 @@ Public Class FormManual
 
                 DatalogTime = Val(txtDataLogStepTime.Text)
                 CSVTimerStartPb_Status = True
+            ElseIf bolLeakTest Then
+                DataLogShortFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
+                CheckDataLogDirAndCreate()
+                DataLogCUVFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
+                DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
+
+                DatalogTime = Val(txtDataLogStepTime.Text)
+                CSVTimerStartPb_Status = True
+
             Else
                 DataLogRecordFileName = ""
                 If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -1640,7 +1660,7 @@ Public Class FormManual
             End If
             lblDatalogFileName.Text = DataLogRecordFileName
         End If
-        DatalogStart = CSVTimerStartPb_Status
+        'Module_AutoTask.CSVTimerStartPb_Status = Module_Button.CSVTimerStartPb_Status
     End Sub
 
     Private Sub btnOpenLogFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenLogFile.Click
@@ -1914,12 +1934,12 @@ Public Class FormManual
             btnStartLog_Click(vbNull, e) '開始紀錄
 
         Else
-            Timercount_enable = False
-            bolVaccTest = False
+            Timercount_enable = False '停止計時
             btnStartLog_Click(vbNull, e) '開始紀錄
             Output(DoMPIndex).Status = False
             Output(DoRVIndex).Status = False
             CSVTimerStartPb_Status = False
+            bolVaccTest = False
 
         End If
 
@@ -1939,6 +1959,27 @@ Public Class FormManual
         'CallKeyboard2(sender, "59", "0")
         If Val(sender.Text) > 24 Then
             sender.Text = "24"
+        End If
+    End Sub
+
+    Private Sub btnLeakRateTest_Click(sender As Object, e As EventArgs) Handles btnLeakRateTest.Click
+        If ProcessMode_RUN Then Exit Sub
+        bolLeakTest = Not bolLeakTest
+        If bolLeakTest Then
+            '關valve
+            Output(DoRVIndex).Status = False
+            Output(DoVentIndex).Status = False
+            'log 壓力
+            Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+            txtTimerMin.Text = Timercount.set_min.ToString
+            btnTImerStart_Click(vbNull, e) '開始計時
+            Panel2.Enabled = False
+            btnStartLog_Click(vbNull, e) '開始紀錄
+        Else
+            Timercount_enable = False
+            btnStartLog_Click(vbNull, e) '開始紀錄
+            Module_Button.CSVTimerStartPb_Status = False
+
         End If
     End Sub
 End Class

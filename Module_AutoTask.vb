@@ -1,4 +1,4 @@
-Imports System.Runtime.InteropServices
+ï»¿Imports System.Runtime.InteropServices
 
 Module Module_AutoTask
     'Add by Vincent TCPIP 20200716  ---------------- Start
@@ -10,6 +10,7 @@ Module Module_AutoTask
     Public RunCounts As Integer = 0
     Public RunDataINIFile As String
     Public bolVaccTest As Boolean
+    Public bolLeakTest As Boolean = False
 
     Public Sub ReadRunData()
         Dim sstr As String
@@ -29,26 +30,26 @@ Module Module_AutoTask
     'Barcode 20160808 by vincent ---------------- End
     Public CSubAutoProcess(MAXPLATE) As CSubProcess
 
-    '¤l»sµ{Ãş§O
+    'å­è£½ç¨‹é¡åˆ¥
     Class CSubProcess
         'Private RecipeData As sPlateRecipe
         Private subPlateRecipe As New sPlateRecipe
         Private subRecipeLoad As Boolean
-        Public SubProcessEeventFileName As String      '»sµ{¨Æ¥óÀÉ¦W,§t¸ô®|,¨Ì»sµ{ÀÉ¦W+EVENT«Ø¥ß
+        Public SubProcessEeventFileName As String      'è£½ç¨‹äº‹ä»¶æª”å,å«è·¯å¾‘,ä¾è£½ç¨‹æª”å+EVENTå»ºç«‹
         Public TempTopSV, TempBotSV As Integer
         Private TotoalStringListNum As Integer
         Private SubProcessListString(2, 99) As String
 
-        'Åª¨ú°õ¦r¦ê,3»y
-        'process = »sµ{¦WºÙ,INI ÀÉ®×³]©w¬°==>  ­Y process= "PROCESS" [process"_
-        'ReadStatusString (»sµ{¦W,Àx¦s3»y¤§2ºû°}¦C, ÀÉ®×¦W) ¶Ç¦^¦r¦êÁ`¼Æ --> ©w¸q©ó XXXX_=40
-        '¤¤¤å¦r¦ê©w¸q¦p¤U, Â²Åé«h¬° _CHS, ­^¤å¬° _ENG
+        'è®€å–åŸ·å­—ä¸²,3èª
+        'process = è£½ç¨‹åç¨±,INI æª”æ¡ˆè¨­å®šç‚º==>  è‹¥ process= "PROCESS" [process"_
+        'ReadStatusString (è£½ç¨‹å,å„²å­˜3èªä¹‹2ç¶­é™£åˆ—, æª”æ¡ˆå) å‚³å›å­—ä¸²ç¸½æ•¸ --> å®šç¾©æ–¼ XXXX_=40
+        'ä¸­æ–‡å­—ä¸²å®šç¾©å¦‚ä¸‹, ç°¡é«”å‰‡ç‚º _CHS, è‹±æ–‡ç‚º _ENG
         '[PROCESS_CHT]   
         'PROCESS_NUM=10
-        'PROCESS00=»sµ{¶}©l
-        'PROCESS01=©â¯uªÅ
-        '.....¾lÃş±À
-        '¤@¦¸Åª¤TºØ»y¨¥¦s¤J°}¦C¤¤
+        'PROCESS00=è£½ç¨‹é–‹å§‹
+        'PROCESS01=æŠ½çœŸç©º
+        '.....é¤˜é¡æ¨
+        'ä¸€æ¬¡è®€ä¸‰ç¨®èªè¨€å­˜å…¥é™£åˆ—ä¸­
         Public Function ReadSubProcessString(ByVal process As String, ByRef sstr(,) As String, ByVal sfile As String) As Integer
             Dim para, section As String
             Dim i, j, num As Integer
@@ -74,7 +75,7 @@ Module Module_AutoTask
         End Function
 
         ''' <summary>
-        ''' ¤l»sµ{
+        ''' å­è£½ç¨‹
         ''' </summary>
         ''' <param name="sRecipe"></param>
         Public Sub LoadPlateRecipe(ByRef sRecipe As sPlateRecipe)
@@ -114,53 +115,53 @@ Module Module_AutoTask
 
 
         Private SiteNum As Integer
-        Private RunFlag As Boolean    'À£¦X®É­«¸m¦±½u
-        Private RunOKFlag As Boolean    'À£¦X®É­«¸m¦±½u
-        Private AbortFlag As Boolean    'À£¦X®É­«¸m¦±½u claire 2023.06.20¬°½[°Ê²v§ï¬°public
-        Private SkipFlag As Boolean    'À£¦X®É­«¸m¦±½u
-        Public SelectedFlag As Boolean    'À£¦X®É­«¸m¦±½u
+        Private RunFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
+        Private RunOKFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
+        Private AbortFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š claire 2023.06.20ç‚ºç¨¼å‹•ç‡æ”¹ç‚ºpublic
+        Private SkipFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
+        Public SelectedFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
 
-        Private CurveFlag As Boolean    'À£¦X®É­«¸m¦±½u
-        Private CurveFreeze As Boolean  '§¹¦¨»sµ{®É, ©w¦í¦±½u
+        Private CurveFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
+        Private CurveFreeze As Boolean  'å®Œæˆè£½ç¨‹æ™‚, å®šä½æ›²ç·š
 
-        '»sµ{¤¤©µ¿ğ®É¶¡­p®É
+        'è£½ç¨‹ä¸­å»¶é²æ™‚é–“è¨ˆæ™‚
         Private SubProcessTimerEnabled As Boolean
         Private SubProcessTimer As Integer
-        '«O«ù®É¶¡­p®É
+        'ä¿æŒæ™‚é–“è¨ˆæ™‚
         Private SubProcessHoldTimerEnabled As Boolean
         Public SubProcessHoldTimer As Integer
-        Private SubProcessHoldTimerSet As Integer   '«O«ù®É¶¡³]©w
+        Private SubProcessHoldTimerSet As Integer   'ä¿æŒæ™‚é–“è¨­å®š
 
-        '¹w­p®É¶¡¤£¨ì ALARM­p®É
+        'é è¨ˆæ™‚é–“ä¸åˆ° ALARMè¨ˆæ™‚
         Private SubProcessPresetTimerEnabled As Boolean
         Private SubProcessPresetTimer As Integer
 
-        Private SubProcessStartTime As String       '»sµ{¶}©l®É¶¡
-        Private SubProcessEndTime As String         '»sµ{µ²§ô®É¶¡
-        Private SubProcessAbortTime As String       '»sµ{¤¤Â_®É¶¡
+        Private SubProcessStartTime As String       'è£½ç¨‹é–‹å§‹æ™‚é–“
+        Private SubProcessEndTime As String         'è£½ç¨‹çµæŸæ™‚é–“
+        Private SubProcessAbortTime As String       'è£½ç¨‹ä¸­æ–·æ™‚é–“
 
-        Public SubProcessStatusString As String       '»sµ{ª¬ºA¦r¦ê
+        Public SubProcessStatusString As String       'è£½ç¨‹ç‹€æ…‹å­—ä¸²
 
-        Private SubTotalProcessTime As Integer  '»sµ{Á`®É¶¡(sec)
+        Private SubTotalProcessTime As Integer  'è£½ç¨‹ç¸½æ™‚é–“(sec)
 
         ReadOnly Property RunIndex() As Integer
             Get
                 Return SubProcessRunStepIndex
             End Get
         End Property
-        Public SubProcessRunStepIndex As Integer  '»sµ{ STEP ¼Æ
+        Public SubProcessRunStepIndex As Integer  'è£½ç¨‹ STEP æ•¸
 
-        Public SubProcessStepIndex As Integer  '»sµ{ STEP ¼Æ
-        Private SubRecipeStepIndex As Integer   '°t¤èSTEP¼Æ
-        Private SubProcessVacuumOK As Boolean   '»sµ{¯uªÅOK
-        Private SubProcessPressureOK As Boolean '»sµ{À£¤OOK
-        Private SubProcessTopTempOK As Boolean  '»sµ{¤¤¤W·Å«×OK
-        Private SubProcessBotTempOK As Boolean  '»sµ{¤¤¤U·Å«×OK
-        Private SubProcessTempOK As Boolean     '»sµ{¤¤·Å«×OK
-        Private SubProcessFirstConatctOK As Boolean '»sµ{¤¤­º¦¸±µ¦XOK
-        Private SubBondBeforeVacuumOK As Boolean    '»sµ{¤¤¥ıÀ£¦A©â¯uªÅOK
-        Private SubProcessToStepGo As Boolean       'À£ÀY¤vÀ£,¶}©l»sµ{(¥[·Å¥[À£)
-        Private SubProcessCurveIndex As Integer     '¦±½u°O¿ı¥Î index
+        Public SubProcessStepIndex As Integer  'è£½ç¨‹ STEP æ•¸
+        Private SubRecipeStepIndex As Integer   'é…æ–¹STEPæ•¸
+        Private SubProcessVacuumOK As Boolean   'è£½ç¨‹çœŸç©ºOK
+        Private SubProcessPressureOK As Boolean 'è£½ç¨‹å£“åŠ›OK
+        Private SubProcessTopTempOK As Boolean  'è£½ç¨‹ä¸­ä¸Šæº«åº¦OK
+        Private SubProcessBotTempOK As Boolean  'è£½ç¨‹ä¸­ä¸‹æº«åº¦OK
+        Private SubProcessTempOK As Boolean     'è£½ç¨‹ä¸­æº«åº¦OK
+        Private SubProcessFirstConatctOK As Boolean 'è£½ç¨‹ä¸­é¦–æ¬¡æ¥åˆOK
+        Private SubBondBeforeVacuumOK As Boolean    'è£½ç¨‹ä¸­å…ˆå£“å†æŠ½çœŸç©ºOK
+        Private SubProcessToStepGo As Boolean       'å£“é ­å·±å£“,é–‹å§‹è£½ç¨‹(åŠ æº«åŠ å£“)
+        Private SubProcessCurveIndex As Integer     'æ›²ç·šè¨˜éŒ„ç”¨ index
 
         Private ExternalTimerFlag As Boolean
 
@@ -174,10 +175,10 @@ Module Module_AutoTask
         Private AbortStr, DelayTimer, State, ProcessStr As String
 
         Sub New()
-            TotoalStringListNum = ReadStatusString("SUB_PROCESS", SubProcessListString, ProcessINIFile)    'Åª¨ú»sµ{¦r¦ê 3 »y
+            TotoalStringListNum = ReadStatusString("SUB_PROCESS", SubProcessListString, ProcessINIFile)    'è®€å–è£½ç¨‹å­—ä¸² 3 èª
         End Sub
         ''' <summary>
-        ''' »sµ{µ²§ô(¤¤Â_©Î¥¿±`µ²§ô)
+        ''' è£½ç¨‹çµæŸ(ä¸­æ–·æˆ–æ­£å¸¸çµæŸ)
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -189,7 +190,7 @@ Module Module_AutoTask
         End Property
 
         ''' <summary>
-        ''' Åª¨úRUNª¬ºA
+        ''' è®€å–RUNç‹€æ…‹
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -202,7 +203,7 @@ Module Module_AutoTask
         End Sub
 
         ''' <summary>
-        ''' Åª¨úRUNª¬ºA
+        ''' è®€å–RUNç‹€æ…‹
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -214,7 +215,7 @@ Module Module_AutoTask
         End Property
 
         ''' <summary>
-        ''' Åª¨ú¤¤Â_ª¬ºA
+        ''' è®€å–ä¸­æ–·ç‹€æ…‹
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -225,7 +226,7 @@ Module Module_AutoTask
             End Get
         End Property
         ''' <summary>
-        ''' ³]©w©Î¨ú±o¯uªÅOKª¬ºA
+        ''' è¨­å®šæˆ–å–å¾—çœŸç©ºOKç‹€æ…‹
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -240,13 +241,13 @@ Module Module_AutoTask
             End Set
         End Property
         '-------------------------------------------------------------------------------------------------------- Title
-        '¨ç¼Æ¦WºÙ       :   ProcessTimer  
-        '¨ç¼Æ¥\¯à       :   ­Ë¼Æ­p®É¤§­p®É¾¹
-        '¨ç¼Æ¶Ç¤J°Ñ¼Æ   :   (¶Ç§}¤§­p®É¾¹­P¯àºX¼Ğ= Boolean, ¶Ç§}¤§­p®É¾¹ÅÜ¼Æ As Integer)
-        '¶Ç¦^­È         : µL
-        '§@ªÌ           : Libra
-        '«Ø¥ß¤é´Á       : 2009/04/07
-        '­×§ï¤é´Á       :
+        'å‡½æ•¸åç¨±       :   ProcessTimer  
+        'å‡½æ•¸åŠŸèƒ½       :   å€’æ•¸è¨ˆæ™‚ä¹‹è¨ˆæ™‚å™¨
+        'å‡½æ•¸å‚³å…¥åƒæ•¸   :   (å‚³å€ä¹‹è¨ˆæ™‚å™¨è‡´èƒ½æ——æ¨™= Boolean, å‚³å€ä¹‹è¨ˆæ™‚å™¨è®Šæ•¸ As Integer)
+        'å‚³å›å€¼         : ç„¡
+        'ä½œè€…           : Libra
+        'å»ºç«‹æ—¥æœŸ       : 2009/04/07
+        'ä¿®æ”¹æ—¥æœŸ       :
         '-------------------------------------------------------------------------------------------------------- Start
         Private Sub ProcessTimer(ByRef bEnable As Boolean, ByRef tCount As Integer)
             If bEnable Then
@@ -337,8 +338,8 @@ Module Module_AutoTask
         End Sub
         Private Function SubAutoProcess_Task() As Integer
             State = Format(Control_State, "[000]") + "[" + (SubProcessStepIndex + 1).ToString + "/" + subPlateRecipe.TotalStep.ToString + "]"
-            ProcessStr = GetLangText("»sµ{¤¤:", "Process:")
-            AbortStr = GetLangText("¤¤Â_:", "Abort:")
+            ProcessStr = GetLangText("è£½ç¨‹ä¸­:", "Process:")
+            AbortStr = GetLangText("ä¸­æ–·:", "Abort:")
             If SubProcessTimer = 0 Then
                 DelayTimer = ""
             Else
@@ -347,14 +348,14 @@ Module Module_AutoTask
 
             On Error Resume Next
             Select Case Control_State
-                Case 0  '»sµ{ªì©l¤Æ
+                Case 0  'è£½ç¨‹åˆå§‹åŒ–
                     If RunFlag Then
                         RunOKFlag = False
                         CurveFlag = 0
                         CurveFreeze = 0
                         SubProcessTimerEnabled = False
                         SubProcessTimer = 0
-                        '«O«ù®É¶¡­p®É
+                        'ä¿æŒæ™‚é–“è¨ˆæ™‚
                         SubProcessHoldTimerEnabled = False
                         SubProcessHoldTimer = 0
                         SubProcessHoldTimerSet = 0
@@ -384,7 +385,7 @@ Module Module_AutoTask
                         Last_State = Control_State
                         Control_State = 1
                     End If
-                Case 1 'ÀË¬d¯uªÅ«×/­º¦¸¶K¦X
+                Case 1 'æª¢æŸ¥çœŸç©ºåº¦/é¦–æ¬¡è²¼åˆ
                     If RunFlag Then
                         TopTempSV(SiteNum) = TempCal(SiteNum).GetTICTopTemp(Val(subPlateRecipe.Temperature(SubProcessStepIndex))) 'By Chesly 20180702
                         BotTempSV(SiteNum) = TempCal(SiteNum).GetTICBotTemp(Val(subPlateRecipe.Temperature(SubProcessStepIndex))) 'By Chesly 20180702
@@ -399,7 +400,7 @@ Module Module_AutoTask
 
 
                         If ManualControl(SiteNum).FirstContact Or Val(subPlateRecipe.Pressure(SubProcessStepIndex)) = 0 Then
-                            SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
+                            SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("æª¢æŸ¥é¦–æ¬¡è²¼åˆ.", "ï¢æŸ¥é¦–æ¬¡ï…Œåˆ", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
                             SubProcessRunStepIndex = 1
                             If ManualControl(SiteNum).FirstContact = False Then
                                 If Val(subPlateRecipe.Pressure(SubProcessStepIndex)) > 0 And
@@ -409,7 +410,7 @@ Module Module_AutoTask
                                     End If
                                 End If
                             End If
-                            'SubProcessStatusString = ProcessStr + State + GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.") + "OK" 'ProcessStatusList(SystemLanguage, Control_State) + "--> OK"
+                            'SubProcessStatusString = ProcessStr + State + GetLangText("æª¢æŸ¥é¦–æ¬¡è²¼åˆ.", "ï¢æŸ¥é¦–æ¬¡ï…Œåˆ", "Check Vacuum.") + "OK" 'ProcessStatusList(SystemLanguage, Control_State) + "--> OK"
                             'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
                             SubProcessTimerEnabled = True
                             SubProcessTimer = 1
@@ -423,11 +424,11 @@ Module Module_AutoTask
                         Last_State = Control_State
                         Control_State = 99
                     End If
-                Case 2  '¼g¤J¾Ş§@°Ñ¼Æ and Turn ON
+                Case 2  'å¯«å…¥æ“ä½œåƒæ•¸ and Turn ON
                     If RunFlag Then
-                        SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
+                        SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("æª¢æŸ¥é¦–æ¬¡è²¼åˆ.", "ï¢æŸ¥é¦–æ¬¡ï…Œåˆ", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
 
-                        'SubProcessStatusString = ProcessStr + State + GetLangText("¼g¤JStep°Ñ¼Æ.", "‡À¤JStepƒò‡Û.", "Write Step Settings.")  ' ProcessStatusList(SystemLanguage, Control_State)
+                        'SubProcessStatusString = ProcessStr + State + GetLangText("å¯«å…¥Stepåƒæ•¸.", "ï‹„å…¥Stepï‚‚ï‹Ÿ.", "Write Step Settings.")  ' ProcessStatusList(SystemLanguage, Control_State)
                         ' Write Bonding Pressure /rate
                         PressSV(SiteNum) = Val(subPlateRecipe.Pressure(SubProcessStepIndex))
                         PressRateSV(SiteNum) = Val(subPlateRecipe.Pressure_Rate(SubProcessStepIndex))
@@ -467,7 +468,7 @@ Module Module_AutoTask
                         PlateProcess(SiteNum).lblTopTempSet.Text = subPlateRecipe.Temperature(SubProcessStepIndex)
                         PlateProcess(SiteNum).lblBotTempSet.Text = subPlateRecipe.Temperature(SubProcessStepIndex)
 
-                        ''³]©w¥[·Å
+                        ''è¨­å®šåŠ æº«
                         If (Val(subPlateRecipe.Temperature(SubProcessStepIndex)) > RecipeTempLowLimit) And Val(RecipeNum(RecipeRunIndex).PumpingMode) > 0 Then
                             ManualControl(SiteNum).SetHeater(True)
                             SubProcessTopTempOK = False
@@ -479,7 +480,7 @@ Module Module_AutoTask
                             SubProcessBotTempOK = True
                             SubProcessTempOK = True
                         End If
-                        '³]©w¥[À£
+                        'è¨­å®šåŠ å£“
                         If Val(subPlateRecipe.Pressure(SubProcessStepIndex)) > 0 And Val(subPlateRecipe.Time(SubProcessStepIndex)) > 0 Then
                             'If ManualControl(SiteNum).FirstContact = False Then
                             '    ManualControl(SiteNum).SetPlateUp()
@@ -522,11 +523,11 @@ Module Module_AutoTask
                         Last_State = Control_State
                         Control_State = 99
                     End If
-                Case 3  'ÀË¬d·Å«×¤ÎÀ£¤O/³]©w«O«ù®É¶¡
+                Case 3  'æª¢æŸ¥æº«åº¦åŠå£“åŠ›/è¨­å®šä¿æŒæ™‚é–“
                     If RunFlag Then
-                        SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
+                        SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("æª¢æŸ¥é¦–æ¬¡è²¼åˆ.", "ï¢æŸ¥é¦–æ¬¡ï…Œåˆ", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
 
-                        SubProcessStatusString = ProcessStr + State + GetLangText("µ¥«İ·Å«×¤ÎÀ£¤O.", "Wait Temp. & Forcing.")  'ProcessStatusList(SystemLanguage, Control_State)
+                        SubProcessStatusString = ProcessStr + State + GetLangText("ç­‰å¾…æº«åº¦åŠå£“åŠ›.", "Wait Temp. & Forcing.")  'ProcessStatusList(SystemLanguage, Control_State)
                         If SubProcessTimerEnabled = False Then
                             'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
                             SubProcessPressureOK = PV_InRange(Val(subPlateRecipe.Pressure(SubProcessStepIndex)), PressPV(SiteNum), Val(SystemParameters.PressureRange))
@@ -563,9 +564,9 @@ Module Module_AutoTask
                         Control_State = 99
                     End If
 
-                Case 4  '«O«ù®É¶¡­p®É
+                Case 4  'ä¿æŒæ™‚é–“è¨ˆæ™‚
                     If RunFlag Then
-                        SubProcessStatusString = ProcessStr + State + GetLangText("«O«ù®É¶¡­p®É:", "Hold Time:") + DelayTimer  'ProcessStatusList(SystemLanguage, Control_State)
+                        SubProcessStatusString = ProcessStr + State + GetLangText("ä¿æŒæ™‚é–“è¨ˆæ™‚:", "Hold Time:") + DelayTimer  'ProcessStatusList(SystemLanguage, Control_State)
                         If SubProcessTimerEnabled = False Then
                             ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + "--> OK"
                             'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
@@ -598,7 +599,7 @@ Module Module_AutoTask
                 Case 5 'Finished
                     If RunFlag Then
                         SubProcessStepIndex = subPlateRecipe.TotalStep - 1
-                        SubProcessStatusString = ProcessStr + State + GetLangText("»sµ{§¹¦¨!", "Process Finished!") + DelayTimer + " " + TTime 'ProcessStatusList(SystemLanguage, Control_State) 
+                        SubProcessStatusString = ProcessStr + State + GetLangText("è£½ç¨‹å®Œæˆ!", "Process Finished!") + DelayTimer + " " + TTime 'ProcessStatusList(SystemLanguage, Control_State) 
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
                         SubProcessEndTime = TTime
                         SubProcessRunStepIndex = 0
@@ -612,7 +613,7 @@ Module Module_AutoTask
 
                         SubProcessTimerEnabled = False
                         SubProcessTimer = 0
-                        '«O«ù®É¶¡­p®É
+                        'ä¿æŒæ™‚é–“è¨ˆæ™‚
                         SubProcessHoldTimerEnabled = False
                         SubProcessHoldTimer = 0
                         SubProcessHoldTimerSet = 0
@@ -634,7 +635,7 @@ Module Module_AutoTask
                     CurveFreeze = 0
                     SubProcessTimerEnabled = False
                     SubProcessTimer = 0
-                    '«O«ù®É¶¡­p®É
+                    'ä¿æŒæ™‚é–“è¨ˆæ™‚
                     SubProcessHoldTimerEnabled = False
                     SubProcessHoldTimer = 0
                     SubProcessHoldTimerSet = 0
@@ -674,50 +675,50 @@ Module Module_AutoTask
 
     End Class
 
-    '¦Û°Ê»sµ{µ{§Ç
-    Public CurveFlag As Boolean    'À£¦X®É­«¸m¦±½u
-    Public CurveFreeze As Boolean  '§¹¦¨»sµ{®É, ©w¦í¦±½u
+    'è‡ªå‹•è£½ç¨‹ç¨‹åº
+    Public CurveFlag As Boolean    'å£“åˆæ™‚é‡ç½®æ›²ç·š
+    Public CurveFreeze As Boolean  'å®Œæˆè£½ç¨‹æ™‚, å®šä½æ›²ç·š
 
-    '»sµ{¤¤©µ¿ğ®É¶¡­p®É
+    'è£½ç¨‹ä¸­å»¶é²æ™‚é–“è¨ˆæ™‚
     Public AutoProcessTimerEnabled As Boolean
     Public AutoProcessTimer As Integer
-    '«O«ù®É¶¡­p®É
+    'ä¿æŒæ™‚é–“è¨ˆæ™‚
     Public ProcessHoldTimerEnabled As Boolean
     Public ProcessHoldTimer As Integer
 
-    Public ProcessHoldTimerSet As Integer   '«O«ù®É¶¡³]©w
+    Public ProcessHoldTimerSet As Integer   'ä¿æŒæ™‚é–“è¨­å®š
 
-    Public ProcessStartTime As String       '»sµ{¶}©l®É¶¡
-    Public ProcessEndTime As String         '»sµ{µ²§ô®É¶¡
-    Public ProcessAbortTime As String       '»sµ{¤¤Â_®É¶¡
+    Public ProcessStartTime As String       'è£½ç¨‹é–‹å§‹æ™‚é–“
+    Public ProcessEndTime As String         'è£½ç¨‹çµæŸæ™‚é–“
+    Public ProcessAbortTime As String       'è£½ç¨‹ä¸­æ–·æ™‚é–“
 
-    Public ProcessStatusString As String    '»sµ{ª¬ºA¦r¦ê
+    Public ProcessStatusString As String    'è£½ç¨‹ç‹€æ…‹å­—ä¸²
 
 
-    Public TotalProcessTime As Integer  '»sµ{Á`®É¶¡(sec)
+    Public TotalProcessTime As Integer  'è£½ç¨‹ç¸½æ™‚é–“(sec)
 
-    Public ProcessStepIndex As Integer  '»sµ{ STEP ¼Æ
+    Public ProcessStepIndex As Integer  'è£½ç¨‹ STEP æ•¸
     '
-    Public RecipeStepIndex As Integer   '°t¤èSTEP¼Æ
+    Public RecipeStepIndex As Integer   'é…æ–¹STEPæ•¸
 
-    Public AllProcessEnd As Boolean   '»sµ{¯uªÅOK
-    Public ProcessOkCount As Integer    '»sµ{¯uªÅOK
-    Public ProcessAbortCount As Integer    '»sµ{¯uªÅOK
+    Public AllProcessEnd As Boolean   'è£½ç¨‹çœŸç©ºOK
+    Public ProcessOkCount As Integer    'è£½ç¨‹çœŸç©ºOK
+    Public ProcessAbortCount As Integer    'è£½ç¨‹çœŸç©ºOK
 
-    Public ProcessVacuumOK As Boolean   '»sµ{¯uªÅOK
-    Public ProcessPressureOK As Boolean '»sµ{À£¤OOK
-    Public ProcessTopTempOK As Boolean  '»sµ{¤¤¤W·Å«×OK
-    Public ProcessBotTempOK As Boolean  '»sµ{¤¤¤U·Å«×OK
-    Public ProcessTempOK As Boolean     '»sµ{¤¤·Å«×OK
-    Public ProcessFirstConatctOK As Boolean '»sµ{¤¤­º¦¸±µ¦XOK
-    Public BondBeforeVacuumOK As Boolean    '»sµ{¤¤¥ıÀ£¦A©â¯uªÅOK
+    Public ProcessVacuumOK As Boolean   'è£½ç¨‹çœŸç©ºOK
+    Public ProcessPressureOK As Boolean 'è£½ç¨‹å£“åŠ›OK
+    Public ProcessTopTempOK As Boolean  'è£½ç¨‹ä¸­ä¸Šæº«åº¦OK
+    Public ProcessBotTempOK As Boolean  'è£½ç¨‹ä¸­ä¸‹æº«åº¦OK
+    Public ProcessTempOK As Boolean     'è£½ç¨‹ä¸­æº«åº¦OK
+    Public ProcessFirstConatctOK As Boolean 'è£½ç¨‹ä¸­é¦–æ¬¡æ¥åˆOK
+    Public BondBeforeVacuumOK As Boolean    'è£½ç¨‹ä¸­å…ˆå£“å†æŠ½çœŸç©ºOK
     Public PlateOK(MAXPLATE) As Boolean
     Public PlateCount As Integer
 
-    Public ProcessToStepGo As Boolean       'À£ÀY¤vÀ£,¶}©l»sµ{(¥[·Å¥[À£)
+    Public ProcessToStepGo As Boolean       'å£“é ­å·±å£“,é–‹å§‹è£½ç¨‹(åŠ æº«åŠ å£“)
 
-    Public ProcessCurveIndex As Integer     '¦±½u°O¿ı¥Î index
-    Public ProcessCSVIndex As Integer     '¦±½u°O¿ı¥Î index
+    Public ProcessCurveIndex As Integer     'æ›²ç·šè¨˜éŒ„ç”¨ index
+    Public ProcessCSVIndex As Integer     'æ›²ç·šè¨˜éŒ„ç”¨ index
 
 
     Public Function AutoProcess_Task() As Integer
@@ -733,8 +734,8 @@ Module Module_AutoTask
 
         Dim AbortStr, DelayTimer, State, ProcessStr As String
         State = Format(Control_State, "[000]:") '+ "[" + (ProcessStepIndex + 1).ToString + "/" + RecipeStepIndex.ToString + "]"
-        ProcessStr = GetLangText("»sµ{¤¤:", "Process:")
-        AbortStr = GetLangText("¤¤Â_:", "Abort:")
+        ProcessStr = GetLangText("è£½ç¨‹ä¸­:", "Process:")
+        AbortStr = GetLangText("ä¸­æ–·:", "Abort:")
         If AutoProcessTimer = 0 Then
             DelayTimer = ""
         Else
@@ -810,7 +811,7 @@ Module Module_AutoTask
             End If
         Next
         Select Case Control_State
-            Case 0  '»sµ{ªì©l¤Æ
+            Case 0  'è£½ç¨‹åˆå§‹åŒ–
                 If ProcessMode_RUN Then
                     ProcessStartTime = NHour + ":" + NMin + ":" + NSec
 
@@ -826,7 +827,7 @@ Module Module_AutoTask
                         Output(DoBotPurge3Index).Status = False
 
                     End If
-                    '²M°£»sµ{¨B§Ç
+                    'æ¸…é™¤è£½ç¨‹æ­¥åº
                     ProcessStepIndex = 0
                     TotalProcessTime = 0
 
@@ -846,11 +847,11 @@ Module Module_AutoTask
                     Control_State = 1
                 End If
 
-            Case 1  '¼g¤J¾Ş§@°Ñ¼Æ
+            Case 1  'å¯«å…¥æ“ä½œåƒæ•¸
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
-                    '±Ò°ÊªoÀ£°¨¹F
+                    'å•Ÿå‹•æ²¹å£“é¦¬é”
                     For i = 0 To MAXPLATE
                         If OilPumpUsed Then
                             ManualControl(i).SetOilPump(True)
@@ -859,14 +860,14 @@ Module Module_AutoTask
                         CSubAutoProcess(i).SubProcessStatusString = ""
                     Next
 
-                    '³]©w»sµ{¨BÆJ¸ê®Æ
+                    'è¨­å®šè£½ç¨‹æ­¥é©Ÿè³‡æ–™
                     RecipeStepIndex = Val(RecipeNum(RecipeRunIndex).StepSet)
                     ProcessStepIndex = 0
 
                     DoorDelay = 0  'Add By Vincent 20190416 
                     Door1CloseAlarm_Error = False    'Add By Vincent 20190416 
 
-                    '¼g¤JVENT ®É¶¡
+                    'å¯«å…¥VENT æ™‚é–“
                     Write_PLC_R1100(DAVentTimeIndex, Val(SystemParameters.VentTime))
                     Write_PLC_R1100(DAProcessOKAlarmIndex, Val(SystemParameters.ProcessEndBZonTime))
                     Output(DoDoor1UpIndex).Status = True
@@ -884,7 +885,7 @@ Module Module_AutoTask
                     Last_State = Control_State
                     Control_State = 99
                 End If
-            Case 2  '¼g¤J»sµ{¸ê®Æ
+            Case 2  'å¯«å…¥è£½ç¨‹è³‡æ–™
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -908,13 +909,13 @@ Module Module_AutoTask
                             If Check_PLC_X(DiSaftyGate01Index) = False Or Check_PLC_X(DiSaftyGate01Index) = False Then
                                 ProcessMode_RUN = False
                                 Control_State = 99
-                                MsgBoxLangErr("¦w¥şªù°Ê§@,¤¤Â_»sµ{!!", "Safty Door Actived!")
+                                MsgBoxLangErr("å®‰å…¨é–€å‹•ä½œ,ä¸­æ–·è£½ç¨‹!!", "Safty Door Actived!")
                             End If
                         End If
                         'Add By Vincent 20190416 ------------------ Start
                         If Door1CloseAlarm_Error = False Then
                             If DoorDelay >= DOORTIME * 10 Then
-                                ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer & "->" & GetLangText("µ¥«İµÄªùÃö³¬", "Wait Door close.")
+                                ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer & "->" & GetLangText("ç­‰å¾…è…”é–€é—œé–‰", "Wait Door close.")
                                 Door1CloseAlarm_Error = True
                             Else
                                 Door1CloseAlarm_Error = False
@@ -932,7 +933,7 @@ Module Module_AutoTask
                     Control_State = 99
                 End If
 
-            Case 3 '¶}©l©â¯uªÅ
+            Case 3 'é–‹å§‹æŠ½çœŸç©º
 
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
@@ -940,7 +941,7 @@ Module Module_AutoTask
                         ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
 
-                        '³]©w°t¤è¯uªÅ¼Ò¦¡
+                        'è¨­å®šé…æ–¹çœŸç©ºæ¨¡å¼
                         If (Val(RecipeNum(RecipeRunIndex).PumpingMode) > 0) Then
                             CAutoPumping.AutoPurge = (Val(RecipeNum(RecipeRunIndex).VacuumPurge) > 0)
                             CAutoPumping.SetAutoPurge(CAutoPumping.AutoPurge, Val(SystemParameters.AutoPurgeOnTime), Val(SystemParameters.AutoPurgeOFFTime), Val(SystemParameters.AutoPurgeCycle))
@@ -969,7 +970,7 @@ Module Module_AutoTask
                     Control_State = 99
                 End If
 
-            Case 4 'ÀË¬d¯uªÅ­È¬O§_¤w¨ì,
+            Case 4 'æª¢æŸ¥çœŸç©ºå€¼æ˜¯å¦å·²åˆ°,
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     If CAutoPumping.AutoPurge Then ProcessStatusString = ProcessStatusString + Format(CAutoPumping.PurgeCounter, "Purge:[00]")
@@ -1024,13 +1025,13 @@ Module Module_AutoTask
                     Last_State = Control_State
                     Control_State = 99
                 End If
-            Case 5 'À£¬û¤W¤É
+            Case 5 'å£“ç¼¸ä¸Šå‡
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
                         ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State)
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
-                        'À£¬û¤W¤É
+                        'å£“ç¼¸ä¸Šå‡
                         For i = 0 To MAXPLATE
                             If Val(RecipeNum(RecipeRunIndex).Plate(i).Pressure(ProcessStepIndex)) > 0 Then
                                 ManualControl(i).SetPlateUp(True)
@@ -1047,7 +1048,7 @@ Module Module_AutoTask
                     Last_State = Control_State
                     Control_State = 99
                 End If
-            Case 6 'À£¬û¤w¤W¤É(§¹¦¨­º¦¸¶K¦Xµ{§Ç)
+            Case 6 'å£“ç¼¸å·²ä¸Šå‡(å®Œæˆé¦–æ¬¡è²¼åˆç¨‹åº)
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -1068,7 +1069,7 @@ Module Module_AutoTask
                             ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                             'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
                             If Val(RecipeNum(RecipeRunIndex).BondBeforeVacuum) > 0 And BondBeforeVacuumOK = True Then
-                                '¯uªÅ«e¹wÀ£
+                                'çœŸç©ºå‰é å£“
                                 If PlateCount = 0 Then
                                     AutoProcessTimerEnabled = True
                                     AutoProcessTimer = 2
@@ -1076,7 +1077,7 @@ Module Module_AutoTask
                                     Control_State = 3
                                 End If
                             Else
-                                '¥ı©â¯uªÅ¦AÀ£
+                                'å…ˆæŠ½çœŸç©ºå†å£“
                                 ProcessStepIndex = 0
                                 AutoProcessTimerEnabled = True
                                 AutoProcessTimer = 2
@@ -1094,14 +1095,14 @@ Module Module_AutoTask
                 End If
 
 
-            Case 7 'À£¦X§¹¦¨,¶}©l»sµ{
+            Case 7 'å£“åˆå®Œæˆ,é–‹å§‹è£½ç¨‹
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
                         'If Check_PLC_M(Do1stContactOK01Index) Then
                         ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Control_State) + DelayTimer
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
-                        '³]©w MFC ¬y¶q
+                        'è¨­å®š MFC æµé‡
                         If MFC01_USED Then
                             MFC01_Control.Start(Val(RecipeNum(RecipeRunIndex).MFC01Flow),
                                                 Val(RecipeNum(RecipeRunIndex).MFC01ONTime),
@@ -1130,7 +1131,7 @@ Module Module_AutoTask
                     Control_State = 99
                 End If
 
-            Case 8 '¥[·Å¥[À£
+            Case 8 'åŠ æº«åŠ å£“
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Last_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -1176,7 +1177,7 @@ Module Module_AutoTask
                     Control_State = 99
                 End If
 
-            Case 9 'ÀË¬d·Å«×/À£¤O¤w¨ì
+            Case 9 'æª¢æŸ¥æº«åº¦/å£“åŠ›å·²åˆ°
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Last_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -1200,7 +1201,7 @@ Module Module_AutoTask
                             End If
                         Next
 
-                        '©Ò¦³¤l»sµ{µ²§ô
+                        'æ‰€æœ‰å­è£½ç¨‹çµæŸ
                         If ProcessOkCount = 0 Then
                             RunCounts += 1
                             If RunCounts > 100000 Then
@@ -1213,11 +1214,11 @@ Module Module_AutoTask
                             Next
                             MFC01_Control.Stop()
                             MFC02_Control.Stop()
-                            'PURGE ­°·Å
+                            'PURGE é™æº«
                             If Val(RecipeNum(RecipeRunIndex).PurgeCooling) > 0 And PURGECOOLING Then
-                                'PURGE «ùÀ£
+                                'PURGE æŒå£“
                                 If Val(RecipeNum(RecipeRunIndex).PurgeKeepBonding) = 0 Then
-                                    'À£¬û¤U­°
+                                    'å£“ç¼¸ä¸‹é™
                                     For i = 0 To MAXPLATE
                                         ManualControl(i).SetPlateDown(True)
                                         ManualControl(i).SetPlateUp(False)
@@ -1228,7 +1229,7 @@ Module Module_AutoTask
                                 Last_State = Control_State
                                 Control_State = 18
                             Else
-                                '¬O§_­nPURGE
+                                'æ˜¯å¦è¦PURGE
                                 If Val(RecipeNum(RecipeRunIndex).AfterPurge) > 0 Then
                                     CAutoPumping.Start = True
                                     CAutoPumping.SetAutoPurge(CAutoPumping.AutoPurge, Val(SystemParameters.AutoPurgeOnTime), Val(SystemParameters.AutoPurgeOFFTime), Val(SystemParameters.AutoPurgeCycle))
@@ -1251,7 +1252,7 @@ Module Module_AutoTask
                 End If
             Case 18 ' Purge  Cooling 
                 If ProcessMode_RUN Then
-                    ProcessStatusString = ProcessStr + State + GetLangText("³q®ğ­°·Å¤¤...", "Purge cooling...") + Format(CAutoPumping.Timer, "[0]/") + Format(CAutoPumping.PurgeCounter, "[0]") + DelayTimer
+                    ProcessStatusString = ProcessStr + State + GetLangText("é€šæ°£é™æº«ä¸­...", "Purge cooling...") + Format(CAutoPumping.Timer, "[0]/") + Format(CAutoPumping.PurgeCounter, "[0]") + DelayTimer
                     If AutoProcessTimerEnabled = False Then
 
                         Dim PurgeCoolingTempOK As Integer = 0
@@ -1278,7 +1279,7 @@ Module Module_AutoTask
 
             Case 19
                 If ProcessMode_RUN Then
-                    ProcessStatusString = ProcessStr + State + GetLangText("³q®ğ­°·Å¤¤...", "Purge cooling...") + Format(CAutoPumping.Timer, "[0]/") + Format(CAutoPumping.PurgeCounter, "[0]") + DelayTimer
+                    ProcessStatusString = ProcessStr + State + GetLangText("é€šæ°£é™æº«ä¸­...", "Purge cooling...") + Format(CAutoPumping.Timer, "[0]/") + Format(CAutoPumping.PurgeCounter, "[0]") + DelayTimer
                     If AutoProcessTimerEnabled = False Then
 
                         Dim cooltempok As Integer = 0
@@ -1291,13 +1292,13 @@ Module Module_AutoTask
                                 CAutoPumping.SetAutoPurge(CAutoPumping.AutoPurge, Val(RecipeNum(RecipeRunIndex).PurgeONTime), Val(RecipeNum(RecipeRunIndex).PurgeOFFTime), 9999)
                                 CAutoPumping.AutoPurge = True
                             End If
-                            ProcessStatusString = ProcessStr + State + GetLangText("³q®ğ­°·ÅOK...", "Purge cooling OK.")
+                            ProcessStatusString = ProcessStr + State + GetLangText("é€šæ°£é™æº«OK...", "Purge cooling OK.")
 
                             AutoProcessTimerEnabled = True
                             AutoProcessTimer = 5 '
                             If Val(RecipeNum(RecipeRunIndex).KeepBonding) = 0 Then
-                                ProcessStatusString = ProcessStr + State + GetLangText("³q®ğ­°·ÅOK,À£¬û¤U­°.", "Purge cooling OK. Bond down.")
-                                'À£¬û¤U­°
+                                ProcessStatusString = ProcessStr + State + GetLangText("é€šæ°£é™æº«OK,å£“ç¼¸ä¸‹é™.", "Purge cooling OK. Bond down.")
+                                'å£“ç¼¸ä¸‹é™
                                 For i = 0 To MAXPLATE
                                     ManualControl(i).SetPlateDown(True)
                                     ManualControl(i).SetPlateUp(False)
@@ -1350,7 +1351,7 @@ Module Module_AutoTask
                         MFC01_Control.Stop()
                         MFC02_Control.Stop()
                         If Val(RecipeNum(RecipeRunIndex).KeepBonding) = 0 Then
-                            'À£¬û¤U­°
+                            'å£“ç¼¸ä¸‹é™
                             For i = 0 To MAXPLATE
                                 If CSubAutoProcess(i).AbortStatus = False Then
                                     ManualControl(i).SetPlateDown(True)
@@ -1387,7 +1388,7 @@ Module Module_AutoTask
                     Last_State = Control_State
                     Control_State = 99
                 End If
-            Case 12 '»sµ{µ²§ô, VENT ¤¤
+            Case 12 'è£½ç¨‹çµæŸ, VENT ä¸­
                 If ProcessMode_RUN Then
                     ProcessStatusString = ProcessStr + State + ProcessStatusList(SystemLanguage, Last_State) + DelayTimer
                     If AutoProcessTimerEnabled = False Then
@@ -1400,7 +1401,7 @@ Module Module_AutoTask
                         Output(DoRVIndex).Status = False
                         Output(DoMPIndex).Status = False
                         Output(DoVentIndex).Status = True
-                        'µ²§ô«á VENT
+                        'çµæŸå¾Œ VENT
                         '///  If TopTempPV <= Val(SystemParameters.CoolingTemperature) And BotTempPV <= Val(SystemParameters.CoolingTemperature) Then
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
 
@@ -1431,7 +1432,7 @@ Module Module_AutoTask
                             Next
                             If cooltempok = 0 Then
                                 If Val(RecipeNum(RecipeRunIndex).KeepBonding) = 0 Then
-                                    'À£¬û¤U­°
+                                    'å£“ç¼¸ä¸‹é™
                                     For i = 0 To MAXPLATE
                                         ManualControl(i).SetPlateDown(True)
                                         ManualControl(i).SetPlateUp(False)
@@ -1447,7 +1448,7 @@ Module Module_AutoTask
                                 AutoProcessTimerEnabled = True
                                 AutoProcessTimer = 3
 
-                                '*****claire add Ãö purge »Ö 2023.8.11
+                                '*****claire add é—œ purge é–¥ 2023.8.11
                                 Output(DoTopPurge1Index).Status = False
                                 Output(DoTopPurge2Index).Status = False
                                 Output(DoTopPurge3Index).Status = False
@@ -1518,7 +1519,7 @@ Module Module_AutoTask
                 Next
                 FormProcesss.lblProcessStopTime.Text = NHour + ":" + NMin + ":" + NSec
                 CAutoPumping.Start = False
-                ProcessStatusString = ProcessStr + State + GetLangText("»sµ{µ²§ô.", "Process Complete!")
+                ProcessStatusString = ProcessStr + State + GetLangText("è£½ç¨‹çµæŸ.", "Process Complete!")
 
                 If ProcessOkALMEnabled_Status Then Set_MBit(DoPressEndAlarmIndex, DEVICE_ON)
                 Control_State = 0
@@ -1539,7 +1540,7 @@ Module Module_AutoTask
                 'If SystemParameters.BarcodeOnly = "1" Then 'Add By Vincent 20160913
                 '    FormProcesss.RecipeLoaded = False
                 'End If
-                MsgBoxLangOK("»sµ{µ²§ô.", "Process Complete!")
+                MsgBoxLangOK("è£½ç¨‹çµæŸ.", "Process Complete!")
                 ProcessStepIndex = 0
 
             Case 99 'Step Finished or Aborted
@@ -1587,7 +1588,7 @@ Module Module_AutoTask
                 End If
                 If ProcessOkALMEnabled_Status Then Set_MBit(DoPressEndAlarmIndex, DEVICE_ON)
                 Control_State = 0
-                MsgBoxLangOK("»sµ{¤¤Â_!!", "Process Abort!!")
+                MsgBoxLangOK("è£½ç¨‹ä¸­æ–·!!", "Process Abort!!")
                 'BZ_Status = False
 
         End Select
@@ -1761,7 +1762,7 @@ Module Module_AutoTask
         End Select
     End Sub
 
-    '¦±½u¤Î»sµ{°O¿ı
+    'æ›²ç·šåŠè£½ç¨‹è¨˜éŒ„
     Public Sub ProcessRecord_Task_200ms()
         Static Control_State As Byte
         Dim ShowData As String
@@ -1893,7 +1894,7 @@ Module Module_AutoTask
                 'End If
         End Select
     End Sub
-    '¦±½u¤Î»sµ{°O¿ı/¨Ì¾ÚPID timer interval
+    'æ›²ç·šåŠè£½ç¨‹è¨˜éŒ„/ä¾æ“šPID timer interval
     Public Sub ProcessRecord_Task_ms()
         Static Control_State As Byte
         Dim ShowData As String
@@ -1915,7 +1916,7 @@ Module Module_AutoTask
             Case 1
 
                 If ProcessMode_RUN Then
-                    '¼ĞÃD
+                    'æ¨™é¡Œ
                     If ProcessRecordsIndex1 = 0 Then
                         ShowData = "Model:" + vbTab + Program_ModelName + vbTab + " Process Start for Recipe:" + vbTab + ProcessRecipeName + "Date/Time:" + ADate + " " + TTime + vbTab + "  PN:" + ProcessPN
                         AppendMultiData(ProcessRecordFileName1, 150, ShowData)
@@ -1961,7 +1962,7 @@ Module Module_AutoTask
                         ShowData = ""
                         ProcessRecordsIndex1 += 1
                     End If
-                    'log ¸ê®Æ
+                    'log è³‡æ–™
                     If ProcessMode_RUN Then
 
                         ShowData = ""
@@ -2029,8 +2030,8 @@ Module Module_AutoTask
                 'End If
         End Select
     End Sub
-    '¤â°Ê¸ê®Æ°O¿ı,
-    Public DatalogStart As Boolean
+    'æ‰‹å‹•è³‡æ–™è¨˜éŒ„,
+    'Public CSVTimerStartPb_Status As Boolean
     Public DatalogCount As Integer
     Public DatalogTime As Integer
     Public DatalogTimerCount As Integer
@@ -2046,17 +2047,21 @@ Module Module_AutoTask
     Public DataLogCUVFileName As String
     Public DataLogCUVFileName1 As String
     Public DataLogRecordDir As String
+    Public sigLastVacuum As Single
 
     Public Sub DataLog_Task()
         Static Control_State As Byte
         Dim ShowData As String
         Dim Data(99) As String
         Dim datamax As Integer
+        Dim sigLeakRate As Single
+        'Static strLastVacuum As String
+        'Static sigLastVacuum As Single
         Dim i, j As Integer
         On Error Resume Next
         Select Case Control_State
-            Case 0  'ªì©l¤Æ
-                If DatalogStart Then
+            Case 0  'åˆå§‹åŒ–+æ¨™é ­
+                If CSVTimerStartPb_Status Then
                     DatalogTimerCount = 0
                     DatalogCount = 0
                     AppendMultiData(DataLogRecordFileName, 100, " DataLog Start At:", Now.ToString, "FileName:", DataLogShortFileName, "Model:", Program_ModelName)
@@ -2069,7 +2074,7 @@ Module Module_AutoTask
                     Data(datamax) = "Vacuum"
                     datamax += 1
                     Data(datamax) = "MPCurrent"
-                    If bolVaccTest = False Then
+                    If (bolVaccTest Or bolLeakTest) = False Then
                         For i = 0 To MAXPLATE
                             datamax += 1
                             Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
@@ -2089,6 +2094,12 @@ Module Module_AutoTask
                             Data(datamax) = "BotWater" + Format(i + 1, "00")
                         Next
                     End If
+                    If bolLeakTest Then
+                        datamax += 1
+                        'strLastVacuum = 0
+                        sigLastVacuum = 0
+                        Data(datamax) = "LeakRate(mbar.mÂ³/s)"
+                    End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
                     Next
@@ -2098,8 +2109,8 @@ Module Module_AutoTask
                 End If
             Case 1
                 DatalogTimerCount = DatalogTimerCount + 1
-                If DatalogStart And DatalogTimerCount >= DatalogTime Then
-                    '¦¬¶°¸ê®Æ°O¿ı
+                If (bolLeakTest And sigLastVacuum = 0) Or (CSVTimerStartPb_Status And DatalogTimerCount >= DatalogTime) Then
+                    'æ”¶é›†è³‡æ–™è¨˜éŒ„
                     DatalogTimerCount = 0
                     ShowData = ""
                     datamax = 0
@@ -2110,7 +2121,7 @@ Module Module_AutoTask
                     Data(datamax) = GaugeCHVacStr
                     datamax += 1
                     Data(datamax) = MPCurrentStr
-                    If bolVaccTest = False Then
+                    If (bolVaccTest Or bolLeakTest) = False Then
                         For i = 0 To MAXPLATE
                             datamax += 1
                             Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
@@ -2131,15 +2142,27 @@ Module Module_AutoTask
 
                         Next
                     End If
+                    If bolLeakTest Then
+                        datamax += 1
+                        If sigLastVacuum <> 0 Then
+                            'sinLeakRate=0.9mÂ³*mbar/s  1mabr=0.75torr
+                            sigLeakRate = 0.9 * (GaugeCHVac - sigLastVacuum) / 0.75 / DatalogTime
+                            Data(datamax) = Format(sigLeakRate, "0.00")
+                        Else
+                            Data(datamax) = "_" 'ç¬¬ä¸€ç­†è³‡æ–™
+                        End If
+                        'strLastVacuum = GaugeCHVacStr
+                        sigLastVacuum = GaugeCHVac
+                    End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
                     Next
                     ShowData = ShowData + Data(i)
-                    '¼g¤J¸ê®Æ°O¿ı
+                    'å¯«å…¥è³‡æ–™è¨˜éŒ„
                     AppendData(DataLogRecordFileName, ShowData, 150)
                     DatalogCount = DatalogCount + 1
                 Else
-                    If DatalogStart = False Then Control_State = 0
+                    If CSVTimerStartPb_Status = False Then Control_State = 0
                 End If
         End Select
     End Sub
@@ -2151,8 +2174,8 @@ Module Module_AutoTask
         Dim i, j As Integer
         On Error Resume Next
         Select Case Control_State
-            Case 0  'ªì©l¤Æ
-                If DatalogStart Then
+            Case 0  'åˆå§‹åŒ–
+                If CSVTimerStartPb_Status Then
                     DatalogTimerCount1 = 0
                     DatalogCount1 = 0
                     AppendMultiData(DataLogRecordFileName1, 100, " DataLog Start At:", Now.ToString, "FileName:", DataLogShortFileName, "Model:", Program_ModelName)
@@ -2191,8 +2214,8 @@ Module Module_AutoTask
                 End If
             Case 1
                 'DatalogTimerCount1 = DatalogTimerCount1 + 1
-                If DatalogStart Then
-                    '¦¬¶°¸ê®Æ°O¿ı
+                If CSVTimerStartPb_Status Then
+                    'æ”¶é›†è³‡æ–™è¨˜éŒ„
                     DatalogTimerCount1 = 0
                     ShowData = ""
                     datamax = 0
@@ -2223,16 +2246,16 @@ Module Module_AutoTask
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
                     Next
                     ShowData = ShowData + Data(i)
-                    '¼g¤J¸ê®Æ°O¿ı
+                    'å¯«å…¥è³‡æ–™è¨˜éŒ„
                     AppendData(DataLogRecordFileName1, ShowData, 150)
                     DatalogCount1 = DatalogCount1 + 1
                 Else
-                    If DatalogStart = False Then Control_State = 0
+                    If CSVTimerStartPb_Status = False Then Control_State = 0
                 End If
         End Select
     End Sub
 
-    ' ¤â°Ê­p®É¾¹(¥¿¼Æ/­Ë¼Æ)-----------------------------------STart
+    ' æ‰‹å‹•è¨ˆæ™‚å™¨(æ­£æ•¸/å€’æ•¸)-----------------------------------STart
     <StructLayout(LayoutKind.Sequential)> Structure Timercounts
         Public set_min As Integer
         Public set_sec As Integer
@@ -2257,11 +2280,11 @@ Module Module_AutoTask
         Dim hh As Integer
         Dim mm As Integer
         Dim ss As Integer
-        '¨ú±o¥Ø«e®É¶¡
+        'å–å¾—ç›®å‰æ™‚é–“
         hh = Val(NHour)
         mm = Val(NMin)
         ss = Val(NSec)
-        '±N¥Ø«e®É¶¡Âà´«¦¨¬í¼Æ
+        'å°‡ç›®å‰æ™‚é–“è½‰æ›æˆç§’æ•¸
         Timercount_sys = 3600 * hh + 60 * mm + ss
 
         If Timercount_sys = 3600 And Timercount_shift = False Then
@@ -2269,32 +2292,32 @@ Module Module_AutoTask
             Timercount_shift = True
         End If
         If Timercount_last <> Timercount_sys Then
-            '¤W¼Æ­p®É¾¹
+            'ä¸Šæ•¸è¨ˆæ™‚å™¨
             If Timercount_up Then
-                '­p®É­È¥[1
+                'è¨ˆæ™‚å€¼åŠ 1
                 Timercount_now = Timercount_now + 1
-                '­pºâ¤À¤Î¬í
-                Timercount.pv_min = Timercount_now \ 60             '¬í°£¥H60¨ú°Ó¼Æ
-                Timercount.pv_sec = Timercount_now Mod 60           '¨ú¬í¤§¾l¼Æ
-                '§ó·sªí³æ­p®É­È
+                'è¨ˆç®—åˆ†åŠç§’
+                Timercount.pv_min = Timercount_now \ 60             'ç§’é™¤ä»¥60å–å•†æ•¸
+                Timercount.pv_sec = Timercount_now Mod 60           'å–ç§’ä¹‹é¤˜æ•¸
+                'æ›´æ–°è¡¨å–®è¨ˆæ™‚å€¼
                 obj_min.Text = Format(Timercount.pv_min, "#0")
                 obj_sec.Text = Format(Timercount.pv_sec, "#0")
             End If
-            '­Ë¼Æ­p®É¾¹
+            'å€’æ•¸è¨ˆæ™‚å™¨
             If Timercount_down Then
-                '­p®É­È´î1
+                'è¨ˆæ™‚å€¼æ¸›1
                 Timercount_now = Timercount_now - 1
-                '´î1«á¤£¬°0,ªí¥ÜÁÙ¥¼¼Æ¨ì
+                'æ¸›1å¾Œä¸ç‚º0,è¡¨ç¤ºé‚„æœªæ•¸åˆ°
                 If Timercount_now > 0 Then
-                    Timercount.pv_min = Timercount_now \ 60         '¬í°£¥H60¨ú°Ó¼Æ
-                    Timercount.pv_sec = Timercount_now Mod 60       '¨ú¬í¤§¾l¼Æ
-                    '§ó·sªí³æ­p®É­È
+                    Timercount.pv_min = Timercount_now \ 60         'ç§’é™¤ä»¥60å–å•†æ•¸
+                    Timercount.pv_sec = Timercount_now Mod 60       'å–ç§’ä¹‹é¤˜æ•¸
+                    'æ›´æ–°è¡¨å–®è¨ˆæ™‚å€¼
                     obj_min.Text = Format(Timercount.pv_min, "#0")
                     obj_sec.Text = Format(Timercount.pv_sec, "#0")
                 Else
-                    '­p®É¤w¨ì
-                    Timercount_now = 0          '²M°£­p®ÉÅÜ¼Æ
-                    Timercount_enable = False   '°±¤î­p®É
+                    'è¨ˆæ™‚å·²åˆ°
+                    Timercount_now = 0          'æ¸…é™¤è¨ˆæ™‚è®Šæ•¸
+                    Timercount_enable = False   'åœæ­¢è¨ˆæ™‚
                     If bolVaccTest And Timercount_enable = False Then
                         CAutoPumping.Start = False
                         bolVaccTest = False
@@ -2302,24 +2325,28 @@ Module Module_AutoTask
                         Output(DoRVIndex).Status = False
                         CSVTimerStartPb_Status = False
                     End If
+                    If bolLeakTest And Timercount_enable = False Then
+                        bolLeakTest = False
+                        CSVTimerStartPb_Status = False
+                    End If
                     Timercount_up = False       '
                     Timercount_down = False
-                    '§ó·sªí³æ­p®É­È
+                    'æ›´æ–°è¡¨å–®è¨ˆæ™‚å€¼
                     obj_min.Text = "0"
                     obj_sec.Text = "0"
-                    'obj_Start.Text = GetLangText("¶}©l­p®É",  "Start")
-                    'Åã¥Ü°T®§
-                    MsgBoxLangOK("­p®É§¹¦¨!", "Time Up")
+                    'obj_Start.Text = GetLangText("é–‹å§‹è¨ˆæ™‚",  "Start")
+                    'é¡¯ç¤ºè¨Šæ¯
+                    MsgBoxLangOK("è¨ˆæ™‚å®Œæˆ!", "Time Up")
                 End If
             End If
             Timercount_last = 3600 * hh + 60 * mm + ss
         End If
     End Sub
 
-    ' ¤â°Ê­p®É¾¹(¥¿¼Æ/­Ë¼Æ)-----------------------------------End
+    ' æ‰‹å‹•è¨ˆæ™‚å™¨(æ­£æ•¸/å€’æ•¸)-----------------------------------End
 
 
-    '¦Û°Ê©â¯uªÅÃş§O
+    'è‡ªå‹•æŠ½çœŸç©ºé¡åˆ¥
     Public CAutoPumping As New CAutoVacuum(DoMPIndex, DoRVIndex, DoVentIndex, DiDoor1UpIndex, DiCDAIndex, DiEMOIndex, DiDPFailIndex, ADVacuumIndex)
     Public Class CAutoVacuum
         Private RV_ON_Time As Integer
@@ -2412,11 +2439,11 @@ Module Module_AutoTask
         End Property
 
 
-        'GP275 Åª¨úÅÜ¼Æ (¸ü¤JµÄ¨Ï¥Î¤§¯uªÅ­p),0-10V (0.3~5.659V)¬dªíªk 
+        'GP275 è®€å–è®Šæ•¸ (è¼‰å…¥è…”ä½¿ç”¨ä¹‹çœŸç©ºè¨ˆ),0-10V (0.3~5.659V)æŸ¥è¡¨æ³• 
         Private Gp275PressureIndex() As Single = {1000, 900, 800, 760, 700, 600, 500, 400, 300, 200,
                                                  100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1,
                                                  0.05, 0.02, 0.01, 0.005, 0.002, 0.001}
-        'AD ¼Æ­È, ¤£Âà´« 0-10V, 0-8191
+        'AD æ•¸å€¼, ä¸è½‰æ› 0-10V, 0-8191
         Private Gp275VoltageIndex() As Integer = {4635, 4598, 4553, 4533, 4501, 4439, 4365, 4279, 4186, 4111,
                                                  4050, 3969, 3749, 3445, 3010, 2328, 1816, 1379, 946, 718,
                                                  559, 428, 373, 342, 321, 315}
@@ -2424,11 +2451,11 @@ Module Module_AutoTask
             Dim i As Integer
             Dim a1, a2, b1, b2, c1 As Single
             Dim VacValue As Single
-            'ÀË¬d¯uªÅ­p¬O§_¦s¦b
+            'æª¢æŸ¥çœŸç©ºè¨ˆæ˜¯å¦å­˜åœ¨
             If ADCount < 300 Then
                 Return 0
             End If
-            '¬dªí¨ú±o ¯uªÅ­È
+            'æŸ¥è¡¨å–å¾— çœŸç©ºå€¼
             For i = 1 To 25
                 If ADCount > Gp275VoltageIndex(i) Then
                     a1 = Gp275PressureIndex(i - 1)
@@ -2601,13 +2628,13 @@ Module Module_AutoTask
                             End If
                         End If
                         '------------------------------------------------------------------------------------
-                        '¦Û°Ê¯uªÅ±±¨î
-                    Case 7 'ÀË¬d¯uªÅ«×¬O§_¹L°ª
+                        'è‡ªå‹•çœŸç©ºæ§åˆ¶
+                    Case 7 'æª¢æŸ¥çœŸç©ºåº¦æ˜¯å¦éé«˜
                         If AutoBasePressure Then
                             If TimeUp() Then
-                                '¯uªÅ«×¤p©ó³]©w­È
+                                'çœŸç©ºåº¦å°æ–¼è¨­å®šå€¼
                                 If CurrentVac < BasePressureHi Then
-                                    SetTimer(10) '30s    ¦A©â10¬í
+                                    SetTimer(10) '30s    å†æŠ½10ç§’
                                     Control_State = 8
                                 Else
                                     Control_State = 0
@@ -2616,7 +2643,7 @@ Module Module_AutoTask
                         Else
                             Control_State = 0
                         End If
-                    Case 8 'Ãö³¬ RV
+                    Case 8 'é—œé–‰ RV
                         If AutoBasePressure Then
                             If TimeUp() Then
                                 If Check_PLC_Y(RV_Index) = True Then
@@ -2630,13 +2657,13 @@ Module Module_AutoTask
                         Else
                             Control_State = 0
                         End If
-                    Case 9 'Ãö³¬ MP
+                    Case 9 'é—œé–‰ MP
                         If AutoBasePressure Then
                             If TimeUp() Then
                                 If Check_PLC_Y(DP_Index) Then
                                     Set_MBit(DP_Index, DEVICE_OFF)
                                 End If
-                                '­Y¯uªÅ«×¦^À£¨ì §CÀ£, «h¦A­«·s±Ò°Ê.
+                                'è‹¥çœŸç©ºåº¦å›å£“åˆ° ä½å£“, å‰‡å†é‡æ–°å•Ÿå‹•.
                                 If (CurrentVac > BasePressure) Or PurgeStatus Then
                                     SetTimer(3)
                                     Control_State = 0
@@ -2757,7 +2784,7 @@ Module Module_AutoTask
         End Sub
 
     End Class
-    '¿O¸¹±±¨îÃş§O
+    'ç‡ˆè™Ÿæ§åˆ¶é¡åˆ¥
     Public CLampControl As New CLampClass(Alarm_status, ProcessMode_RUN, DoRLLampIndex, DoYLLampIndex, DoGLLampIndex)
     Class CLampClass
         Private RL_Index As Integer
@@ -2806,7 +2833,7 @@ Module Module_AutoTask
                 OldTimeCount = NowTimeCount
             End If
         End Sub
-        '¿O¸¹±±¨î
+        'ç‡ˆè™Ÿæ§åˆ¶
         Private Sub Run()
             IsAlarm = Alarm_status
             IsProcess = ProcessMode_RUN
@@ -2859,41 +2886,41 @@ Module Module_AutoTask
             End Select
         End Sub
     End Class
-    'MFC ON/OFF ¥æ´À¼Ò²Õ
+    'MFC ON/OFF äº¤æ›¿æ¨¡çµ„
     Public MFC01_Control As New Class_IntervalCOntrol(DoV10Index, DAMFC01Index, ADMFC01Index)
     Public MFC02_Control As New Class_IntervalCOntrol(DoV11Index, DAMFC02Index, ADMFC02Index)
     ''' <summary>
-    ''' MFC ¥æ´À±±¨îÃş§O Public MFC01_Control As New Class_IntervalCOntrol(DoV10Index, DAMFC01Index, ADMFC01Index)
+    ''' MFC äº¤æ›¿æ§åˆ¶é¡åˆ¥ Public MFC01_Control As New Class_IntervalCOntrol(DoV10Index, DAMFC01Index, ADMFC01Index)
     ''' </summary>
     ''' <remarks> Public MFC01_Control As New Class_IntervalCOntrol(DoV10Index, DAMFC01Index, ADMFC01Index)</remarks>
     Class Class_IntervalCOntrol
-        '­p®É¾¹ª«¥ó
+        'è¨ˆæ™‚å™¨ç‰©ä»¶
         Private DelayTimer As Timer
-        '­p®ÉÅÜ¼Æ
+        'è¨ˆæ™‚è®Šæ•¸
         Private TickCount As Integer
         Private TickCountEnabled As Boolean
-        'ª¬ºAÅÜ¼Æ
+        'ç‹€æ…‹è®Šæ•¸
         Private Control_State As Integer
-        'ª¬ºAÅÜ¼Æ
+        'ç‹€æ…‹è®Šæ•¸
         Private Cond As Boolean
-        '®É¶¡®Õ¥¿
+        'æ™‚é–“æ ¡æ­£
         Private OldTime, CurTime As Integer
-        'ÅÜ¼Æ
+        'è®Šæ•¸
         Private DAIndex As Integer
         Private ADIndex As Integer
         Private OutputIndex As Integer
-        '°õ¦æ¥ÎÅÜ¼Æ
+        'åŸ·è¡Œç”¨è®Šæ•¸
         Private MFCFlow As Integer
         Private MFCOnTime As Integer
         Private MFCOffTime As Integer
         Public DelayTime As String
-        '«Øºc¨ç¼Æ
+        'å»ºæ§‹å‡½æ•¸
         ''' <summary>
-        '''ªì©l¤Æ«Øºc¨ç¼Æ
+        '''åˆå§‹åŒ–å»ºæ§‹å‡½æ•¸
         ''' </summary>
-        ''' <param name="iDoIndex">MFC ®ğ»Ö¿é¥XÂI½s¸¹</param>
-        ''' <param name="iDAIndex">MFC ®ğ»Ö³]©w­È½s¸¹</param>
-        ''' <param name="iADIndex">MFC ®ğ»ÖÅª­È½s¸¹</param>
+        ''' <param name="iDoIndex">MFC æ°£é–¥è¼¸å‡ºé»ç·¨è™Ÿ</param>
+        ''' <param name="iDAIndex">MFC æ°£é–¥è¨­å®šå€¼ç·¨è™Ÿ</param>
+        ''' <param name="iADIndex">MFC æ°£é–¥è®€å€¼ç·¨è™Ÿ</param>
         ''' <remarks></remarks>
         Sub New(ByVal iDoIndex As Integer, ByVal iDAIndex As Integer, ByVal iADIndex As Integer)
             DelayTimer = New Timer
@@ -2905,7 +2932,7 @@ Module Module_AutoTask
             AddHandler DelayTimer.Tick, AddressOf TimerTick
             TickCount = 0
         End Sub
-        '­p®É¾¹
+        'è¨ˆæ™‚å™¨
         Private Sub TimerTick()
             CurTime = DatePart(DateInterval.Second, Now())
             If CurTime <> OldTime Then
@@ -2931,11 +2958,11 @@ Module Module_AutoTask
             End If
         End Sub
         ''' <summary>
-        ''' ­«³] MFC  I/O 
+        ''' é‡è¨­ MFC  I/O 
         ''' </summary>
-        ''' <param name="iDoIndex">MFC ®ğ»Ö¿é¥XÂI½s¸¹</param>
-        ''' <param name="iDAIndex">MFC ®ğ»Ö³]©w­È½s¸¹</param>
-        ''' <param name="iADIndex">MFC ®ğ»ÖÅª­È½s¸¹</param>
+        ''' <param name="iDoIndex">MFC æ°£é–¥è¼¸å‡ºé»ç·¨è™Ÿ</param>
+        ''' <param name="iDAIndex">MFC æ°£é–¥è¨­å®šå€¼ç·¨è™Ÿ</param>
+        ''' <param name="iADIndex">MFC æ°£é–¥è®€å€¼ç·¨è™Ÿ</param>
         ''' <remarks></remarks>
         Public Sub Initial(ByVal iDoIndex As Integer, ByVal iDAIndex As Integer, ByVal iADIndex As Integer)
             DAIndex = iDAIndex
@@ -2944,11 +2971,11 @@ Module Module_AutoTask
             DelayTimer.Enabled = True
         End Sub
         ''' <summary>
-        ''' ±Ò°ÊMFC ¥æ´À±±¨î
+        ''' å•Ÿå‹•MFC äº¤æ›¿æ§åˆ¶
         ''' </summary>
-        ''' <param name="iFlow">³]©w¬y¶q</param>
-        ''' <param name="iOnTime">³]©wON®É¶¡</param>
-        ''' <param name="iOffTime">³]©wOFF®É¶¡</param>
+        ''' <param name="iFlow">è¨­å®šæµé‡</param>
+        ''' <param name="iOnTime">è¨­å®šONæ™‚é–“</param>
+        ''' <param name="iOffTime">è¨­å®šOFFæ™‚é–“</param>
         ''' <remarks></remarks>
         Public Sub Start(ByVal iFlow As Integer, ByVal iOnTime As Integer, ByVal iOffTime As Integer)
             MFCFlow = iFlow
@@ -2959,7 +2986,7 @@ Module Module_AutoTask
             DelayTimer.Enabled = True
         End Sub
         ''' <summary>
-        ''' °±¤îMFC ¥æ´Àµ{§Ç
+        ''' åœæ­¢MFC äº¤æ›¿ç¨‹åº
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub [Stop]()
@@ -2968,7 +2995,7 @@ Module Module_AutoTask
             Control_State = 0
         End Sub
         ''' <summary>
-        ''' Äİ©Ê, Åª¨ú MFC Åª­È
+        ''' å±¬æ€§, è®€å– MFC è®€å€¼
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -3022,7 +3049,7 @@ Module Module_AutoTask
         End Function
 
     End Class
-    'By chesly 20181023 À£¬û¦Û°Ê´`Àô°Ê§@ start
+    'By chesly 20181023 å£“ç¼¸è‡ªå‹•å¾ªç’°å‹•ä½œ start
 #Region " Bonder Auto Cycle Run"
     Public BondCycle1 As New CCycleRun(DoBondUp01Index, DoBondDown01Index, DiBondUp01Index, DiBondDown01Index, 300, 300)
     Public BondCycle2 As New CCycleRun(DoBondUp02Index, DoBondDown02Index, DiBondUp02Index, DiBondDown02Index, 300, 300)
@@ -3080,13 +3107,13 @@ Module Module_AutoTask
             Select Case State
                 Case 0
                     If StartRun Then
-                        DelayTimerEndbled = True '­p®É¶}©l
+                        DelayTimerEndbled = True 'è¨ˆæ™‚é–‹å§‹
                         DelayTimer = 10
                         State = 1
                     End If
                 Case 1 'down
                     If StartRun Then
-                        If DelayTimerEndbled = False Then '­p®É¨ì
+                        If DelayTimerEndbled = False Then 'è¨ˆæ™‚åˆ°
                             Output(_Out1Index).Status = False
                             Output(_Out2Index).Status = True
                             'ChuckUpPb_Status = False
@@ -3167,6 +3194,6 @@ Module Module_AutoTask
         End Sub
     End Class
 #End Region
-    'By chesly 20181023 À£¬û¦Û°Ê´`Àô°Ê§@ End
+    'By chesly 20181023 å£“ç¼¸è‡ªå‹•å¾ªç’°å‹•ä½œ End
 
 End Module

@@ -229,6 +229,7 @@ Public Class FormKeyinDataLogName
         If txtFileName.Text.Length < 1 Then
             txtFileName.Text = FDate + "-" + FTime + "-[" + LoginUserName + "]"
         Else
+            CheckDataLogDirAndCreate()
             DataLogShortFileName = txtFileName.Text + ".csv"
             DataLogShortFileName1 = txtFileName.Text + "_A.csv"
             DataLogCUVFileName = txtFileName.Text + ".cuv"
