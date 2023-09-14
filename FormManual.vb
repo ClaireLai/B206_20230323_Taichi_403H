@@ -92,6 +92,8 @@ Public Class FormManual
     Friend WithEvents txtVacuumTestTimeMin As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents txtVacuumTestTimeHr As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblWaterPress As Label
     Dim maxvalue(10) As Double
 
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -222,6 +224,8 @@ Public Class FormManual
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblWaterPress = New System.Windows.Forms.Label()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -586,9 +590,9 @@ Public Class FormManual
         Me.btnPumpProtection.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnPumpProtection.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPumpProtection.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnPumpProtection.Location = New System.Drawing.Point(338, 252)
+        Me.btnPumpProtection.Location = New System.Drawing.Point(338, 243)
         Me.btnPumpProtection.Name = "btnPumpProtection"
-        Me.btnPumpProtection.Size = New System.Drawing.Size(108, 44)
+        Me.btnPumpProtection.Size = New System.Drawing.Size(108, 28)
         Me.btnPumpProtection.TabIndex = 533
         Me.btnPumpProtection.Text = "真空維持"
         Me.btnPumpProtection.UseVisualStyleBackColor = False
@@ -608,6 +612,8 @@ Public Class FormManual
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.lblWaterPress)
+        Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.picC05)
         Me.Panel2.Controls.Add(Me.lblDPTemp)
         Me.Panel2.Controls.Add(Me.pnlMFC02)
@@ -1353,6 +1359,29 @@ Public Class FormManual
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(326, 284)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 20)
+        Me.Label3.TabIndex = 562
+        Me.Label3.Text = "水壓"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblWaterPress
+        '
+        Me.lblWaterPress.BackColor = System.Drawing.Color.Black
+        Me.lblWaterPress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblWaterPress.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWaterPress.ForeColor = System.Drawing.Color.Lime
+        Me.lblWaterPress.Location = New System.Drawing.Point(373, 282)
+        Me.lblWaterPress.Name = "lblWaterPress"
+        Me.lblWaterPress.Size = New System.Drawing.Size(63, 24)
+        Me.lblWaterPress.TabIndex = 563
+        Me.lblWaterPress.Text = "0"
+        Me.lblWaterPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FormManual
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1475,6 +1504,7 @@ Public Class FormManual
         Else
             lblDPText.Text = "MP"
         End If
+        lblWaterPress.Text = WaterPressStr
         lblDPTemp.Text = Get_PLC_R1000(ADDPTempIndex).ToString
         lblDPTemp.Visible = DP_Pump_Used
 

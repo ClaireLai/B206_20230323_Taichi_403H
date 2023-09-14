@@ -572,7 +572,7 @@
     Public Const ADBotTemp05Index As Integer = 89       '目前 下壓頭溫度值
     Public Const ADTopTemp06Index As Integer = 90        '目前 上壓頭溫度值
     Public Const ADBotTemp06Index As Integer = 91       '目前 下壓頭溫度值
-    Public Const ADWaterPressIndex As Integer = 96       '目前 下壓頭溫度值
+    Public Const ADWaterPressIndex As Integer = 96       '目前 水壓
 
     'R1200 ~R1263 從 96開始
     Public Const ADTopFlowMeter01Index As Integer = 96        '上水流量01R1200
