@@ -124,6 +124,9 @@
     Public PressPV(MAXPLATE) As Integer
     Public oriPressPV(MAXPLATE) As Integer
     Public PressPVstr(MAXPLATE) As String
+
+
+
     '預設曲線
     Public PresetTemp(MAXPLATE) As Integer
     Public PresetPress(MAXPLATE) As Integer
@@ -142,6 +145,10 @@
     '抽真空資訊更新
     Public MPCurrent As Single
     Public MPCurrentStr As String
+
+    Public WaterPressStr As String
+
+
 
     Public Sub ReadInformation()
         '單頭溫度 
@@ -179,6 +186,9 @@
         MFCReadValueStr(ADMFC02Index) = Format(MFCReadValue(ADMFC02Index), "0")
         '判斷是否可以VENT
         VentOKCount = 0
+
+        '水壓
+
         For i = 0 To MAXPLATE
             '各頭溫度值
             TopTempPV(i) = TempCal(i).CaledTopTemp
@@ -297,9 +307,7 @@
         Next
         '可以 vent
         VentOK = (VentOKCount = 0)
-
-
-
+        WaterPressStr = Format(Get_PLC_R1000(ADWaterPressIndex), "0.00")
 
     End Sub
     'End Class

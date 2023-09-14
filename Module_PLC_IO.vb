@@ -74,7 +74,7 @@
     Public Const DiBondUp03Index As Integer = 19 '22            'X03
 
 
-    Public Const DiHeaterOL01Index As Integer = 23 '14               '    X12
+    Public Const DiWaterLeakIndex As Integer = 23 '14               '    X12
     Public Const DiHeaterOL02Index As Integer = 24 '19               '    X12
     Public Const DiHeaterOL03Index As Integer = 25 '24               '    X12
 
@@ -572,7 +572,7 @@
     Public Const ADBotTemp05Index As Integer = 89       '目前 下壓頭溫度值
     Public Const ADTopTemp06Index As Integer = 90        '目前 上壓頭溫度值
     Public Const ADBotTemp06Index As Integer = 91       '目前 下壓頭溫度值
-
+    Public Const ADWaterPressIndex As Integer = 96       '目前 下壓頭溫度值
 
     'R1200 ~R1263 從 96開始
     Public Const ADTopFlowMeter01Index As Integer = 96        '上水流量01R1200

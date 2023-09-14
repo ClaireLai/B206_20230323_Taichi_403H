@@ -203,6 +203,7 @@ Module Module_Alarm_Task
         Door1CloseAlarm_Error = 145
 
         PumpingAlarm_Error = 146
+        WaterLeak_Error = 147
         'Add By Vincent 20190416 ------------------ End
     End Enum
     'Add By Vincent 20190416 ------------------ Start
@@ -797,6 +798,7 @@ Module Module_Alarm_Task
             'AlarmError(Alarm_Name.SaftyGate1Error) = (Not Check_PLC_X(DiDoor1UpIndex) Or Not Check_PLC_X(DiDoor1DownIndex)) And (Not Check_PLC_X(DiSaftyGate01Index) And Check_PLC_Y(DoDoor1UpIndex))
             'AlarmError(Alarm_Name.SaftyGate2Error) = Not Check_PLC_X(DiSaftyGate02Index) And Check_PLC_Y(DoDoor2UpIndex)
             AlarmError(Alarm_Name.SaftyGate1Error) = Check_PLC_M(DoSaftyGateAlarmIndex)
+            AlarmError(Alarm_Name.WaterLeak_Error) = Check_PLC_X(DiWaterLeakIndex)
 
             For i = 0 To MAXPLATE
                 'AlarmError(Alarm_Name.BUND_DOWN_Error1 + i) = CAlarmError(Alarm_Name.BUND_DOWN_Error1 + i).CheckAlarm(BONDDOWNTIME, Check_PLC_Y(DoBondDown01Index + i * 4), Check_PLC_X(DiBondDown01Index + i * 2))

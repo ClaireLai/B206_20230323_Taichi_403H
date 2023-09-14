@@ -2216,7 +2216,8 @@ Public Class FormProcess
         Else
             lblModelname.Text = Program_ModelName
         End If
-        lblProcessDataFile.Text = IO.Path.GetFileName(ProcessRecordFileName) & " <" & ProcessRecordsIndex.ToString & ">"
+        'lblProcessDataFile.Text = IO.Path.GetFileName(ProcessRecordFileName) & " <" & ProcessRecordsIndex.ToString & ">"
+        lblProcessDataFile.Text = IO.Path.GetFileName(ProcessRecordFileName_222) & " <" & ProcessRecordsIndex.ToString & ">"
         btnDoor1Up.Enabled = Not ProcessMode_RUN
         btnDoor1Down.Enabled = Not ProcessMode_RUN
         btnBarcodeReader.Enabled = RemoteCIM.Enable Or Not ProcessMode_RUN
@@ -2421,6 +2422,7 @@ Public Class FormProcess
                 sFile = aa
                 ProcessPN = sFile
                 ProcessRecordFileName = ProcessRecordDir + sFile + ".dat"
+                ProcessRecordFileName_222 = ProcessRecordDir + sFile + "_222.dat"
                 ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
                 ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
                 CsvFilename = ProcessCSVDir + sFile + ".csv"
@@ -2478,6 +2480,7 @@ Public Class FormProcess
                 'sFile = ProcessRecordFileName 'FormKeyInProcessNames.ProcessFileName
                 ProcessPN = sFile
                 ProcessRecordFileName = ProcessRecordDir + sFile + ".dat"
+                ProcessRecordFileName_222 = ProcessRecordDir + sFile + "_222.dat"
                 ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
                 ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
                 ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
@@ -3299,6 +3302,7 @@ Public Class FormProcess
         'sFile = ProcessRecordFileName 'FormKeyInProcessNames.ProcessFileName
         ProcessPN = sFile
         ProcessRecordFileName = ProcessRecordDir + sFile + ".dat"
+        ProcessRecordFileName_222 = ProcessRecordDir + sFile + "_222.dat"
         ProcessRecordFileName1 = ProcessRecordDir + sFile + "_A.txt"
         ProcessRecordCurveFileName = ProcessRecordCurveDir + sFile + ".Proc"
         ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
@@ -3556,7 +3560,9 @@ Public Class FormProcess
 
         FormKeyInProcessNames.RemoteEnter(RemoteCIM.PorcessDataFileName)
         ProcessRecordShortFileName = FormKeyInProcessNames.ProcessFileName
+        ProcessRecordShortFileName_222 = FormKeyInProcessNames.ProcessFileName
         ProcessRecordFileName = ProcessRecordDir + ProcessRecordShortFileName + ".dat"
+        ProcessRecordFileName_222 = ProcessRecordDir + ProcessRecordShortFileName_222 + ".dat"
         ProcessEeventFileName = ProcessEeventDir + "Event_" + FDate + "-" + FTime + "-[" + LoginUserName + "].dat"
         If FileIO.FileSystem.FileExists(ProcessRecordFileName) Then
             'If MsgBoxLangYesNo("ÀÉ®×¤w¦s¦b,­nÂÐ»\?", "‰ã®×¤w¦s¦b,­nÂÐ‡I?", "File Exist, Overwrite?") Then

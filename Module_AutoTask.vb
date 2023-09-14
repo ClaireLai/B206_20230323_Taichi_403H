@@ -11,6 +11,10 @@ Module Module_AutoTask
     Public RunDataINIFile As String
     Public bolVaccTest As Boolean
     Public bolLeakTest As Boolean = False
+    Public LastTopTemp(2) As Integer
+    Public LastBotTemp(2) As Integer
+    Public timecounts As Integer = 0
+
 
     Public Sub ReadRunData()
         Dim sstr As String
@@ -1623,37 +1627,6 @@ Module Module_AutoTask
                     If ProcessRecordsIndex = 0 Then
                         ShowData = "Model:" + vbTab + Program_ModelName + vbTab + " Process Start for Recipe:" + vbTab + ProcessRecipeName + "Date/Time:" + ADate + " " + TTime + vbTab + "  PN:" + ProcessPN
                         AppendMultiData(ProcessRecordFileName, 150, ShowData)
-                        'If RemoteCIM.Enable Then
-                        '    ShowData = "EqId:" & RemoteCIM.EQID & vbCrLf
-                        '    ShowData = ShowData & "DateTime:" & RemoteCIM.RecipeData.DateTime & vbCrLf
-                        '    Dim ProductCount As Integer = RemoteCIM.RecipeData.Site1WaferList.Count + RemoteCIM.RecipeData.Site2WaferList.Count + RemoteCIM.RecipeData.Site3WaferList.Count
-                        '    ShowData = ShowData & "ProductCount:" & ProductCount & vbCrLf
-                        '    Dim k As Integer = 1
-                        '    ShowData = ShowData & "Site #1" & vbCrLf
-                        '    If RemoteCIM.RecipeData.Site1WaferList.Count > 0 Then
-                        '        For i = 0 To RemoteCIM.RecipeData.Site1WaferList.Count - 1
-                        '            ShowData = ShowData & "ProductId" & k.ToString & "_InputId: " & RemoteCIM.RecipeData.Site1WaferList.Item(i) & "," & RemoteCIM.RecipeData.Site1PairWaferList.Item(i) & vbCrLf
-                        '            k += 1
-                        '        Next
-                        '    End If
-                        '    ShowData = ShowData & "Site #2" & vbCrLf
-                        '    If RemoteCIM.RecipeData.Site2WaferList.Count > 0 Then
-                        '        For i = 0 To RemoteCIM.RecipeData.Site2WaferList.Count - 1
-                        '            ShowData = ShowData & "ProductId" & k.ToString & "_InputId: " & RemoteCIM.RecipeData.Site2WaferList.Item(i) & "," & RemoteCIM.RecipeData.Site2PairWaferList.Item(i) & vbCrLf
-                        '            k += 1
-                        '        Next
-                        '    End If
-                        '    ShowData = ShowData & "Site #3" & vbCrLf
-                        '    If RemoteCIM.RecipeData.Site3WaferList.Count > 0 Then
-                        '        For i = 0 To RemoteCIM.RecipeData.Site3WaferList.Count - 1
-                        '            ShowData = ShowData & "ProductId" & k.ToString & "_InputId: " & RemoteCIM.RecipeData.Site3WaferList.Item(i) & "," & RemoteCIM.RecipeData.Site3PairWaferList.Item(i) & vbCrLf
-                        '            k += 1
-                        '        Next
-                        '    End If
-                        '    ShowData = ShowData & "[Data]:" & vbCrLf
-                        '    AppendData(ProcessRecordFileName, ShowData, 511)
-                        'End If
-
                         ShowData = ""
                         datamax = 0
                         Data(datamax) = "No."
@@ -1757,6 +1730,182 @@ Module Module_AutoTask
                 Control_State = 0
                 ProcessRecordsIndex = 0
                 'If ProcessRecordsIndex > 0 Then
+                '    FileClose(21)
+                'End If
+        End Select
+    End Sub
+    Public Sub ProcessRecord_Task_222()
+        Static Control_State As Byte
+        Dim ShowData As String
+        Dim Data(200) As String
+        Dim j, datamax As Integer
+        Dim i As Byte
+        On Error Resume Next
+        If ProcessRecordFileName_222 = "" Then
+            Exit Sub
+        End If
+
+        Debug.Print("ProcessRecordsIndex_222 =" + ProcessRecordsIndex_222.ToString)
+        Debug.Print("Control_State =" + Control_State.ToString)
+        Select Case Control_State
+            Case 0
+                If ProcessMode_RUN Then
+                    ProcessRecordsIndex_222 = 0
+
+                    Control_State = 1
+                End If
+            Case 1
+                If ProcessMode_RUN Then
+                    If ProcessRecordsIndex_222 = 0 Then
+                        ShowData = "Model:" + vbTab + Program_ModelName + vbTab + " Process Start for Recipe:" + vbTab + ProcessRecipeName + "Date/Time:" + ADate + " " + TTime + vbTab + "  PN:" + ProcessPN
+                        AppendMultiData(ProcessRecordFileName_222, 150, ShowData)
+                        ShowData = ""
+                        datamax = 0
+                        Data(datamax) = "No."
+                        datamax += 1
+                        Data(datamax) = "Step"
+                        datamax += 1
+                        Data(datamax) = "Time"
+                        datamax += 1
+                        Data(datamax) = "ProcessTime"
+                        datamax += 1
+                        Data(datamax) = "Vacuum"
+                        datamax += 1
+                        Data(datamax) = "MPCurrent"
+                        datamax += 1
+                        Data(datamax) = "WaterPress"
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
+                            datamax += 1
+                            Data(datamax) = "TopTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotTemp" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopTempRate" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotTempRate" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "Pressure" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotCurrent" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "TopWater" + Format(i + 1, "00")
+                            datamax += 1
+                            Data(datamax) = "BotWater" + Format(i + 1, "00")
+
+                        Next
+                        For i = 0 To datamax - 1
+                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
+                        Next
+                        ShowData = ShowData + Data(i)
+                        'AppendMultiData(ProcessRecordFileName_222, 511, ShowData)
+                        AppendData(ProcessRecordFileName_222, ShowData, 511)
+                        ShowData = ""
+                        ProcessRecordsIndex_222 += 1
+                        timecounts = 0
+                    End If
+
+                    If ProcessMode_RUN Then
+
+                        ShowData = ""
+                        datamax = 0
+                        Data(datamax) = Format(ProcessRecordsIndex_222)
+                        datamax += 1
+                        Data(datamax) = Format(ProcessStepIndex + 1)
+                        datamax += 1
+                        Data(datamax) = TTime
+                        datamax += 1
+                        Data(datamax) = ConvertSecToTime(TotalProcessTime)
+                        datamax += 1
+                        Data(datamax) = GaugeCHVacStr
+                        datamax += 1
+                        Data(datamax) = MPCurrentStr
+                        datamax += 1
+                        Data(datamax) = WaterPressStr
+                        Dim bollog As Boolean = False
+                        Dim sinAvgTopTempRate(MAXPLATE) As Single
+                        Dim sinAvgBotTempRate(MAXPLATE) As Single
+                        If TotalProcessTime > timecounts * 60 Then
+                            'log
+                            bollog = True
+                            timecounts += 1
+                        End If
+                        For i = 0 To MAXPLATE
+                            datamax += 1
+                            Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
+                            datamax += 1
+                            Data(datamax) = TopTempPVStr(i)
+                            datamax += 1
+                            Data(datamax) = BotTempPVStr(i)
+
+                            If bollog Then
+                                If timecounts > 1 Then '計算平均加熱速度
+                                    sinAvgTopTempRate(i) = TopTempPV(i) - LastTopTemp(i)
+                                    sinAvgBotTempRate(i) = BotTempPV(i) - LastBotTemp(i)
+                                    datamax += 1
+                                    Data(datamax) = sinAvgTopTempRate(i).ToString
+                                    datamax += 1
+                                    Data(datamax) = sinAvgBotTempRate(i).ToString
+                                Else
+                                    datamax += 1
+                                    Data(datamax) = "_"
+                                    datamax += 1
+                                    Data(datamax) = "_"
+                                End If
+                                LastTopTemp(i) = TopTempPV(i)
+                                LastBotTemp(i) = BotTempPV(i)
+                            Else
+                                datamax += 1
+                                Data(datamax) = "_"
+                                datamax += 1
+                                Data(datamax) = "_"
+                            End If
+                            'datamax += 1
+                            'Data(datamax) = sinAvgTopTempRate(i).ToString
+                            'datamax += 1
+                            'Data(datamax) = sinAvgBotTempRate(i).ToString
+                            datamax += 1
+                            Data(datamax) = PressPVstr(i)
+                            datamax += 1
+                            Data(datamax) = TopCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = BotCurrentStr(i)
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetTopFLowStr
+                            datamax += 1
+                            Data(datamax) = FlowRead(i).GetBotFLowStr
+
+                        Next
+                        For i = 0 To datamax - 1
+                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab
+                        Next
+                        ShowData = ShowData + Data(i)
+                        AppendMultiData(ProcessRecordFileName_222, 255, ShowData)
+
+                        'ProcessRecords.ProcessStep = Data(0)
+                        'ProcessRecords.ProcessTime = Data(1)
+                        'ProcessRecords.TopTemperature = Data(2)
+                        'ProcessRecords.BotTemperature = Data(3)
+                        'ProcessRecords.TopCurrent = Data(4)
+                        'ProcessRecords.BotCurrent = Data(5)
+                        'ProcessRecords.BondingPressure = Data(6)
+                        'ProcessRecords.DPCurrent = Data(7)
+                        'ProcessRecords.Vacuum = Data(8)
+                        'FileOpen(21, ProcessRecordCurveFileName, OpenMode.Random, , OpenShare.Shared, 300)
+                        'FilePut(21, ProcessRecords, ProcessRecordsIndex_222)
+                        'FileClose(21)
+                        ProcessRecordsIndex_222 = ProcessRecordsIndex_222 + 1
+                    End If
+                Else
+                    Control_State = 99
+                End If
+            Case 99
+                Control_State = 0
+                ProcessRecordsIndex_222 = 0
+                'If ProcessRecordsIndex_222 > 0 Then
                 '    FileClose(21)
                 'End If
         End Select

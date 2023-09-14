@@ -45,7 +45,9 @@
     Public PurgeGasRecordFileName As String     '氣體管路 PURGE 資料夾, PURGE PIPE 
     Public ProcessEeventFileName As String      '製程事件檔名,含路徑,依製程檔名+EVENT建立
     Public ProcessRecordShortFileName As String
+    Public ProcessRecordShortFileName_222 As String
     Public ProcessRecordFileName As String
+    Public ProcessRecordFileName_222 As String
     Public ProcessRecordCurveFileName As String '製程記錄曲線檔名(*.PROC)
     Public OperateEeventLogFileName As String
 
