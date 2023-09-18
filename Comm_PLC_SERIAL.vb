@@ -93,7 +93,7 @@ Module Comm_PLC_SERIAL
     'Public WithEvents RS232_BackWork As System.ComponentModel.BackgroundWorker
 
     'Public Rs232Thread As New System.Threading.Thread(AddressOf Rs232ThreadWork)
-
+    Private PLCAlarm_String As String
     Public Rs232Thread As System.Threading.Thread
 
     Public file_old As System.IO.StreamWriter
@@ -612,7 +612,22 @@ Module Comm_PLC_SERIAL
         'End If
 
     End Sub
+    Private Sub PLCAlarm_Log(ByVal strErr As String)
+        Static Control_State As Integer
+        Static i, SerialNo, OldSerialNo, j, k As Integer
+        Dim astr As String
+        Dim tempstr As String
+        PLCAlarm_String = ""
+        CheckPLCAlarmDateAndCreate()
+        SerialNo = 0
 
+        astr = LoginUserName + vbTab + ADate + "   " + TTime + vbTab + Format(i, " [000]  ") + vbTab + strErr + vbCrLf
+        PLCAlarm_String = PLCAlarm_String + astr
+
+        'tempstr = AddAlarmToListView(FormAlarms.ListView1, LoginUserName, ADate, TTime, Format(i, "[000]"), strErr)
+        AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), PLCAlarm_String)
+        i += 1
+    End Sub
     Public Function PLCSendCmd(ByVal StartX As String, ByVal SlaveNumber As String, ByVal PlcCmd As String, ByVal sData As String, ByVal EndX As String) As String
         Dim sstr As String = ""
         'If PlcCmd = "49" Then

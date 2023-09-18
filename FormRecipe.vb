@@ -1,6 +1,6 @@
 Public Class FormRecipe
     Inherits System.Windows.Forms.Form
-    Public StepTime(Recipe_Max) As Integer
+    Public StepTime(Recipe_StepMax) As Integer
     Public TotalStepTime As Integer
     Public RecipePage As Integer
     Dim rwstepindex As Integer
@@ -1841,7 +1841,7 @@ Public Class FormRecipe
 
     Public Sub AddStep()
         Dim col_index As Integer
-        If rwstepindex < Recipe_Max Then
+        If rwstepindex < Recipe_StepMax Then
             rwstepindex += 1
             col_index = rwstepindex - 1
             dgRecipeEdit.ColumnCount = rwstepindex
@@ -1913,14 +1913,14 @@ Public Class FormRecipe
         End If
     End Sub
 
-    Dim tempT(Recipe_Max) As Single
-    Dim tempTR(Recipe_Max) As Single
-    Dim tempP(Recipe_Max) As Single
-    Dim tempPR(Recipe_Max) As Single
-    Dim tempH(Recipe_Max) As Single
+    Dim tempT(Recipe_StepMax) As Single
+    Dim tempTR(Recipe_StepMax) As Single
+    Dim tempP(Recipe_StepMax) As Single
+    Dim tempPR(Recipe_StepMax) As Single
+    Dim tempH(Recipe_StepMax) As Single
     Public Sub ClearStepTime()
         Dim i As Integer
-        For i = 0 To Recipe_Max
+        For i = 0 To Recipe_StepMax
             tempP(i) = 0
             tempPR(i) = 0
             tempT(i) = 0
@@ -1970,7 +1970,9 @@ Public Class FormRecipe
         'End If
         'lblStepTotalTime.Text = ConvertSecToTime(TotalStepTime)
     End Sub
-    Private Function Cal_StepTime(ByVal dg As DataGridView, ByVal Index As Integer) As Integer
+
+
+    Private Function Cal_StepTime(ByVal dg As DataGridView, ByVal Plate_Index As Integer) As Integer
         Dim i As Integer
         Dim j As Integer
         Dim TstepTime As Integer
@@ -1978,25 +1980,25 @@ Public Class FormRecipe
         ClearStepTime()
 
         For i = 0 To rwstepindex - 1
-            tempP(i) = Val(dg.Item(i, Index * Recipe_Change).Value)
-            tempPR(i) = Val(dg.Item(i, Index * Recipe_Change + 1).Value)
-            tempT(i) = Val(dg.Item(i, Index * Recipe_Change + 2).Value)
-            tempTR(i) = Val(dg.Item(i, Index * Recipe_Change + 3).Value)
-            tempH(i) = Val(dg.Item(i, Index * Recipe_Change + 4).Value)
+            tempP(i) = Val(dg.Item(i, Plate_Index * Recipe_Change).Value)
+            tempPR(i) = Val(dg.Item(i, Plate_Index * Recipe_Change + 1).Value)
+            tempT(i) = Val(dg.Item(i, Plate_Index * Recipe_Change + 2).Value)
+            tempTR(i) = Val(dg.Item(i, Plate_Index * Recipe_Change + 3).Value)
+            tempH(i) = Val(dg.Item(i, Plate_Index * Recipe_Change + 4).Value)
             'StepTime(i) = GetStepTimeI0(tempP(i), tempPR(i), tempT(i), tempTR(i), tempH(i))
             'dg.Item(i, Index * Recipe_Change + 6).Value = StepTime(i)
         Next
-        StepTime(0) = GetStepTimeI0(tempP(0), tempPR(0), tempT(0), tempTR(0), tempH(0))
+        'StepTime(0) = GetStepTimeI0(tempP(0), tempPR(0), tempT(0), tempTR(0), tempH(0))
 
         TstepTime = 0
         i = 0
         StepTime(i) = GetStepTimeI0(tempP(i), tempPR(i), tempT(i), tempTR(i), tempH(i))
-        dg.Item(i, Index * Recipe_Change + 6).Value = StepTime(i)
+        dg.Item(i, Plate_Index * Recipe_Change + 6).Value = StepTime(i)
         TstepTime = TstepTime + StepTime(i)
         If rwstepindex > 1 Then
             For i = 1 To rwstepindex - 1
                 StepTime(i) = GetStepTimeI(tempP(i), tempPR(i), tempT(i), tempTR(i), tempH(i), tempP(i - 1), tempT(i - 1))
-                dg.Item(i, Index * Recipe_Change + 6).Value = StepTime(i)
+                dg.Item(i, Plate_Index * Recipe_Change + 6).Value = StepTime(i)
                 TstepTime = TstepTime + StepTime(i)
             Next
         End If

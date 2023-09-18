@@ -23,7 +23,7 @@ Module Module_Alarm_Task
     Public Alarm_Text As String
     Public PopupFlag As Boolean = False
     Public ProcessEndAlarm_Err As Boolean
-    Public PLCAlarm_String As String
+
 
     Public Vacuum_Error As Boolean
 
@@ -203,6 +203,14 @@ Module Module_Alarm_Task
         Door1CloseAlarm_Error = 145
 
         PumpingAlarm_Error = 146
+        DP_NoCurrent_Error = 147
+        RP_NoCurrent_Error = 148
+        Site1_Temp_Timeout_Error = 149
+        Site2_Temp_Timeout_Error = 150
+        Site3_Temp_Timeout_Error = 151
+        Site1_Pressure_Timeout_Error = 152
+        Site2_Pressure_Timeout_Error = 153
+        Site3_Pressure_Timeout_Error = 154
         'Add By Vincent 20190416 ------------------ End
     End Enum
     'Add By Vincent 20190416 ------------------ Start
@@ -477,6 +485,14 @@ Module Module_Alarm_Task
             'AlarmOccur(i) = False
             'AlarmClear(i) = False
         Next
+        For i = 0 To MAXPLATE
+            If CSubAutoProcess(i).TempTimeout_Error Then
+                CSubAutoProcess(i).TempTimeout_Error = False
+            End If
+            If CSubAutoProcess(i).ForceTimeout_Error Then
+                CSubAutoProcess(i).ForceTimeout_Error = False
+            End If
+        Next
         'Add By Vincent 20190416 ------------------ Start
         Door1CloseAlarm_Error = False
         PumpingAlarm_Error = False
@@ -741,22 +757,7 @@ Module Module_Alarm_Task
     '    End If
     'End Sub
 
-    Public Sub PLCAlarm_Log(ByVal strErr As String)
-        Static Control_State As Integer
-        Static i, SerialNo, OldSerialNo, j, k As Integer
-        Dim astr As String
-        Dim tempstr As String
-        PLCAlarm_String = ""
-        CheckPLCAlarmDateAndCreate()
-        SerialNo = 0
 
-        astr = LoginUserName + vbTab + ADate + "   " + TTime + vbTab + Format(i, " [000]  ") + vbTab + strErr + vbCrLf
-        PLCAlarm_String = PLCAlarm_String + astr
-
-        'tempstr = AddAlarmToListView(FormAlarms.ListView1, LoginUserName, ADate, TTime, Format(i, "[000]"), strErr)
-        AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), PLCAlarm_String)
-        i += 1
-    End Sub
     '門上升警報 for B222
     Public Sub CheckDoorUpAlarm()
         If Output(DoDoor1UpIndex).Status = True And Check_PLC_X(DiDoor1UpIndex) = False Then
@@ -845,7 +846,8 @@ Module Module_Alarm_Task
                 AlarmError(Alarm_Name.ProcessBotTempError1 + i * 4) = CAlarmError(Alarm_Name.ProcessBotTempError1 + i * 4).CheckProcessValue(Check_PLC_Y(DoHeater01Index + i) And CSubAutoProcess(i).Run, btempSV, btempPV, Val(SystemParameters.AbortTempRange), PROCESSBOTTEMPTIME)
                 AlarmError(Alarm_Name.ProcessPressError1 + i * 4) = CAlarmError(Alarm_Name.ProcessPressError1 + i * 4).CheckProcessValue(Check_PLC_M(DoBondForce01Index + i) And CSubAutoProcess(i).Run, PressSV(i), PressPV(i), Val(SystemParameters.AbortPressureRange), PROCESSBONDFORCETIME)
                 AlarmError(Alarm_Name.FirstConatctError1 + i * 4) = CAlarmError(Alarm_Name.FirstConatctError1 + i * 4).CheckAlarm(FIRSTCONTACTTIME, Check_PLC_Y(DoBondUp01Index + i * 4), Check_PLC_M(Do1stContactOK01Index + i))
-
+                AlarmError(Alarm_Name.Site1_Temp_Timeout_Error + i) = CSubAutoProcess(i).TempTimeout_Error
+                AlarmError(Alarm_Name.Site1_Pressure_Timeout_Error + i) = CSubAutoProcess(i).ForceTimeout_Error
             Next
 
             'If ProcessMode_RUN Then

@@ -2622,8 +2622,10 @@ Public Class FormProcess
         Return True
     End Function
 
-
-
+    ''' <summary>
+    ''' 計算預定曲線
+    ''' </summary>
+    ''' <param name="iTotal">預定執行時間</param>
     Public Sub Cal_PresetData(ByVal iTotal As Integer)
         Dim rwstepindex As Integer
         Dim pressure As Integer = 0
@@ -2906,34 +2908,44 @@ Public Class FormProcess
         rwstepindex = Val(RecipeNum(i).StepSet)
         For k = 0 To MAXPLATE
             For j = 0 To rwstepindex - 1
-                sstr = "STEP" & Format(j + 1, "00")
-                RecipeNum(i).Plate(k).Pressure(j) = Val(ReadProgData(sstr, "PRESS" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).Pressure_Rate(j) = Val(ReadProgData(sstr, "PRESS_RATE" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).Temperature(j) = Val(ReadProgData(sstr, "TEMP" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).Temperature_Rate(j) = Val(ReadProgData(sstr, "TEMP_RATE" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).Time(j) = Val(ReadProgData(sstr, "HOLD_TIME" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).STEPNote(j) = ReadProgData(sstr, "NOTE" + Format(k, "00"), "0", sfile)
-                RecipeNum(i).Plate(k).StepTime(j) = Val(ReadProgData(sstr, "STEP_TIME" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).TotalTime = Val(ReadProgData(sstr, "TOTALTIME" + Format(k, "00"), "0", sfile))
-                RecipeNum(i).Plate(k).TotalStep = Val(ReadProgData(sstr, "TOTALSTEP" + Format(k, "00"), "0", sfile))
+                With RecipeNum(i).Plate(k)
+                    sstr = "STEP" & Format(j + 1, "00")
+                    .Pressure(j) = Val(ReadProgData(sstr, "PRESS" + Format(k, "00"), "0", sfile))
+                    .Pressure_Rate(j) = Val(ReadProgData(sstr, "PRESS_RATE" + Format(k, "00"), "0", sfile))
+                    .Temperature(j) = Val(ReadProgData(sstr, "TEMP" + Format(k, "00"), "0", sfile))
+                    .Temperature_Rate(j) = Val(ReadProgData(sstr, "TEMP_RATE" + Format(k, "00"), "0", sfile))
+                    .Time(j) = Val(ReadProgData(sstr, "HOLD_TIME" + Format(k, "00"), "0", sfile))
+                    .STEPNote(j) = ReadProgData(sstr, "NOTE" + Format(k, "00"), "0", sfile)
+                    .StepTime(j) = Val(ReadProgData(sstr, "STEP_TIME" + Format(k, "00"), "0", sfile))
+                    .TotalTime = Val(ReadProgData(sstr, "TOTALTIME" + Format(k, "00"), "0", sfile))
+                    .TotalStep = Val(ReadProgData(sstr, "TOTALSTEP" + Format(k, "00"), "0", sfile))
+                    If j = 0 Then
+                        If .Temperature_Rate(j) > 0 Then .AddTempTime(j) = (.Temperature(j) - 25) / .Temperature_Rate(j)
+                        If .Pressure_Rate(j) > 0 Then .AddForceTime(j) = (.Pressure(j) / .Pressure_Rate(j))
+                        'Debug.Print("熱愈時時間,第" + k.ToString + "頭第" + j.ToString + "步=" + RecipeNum(RecipeRunIndex).Plate(j).AddTempTime(j).ToString)
+                        'Debug.Print("加壓愈時時間,第" + k.ToString + "頭第" + j.ToString + "步=" + RecipeNum(RecipeRunIndex).Plate(j).AddForceTime(j).ToString)
+                    Else
+                        If .Temperature_Rate(j) > 0 Then
+                            If .Temperature(j) > .Temperature(j - 1) Then
+                                .AddTempTime(j) = (.Temperature(j) - .Temperature(j - 1)) / .Temperature_Rate(j)
+                            Else
+                                .AddTempTime(j) = 0
+                            End If
+                        End If
+                        If .Pressure_Rate(j) > 0 Then .AddForceTime(j) = Math.Abs(.Pressure(j) - .Pressure(j - 1)) / .Pressure_Rate(j)
+                        'Debug.Print("熱愈時時間,第" + k.ToString + "頭第" + j.ToString + "步=" + RecipeNum(RecipeRunIndex).Plate(j).AddTempTime(j).ToString)
+                        'Debug.Print("加壓愈時時間,第" + k.ToString + "頭第" + j.ToString + "步=" + RecipeNum(RecipeRunIndex).Plate(j).AddForceTime(j).ToString)
+                    End If
+                End With
+                'Debug.Print("熱愈時時間,第" + k.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(j).AddTempTime(j).ToString)
+                'RecipeNum(i).Plate(k).AddTempTime(j) = 0
             Next
-        Next
-        For k = 0 To MAXPLATE
             ProcessData(k).SetRecipeIndex(0)
-            'ProcessData(k).PressuseSet = RecipeNum(i).Plate(k).Pressure(0)
-            'ProcessData(k).PressuseRate = RecipeNum(i).Plate(k).Pressure_Rate(0)
-            'ProcessData(k).TempSet = RecipeNum(i).Plate(k).Temperature(0)
-            'ProcessData(k).TempRateSet = RecipeNum(i).Plate(k).Temperature_Rate(0)
-            'ProcessData(k).HoldTimeSet = RecipeNum(i).Plate(k).Time(0)
-            'ProcessData(k).StepSet = RecipeNum(i).Plate(k).TotalStep
-            'ProcessData(k).StepNote = RecipeNum(i).Plate(k).STEPNote(0)
-            'ProcessData(k).StepTimeMin = RecipeNum(i).Plate(k).StepTime(0)
             PlateProcess(k).lblPressureSet.Text = RecipeNum(i).Plate(k).Pressure(0)
             PlateProcess(k).lblTopTempSet.Text = RecipeNum(i).Plate(k).Temperature(0)
             PlateProcess(k).lblBotTempSet.Text = RecipeNum(i).Plate(k).Temperature(0)
         Next
 
-        'Cal_StepTime()
     End Sub
     Private Sub btnYReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCurveReset.Click
         ResetCurve(ChartProcessVacuum)

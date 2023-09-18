@@ -31,14 +31,27 @@ Module Module_AutoTask
 
     '¤l»sµ{Ãþ§O
     Class CSubProcess
-        'Private RecipeData As sPlateRecipe
+
+        Public TempTimeout_Error As Boolean
+        Public ForceTimeout_Error As Boolean
         Private subPlateRecipe As New sPlateRecipe
         Private subRecipeLoad As Boolean
         Public SubProcessEeventFileName As String      '»sµ{¨Æ¥óÀÉ¦W,§t¸ô®|,¨Ì»sµ{ÀÉ¦W+EVENT«Ø¥ß
         Public TempTopSV, TempBotSV As Integer
         Private TotoalStringListNum As Integer
         Private SubProcessListString(2, 99) As String
-
+        Private TempTimeOutWDog As New Stopwatch
+        Private ForceTimeOutWDog As New Stopwatch
+        Private Sub TempTimeOutWDog_Restart()
+            TempTimeOutWDog.Stop()
+            TempTimeOutWDog.Reset()
+            TempTimeOutWDog.Start()
+        End Sub
+        Private Sub ForceTimeOutWDog_Restart()
+            ForceTimeOutWDog.Stop()
+            ForceTimeOutWDog.Reset()
+            ForceTimeOutWDog.Start()
+        End Sub
         'Åª¨ú°õ¦r¦ê,3»y
         'process = »sµ{¦WºÙ,INI ÀÉ®×³]©w¬°==>  ­Y process= "PROCESS" [process"_
         'ReadStatusString (»sµ{¦W,Àx¦s3»y¤§2ºû°}¦C, ÀÉ®×¦W) ¶Ç¦^¦r¦êÁ`¼Æ --> ©w¸q©ó XXXX_=40
@@ -380,6 +393,9 @@ Module Module_AutoTask
                         SubProcessToStepGo = False
                         SubProcessCurveIndex = 0
                         AbortFlag = False
+
+                        TempTimeout_Error = False
+                        ForceTimeout_Error = False
                         SubProcessRunStepIndex = 0
                         Last_State = Control_State
                         Control_State = 1
@@ -490,6 +506,8 @@ Module Module_AutoTask
                                 SelectedFlag = True
                                 SubProcessTimerEnabled = True
                                 SubProcessTimer = 1
+                                TempTimeOutWDog_Restart()
+                                ForceTimeOutWDog_Restart()
                                 '-========================================================
                                 Last_State = Control_State
                                 Control_State = 3
@@ -502,6 +520,8 @@ Module Module_AutoTask
                                 SubProcessTimer = 1
                                 '-========================================================
                                 Last_State = Control_State
+                                TempTimeOutWDog_Restart()
+                                ForceTimeOutWDog_Restart()
                                 Control_State = 3
                             Else
                                 SelectedFlag = False
@@ -524,6 +544,8 @@ Module Module_AutoTask
                     End If
                 Case 3  'ÀË¬d·Å«×¤ÎÀ£¤O/³]©w«O«ù®É¶¡
                     If RunFlag Then
+
+
                         SubProcessStatusString = ProcessStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer ' GetLangText("ÀË¬d­º¦¸¶K¦X.", "‰ä¬d­º¦¸…`¦X", "Check Vacuum.")  'ProcessStatusList(SystemLanguage, Control_State)
 
                         SubProcessStatusString = ProcessStr + State + GetLangText("µ¥«Ý·Å«×¤ÎÀ£¤O.", "Wait Temp. & Forcing.")  'ProcessStatusList(SystemLanguage, Control_State)
@@ -545,17 +567,30 @@ Module Module_AutoTask
                             If Val(RecipeNum(RecipeRunIndex).PumpingMode) = 0 Then
                                 SubProcessTempOK = True
                             End If
+                            'Debug.Print("¼ö·U®É®É¶¡,²Ä" + SiteNum.ToString + "ÀY=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
+                            If SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) > 0 And
+                                (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) * 2) Then
+                                TempTimeout_Error = True
 
-                            If SubProcessPressureOK And SubProcessTempOK Then
-                                SubProcessHoldTimerSet = subPlateRecipe.Time(SubProcessStepIndex)
-                                SubProcessTimerEnabled = True
-                                SubProcessTimer = subPlateRecipe.Time(SubProcessStepIndex)
-                                '=========================================================
-                                Last_State = Control_State
-                                Control_State = 4
+                            Else
+                                TempTimeout_Error = False
                             End If
-                        End If
-                    Else
+                            If SubProcessPressureOK = False And
+                                (ForceTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddForceTime(SubProcessStepIndex) * 3) Then
+                                ForceTimeout_Error = True
+                            Else
+                                ForceTimeout_Error = False
+                            End If
+                            If SubProcessPressureOK And SubProcessTempOK Then
+                                    SubProcessHoldTimerSet = subPlateRecipe.Time(SubProcessStepIndex)
+                                    SubProcessTimerEnabled = True
+                                    SubProcessTimer = subPlateRecipe.Time(SubProcessStepIndex)
+                                    '=========================================================
+                                    Last_State = Control_State
+                                    Control_State = 4
+                                End If
+                            End If
+                        Else
                         SubProcessStatusString = AbortStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer + " " + TTime
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
 
@@ -626,6 +661,8 @@ Module Module_AutoTask
                         '===============================================================
                         Last_State = Control_State
                         Control_State = 0
+                        TempTimeOutWDog.Stop()
+                        ForceTimeOutWDog.Stop()
                     End If
 
                 Case 99

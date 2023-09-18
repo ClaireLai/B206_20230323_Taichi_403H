@@ -26,7 +26,7 @@ Module Module_Recipe_Public
         PRE_SET = 6
     End Enum
 
-    Public Const Recipe_Max As Integer = 99 '配方最大　ＳＴＥＰ
+    Public Const Recipe_StepMax As Integer = 99 '配方最大　ＳＴＥＰ
     Public Const UnitTorr As Double = 0.13332237    '0.001mtorr =0.13332237Pa  
     Public DeviceUnit As Integer    ' 真空單位
     Public Const MAX_XSCALE As Integer = 2000 '圖表刻度(TEST及 PROCESS)
@@ -69,6 +69,12 @@ Module Module_Recipe_Public
         Public StepTime() As Integer        '每步所需時間
         Public TotalTime As Integer         '單頭配方總時間
         Public TotalStep As Integer         '單頭配方總時間
+
+        'Add By claire 20230918   ---- Start
+        Public AddTempTime() As Integer       '升溫時間
+        Public AddForceTime() As Integer      '升壓時間
+        'Add By claire 20230918    ---- End
+
     End Structure
 
 
@@ -216,7 +222,7 @@ Module Module_Recipe_Public
     Public Sub RecipeInit(ByVal sfile As String)
         ReadRecipeColumnData(RecipeINIFile)
         CreateRecipeDataGrid(FormRecipes.dgRecipeEdit)                  '建立配方欄位
-        RecipeStructReDim(Recipe_Max)                                   '載入配方資料
+        RecipeStructReDim(Recipe_StepMax)                                   '載入配方資料
     End Sub
     '配方資料初始化
     Public Sub RecipeStructReDim(ByVal recipe As Integer)
@@ -224,28 +230,29 @@ Module Module_Recipe_Public
         Dim j, k As Integer
         For i = 0 To 3
             ReDim RecipeNum(i).Plate(MAXPLATE)
-            ''ReDim RecipeNum(i).DC(Recipe_Max)
-            ''ReDim RecipeNum(i).DC_Rate(Recipe_Max)
-            ''ReDim RecipeNum(i).BondingSync(Recipe_Max)
-            ''ReDim RecipeNum(i).BondMode(Recipe_Max)
+
             For k = 0 To MAXPLATE
-                ReDim RecipeNum(i).Plate(k).Pressure(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).Pressure_Rate(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).Temperature(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).Temperature_Rate(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).Time(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).STEPNote(Recipe_Max)
-                ReDim RecipeNum(i).Plate(k).StepTime(Recipe_Max)
+                ReDim RecipeNum(i).Plate(k).Pressure(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).Pressure_Rate(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).Temperature(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).Temperature_Rate(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).Time(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).STEPNote(Recipe_StepMax)
+                ReDim RecipeNum(i).Plate(k).StepTime(Recipe_StepMax) '每步所需時間
+                ReDim RecipeNum(i).Plate(k).AddTempTime(Recipe_StepMax) '每步加溫時間
+                ReDim RecipeNum(i).Plate(k).AddForceTime(Recipe_StepMax) '每步加壓時間
             Next
         Next
     End Sub
+
+
     '讀取配方資料欄位標題
     Public Sub ReadRecipeColumnData(ByVal sfile As String)
         Dim i, j, k As Integer
         Dim lang As String
         k = 0
-        Recipe_Num = Val(ReadProgData("RECIPE", "RECIPE_NUM", "0", sfile))
-        Recipe_Change = Val(ReadProgData("RECIPE", "RECIPE_COLOR_CHANGE", "0", sfile))
+        Recipe_Num = Val(ReadProgData("RECIPE", "RECIPE_NUM", "0", sfile)) '3頭共21個參數 3*7-1=20
+        Recipe_Change = Val(ReadProgData("RECIPE", "RECIPE_COLOR_CHANGE", "0", sfile)) '一組recipe設定7組參數
         For i = 0 To 2
             Select Case i
                 Case 0
