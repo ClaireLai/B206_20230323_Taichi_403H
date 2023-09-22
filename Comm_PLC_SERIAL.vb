@@ -33,7 +33,7 @@ Module Comm_PLC_SERIAL
 
     'Load Recipe to plc R1200 - R1488 PLCRecipe(288)
     'LoadRecipeStatus=TRUE
-
+    Public PLCAlarmRecordFileName As String     'PLC異常記錄資料夾
 
     Private R_R1100_Read As New Dictionary(Of Int32, Int32) '建立本機 table  R_R1100_Read(key,value)
     '紀錄192個暫存器是否有被更動 R1100_Changed(2)=true 代表 R1102有被更動將被比對,比對完OK=false
@@ -627,6 +627,24 @@ Module Comm_PLC_SERIAL
         'tempstr = AddAlarmToListView(FormAlarms.ListView1, LoginUserName, ADate, TTime, Format(i, "[000]"), strErr)
         AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), PLCAlarm_String)
         i += 1
+    End Sub
+    Private Sub CheckPLCAlarmDateAndCreate()
+        Static LastDateTime As New DateTime
+        Static CurrentDateTime As New DateTime
+        CurrentDateTime = Now()
+        If CurrentDateTime.Date <> LastDateTime.Date Then
+            Dim sstr As String
+            MakeDateData()        '建立日期資料
+            sstr = WorkingDir & "Records\PLCAlarmRecords\" & FDate
+            CheckExistDirAndCreate(sstr)
+            PLCAlarmRecordFileName = sstr & "\" & FDate & ".dat"
+            LastDateTime = CurrentDateTime
+        End If
+    End Sub
+    Private Sub CheckExistDirAndCreate(ByVal sstr As String)
+        If Not My.Computer.FileSystem.DirectoryExists(sstr) Then
+            My.Computer.FileSystem.CreateDirectory(sstr)
+        End If
     End Sub
     Public Function PLCSendCmd(ByVal StartX As String, ByVal SlaveNumber As String, ByVal PlcCmd As String, ByVal sData As String, ByVal EndX As String) As String
         Dim sstr As String = ""
