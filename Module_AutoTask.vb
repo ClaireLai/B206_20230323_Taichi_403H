@@ -569,14 +569,17 @@ Module Module_AutoTask
                             End If
                             'Debug.Print("熱愈時時間,第" + SiteNum.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
                             If SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) > 0 And
-                                (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) * 2) Then
+                                (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) * SystemParameters.AddTempTimeoutX_Alarm) Then
                                 TempTimeout_Error = True
 
+                            ElseIf SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) > 0 And
+                                    (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) * SystemParameters.CoolTempTimeoutX_Alarm) Then
+                                TempTimeout_Error = True
                             Else
                                 TempTimeout_Error = False
                             End If
                             If SubProcessPressureOK = False And
-                                (ForceTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddForceTime(SubProcessStepIndex) * 3) Then
+                                (ForceTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddForceTime(SubProcessStepIndex) * SystemParameters.ForceTimeoutX_Alarm) Then
                                 ForceTimeout_Error = True
                             Else
                                 ForceTimeout_Error = False

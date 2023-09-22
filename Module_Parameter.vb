@@ -293,6 +293,11 @@ Module Module_Parameter
         'Add  by claire 20230620  稼動率功能 ------------------- End
         Public StartLog_Time As String
         Public bolDAlog As Boolean '在Log時是否要紀錄DA值
+        'Add  by claire 20230920  超溫超壓愈時功能 ------------------- End
+        Public ForceTimeoutX_Alarm As Single
+        Public AddTempTimeoutX_Alarm As Single
+        Public CoolTempTimeoutX_Alarm As Single
+        'Add  by claire 20230920  超溫超壓愈時功能  ------------------- End
     End Structure
     Public SystemParameters As SystemParameterss
 
@@ -446,8 +451,9 @@ Module Module_Parameter
         End If
         SystemParameters.bolDAlog = ReadProgData("PARAMETER", "DALog", "0", sfile)  'Add  by claire 20230901
 
-
-
+        SystemParameters.ForceTimeoutX_Alarm = ReadProgData("PARAMETER", "ForceTimeoutX_Alarm", "0", sfile)  'Add  by claire 20230920
+        SystemParameters.AddTempTimeoutX_Alarm = ReadProgData("PARAMETER", "AddTempTimeoutX_Alarm", "0", sfile)  'Add  by claire 20230920
+        SystemParameters.CoolTempTimeoutX_Alarm = ReadProgData("PARAMETER", "CoolTempTimeoutX_Alarm", "0", sfile)  'Add  by claire 20230920
     End Sub
     '將資料結構寫入檔案內
     Public Sub WriteParameterToFile(ByVal sfile As String)
@@ -542,6 +548,10 @@ Module Module_Parameter
         WriteProgData("PARAMETER", "WebPath", SystemParameters.WebPath, sfile)
 
         WriteProgData("PARAMETER", "DALog", SystemParameters.bolDAlog, sfile)
+
+        WriteProgData("PARAMETER", "ForceTimeoutX_Alarm", SystemParameters.ForceTimeoutX_Alarm, sfile)
+        WriteProgData("PARAMETER", "AddTempTimeoutX_Alarm", SystemParameters.AddTempTimeoutX_Alarm, sfile)
+        WriteProgData("PARAMETER", "CoolTempTimeoutX_Alarm", SystemParameters.CoolTempTimeoutX_Alarm, sfile)
     End Sub
 
 

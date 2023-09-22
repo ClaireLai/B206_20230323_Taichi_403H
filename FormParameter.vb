@@ -493,6 +493,14 @@ Public Class FormParameter
     Friend WithEvents btnSelPath As Button
     Friend WithEvents chkAvailBarCode As CheckBox
     Friend WithEvents chkDa As CheckBox
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents txtForceTimeoutX_Alarm As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtCoolTempTimeoutX_Alarm As TextBox
+    Friend WithEvents txtAddTempTimeoutX_Alarm As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -618,6 +626,14 @@ Public Class FormParameter
         Me.txtDoorCloseTime = New System.Windows.Forms.TextBox()
         Me.lblProcessPumpVacuumText = New System.Windows.Forms.Label()
         Me.grpAlarmSetup = New System.Windows.Forms.GroupBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtForceTimeoutX_Alarm = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtCoolTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
+        Me.txtAddTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtHiPressureLimit = New System.Windows.Forms.TextBox()
         Me.lblHiPressureLimitText = New System.Windows.Forms.Label()
         Me.lblKg05Text = New System.Windows.Forms.Label()
@@ -999,6 +1015,7 @@ Public Class FormParameter
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
         Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
+        Me.chkDa = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtTICComport = New System.Windows.Forms.TextBox()
         Me.chkTICMonitorUsed = New System.Windows.Forms.CheckBox()
@@ -1045,59 +1062,59 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.chkDa = New System.Windows.Forms.CheckBox()
         Me.pnlParaSet.SuspendLayout
         Me.Panel3.SuspendLayout
         Me.Panel2.SuspendLayout
         Me.grpVacuum.SuspendLayout
         Me.pnlDPWaterFlow.SuspendLayout
         Me.pnlDPTemp.SuspendLayout
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpProcessCondition.SuspendLayout
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpAlarmSetup.SuspendLayout
-        Me.pnlFlowShow.SuspendLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpPurgeSetup.SuspendLayout
-        Me.grpPIDLoadSave.SuspendLayout
-        Me.grpVacuumSetup.SuspendLayout
-        Me.tabParameter.SuspendLayout
-        Me.TabPageTIC.SuspendLayout
-        Me.tabPIDSetup.SuspendLayout
-        Me.tabPage1to3.SuspendLayout
-        Me.tabPage4to6.SuspendLayout
-        Me.TabPageTCal.SuspendLayout
-        Me.pnlSplitTopBotTemp.SuspendLayout
-        Me.TabPagePCal.SuspendLayout
-        Me.TabPageSystem.SuspendLayout
-        Me.TabPageCIM.SuspendLayout
-        Me.TabPageCello.SuspendLayout
-        Me.tabSystem.SuspendLayout
-        Me.tabpageTempCal.SuspendLayout
-        Me.pnlHeaterSetup.SuspendLayout
-        Me.tabpageVacuum.SuspendLayout
-        Me.grpFlowMeter.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpPumpType.SuspendLayout
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpagePressCal.SuspendLayout
-        Me.tabpagePressControl.SuspendLayout
-        Me.pnlPressureAverage.SuspendLayout
-        Me.pnl6Plate.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        Me.Panel1.SuspendLayout
-        Me.tabPageIniEdit.SuspendLayout
-        Me.TabPageTempCalTool.SuspendLayout
-        Me.tabpageCycleRun.SuspendLayout
-        Me.pnl6Plate1.SuspendLayout
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpProcessCondition.SuspendLayout()
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpAlarmSetup.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.pnlFlowShow.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpPurgeSetup.SuspendLayout()
+        Me.grpPIDLoadSave.SuspendLayout()
+        Me.grpVacuumSetup.SuspendLayout()
+        Me.tabParameter.SuspendLayout()
+        Me.TabPageTIC.SuspendLayout()
+        Me.tabPIDSetup.SuspendLayout()
+        Me.tabPage1to3.SuspendLayout()
+        Me.tabPage4to6.SuspendLayout()
+        Me.TabPageTCal.SuspendLayout()
+        Me.pnlSplitTopBotTemp.SuspendLayout()
+        Me.TabPagePCal.SuspendLayout()
+        Me.TabPageSystem.SuspendLayout()
+        Me.TabPageCIM.SuspendLayout()
+        Me.TabPageCello.SuspendLayout()
+        Me.tabSystem.SuspendLayout()
+        Me.tabpageTempCal.SuspendLayout()
+        Me.pnlHeaterSetup.SuspendLayout()
+        Me.tabpageVacuum.SuspendLayout()
+        Me.grpFlowMeter.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpPumpType.SuspendLayout()
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpagePressCal.SuspendLayout()
+        Me.tabpagePressControl.SuspendLayout()
+        Me.pnlPressureAverage.SuspendLayout()
+        Me.pnl6Plate.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.tabPageIniEdit.SuspendLayout()
+        Me.TabPageTempCalTool.SuspendLayout()
+        Me.tabpageCycleRun.SuspendLayout()
+        Me.pnl6Plate1.SuspendLayout()
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'Timer1
         '
@@ -1939,6 +1956,7 @@ Public Class FormParameter
         '
         'grpAlarmSetup
         '
+        Me.grpAlarmSetup.Controls.Add(Me.Panel4)
         Me.grpAlarmSetup.Controls.Add(Me.txtHiPressureLimit)
         Me.grpAlarmSetup.Controls.Add(Me.lblHiPressureLimitText)
         Me.grpAlarmSetup.Controls.Add(Me.lblKg05Text)
@@ -2002,6 +2020,95 @@ Public Class FormParameter
         Me.grpAlarmSetup.TabIndex = 520
         Me.grpAlarmSetup.TabStop = False
         Me.grpAlarmSetup.Text = "警報設定"
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.Label15)
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.txtForceTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.Label16)
+        Me.Panel4.Controls.Add(Me.txtCoolTempTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.txtAddTempTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Location = New System.Drawing.Point(27, 350)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(339, 126)
+        Me.Panel4.TabIndex = 854
+        '
+        'Label15
+        '
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(10, 6)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(62, 28)
+        Me.Label15.TabIndex = 600
+        Me.Label15.Text = "製程中"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label14
+        '
+        Me.Label14.BackColor = System.Drawing.Color.Transparent
+        Me.Label14.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(7, 27)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(244, 36)
+        Me.Label14.TabIndex = 526
+        Me.Label14.Text = "加熱超過預定升溫?倍時間警報"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtForceTimeoutX_Alarm
+        '
+        Me.txtForceTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtForceTimeoutX_Alarm.Location = New System.Drawing.Point(277, 91)
+        Me.txtForceTimeoutX_Alarm.Name = "txtForceTimeoutX_Alarm"
+        Me.txtForceTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
+        Me.txtForceTimeoutX_Alarm.TabIndex = 528
+        Me.txtForceTimeoutX_Alarm.Text = "3"
+        Me.txtForceTimeoutX_Alarm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label16
+        '
+        Me.Label16.BackColor = System.Drawing.Color.Transparent
+        Me.Label16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(9, 82)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(240, 36)
+        Me.Label16.TabIndex = 530
+        Me.Label16.Text = "加壓超過預定升降?倍時間警報"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtCoolTempTimeoutX_Alarm
+        '
+        Me.txtCoolTempTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCoolTempTimeoutX_Alarm.Location = New System.Drawing.Point(277, 60)
+        Me.txtCoolTempTimeoutX_Alarm.Name = "txtCoolTempTimeoutX_Alarm"
+        Me.txtCoolTempTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
+        Me.txtCoolTempTimeoutX_Alarm.TabIndex = 525
+        Me.txtCoolTempTimeoutX_Alarm.Text = "3"
+        Me.txtCoolTempTimeoutX_Alarm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtAddTempTimeoutX_Alarm
+        '
+        Me.txtAddTempTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddTempTimeoutX_Alarm.Location = New System.Drawing.Point(277, 32)
+        Me.txtAddTempTimeoutX_Alarm.Name = "txtAddTempTimeoutX_Alarm"
+        Me.txtAddTempTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
+        Me.txtAddTempTimeoutX_Alarm.TabIndex = 524
+        Me.txtAddTempTimeoutX_Alarm.Text = "2"
+        Me.txtAddTempTimeoutX_Alarm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label13
+        '
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.Label13.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(10, 53)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(239, 36)
+        Me.Label13.TabIndex = 527
+        Me.Label13.Text = "加熱超過預定降溫?倍時間警報"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtHiPressureLimit
         '
@@ -6630,6 +6737,17 @@ Public Class FormParameter
         Me.TabPageTempCalTool.Text = "校溫工具"
         Me.TabPageTempCalTool.UseVisualStyleBackColor = True
         '
+        'chkDa
+        '
+        Me.chkDa.AutoSize = True
+        Me.chkDa.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.chkDa.Location = New System.Drawing.Point(715, 74)
+        Me.chkDa.Name = "chkDa"
+        Me.chkDa.Size = New System.Drawing.Size(63, 17)
+        Me.chkDa.TabIndex = 954
+        Me.chkDa.Text = "DALog"
+        Me.chkDa.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
@@ -7212,17 +7330,6 @@ Public Class FormParameter
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'chkDa
-        '
-        Me.chkDa.AutoSize = True
-        Me.chkDa.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkDa.Location = New System.Drawing.Point(757, 93)
-        Me.chkDa.Name = "chkDa"
-        Me.chkDa.Size = New System.Drawing.Size(63, 17)
-        Me.chkDa.TabIndex = 954
-        Me.chkDa.Text = "DALog"
-        Me.chkDa.UseVisualStyleBackColor = True
-        '
         'FormParameter
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -7241,43 +7348,45 @@ Public Class FormParameter
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "ParameterSet"
         Me.pnlParaSet.ResumeLayout(False)
-        Me.pnlParaSet.PerformLayout
+        Me.pnlParaSet.PerformLayout()
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout
+        Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.grpVacuum.ResumeLayout(False)
-        Me.grpVacuum.PerformLayout
+        Me.grpVacuum.PerformLayout()
         Me.pnlDPWaterFlow.ResumeLayout(False)
-        Me.pnlDPWaterFlow.PerformLayout
+        Me.pnlDPWaterFlow.PerformLayout()
         Me.pnlDPTemp.ResumeLayout(False)
-        Me.pnlDPTemp.PerformLayout
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnlDPTemp.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpProcessCondition.ResumeLayout(False)
-        Me.grpProcessCondition.PerformLayout
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit
+        Me.grpProcessCondition.PerformLayout()
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAlarmSetup.ResumeLayout(False)
-        Me.grpAlarmSetup.PerformLayout
+        Me.grpAlarmSetup.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.pnlFlowShow.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPurgeSetup.ResumeLayout(False)
-        Me.grpPurgeSetup.PerformLayout
+        Me.grpPurgeSetup.PerformLayout()
         Me.grpPIDLoadSave.ResumeLayout(False)
-        Me.grpPIDLoadSave.PerformLayout
+        Me.grpPIDLoadSave.PerformLayout()
         Me.grpVacuumSetup.ResumeLayout(False)
-        Me.grpVacuumSetup.PerformLayout
+        Me.grpVacuumSetup.PerformLayout()
         Me.tabParameter.ResumeLayout(False)
         Me.TabPageTIC.ResumeLayout(False)
-        Me.TabPageTIC.PerformLayout
+        Me.TabPageTIC.PerformLayout()
         Me.tabPIDSetup.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
         Me.TabPageTCal.ResumeLayout(False)
         Me.pnlSplitTopBotTemp.ResumeLayout(False)
-        Me.pnlSplitTopBotTemp.PerformLayout
+        Me.pnlSplitTopBotTemp.PerformLayout()
         Me.TabPagePCal.ResumeLayout(False)
         Me.TabPageSystem.ResumeLayout(False)
         Me.TabPageCIM.ResumeLayout(False)
@@ -7285,37 +7394,37 @@ Public Class FormParameter
         Me.tabSystem.ResumeLayout(False)
         Me.tabpageTempCal.ResumeLayout(False)
         Me.pnlHeaterSetup.ResumeLayout(False)
-        Me.pnlHeaterSetup.PerformLayout
+        Me.pnlHeaterSetup.PerformLayout()
         Me.tabpageVacuum.ResumeLayout(False)
         Me.grpFlowMeter.ResumeLayout(False)
-        Me.grpFlowMeter.PerformLayout
+        Me.grpFlowMeter.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout
+        Me.GroupBox1.PerformLayout()
         Me.grpPumpType.ResumeLayout(False)
-        Me.grpPumpType.PerformLayout
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit
+        Me.grpPumpType.PerformLayout()
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpagePressCal.ResumeLayout(False)
         Me.tabpagePressControl.ResumeLayout(False)
-        Me.tabpagePressControl.PerformLayout
+        Me.tabpagePressControl.PerformLayout()
         Me.pnlPressureAverage.ResumeLayout(False)
-        Me.pnlPressureAverage.PerformLayout
+        Me.pnlPressureAverage.PerformLayout()
         Me.pnl6Plate.ResumeLayout(False)
-        Me.pnl6Plate.PerformLayout
+        Me.pnl6Plate.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout
+        Me.GroupBox2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout
+        Me.Panel1.PerformLayout()
         Me.tabPageIniEdit.ResumeLayout(False)
-        Me.tabPageIniEdit.PerformLayout
+        Me.tabPageIniEdit.PerformLayout()
         Me.TabPageTempCalTool.ResumeLayout(False)
-        Me.TabPageTempCalTool.PerformLayout
+        Me.TabPageTempCalTool.PerformLayout()
         Me.tabpageCycleRun.ResumeLayout(False)
-        Me.tabpageCycleRun.PerformLayout
+        Me.tabpageCycleRun.PerformLayout()
         Me.pnl6Plate1.ResumeLayout(False)
-        Me.pnl6Plate1.PerformLayout
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnl6Plate1.PerformLayout()
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -7439,6 +7548,9 @@ Public Class FormParameter
         'Add By Vincent 20190710  ----------------------------------------------------------  End
         chkDa.Checked = SystemParameters.bolDAlog
 
+        txtForceTimeoutX_Alarm.Text = SystemParameters.ForceTimeoutX_Alarm 'add by claire 2023.0920
+        txtAddTempTimeoutX_Alarm.Text = SystemParameters.AddTempTimeoutX_Alarm 'add by claire 2023.0920
+        txtCoolTempTimeoutX_Alarm.Text = SystemParameters.CoolTempTimeoutX_Alarm 'add by claire 2023.0920
         Timer1.Interval = 300
         Timer1.Enabled = True
     End Sub
@@ -9389,4 +9501,22 @@ Public Class FormParameter
         End If
     End Sub
 
+    Private Sub txtAddTempTimeoutX_Alarm_MouseDown(sender As Object, e As MouseEventArgs) Handles txtAddTempTimeoutX_Alarm.MouseDown
+        If FormKeyboard2s.KeyInString(sender, "5.0", "0.0") <> "" Then
+            SystemParameters.AddTempTimeoutX_Alarm = sender.Text
+            WriteProgData("PARAMETER", "AddTempTimeoutX_Alarm", SystemParameters.AddTempTimeoutX_Alarm, ParameterINIFile)
+        End If
+    End Sub
+    Private Sub txtCoolTempTimeoutX_Alarm_MouseDown(sender As Object, e As MouseEventArgs) Handles txtCoolTempTimeoutX_Alarm.MouseDown
+        If FormKeyboard2s.KeyInString(sender, "5.0", "0.0") <> "" Then
+            SystemParameters.CoolTempTimeoutX_Alarm = sender.Text
+            WriteProgData("PARAMETER", "CoolTempTimeoutX_Alarm", SystemParameters.CoolTempTimeoutX_Alarm, ParameterINIFile)
+        End If
+    End Sub
+    Private Sub txtForceTimeoutX_Alarm_Alarm_MouseDown(sender As Object, e As MouseEventArgs) Handles txtForceTimeoutX_Alarm.MouseDown
+        If FormKeyboard2s.KeyInString(sender, "5.0", "0.0") <> "" Then
+            SystemParameters.ForceTimeoutX_Alarm = sender.Text
+            WriteProgData("PARAMETER", "ForceTimeoutX_Alarm", SystemParameters.ForceTimeoutX_Alarm, ParameterINIFile)
+        End If
+    End Sub
 End Class

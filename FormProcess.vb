@@ -2928,8 +2928,10 @@ Public Class FormProcess
                         If .Temperature_Rate(j) > 0 Then
                             If .Temperature(j) > .Temperature(j - 1) Then
                                 .AddTempTime(j) = (.Temperature(j) - .Temperature(j - 1)) / .Temperature_Rate(j)
+                                .CoolTempTime(j) = 0
                             Else
                                 .AddTempTime(j) = 0
+                                .CoolTempTime(j) = (.Temperature(j - 1) - .Temperature(j)) / .Temperature_Rate(j)
                             End If
                         End If
                         If .Pressure_Rate(j) > 0 Then .AddForceTime(j) = Math.Abs(.Pressure(j) - .Pressure(j - 1)) / .Pressure_Rate(j)

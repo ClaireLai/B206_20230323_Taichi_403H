@@ -72,6 +72,7 @@ Module Module_Recipe_Public
 
         'Add By claire 20230918   ---- Start
         Public AddTempTime() As Integer       '升溫時間
+        Public CoolTempTime() As Integer       '降溫時間
         Public AddForceTime() As Integer      '升壓時間
         'Add By claire 20230918    ---- End
 

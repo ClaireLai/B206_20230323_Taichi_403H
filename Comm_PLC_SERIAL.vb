@@ -650,6 +650,18 @@ Module Comm_PLC_SERIAL
         sCheckSum = FillZero(iCheckSum And &HFF, 2)
         PLCSendCmd_FB = str + sCheckSum + EndX
     End Function
+    Public Function GetCheckSum(ByVal StartX As String, ByVal SlaveNumber As String, ByVal PlcCmd As String, ByVal sData As String, ByVal EndX As String) As String
+        Dim i As Integer
+        Dim str As String
+        Dim iCheckSum As Integer
+        'Dim sCheckSum As String
+        str = StartX & SlaveNumber & PlcCmd & sData
+        For i = 1 To Len(Str)
+            iCheckSum = iCheckSum + Asc(Mid(Str, i, 1))
+        Next i
+        Return FillZero(iCheckSum And &HFF, 2)
+
+    End Function
 
     Private Sub WriteMToPLCFB()
         Dim cmdstr As String
@@ -1183,16 +1195,16 @@ Module Comm_PLC_SERIAL
         wdog.Reset()
         wdog.Start()
     End Sub
-    Public Sub wdog1_Restart()
-        wdog1.Stop()
-        wdog1.Reset()
-        wdog1.Start()
-    End Sub
-    Public Sub swdog_Restart()
-        swdog.Stop()
-        swdog.Reset()
-        swdog.Start()
-    End Sub
+    'Public Sub wdog1_Restart()
+    '    wdog1.Stop()
+    '    wdog1.Reset()
+    '    wdog1.Start()
+    'End Sub
+    'Public Sub swdog_Restart()
+    '    swdog.Stop()
+    '    swdog.Reset()
+    '    swdog.Start()
+    'End Sub
     Public Sub Rs232ThreadWork()
 
         Dim i As Integer = 0
@@ -2240,6 +2252,7 @@ Module Comm_PLC_SERIAL
         Dim y As String
         Static Interlock2Index As Byte
         Dim k As String
+
         Select Case InType
             Case 0 ' PLC X updata  
                 iValue = Mid(Rx_msgPLC, 7, 96)
