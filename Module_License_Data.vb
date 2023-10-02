@@ -1151,7 +1151,7 @@ Module Module_License_Data
                 Reg_MB_ID = Decrypt(subkey.GetValue("MBID", Encrypt("ASUS")))
                 Reg_HDD1_ID = Decrypt(subkey.GetValue("HDD1SERIAL", Encrypt("WD")))
 
-                TotalRunMin = Val(subkey.GetValue("TotalRunMins", Encrypt("")))
+                TotalRunMin = Val(Decrypt(subkey.GetValue("TotalRunMins", Encrypt(""))))
                 WriteLicenseCode(LicenseCode)
                 WriteLicenseDate(LicenseDate)
                 WriteLicenseTrial(LicenseTrial)
