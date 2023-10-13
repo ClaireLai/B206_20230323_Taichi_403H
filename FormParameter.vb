@@ -7323,7 +7323,6 @@ Public Class FormParameter
         '
         'Timer2
         '
-        Me.Timer2.Enabled = True
         Me.Timer2.Interval = 10000
         '
         'OpenFileDialog1

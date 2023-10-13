@@ -1450,7 +1450,7 @@ Public Class FormManual
 
 
             FormTextBoxSave.SetTextBox(ManualControl(i), ManualControl(i).Name, FormSaveINIFile)
-
+            CSubAutoProcess(i).AbortFlag = False
         Next
 
         Timer1.Interval = 500
