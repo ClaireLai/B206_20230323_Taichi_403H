@@ -75,8 +75,9 @@
 
 
     Public Const DiWaterLeakIndex As Integer = 23 '14               '    X12
-    Public Const DiHeaterOL02Index As Integer = 24 '19               '    X12
-    Public Const DiHeaterOL03Index As Integer = 25 '24               '    X12
+    Public Const DiHeaterOL01Index As Integer = 24 '19               '    X12
+    Public Const DiHeaterOL02Index As Integer = 25 '19               '    X12
+    Public Const DiHeaterOL03Index As Integer = 26 '24               '    X12
 
     '----------------------------------------------------------------------------------以下為6頭使用
     Public Const Di1ATMIndex As Integer = 20 '4               'X01
