@@ -7342,7 +7342,7 @@ Public Class FormParameter
         For i = 0 To MAXPLATE
             FormTextBoxSave.SetTextBox(TempCal(i), TempCal(i).Name, FormSaveINIFile)
             FormTextBoxSave.SetTextBox(PressCal(i), PressCal(i).Name, FormSaveINIFile)
-            FormTextBoxSave.SetTextBox(PIDs(i), PIDs(i).Name, FormSaveINIFile)
+            'FormTextBoxSave.SetTextBox(PIDs(i), PIDs(i).Name, FormSaveINIFile)
         Next
 
         '電阻尺
@@ -7355,8 +7355,6 @@ Public Class FormParameter
             lblRullerLengthText.Visible = True
             Label5.Visible = True
         End If
-
-
 
         LoadParameterToForm()        '載入參數到表單內
         radDryPump.Checked = DP_Pump_Used
