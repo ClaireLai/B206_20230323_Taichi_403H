@@ -7450,7 +7450,7 @@ Public Class FormParameter
         For i = 0 To MAXPLATE
             FormTextBoxSave.SetTextBox(TempCal(i), TempCal(i).Name, FormSaveINIFile)
             FormTextBoxSave.SetTextBox(PressCal(i), PressCal(i).Name, FormSaveINIFile)
-            FormTextBoxSave.SetTextBox(PIDs(i), PIDs(i).Name, FormSaveINIFile)
+            'FormTextBoxSave.SetTextBox(PIDs(i), PIDs(i).Name, FormSaveINIFile)
         Next
 
         'นqชýคุ
