@@ -122,14 +122,10 @@ Module Module_AutoTask
         'End Sub
 
 
-
-
-
-
         Private SiteNum As Integer
         Private RunFlag As Boolean    '壓合時重置曲線
         Private RunOKFlag As Boolean    '壓合時重置曲線
-        Public AbortFlag As Boolean    '壓合時重置曲線 claire 2023.06.20為稼動率改為public
+        Private AbortFlag As Boolean    '壓合時重置曲線 
         Private SkipFlag As Boolean    '壓合時重置曲線
         Public SelectedFlag As Boolean    '壓合時重置曲線
 
@@ -321,7 +317,7 @@ Module Module_AutoTask
 
         Public Sub Initial(ByVal iSiteNum As Integer)
             SiteNum = iSiteNum
-            AbortFlag = False
+            'AbortFlag = False
             AddHandler Timer1.Tick, AddressOf Timer1_Tick
             Timer1.Interval = 800
             Timer1.Enabled = True
@@ -585,15 +581,15 @@ Module Module_AutoTask
                                 ForceTimeout_Error = False
                             End If
                             If SubProcessPressureOK And SubProcessTempOK Then
-                                    SubProcessHoldTimerSet = subPlateRecipe.Time(SubProcessStepIndex)
-                                    SubProcessTimerEnabled = True
-                                    SubProcessTimer = subPlateRecipe.Time(SubProcessStepIndex)
-                                    '=========================================================
-                                    Last_State = Control_State
-                                    Control_State = 4
-                                End If
+                                SubProcessHoldTimerSet = subPlateRecipe.Time(SubProcessStepIndex)
+                                SubProcessTimerEnabled = True
+                                SubProcessTimer = subPlateRecipe.Time(SubProcessStepIndex)
+                                '=========================================================
+                                Last_State = Control_State
+                                Control_State = 4
                             End If
-                        Else
+                        End If
+                    Else
                         SubProcessStatusString = AbortStr + State + SubProcessListString(SystemLanguage, Control_State) + DelayTimer + " " + TTime
                         'AppendMultiData(ProcessEeventFileName, 80, ADate & "  " & TTime & "-->", ProcessStatusString)
 
@@ -844,8 +840,8 @@ Module Module_AutoTask
             End If
         End If
         For i = 0 To MAXPLATE
-            If AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2) Then
-                CSubAutoProcess(2).Abort()
+            If ProcessMode_RUN And (AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2)) Then
+                CSubAutoProcess(i).Abort()
                 ProcessMode_RUN = False
             End If
         Next
