@@ -745,31 +745,7 @@ Module Module_AutoTask
         Else
             DelayTimer = Format(AutoProcessTimer, "(0)")
         End If
-        'Dim AbortError As Integer = 0
-        'If SystemParameters.AbortTempRangeFlag = "1" Then
-        '    For i = 0 To MAXPLATE
 
-        '        If AlarmError(Alarm_Name.TOP_OVTEMP_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_OVTEMP_Error1 + i * 2) Then
-        '            AbortError += 1
-        '        End If
-        '        'If AlarmError(Alarm_Name.OVER_PRESS_Error1 + i) Then
-        '        '    AbortError += 1
-        '        'End If
-        '    Next
-        '    If AbortError > 0 Then
-        '        AbortCount += 1
-        '        If AbortCount > 50 Then
-        '            If ProcessMode_RUN Then
-        '                ProcessMode_RUN = False
-        '            End If
-        '            AbortCount = 0
-        '        End If
-        '    Else
-        '        AbortCount = 0
-        '    End If
-        'Else
-        '    AbortError = 0
-        'End If
         On Error Resume Next
         If SystemParameters.AbortPressureRangeFlag = "1" Then
             If AlarmError(Alarm_Name.OVER_PRESS_Error1) Then
@@ -809,8 +785,8 @@ Module Module_AutoTask
             End If
         End If
         For i = 0 To MAXPLATE
-            If AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2) Then
-                CSubAutoProcess(2).Abort()
+            If ProcessMode_RUN And (AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) Or AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2)) Then
+                CSubAutoProcess(i).Abort()
                 ProcessMode_RUN = False
             End If
         Next
