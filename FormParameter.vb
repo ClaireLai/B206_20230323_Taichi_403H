@@ -493,6 +493,14 @@ Public Class FormParameter
     Friend WithEvents btnSelPath As Button
     Friend WithEvents chkAvailBarCode As CheckBox
     Friend WithEvents chkDa As CheckBox
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents TabControlOption As TabControl
+    Friend WithEvents Site1 As TabPage
+    Friend WithEvents Site2 As TabPage
+    Friend WithEvents Site3 As TabPage
+    Friend WithEvents btnSite1Cal As Button
+    Friend WithEvents btnSite2Cal As Button
+    Friend WithEvents btnSite3Cal As Button
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -999,6 +1007,7 @@ Public Class FormParameter
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
         Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
+        Me.chkDa = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtTICComport = New System.Windows.Forms.TextBox()
         Me.chkTICMonitorUsed = New System.Windows.Forms.CheckBox()
@@ -1045,59 +1054,70 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.chkDa = New System.Windows.Forms.CheckBox()
+        Me.TabControlOption = New System.Windows.Forms.TabControl()
+        Me.Site1 = New System.Windows.Forms.TabPage()
+        Me.Site2 = New System.Windows.Forms.TabPage()
+        Me.Site3 = New System.Windows.Forms.TabPage()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnSite1Cal = New System.Windows.Forms.Button()
+        Me.btnSite2Cal = New System.Windows.Forms.Button()
+        Me.btnSite3Cal = New System.Windows.Forms.Button()
         Me.pnlParaSet.SuspendLayout
         Me.Panel3.SuspendLayout
         Me.Panel2.SuspendLayout
         Me.grpVacuum.SuspendLayout
         Me.pnlDPWaterFlow.SuspendLayout
         Me.pnlDPTemp.SuspendLayout
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpProcessCondition.SuspendLayout
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpAlarmSetup.SuspendLayout
-        Me.pnlFlowShow.SuspendLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.grpPurgeSetup.SuspendLayout
-        Me.grpPIDLoadSave.SuspendLayout
-        Me.grpVacuumSetup.SuspendLayout
-        Me.tabParameter.SuspendLayout
-        Me.TabPageTIC.SuspendLayout
-        Me.tabPIDSetup.SuspendLayout
-        Me.tabPage1to3.SuspendLayout
-        Me.tabPage4to6.SuspendLayout
-        Me.TabPageTCal.SuspendLayout
-        Me.pnlSplitTopBotTemp.SuspendLayout
-        Me.TabPagePCal.SuspendLayout
-        Me.TabPageSystem.SuspendLayout
-        Me.TabPageCIM.SuspendLayout
-        Me.TabPageCello.SuspendLayout
-        Me.tabSystem.SuspendLayout
-        Me.tabpageTempCal.SuspendLayout
-        Me.pnlHeaterSetup.SuspendLayout
-        Me.tabpageVacuum.SuspendLayout
-        Me.grpFlowMeter.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpPumpType.SuspendLayout
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpagePressCal.SuspendLayout
-        Me.tabpagePressControl.SuspendLayout
-        Me.pnlPressureAverage.SuspendLayout
-        Me.pnl6Plate.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        Me.Panel1.SuspendLayout
-        Me.tabPageIniEdit.SuspendLayout
-        Me.TabPageTempCalTool.SuspendLayout
-        Me.tabpageCycleRun.SuspendLayout
-        Me.pnl6Plate1.SuspendLayout
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpProcessCondition.SuspendLayout()
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpAlarmSetup.SuspendLayout()
+        Me.pnlFlowShow.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpPurgeSetup.SuspendLayout()
+        Me.grpPIDLoadSave.SuspendLayout()
+        Me.grpVacuumSetup.SuspendLayout()
+        Me.tabParameter.SuspendLayout()
+        Me.TabPageTIC.SuspendLayout()
+        Me.tabPIDSetup.SuspendLayout()
+        Me.tabPage1to3.SuspendLayout()
+        Me.tabPage4to6.SuspendLayout()
+        Me.TabPageTCal.SuspendLayout()
+        Me.pnlSplitTopBotTemp.SuspendLayout()
+        Me.TabPagePCal.SuspendLayout()
+        Me.TabPageSystem.SuspendLayout()
+        Me.TabPageCIM.SuspendLayout()
+        Me.TabPageCello.SuspendLayout()
+        Me.tabSystem.SuspendLayout()
+        Me.tabpageTempCal.SuspendLayout()
+        Me.pnlHeaterSetup.SuspendLayout()
+        Me.tabpageVacuum.SuspendLayout()
+        Me.grpFlowMeter.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpPumpType.SuspendLayout()
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpagePressCal.SuspendLayout()
+        Me.tabpagePressControl.SuspendLayout()
+        Me.pnlPressureAverage.SuspendLayout()
+        Me.pnl6Plate.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.tabPageIniEdit.SuspendLayout()
+        Me.TabPageTempCalTool.SuspendLayout()
+        Me.tabpageCycleRun.SuspendLayout()
+        Me.pnl6Plate1.SuspendLayout()
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControlOption.SuspendLayout()
+        Me.Site1.SuspendLayout()
+        Me.Site2.SuspendLayout()
+        Me.Site3.SuspendLayout()
+        Me.SuspendLayout()
         '
         'Timer1
         '
@@ -3831,6 +3851,8 @@ Public Class FormParameter
         'TabPagePCal
         '
         Me.TabPagePCal.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPagePCal.Controls.Add(Me.CheckBox1)
+        Me.TabPagePCal.Controls.Add(Me.TabControlOption)
         Me.TabPagePCal.Controls.Add(Me.flwPressCalUser)
         Me.TabPagePCal.Location = New System.Drawing.Point(4, 44)
         Me.TabPagePCal.Name = "TabPagePCal"
@@ -3842,7 +3864,7 @@ Public Class FormParameter
         '
         Me.flwPressCalUser.Location = New System.Drawing.Point(3, 3)
         Me.flwPressCalUser.Name = "flwPressCalUser"
-        Me.flwPressCalUser.Size = New System.Drawing.Size(1001, 489)
+        Me.flwPressCalUser.Size = New System.Drawing.Size(1001, 248)
         Me.flwPressCalUser.TabIndex = 849
         '
         'TabPageSystem
@@ -6630,6 +6652,17 @@ Public Class FormParameter
         Me.TabPageTempCalTool.Text = "校溫工具"
         Me.TabPageTempCalTool.UseVisualStyleBackColor = True
         '
+        'chkDa
+        '
+        Me.chkDa.AutoSize = True
+        Me.chkDa.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.chkDa.Location = New System.Drawing.Point(757, 93)
+        Me.chkDa.Name = "chkDa"
+        Me.chkDa.Size = New System.Drawing.Size(63, 17)
+        Me.chkDa.TabIndex = 954
+        Me.chkDa.Text = "DALog"
+        Me.chkDa.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
@@ -7212,16 +7245,89 @@ Public Class FormParameter
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'chkDa
+        'TabControlOption
         '
-        Me.chkDa.AutoSize = True
-        Me.chkDa.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkDa.Location = New System.Drawing.Point(757, 93)
-        Me.chkDa.Name = "chkDa"
-        Me.chkDa.Size = New System.Drawing.Size(63, 17)
-        Me.chkDa.TabIndex = 954
-        Me.chkDa.Text = "DALog"
-        Me.chkDa.UseVisualStyleBackColor = True
+        Me.TabControlOption.Controls.Add(Me.Site1)
+        Me.TabControlOption.Controls.Add(Me.Site2)
+        Me.TabControlOption.Controls.Add(Me.Site3)
+        Me.TabControlOption.Font = New System.Drawing.Font("Arial", 14.0!)
+        Me.TabControlOption.ItemSize = New System.Drawing.Size(100, 36)
+        Me.TabControlOption.Location = New System.Drawing.Point(296, 266)
+        Me.TabControlOption.Name = "TabControlOption"
+        Me.TabControlOption.SelectedIndex = 0
+        Me.TabControlOption.Size = New System.Drawing.Size(412, 256)
+        Me.TabControlOption.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.TabControlOption.TabIndex = 850
+        '
+        'Site1
+        '
+        Me.Site1.BackColor = System.Drawing.SystemColors.Control
+        Me.Site1.Controls.Add(Me.btnSite1Cal)
+        Me.Site1.Location = New System.Drawing.Point(4, 40)
+        Me.Site1.Name = "Site1"
+        Me.Site1.Padding = New System.Windows.Forms.Padding(3)
+        Me.Site1.Size = New System.Drawing.Size(404, 212)
+        Me.Site1.TabIndex = 0
+        Me.Site1.Text = "Site1"
+        '
+        'Site2
+        '
+        Me.Site2.BackColor = System.Drawing.SystemColors.Control
+        Me.Site2.Controls.Add(Me.btnSite2Cal)
+        Me.Site2.Location = New System.Drawing.Point(4, 40)
+        Me.Site2.Name = "Site2"
+        Me.Site2.Padding = New System.Windows.Forms.Padding(3)
+        Me.Site2.Size = New System.Drawing.Size(404, 212)
+        Me.Site2.TabIndex = 1
+        Me.Site2.Text = "Site2"
+        '
+        'Site3
+        '
+        Me.Site3.BackColor = System.Drawing.SystemColors.Control
+        Me.Site3.Controls.Add(Me.btnSite3Cal)
+        Me.Site3.Location = New System.Drawing.Point(4, 40)
+        Me.Site3.Name = "Site3"
+        Me.Site3.Padding = New System.Windows.Forms.Padding(3)
+        Me.Site3.Size = New System.Drawing.Size(404, 212)
+        Me.Site3.TabIndex = 3
+        Me.Site3.Text = "Site3"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(162, 280)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(91, 22)
+        Me.CheckBox1.TabIndex = 851
+        Me.CheckBox1.Text = "自動校壓"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'btnSite1Cal
+        '
+        Me.btnSite1Cal.Location = New System.Drawing.Point(113, 72)
+        Me.btnSite1Cal.Name = "btnSite1Cal"
+        Me.btnSite1Cal.Size = New System.Drawing.Size(123, 31)
+        Me.btnSite1Cal.TabIndex = 0
+        Me.btnSite1Cal.Text = "Site1 cal"
+        Me.btnSite1Cal.UseVisualStyleBackColor = True
+        '
+        'btnSite2Cal
+        '
+        Me.btnSite2Cal.Location = New System.Drawing.Point(167, 137)
+        Me.btnSite2Cal.Name = "btnSite2Cal"
+        Me.btnSite2Cal.Size = New System.Drawing.Size(123, 31)
+        Me.btnSite2Cal.TabIndex = 1
+        Me.btnSite2Cal.Text = "Site2 cal"
+        Me.btnSite2Cal.UseVisualStyleBackColor = True
+        '
+        'btnSite3Cal
+        '
+        Me.btnSite3Cal.Location = New System.Drawing.Point(141, 91)
+        Me.btnSite3Cal.Name = "btnSite3Cal"
+        Me.btnSite3Cal.Size = New System.Drawing.Size(123, 31)
+        Me.btnSite3Cal.TabIndex = 1
+        Me.btnSite3Cal.Text = "Site3 cal"
+        Me.btnSite3Cal.UseVisualStyleBackColor = True
         '
         'FormParameter
         '
@@ -7241,81 +7347,86 @@ Public Class FormParameter
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "ParameterSet"
         Me.pnlParaSet.ResumeLayout(False)
-        Me.pnlParaSet.PerformLayout
+        Me.pnlParaSet.PerformLayout()
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout
+        Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.grpVacuum.ResumeLayout(False)
-        Me.grpVacuum.PerformLayout
+        Me.grpVacuum.PerformLayout()
         Me.pnlDPWaterFlow.ResumeLayout(False)
-        Me.pnlDPWaterFlow.PerformLayout
+        Me.pnlDPWaterFlow.PerformLayout()
         Me.pnlDPTemp.ResumeLayout(False)
-        Me.pnlDPTemp.PerformLayout
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnlDPTemp.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpProcessCondition.ResumeLayout(False)
-        Me.grpProcessCondition.PerformLayout
-        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit
+        Me.grpProcessCondition.PerformLayout()
+        CType(Me.picC06, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAlarmSetup.ResumeLayout(False)
-        Me.grpAlarmSetup.PerformLayout
+        Me.grpAlarmSetup.PerformLayout()
         Me.pnlFlowShow.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPurgeSetup.ResumeLayout(False)
-        Me.grpPurgeSetup.PerformLayout
+        Me.grpPurgeSetup.PerformLayout()
         Me.grpPIDLoadSave.ResumeLayout(False)
-        Me.grpPIDLoadSave.PerformLayout
+        Me.grpPIDLoadSave.PerformLayout()
         Me.grpVacuumSetup.ResumeLayout(False)
-        Me.grpVacuumSetup.PerformLayout
+        Me.grpVacuumSetup.PerformLayout()
         Me.tabParameter.ResumeLayout(False)
         Me.TabPageTIC.ResumeLayout(False)
-        Me.TabPageTIC.PerformLayout
+        Me.TabPageTIC.PerformLayout()
         Me.tabPIDSetup.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
         Me.TabPageTCal.ResumeLayout(False)
         Me.pnlSplitTopBotTemp.ResumeLayout(False)
-        Me.pnlSplitTopBotTemp.PerformLayout
+        Me.pnlSplitTopBotTemp.PerformLayout()
         Me.TabPagePCal.ResumeLayout(False)
+        Me.TabPagePCal.PerformLayout()
         Me.TabPageSystem.ResumeLayout(False)
         Me.TabPageCIM.ResumeLayout(False)
         Me.TabPageCello.ResumeLayout(False)
         Me.tabSystem.ResumeLayout(False)
         Me.tabpageTempCal.ResumeLayout(False)
         Me.pnlHeaterSetup.ResumeLayout(False)
-        Me.pnlHeaterSetup.PerformLayout
+        Me.pnlHeaterSetup.PerformLayout()
         Me.tabpageVacuum.ResumeLayout(False)
         Me.grpFlowMeter.ResumeLayout(False)
-        Me.grpFlowMeter.PerformLayout
+        Me.grpFlowMeter.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout
+        Me.GroupBox1.PerformLayout()
         Me.grpPumpType.ResumeLayout(False)
-        Me.grpPumpType.PerformLayout
-        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit
+        Me.grpPumpType.PerformLayout()
+        CType(Me.picC02, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpagePressCal.ResumeLayout(False)
         Me.tabpagePressControl.ResumeLayout(False)
-        Me.tabpagePressControl.PerformLayout
+        Me.tabpagePressControl.PerformLayout()
         Me.pnlPressureAverage.ResumeLayout(False)
-        Me.pnlPressureAverage.PerformLayout
+        Me.pnlPressureAverage.PerformLayout()
         Me.pnl6Plate.ResumeLayout(False)
-        Me.pnl6Plate.PerformLayout
+        Me.pnl6Plate.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout
+        Me.GroupBox2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout
+        Me.Panel1.PerformLayout()
         Me.tabPageIniEdit.ResumeLayout(False)
-        Me.tabPageIniEdit.PerformLayout
+        Me.tabPageIniEdit.PerformLayout()
         Me.TabPageTempCalTool.ResumeLayout(False)
-        Me.TabPageTempCalTool.PerformLayout
+        Me.TabPageTempCalTool.PerformLayout()
         Me.tabpageCycleRun.ResumeLayout(False)
-        Me.tabpageCycleRun.PerformLayout
+        Me.tabpageCycleRun.PerformLayout()
         Me.pnl6Plate1.ResumeLayout(False)
-        Me.pnl6Plate1.PerformLayout
-        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnl6Plate1.PerformLayout()
+        CType(Me.picCelloTitleEng, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picCelloTitle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picCelloLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControlOption.ResumeLayout(False)
+        Me.Site1.ResumeLayout(False)
+        Me.Site2.ResumeLayout(False)
+        Me.Site3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -7951,7 +8062,12 @@ Public Class FormParameter
         BondCycle6.CycleTimes(txtCR_Time)
         'By chesly 20181023 壓缸自動循環動作 end
 
+        '自動校壓 claire
+        ObjShow.Show(BondAutoPressCal1.StartRun, btnSite1Cal, Color.Lime, Color.Red)
+        ObjShow.Show(BondAutoPressCal2.StartRun, btnSite2Cal, Color.Lime, Color.Red)
+        ObjShow.Show(BondAutoPressCal3.StartRun, btnSite3Cal, Color.Lime, Color.Red)
 
+        '自動校壓 claire...end
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
 
         If SanAn_TCPIP_Used_Flag Or BarCodeFile_Flag Then
@@ -9379,4 +9495,13 @@ Public Class FormParameter
         End If
     End Sub
 
+    Private Sub btnSite1Cal_Click(sender As Object, e As EventArgs) Handles btnSite1Cal.Click
+        BondAutoPressCal1.StartRun = Not BondAutoPressCal1.StartRun
+    End Sub
+    Private Sub btnSite2Cal_Click(sender As Object, e As EventArgs) Handles btnSite2Cal.Click
+        BondAutoPressCal2.StartRun = Not BondAutoPressCal2.StartRun
+    End Sub
+    Private Sub btnSite3Cal_Click(sender As Object, e As EventArgs) Handles btnSite3Cal.Click
+        BondAutoPressCal3.StartRun = Not BondAutoPressCal3.StartRun
+    End Sub
 End Class

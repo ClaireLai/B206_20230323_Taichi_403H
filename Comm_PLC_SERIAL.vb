@@ -202,13 +202,13 @@ Module Comm_PLC_SERIAL
         End If
     End Function
 
-    '讀取 R1000~R1095
+    '讀取 R1000~R1095 R1200~R1263
     Public Function Get_PLC_R1000(ByVal index As Integer) As Integer
         If index < 0 Then Exit Function
         Return Val(PLC_R_READ(index))
     End Function
 
-    '讀取 R1100~R1195
+    '讀取 R1100~R1195 R1300~R1395
     Public Function Get_PLC_R1100(ByVal index As Integer) As Integer
         If index < 0 Then Exit Function
         Return Val(PLC_R_SetRead(index))
@@ -250,9 +250,9 @@ Module Comm_PLC_SERIAL
     Private Sub ReadOriginalR1100()
         Dim i As Integer
         For i = 0 To 256
-            If i = 96 Then
-                'Debug.Print("96")
-            End If
+            'If i = 96 Then
+            '    'Debug.Print("96")
+            'End If
             'If PLC_R_SetRead(i) <> 0 Then
             addOrUpdate(R_R1100_Read, i, PLC_R_SetRead(i))
             'End If

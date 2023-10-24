@@ -135,7 +135,7 @@ Module Module_Alarm_Task
         ORING_LIFE_Error = 81
         CALIBRATION_Error = 82
 
-        HeaterOverLoadError1 = 83
+        HeaterOverLoadError1 = 83 '沒用到
         HeaterOverLoadError2 = 84
         HeaterOverLoadError3 = 85
         HeaterOverLoadError4 = 86
@@ -835,7 +835,7 @@ Module Module_Alarm_Task
                 btempPV = BotTempPV(i)
                 AlarmError(Alarm_Name.TOP_TEMP_Error1 + i * 2) = CAlarmError(Alarm_Name.TOP_TEMP_Error1 + i * 2).CheckValueAction(Check_PLC_Y(DoHeater01Index + i), ttempSV, ttempPV, Val(SystemParameters.ProcessTempRange), TOPTEMPRUNTIME)
                 AlarmError(Alarm_Name.BOT_TEMP_Error1 + i * 2) = CAlarmError(Alarm_Name.BOT_TEMP_Error1 + i * 2).CheckValueAction(Check_PLC_Y(DoHeater01Index + i), btempSV, btempPV, Val(SystemParameters.ProcessTempRange), BOTTEMPRUNTIME)
-                AlarmError(Alarm_Name.HeaterOverLoadError1 + i) = Check_PLC_X(DiHeaterOL01Index + i)
+                AlarmError(Alarm_Name.HeaterOverLoadError1 + i) = Check_PLC_X(DiHeaterOL01Index + i) '沒用到 過溫用TOP_TEMP_Error1
 
                 'Current Limit
                 AlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2) = CAlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2).Lower(

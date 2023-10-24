@@ -47,12 +47,12 @@ Public Class ControlPressCal
         InitializeComponent()
         ' 在 InitializeComponent() 呼叫之後加入任何初始設定。
     End Sub
-    Public Sub Initial(ByVal iSiteNum As Integer, ByVal iDAPressCalXIndex As Integer, ByVal iDAPressCalYIndex As Integer, _
-                       ByVal iADOriginalPressAD As Integer, ByVal iADOriginalPressIndex As Integer, _
-                       ByVal iADCaledPressIndex As Integer, ByVal iDAFullScaleIndex As Integer, _
-                       ByVal iADScalerValueIndex As Integer, _
-                       ByVal iDoPlateUpIndex As Integer, ByVal iDoPlateDownIndex As Integer, _
-                       ByVal iDoOilPumpIndex As Integer, _
+    Public Sub Initial(ByVal iSiteNum As Integer, ByVal iDAPressCalXIndex As Integer, ByVal iDAPressCalYIndex As Integer,
+                       ByVal iADOriginalPressAD As Integer, ByVal iADOriginalPressIndex As Integer,
+                       ByVal iADCaledPressIndex As Integer, ByVal iDAFullScaleIndex As Integer,
+                       ByVal iADScalerValueIndex As Integer,
+                       ByVal iDoPlateUpIndex As Integer, ByVal iDoPlateDownIndex As Integer,
+                       ByVal iDoOilPumpIndex As Integer,
                        Optional ByVal iMaxValue As Integer = 30000, Optional ByVal iStep As Integer = 500)
         Dim i As Integer
         'For i = 0 To MAXPOINT

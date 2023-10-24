@@ -3319,6 +3319,250 @@ Module Module_AutoTask
         End Sub
     End Class
 #End Region
-    'By chesly 20181023 壓缸自動循環動作 End
 
+    'By chesly 20181023 壓缸自動循環動作 End
+#Region "AutoPressCal Run"
+
+    Public BondAutoPressCal1 As New AutoPressCal(0)
+    Public BondAutoPressCal2 As New AutoPressCal(1)
+    Public BondAutoPressCal3 As New AutoPressCal(2)
+
+    Public Class AutoPressCal
+
+        Private timer1 As Timer
+        Public DelayTimerEndbled As Boolean
+        Public DelayTimer As Integer
+        Private index As Integer
+        Public State As Integer
+
+
+        Property StartRun As Boolean
+
+        Sub New(ByVal iindex As Integer)
+            timer1 = New Timer
+            timer1.Interval = 1000
+            AddHandler timer1.Tick, AddressOf Run
+            timer1.Enabled = True
+            index = iindex
+            StartRun = False
+            DelayTimerEndbled = False
+            DelayTimer = 0
+            State = 0
+
+        End Sub
+        ''' <summary>
+        ''' AutoPressCal Run () by claire 20231024
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private Sub Run()
+            Select Case State
+                Case 0 '畫面歸0
+                    If StartRun Then
+                        DelayTimerEndbled = True '計時開始
+                        Write_PLC_R1100(DAPressure01Cal1Index + index * 5, 0)
+                        Write_PLC_R1100(DAPressure01Cal2Index + index * 5, 0)
+                        Write_PLC_R1100(DAPressure01Cal3Index + index * 5, 0)
+                        Write_PLC_R1100(DAPressure01Cal4Index + index * 5, 0)
+                        Write_PLC_R1100(DAPressure01Cal5Index + index * 5, 0)
+
+                        DelayTimer = 2
+                        State = 1
+                    End If
+                Case 1 '執行第一段壓力
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then '計時到
+                            ManualControl(index).txtPressureSet.Text = PressCal(index).txtX1.Text
+                            ManualControl(index).txtPressureRateSet.Text = 50
+                            ManualControl(index).SetForce()
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 2
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 2 '等待壓力1
+                    If StartRun Then
+                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX1.Text)) < 5 Then
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 3
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 3 '紀錄 1
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            'PressCal(index).txtY1.Text = ManualControl(index).lblPressure.Text
+                            Write_PLC_R1100(DAPressure01Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            DelayTimerEndbled = True
+                            DelayTimer = 1
+                            State = 4
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 4 '執行第2段壓力
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            ManualControl(index).txtPressureSet.Text = PressCal(index).txtX2.Text
+                            ManualControl(index).txtPressureRateSet.Text = 100
+                            ManualControl(index).SetForce()
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 5
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 5 '等待壓力2
+                    If StartRun Then
+                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX2.Text)) < 5 Then
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 6
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 6 '紀錄 2
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            'PressCal(index).txtY2.Text = ManualControl(index).lblPressure.Text
+                            Write_PLC_R1100(DAPressure02Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            DelayTimerEndbled = True
+                            DelayTimer = 1
+                            State = 7
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 7 '執行第3段壓力
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then '計時到
+                            ManualControl(index).txtPressureSet.Text = PressCal(index).txtX3.Text
+                            ManualControl(index).txtPressureRateSet.Text = 100
+                            ManualControl(index).SetForce()
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 8
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 8 '等待壓力3
+                    If StartRun Then
+                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX3.Text)) < 5 Then
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 9
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 9 '紀錄 3
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            'PressCal(index).txtY3.Text = ManualControl(index).lblPressure.Text
+                            Write_PLC_R1100(DAPressure03Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            DelayTimerEndbled = True
+                            DelayTimer = 1
+                            State = 10
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 10 '執行第4段壓力
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then '計時到
+                            ManualControl(index).txtPressureSet.Text = PressCal(index).txtX4.Text
+                            ManualControl(index).txtPressureRateSet.Text = 200
+                            ManualControl(index).SetForce()
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 11
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 11 '等待壓力4
+                    If StartRun Then
+                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX4.Text)) < 5 Then
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 12
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 12 '紀錄 4
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            If DelayTimerEndbled = False Then
+                                'PressCal(index).txtY4.Text = ManualControl(index).lblPressure.Text
+                                Write_PLC_R1100(DAPressure04Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                                DelayTimerEndbled = True
+                                DelayTimer = 1
+                                State = 13
+                            End If
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 13 '執行第5段壓力
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then '計時到
+                            ManualControl(index).txtPressureSet.Text = PressCal(index).txtX5.Text
+                            ManualControl(index).txtPressureRateSet.Text = 250
+                            ManualControl(index).SetForce()
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 14
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 14 '等待壓力5
+                    If StartRun Then
+                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX5.Text)) < 5 Then
+                            DelayTimerEndbled = True
+                            DelayTimer = 10
+                            State = 15
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 15 '紀錄 5
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            'PressCal(index).txtY5.Text = ManualControl(index).lblPressure.Text
+                            Write_PLC_R1100(DAPressure05Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            DelayTimerEndbled = True
+                            DelayTimer = 1
+                            State = 99
+                        End If
+                    Else
+                        State = 99
+                    End If
+                Case 99
+                    DelayTimerEndbled = False
+                    DelayTimer = 0
+                    'RunCount = 0
+                    State = 0
+                    StartRun = False
+            End Select
+            If DelayTimerEndbled Then
+                DelayTimer -= 1
+                If DelayTimer <= 0 Then
+                    DelayTimerEndbled = False
+                    DelayTimer = 0
+                End If
+            Else
+                DelayTimer = 0
+            End If
+            timer1.Interval = 100
+        End Sub
+    End Class
+#End Region
 End Module
