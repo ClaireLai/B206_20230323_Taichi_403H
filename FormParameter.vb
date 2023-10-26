@@ -2,7 +2,7 @@
 
 Public Class FormParameter
     Inherits System.Windows.Forms.Form
-    Dim TempTab1 As TabPage
+    'Dim TempTab1 As TabPage
     Private DoorChk As Boolean
     Private txtC_Time As Integer = 200 ''By chesly 20181023 壓缸自動循環動作/Sec
     Private txtCR_Time As Integer = 999 'By chesly 20181023 壓缸自動循環動作/次數

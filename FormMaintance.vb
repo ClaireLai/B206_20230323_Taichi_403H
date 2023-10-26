@@ -56,15 +56,13 @@
         initflag = True
     End Sub
 
-
-
     Private Sub FindMatchNameControls(ByRef pnl As Object, ByVal name As String, ByRef obj() As Control)
         Dim i, n As Integer
         Dim match, str1 As String
         i = 0
         n = 0
         For Each aa As Control In pnl.Controls
-            Debug.Print("aa.Text=" + aa.Text + ",aa.Name=" + aa.Name)
+            'Debug.Print("aa.Text=" + aa.Text + ",aa.Name=" + aa.Name)
             match = Strings.Left(aa.Name, Len(aa.Name) - 2)
             n = Val(Strings.Right(aa.Name, 2)) '63
             If name = match Then 'lblx

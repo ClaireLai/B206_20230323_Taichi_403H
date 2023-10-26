@@ -565,7 +565,7 @@ Module Module_AutoTask
                             End If
                             If SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) > 0 And SystemParameters.AddTempTimeoutX_Alarm > 0 And
                                 (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) * SystemParameters.AddTempTimeoutX_Alarm) Then
-                                Debug.Print("加熱愈時時間,第" + SiteNum.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
+                                'Debug.Print("加熱愈時時間,第" + SiteNum.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
                                 TempTimeout_Error = True
 
                             ElseIf SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) > 0 And SystemParameters.CoolTempTimeoutX_Alarm And

@@ -43,7 +43,7 @@ Module Module_Button
             If Math.Abs(tick2 - tick1) > 50 Then
                 tick2 = tick1
                 If CommLivePLC Then
-                    'ReadInformation()
+                    ReadInformation()
                     Button_Control()
                     'AutoProcess_Task()
                     UpDataDigital()

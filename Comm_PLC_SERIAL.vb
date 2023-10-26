@@ -256,13 +256,13 @@ Module Comm_PLC_SERIAL
         If dic.TryGetValue(key, val) Then '這電腦暫存器裡面有值
             dic(key) = newValue
             M_Changed(key) = True
-            Debug.Print("M_index=" + key.ToString + ",修改=" + newValue.ToString())
+            'Debug.Print("M_index=" + key.ToString + ",修改=" + newValue.ToString())
         Else
             dic.Add(key, newValue)
             M_Changed(key) = False
             'R1100_Changed(key) = True
             'bolWriteROK = True
-            Debug.Print("M_index=" + key.ToString + ",新增=" + newValue.ToString())
+            'Debug.Print("M_index=" + key.ToString + ",新增=" + newValue.ToString())
         End If
     End Sub
     Private Sub ReadOriginalR1100()
@@ -298,7 +298,7 @@ Module Comm_PLC_SERIAL
                         R1100_ErrorNum(i) = R1100_ErrorNum(i) + 1 '醜1 2....
                         If R1100_ErrorNum(i) > 2 Then '>醜2
                             Write_PLC_R1100(i, val) '再寫一遍
-                            Debug.Print("Write again =" + i.ToString)
+                            'Debug.Print("Write again =" + i.ToString)
                             PLCAlarm_Log("R_index=" + i.ToString + " Compare Err")
                             R1100_ErrorNum(i) = 0
                         End If
@@ -329,7 +329,7 @@ Module Comm_PLC_SERIAL
                         M_ErrorNum(i) = M_ErrorNum(i) + 1 '醜1 2....
                         If M_ErrorNum(i) > 2 Then '>醜3
                             Set_MBit(i, val) '再寫一遍
-                            Debug.Print("M_Write again =" + i.ToString)
+                            'Debug.Print("M_Write again =" + i.ToString)
                             PLCAlarm_Log("Compare Err M_index=" + i.ToString + " val=" + val.ToString)
                             M_ErrorNum(i) = 0
                         End If
@@ -1776,7 +1776,7 @@ Module Comm_PLC_SERIAL
         Rx_msgPLC = PLCComm.ReadExisting()
         Rx_msgPLC = ""
         If SQTailPLC <> SQHeadPLC Then
-            Debug.Print("SQTailPLC =  " + SQTailPLC.ToString() + "    SQHeadPLC=  " + SQHeadPLC.ToString())
+            'Debug.Print("SQTailPLC =  " + SQTailPLC.ToString() + "    SQHeadPLC=  " + SQHeadPLC.ToString())
             SQTailPLC = (SQTailPLC + 1) Mod PLCSetMaxCount
             If PLCSet(SQTailPLC).PLCSetType = 1 Then
                 WriteMToPLCFB()
@@ -1794,7 +1794,7 @@ Module Comm_PLC_SERIAL
             'check 資料格式 error code
             If PLCSet(SQTailPLC).PLCSetType = 2 Then
                 If Rx_msgPLC.Substring(1, 5) <> "01470" Then
-                    Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
+                    'Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
                     PLCAlarm_Log("err code=" + Rx_msgPLC.Substring(1, 5))
                 End If
             End If
