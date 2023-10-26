@@ -1957,6 +1957,7 @@ Public Class FormParameter
         'grpAlarmSetup
         '
         Me.grpAlarmSetup.Controls.Add(Me.Panel4)
+        Me.grpAlarmSetup.Controls.Add(Me.lblTempAlarmTimeText)
         Me.grpAlarmSetup.Controls.Add(Me.txtHiPressureLimit)
         Me.grpAlarmSetup.Controls.Add(Me.lblHiPressureLimitText)
         Me.grpAlarmSetup.Controls.Add(Me.lblKg05Text)
@@ -1995,7 +1996,6 @@ Public Class FormParameter
         Me.grpAlarmSetup.Controls.Add(Me.lblPressAlarmTimeText)
         Me.grpAlarmSetup.Controls.Add(Me.lblSec06Text)
         Me.grpAlarmSetup.Controls.Add(Me.txtPressAlarmTime)
-        Me.grpAlarmSetup.Controls.Add(Me.lblTempAlarmTimeText)
         Me.grpAlarmSetup.Controls.Add(Me.lblSec07Text)
         Me.grpAlarmSetup.Controls.Add(Me.txtTempAlarmTime)
         Me.grpAlarmSetup.Controls.Add(Me.lblHiTempLimitText)
@@ -2030,7 +2030,7 @@ Public Class FormParameter
         Me.Panel4.Controls.Add(Me.txtCoolTempTimeoutX_Alarm)
         Me.Panel4.Controls.Add(Me.txtAddTempTimeoutX_Alarm)
         Me.Panel4.Controls.Add(Me.Label13)
-        Me.Panel4.Location = New System.Drawing.Point(27, 350)
+        Me.Panel4.Location = New System.Drawing.Point(27, 316)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(339, 126)
         Me.Panel4.TabIndex = 854
@@ -2107,7 +2107,7 @@ Public Class FormParameter
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(239, 36)
         Me.Label13.TabIndex = 527
-        Me.Label13.Text = "加熱超過預定降溫?倍時間警報"
+        Me.Label13.Text = "降溫超過預定降溫?倍時間警報"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtHiPressureLimit
@@ -7438,12 +7438,11 @@ Public Class FormParameter
         Me.Left = 0
         'Add By Vtncent 20220506  ----------------------------------------------------------  Start
         If SanAn_TCPIP_Used_Flag = False Then
-            tabParameter.TabPages.RemoveByKey("TabPageCIM")
+            'tabParameter.TabPages.RemoveByKey("TabPageCIM")
+            tabParameter.TabPages.Remove(TabPageCIM)
         End If
 
-        'If TCPIP_Used Then
-        'tabParameter.TabPages.RemoveByKey("TabPageCIM")
-        'End If
+
         'Add By Vtncent 20220506  ----------------------------------------------------------  End
 
         'FormTextBoxSave.SetTextBox(Me, Me.Name, FormSaveINIFile)
@@ -7464,8 +7463,6 @@ Public Class FormParameter
             Label5.Visible = True
         End If
 
-
-
         LoadParameterToForm()        '載入參數到表單內
         radDryPump.Checked = DP_Pump_Used
         radUlvacLS120.Checked = Ulvac_LS120_Used
@@ -7474,9 +7471,7 @@ Public Class FormParameter
         End If
         lblProcessAutoVacuumText.Visible = DP_Pump_Used
         btnProcessAutoVacuum.Visible = DP_Pump_Used
-        'TempTab1 = New TabPage
-        'TempTab1 = tabParameter.TabPages("TabPageCello")
-        'tabParameter.TabPages.RemoveByKey("TabPageCello")
+
         pnlDPTemp.Visible = DP_Pump_Used
         txtDPTempAlarmText.Visible = DP_Pump_Used
         txtDPTempAlarmOff.Visible = DP_Pump_Used
@@ -7484,23 +7479,10 @@ Public Class FormParameter
         txtDPTempAlarmText.Text = Get_PLC_R1100(DADPOverTempIndex).ToString
         txtDPTempAlarmOff.Text = Get_PLC_R1100(DADPOverTempOFFIndex).ToString
         txtDPTempCalSet.Text = Get_PLC_R1100(DADPTempOffsetIndex).ToString
-
-        TempTab1 = New TabPage
-        TempTab1 = tabParameter.TabPages("TabPageCello")
-        tabParameter.TabPages.RemoveByKey("TabPageCello")
-
         pnlFlowShow.Visible = FlowMeterMode
-
         txtOutRangAddDA1.Text = Get_PLC_R1100(DAOutRangAddDA1Index).ToString
         txtOutRangAddDA2.Text = Get_PLC_R1100(DAOutRangAddDA2Index).ToString
         txtOutRangAddDA3.Text = Get_PLC_R1100(DAOutRangAddDA3Index).ToString
-        'txtOutRangAddDA4.Text = Get_PLC_R1100(DAOutRangAddDA4Index).ToString
-        'txtOutRangAddDA5.Text = Get_PLC_R1100(DAOutRangAddDA5Index).ToString
-        'txtOutRangAddDA6.Text = Get_PLC_R1100(DAOutRangAddDA6Index).ToString
-
-        'tabSystem.TabPages("TabPageTempCalTool").Controls.Add(ControlADAM4118s)'動態載入From Page
-
-        'tabSystem.TabPages("TabPageTempCalTool").Controls.Add(ControlADAM4018_Modbuss) '動態載入From Page
 
         chkTICMonitorUsed.Checked = TIC_MONITOR_USED
 
@@ -7537,9 +7519,9 @@ Public Class FormParameter
         pnlDPWaterFlow.Visible = DP_Flow_Used
         chkCIMUsed.Checked = CIM_Used
         chkAvailBarCode.Checked = BarCodeFile_Flag
-        If SanAn_TCPIP_Used_Flag = False Then
-            tabParameter.TabPages.RemoveByKey("TabPageCIM")
-        End If
+        'If SanAn_TCPIP_Used_Flag = False Then
+        '    tabParameter.TabPages.RemoveByKey("TabPageCIM")
+        'End If
 
         'If CIM_Used = False Then
         'tabParameter.TabPages.RemoveByKey("TabPageCIM")
@@ -7835,7 +7817,8 @@ Public Class FormParameter
                 End If
             Next
             If i = 0 Then
-                tabParameter.TabPages.Add(TempTab1)
+                'tabParameter.TabPages.Add(TempTab1)
+                tabParameter.TabPages.Add(TabPageCello)
             End If
         Else
             For Each aa As TabPage In tabParameter.TabPages
@@ -7844,8 +7827,9 @@ Public Class FormParameter
                 End If
             Next
             If i > 0 Then
-                TempTab1 = tabParameter.TabPages("TabPageCello")
-                tabParameter.TabPages.RemoveByKey("TabPageCello")
+                'TempTab1 = tabParameter.TabPages("TabPageCello")
+                'tabParameter.TabPages.RemoveByKey("TabPageCello")
+                tabParameter.TabPages.Remove(TabPageCello)
             End If
 
         End If

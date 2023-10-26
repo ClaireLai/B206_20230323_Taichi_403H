@@ -85,7 +85,7 @@
         'WriteProgData("PROGRAM_MODE", "DOOR2_USED", GetTrue01String(DOOR2_USED), ProgramINIFile)
         'WriteProgData("PROGRAM_MODE", "MFC01_USED", GetTrue01String(MFC01_USED), ProgramINIFile)
         'WriteProgData("PROGRAM_MODE", "MFC02_USED", GetTrue01String(MFC02_USED), ProgramINIFile)
-        WriteProgData("PROGRAM_MODE", "USER_CALIBRATION", GetTrue01String(User_Cal_Enabled), ProgramINIFile)
+        'WriteProgData("PROGRAM_MODE", "USER_CALIBRATION", GetTrue01String(User_Cal_Enabled), ProgramINIFile)
         WriteProgData("PROGRAM_MODE", "PURGECOOLING", GetTrue01String(PURGECOOLING), sfile)
         'WriteProgData("PROGRAM_MODE", "MFC01_NAME", MFC01_NAME, ProgramINIFile)
         'WriteProgData("PROGRAM_MODE", "MFC01_NAME", MFC02_NAME, ProgramINIFile)

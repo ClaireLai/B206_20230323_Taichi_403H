@@ -802,7 +802,7 @@ Module Module_Alarm_Task
             For i = 0 To MAXPLATE
                 'AlarmError(Alarm_Name.BUND_DOWN_Error1 + i) = CAlarmError(Alarm_Name.BUND_DOWN_Error1 + i).CheckAlarm(BONDDOWNTIME, Check_PLC_Y(DoBondDown01Index + i * 4), Check_PLC_X(DiBondDown01Index + i * 2))
                 AlarmError(Alarm_Name.OVER_PRESS_Error1 + i) = (PressPV(i) > Val(SystemParameters.HighPressureLimit)) ' (PressPV(i) > (PRESS_MAX + 100))
-           
+
                 If FlowMeterMode Then
                     AlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2) = CAlarmError(Alarm_Name.TOP_FLOW_Error1 + i * 2).Lower(TOPFLOWTIME, True, Val(SystemParameters.LowFlowAlarm), FlowRead(i).GetTopFLow) 'Check_PLC_Y(78)  ' CAlarmError(i).Run(Check_PLC_X(DiEMOIndex) = False, 2)
                     AlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2) = CAlarmError(Alarm_Name.BOT_FLOW_Error1 + i * 2).Lower(BOTFLOWTIME, True, Val(SystemParameters.LowFlowAlarm), FlowRead(i).GetBotFLow) 'Check_PLC_Y(79)  '
@@ -837,10 +837,10 @@ Module Module_Alarm_Task
                 AlarmError(Alarm_Name.HeaterOverLoadError1 + i) = Check_PLC_X(DiHeaterOL01Index + i)
 
                 'Current Limit
-                AlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2) = CAlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2).Lower( _
+                AlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2) = CAlarmError(Alarm_Name.TOP_HEATER_Error1 + i * 2).Lower(
                 CURRENTMONITORTIME, Check_PLC_Y(DoHeater01Index + i) And (TopPowerPV(i) >= MonitorPower), MonitorCurrentLimit, TopCurrent(i))
 
-                AlarmError(Alarm_Name.BOT_HEATER_Error1 + i * 2) = CAlarmError(Alarm_Name.BOT_HEATER_Error1 + i * 2).Lower( _
+                AlarmError(Alarm_Name.BOT_HEATER_Error1 + i * 2) = CAlarmError(Alarm_Name.BOT_HEATER_Error1 + i * 2).Lower(
                 CURRENTMONITORTIME, Check_PLC_Y(DoHeater01Index + i) And (BotPowerPV(i) >= MonitorPower), MonitorCurrentLimit, BotCurrent(i))
                 AlarmError(Alarm_Name.ProcessTopTempError1 + i * 4) = CAlarmError(Alarm_Name.ProcessTopTempError1 + i * 4).CheckProcessValue(Check_PLC_Y(DoHeater01Index + i) And CSubAutoProcess(i).Run, ttempSV, ttempPV, Val(SystemParameters.AbortTempRange), PROCESSTOPTEMPTIME)
                 AlarmError(Alarm_Name.ProcessBotTempError1 + i * 4) = CAlarmError(Alarm_Name.ProcessBotTempError1 + i * 4).CheckProcessValue(Check_PLC_Y(DoHeater01Index + i) And CSubAutoProcess(i).Run, btempSV, btempPV, Val(SystemParameters.AbortTempRange), PROCESSBOTTEMPTIME)

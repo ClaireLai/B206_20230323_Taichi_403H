@@ -563,18 +563,18 @@ Module Module_AutoTask
                             If Val(RecipeNum(RecipeRunIndex).PumpingMode) = 0 Then
                                 SubProcessTempOK = True
                             End If
-                            'Debug.Print("熱愈時時間,第" + SiteNum.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
-                            If SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) > 0 And
+                            If SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) > 0 And SystemParameters.AddTempTimeoutX_Alarm > 0 And
                                 (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex) * SystemParameters.AddTempTimeoutX_Alarm) Then
+                                Debug.Print("加熱愈時時間,第" + SiteNum.ToString + "頭=" + RecipeNum(RecipeRunIndex).Plate(SiteNum).AddTempTime(SubProcessStepIndex).ToString)
                                 TempTimeout_Error = True
 
-                            ElseIf SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) > 0 And
+                            ElseIf SubProcessTempOK = False And RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) > 0 And SystemParameters.CoolTempTimeoutX_Alarm And
                                     (TempTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).CoolTempTime(SubProcessStepIndex) * SystemParameters.CoolTempTimeoutX_Alarm) Then
                                 TempTimeout_Error = True
                             Else
                                 TempTimeout_Error = False
                             End If
-                            If SubProcessPressureOK = False And
+                            If SubProcessPressureOK = False And SystemParameters.ForceTimeoutX_Alarm > 0 And
                                 (ForceTimeOutWDog.ElapsedMilliseconds / 1000 > RecipeNum(RecipeRunIndex).Plate(SiteNum).AddForceTime(SubProcessStepIndex) * SystemParameters.ForceTimeoutX_Alarm) Then
                                 ForceTimeout_Error = True
                             Else

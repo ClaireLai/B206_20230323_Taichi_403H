@@ -241,6 +241,7 @@ Module Module_Recipe_Public
                 ReDim RecipeNum(i).Plate(k).STEPNote(Recipe_StepMax)
                 ReDim RecipeNum(i).Plate(k).StepTime(Recipe_StepMax) '每步所需時間
                 ReDim RecipeNum(i).Plate(k).AddTempTime(Recipe_StepMax) '每步加溫時間
+                ReDim RecipeNum(i).Plate(k).CoolTempTime(Recipe_StepMax) '每步降溫時間
                 ReDim RecipeNum(i).Plate(k).AddForceTime(Recipe_StepMax) '每步加壓時間
             Next
         Next

@@ -128,18 +128,8 @@
             CreatePID(FormParameters.flwPIDPage2, 3, MAXPLATE)
         End If
         ''建立壓頭校正控制項
-        'CreatePressCal(FormParameters.flwPressCal, 0, MAXPLATE)
-        ''CreateTempCal(FormTempCals.flwProcess1, 0, MAXPLATE)
-        'CreateTempCal(FormParameters.flwTempCal, 0, MAXPLATE)
-        If User_Cal_Enabled Then
-            CreateTempCal(FormParameters.flwTempCalUser, 0, MAXPLATE)
-            CreatePressCal(FormParameters.flwPressCalUser, 0, MAXPLATE)
-        Else
-            CreateTempCal(FormParameters.flwTempCal, 0, MAXPLATE)
-            CreatePressCal(FormParameters.flwPressCal, 0, MAXPLATE)
-            FormParameters.tabParameter.TabPages.RemoveByKey("TabPageTCal")
-            FormParameters.tabParameter.TabPages.RemoveByKey("TabPagePCal")
-        End If
+        CreateTempCal(FormParameters.flwTempCalUser, 0, MAXPLATE)
+        CreatePressCal(FormParameters.flwPressCalUser, 0, MAXPLATE)
         '建立流量控制項
         CreateFlowSet(FormParameters.flwFlowSetup, 0, MAXPLATE)
         '建立壓力PID控制項
@@ -270,12 +260,12 @@
             ManualControl(i) = New ControlManual()
             ManualControl(i).Name = "MANUAL_PLATE" + Format(i, "00")
 
-            ManualControl(i).Initial(i, DiBondUp01Index + i * 2, DiBondDown01Index + i * 2, _
-                                         DoHeater01Index + i, DoHeater01Index + i, _
-                                        DoBondForce01Index + i, DoBondUp01Index + i * 4, DoBondDown01Index + i * 4, _
-                                        DoOilPump01Index + i * 4, ADTopFlowMeter01Index + i * 2, ADTopFlowMeter01Index + i * 2, _
-                                        ADTopCurrent01Index + i * 2, ADBotCurrent01Index + i * 2, _
-                                        DAProcessBond01Index + i * 4, DAProcessBondRate01Index + i * 4, Do1stContactOK01Index + i, _
+            ManualControl(i).Initial(i, DiBondUp01Index + i * 2, DiBondDown01Index + i * 2,
+                                         DoHeater01Index + i, DoHeater01Index + i,
+                                        DoBondForce01Index + i, DoBondUp01Index + i * 4, DoBondDown01Index + i * 4,
+                                        DoOilPump01Index + i * 4, ADTopFlowMeter01Index + i * 2, ADTopFlowMeter01Index + i * 2,
+                                        ADTopCurrent01Index + i * 2, ADBotCurrent01Index + i * 2,
+                                        DAProcessBond01Index + i * 4, DAProcessBondRate01Index + i * 4, Do1stContactOK01Index + i,
                                         DAProcessTemp01Index + i * 4, DAProcessTemp04Index + i * 4, DAProcessTempRate01Index + i * 4, DiTopWater01Index + i * 2, DiBotWater01Indx + i * 2)
             ManualControl(i).OilPumpUsed = OilPumpUsed
             ManualControl(i).Title = Title + Format(i + 1, "00")
@@ -325,9 +315,9 @@
             PIDs(i) = New ControlTempPID
             PIDs(i).Name = "PARAMETER_PID" + Format(i, "00")
 
-            PIDs(i).Initial(i, DoTopWPID01Index + i * 2, DoBotWPID01Index + i * 2, _
-                             DoWAT01Index + i, DoWAT01Index + i, _
-                             ADTopPIndex + i * 6, DATopP1Index + i * 10, _
+            PIDs(i).Initial(i, DoTopWPID01Index + i * 2, DoBotWPID01Index + i * 2,
+                             DoWAT01Index + i, DoWAT01Index + i,
+                             ADTopPIndex + i * 6, DATopP1Index + i * 10,
                              ADBotPIndex + i * 6, DABotP1Index + i * 10, ADTopPower01Index + i * 2, ADBotPower01Index + i * 2)
             PIDs(i).Title = Title + Format(i + 1, "00")
             frm.Controls.Add(PIDs(i))
@@ -365,9 +355,9 @@
             PlateProcess(i) = New ControlProcess
             PlateProcess(i).Name = "PLATE_PROCESS" + Format(i, "00")
 
-            PlateProcess(i).Initial(i, DiBondUp01Index + i * 2, DiBondDown01Index + i * 2, _
-                                                 DoHeater01Index + i, DoHeater01Index + i, _
-                                                 DoBondUp01Index + i * 4, DoBondDown01Index + i * 4, _
+            PlateProcess(i).Initial(i, DiBondUp01Index + i * 2, DiBondDown01Index + i * 2,
+                                                 DoHeater01Index + i, DoHeater01Index + i,
+                                                 DoBondUp01Index + i * 4, DoBondDown01Index + i * 4,
                                                   ADTopCurrent01Index + i * 2, ADBotCurrent01Index + i * 2)
             PlateProcess(i).Title = "Plate #" + Format(i + 1, "00")
             frm.Controls.Add(PlateProcess(i))
