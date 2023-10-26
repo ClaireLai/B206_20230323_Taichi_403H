@@ -36,9 +36,12 @@ Module Comm_PLC_SERIAL
     Public PLCAlarmRecordFileName As String     'PLC異常記錄資料夾
 
     Private R_R1100_Read As New Dictionary(Of Int32, Int32) '建立本機 table  R_R1100_Read(key,value)
+    Private M_Read As New Dictionary(Of Int32, Int32) '建立本機 table  R_R1100_Read(key,value)
     '紀錄192個暫存器是否有被更動 R1100_Changed(2)=true 代表 R1102有被更動將被比對,比對完OK=false
     Public R1100_Changed(256) As Boolean
     Public R1100_ErrorNum(256) As Integer '比對錯誤次數
+    Public M_Changed(95) As Boolean
+    Public M_ErrorNum(95) As Integer '比對錯誤次數
     Public bolonebyone As Boolean = False '是否一筆筆寫入R  False=連續寫入
     '--------------------------------------
     Public Const PLCSetMaxCount As Integer = 2000      'PLC 寫入佇列最大值
@@ -93,7 +96,7 @@ Module Comm_PLC_SERIAL
     'Public WithEvents RS232_BackWork As System.ComponentModel.BackgroundWorker
 
     'Public Rs232Thread As New System.Threading.Thread(AddressOf Rs232ThreadWork)
-    Private PLCAlarm_String As String
+    'Private PLCAlarm_String As String
     Public Rs232Thread As System.Threading.Thread
 
     Public file_old As System.IO.StreamWriter
@@ -228,14 +231,14 @@ Module Comm_PLC_SERIAL
     Public Sub Write_PLC_R1100(ByVal index As Integer, ByVal value As Integer)
         'If Get_PLC_R1100(index) = value Then Exit Sub
         PLCRValue(index).RValue = CDbl(value)
-        addOrUpdate(R_R1100_Read, index, value) '更新R_Read(,) dictionary
+        RaddOrUpdate(R_R1100_Read, index, value) '更新R_Read(,) dictionary
         PLCRUpData(index)
     End Sub
-    '更新R_Read(,) dictionary....>建立電腦本機 Table
-    Private Sub addOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
+    '更新R_Read(,) dictionary.....>建立電腦本機 Table..dictionary
+    Private Sub RaddOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
         Dim val As Integer
 
-        If dic.TryGetValue(key, val) Then '這暫存器裡面有值
+        If dic.TryGetValue(key, val) Then '這電腦暫存器裡面有值
             dic(key) = newValue
             R1100_Changed(key) = True
             'Debug.Print("index=" + key.ToString + ",修改=" + newValue.ToString())
@@ -247,6 +250,21 @@ Module Comm_PLC_SERIAL
             'Debug.Print("index=" + key.ToString + ",新增=" + newValue.ToString())
         End If
     End Sub
+    Private Sub MaddOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
+        Dim val As Integer
+
+        If dic.TryGetValue(key, val) Then '這電腦暫存器裡面有值
+            dic(key) = newValue
+            M_Changed(key) = True
+            Debug.Print("M_index=" + key.ToString + ",修改=" + newValue.ToString())
+        Else
+            dic.Add(key, newValue)
+            M_Changed(key) = False
+            'R1100_Changed(key) = True
+            'bolWriteROK = True
+            Debug.Print("M_index=" + key.ToString + ",新增=" + newValue.ToString())
+        End If
+    End Sub
     Private Sub ReadOriginalR1100()
         Dim i As Integer
         For i = 0 To 256
@@ -254,11 +272,17 @@ Module Comm_PLC_SERIAL
                 'Debug.Print("96")
             End If
             'If PLC_R_SetRead(i) <> 0 Then
-            addOrUpdate(R_R1100_Read, i, PLC_R_SetRead(i))
+            RaddOrUpdate(R_R1100_Read, i, PLC_R_SetRead(i))
             'End If
         Next
     End Sub
 
+    Private Sub ReadOriginalM()
+        Dim i As Integer
+        For i = 0 To 95
+            MaddOrUpdate(M_Read, i, PLC_M(i))
+        Next
+    End Sub
 
     Private Sub R1100_Value_Compare(ByVal dic As Dictionary(Of Integer, Integer), ByVal istart As Integer, ByVal iEnd As Integer)
         Dim val As Integer
@@ -291,7 +315,37 @@ Module Comm_PLC_SERIAL
         Next
 
     End Sub
+    Private Sub M_Value_Compare(ByVal dic As Dictionary(Of Integer, Integer), ByVal istart As Integer, ByVal iEnd As Integer)
+        Dim val As Integer
+        Dim i As Integer
 
+        For i = istart To iEnd
+            If (M_Changed(i)) Then '有update
+                'Debug.Print("Change_=" + i.ToString)
+                If dic.TryGetValue(i, val) Then '取欲寫入的值 本機table val
+                    If PLC_M(i) <> val Then '讀出PLC值<>本機table val
+
+                        'Debug.Print("Compare_Errx=" + i.ToString)
+                        M_ErrorNum(i) = M_ErrorNum(i) + 1 '醜1 2....
+                        If M_ErrorNum(i) > 2 Then '>醜3
+                            Set_MBit(i, val) '再寫一遍
+                            Debug.Print("M_Write again =" + i.ToString)
+                            PLCAlarm_Log("Compare Err M_index=" + i.ToString + " val=" + val.ToString)
+                            M_ErrorNum(i) = 0
+                        End If
+
+                    Else
+                        M_Changed(i) = False '比對完OK
+                        'Debug.Print("index=" + i.ToString + " Compare OK")
+                        bolWriteROK = False
+                        M_ErrorNum(i) = 0
+
+                    End If
+                End If
+            End If
+        Next
+
+    End Sub
     'PLC 設定暫存器 R01100,  SetPLCRValue(暫存器編號(從0開始), 數字字串,10進位),自定轉換
     Public Sub Write_PLC_R1100(ByVal index As Integer, ByVal value As Integer, ByVal max As Double, ByVal min As Double, ByVal fullscale As Double)
         'If Get_PLC_R1100(index) = value Then Exit Sub
@@ -335,6 +389,7 @@ Module Comm_PLC_SERIAL
     Public Sub Set_MBit(ByVal index As Integer, ByVal on_off As String)
         DeviceM(index).SettingCmd = on_off
         DeviceM(index).StatusUpdated = True
+        MaddOrUpdate(M_Read, index, on_off) '更新M_Read(,) dictionary
     End Sub
 
     ' PLC BIT 資料改變記錄
@@ -617,15 +672,12 @@ Module Comm_PLC_SERIAL
         Static i, SerialNo, OldSerialNo, j, k As Integer
         Dim astr As String
         Dim tempstr As String
-        PLCAlarm_String = ""
+        'PLCAlarm_String = ""
         CheckPLCAlarmDateAndCreate()
         SerialNo = 0
 
-        astr = LoginUserName + vbTab + ADate + "   " + TTime + vbTab + Format(i, " [000]  ") + vbTab + strErr + vbCrLf
-        PLCAlarm_String = PLCAlarm_String + astr
-
-        'tempstr = AddAlarmToListView(FormAlarms.ListView1, LoginUserName, ADate, TTime, Format(i, "[000]"), strErr)
-        AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), PLCAlarm_String)
+        astr = LoginUserName + vbTab + "   " + strErr + vbCrLf
+        AppendMultiData(PLCAlarmRecordFileName, 80, LoginUserName, ADate, TTime, Format(i, "[000]"), strErr)
         i += 1
     End Sub
     Private Sub CheckPLCAlarmDateAndCreate()
@@ -674,8 +726,8 @@ Module Comm_PLC_SERIAL
         Dim iCheckSum As Integer
         'Dim sCheckSum As String
         str = StartX & SlaveNumber & PlcCmd & sData
-        For i = 1 To Len(Str)
-            iCheckSum = iCheckSum + Asc(Mid(Str, i, 1))
+        For i = 1 To Len(str)
+            iCheckSum = iCheckSum + Asc(Mid(str, i, 1))
         Next i
         Return FillZero(iCheckSum And &HFF, 2)
 
@@ -1699,9 +1751,11 @@ Module Comm_PLC_SERIAL
                     checkWriteR()
                     If boolfirst Then
                         ReadOriginalR1100()
+                        ReadOriginalM()
                         boolfirst = False
                     Else
                         R1100_Value_Compare(R_R1100_Read, 0, 191)
+                        M_Value_Compare(M_Read, 0, 95)
                     End If
                     'System.Threading.Thread.Sleep(2)
 
