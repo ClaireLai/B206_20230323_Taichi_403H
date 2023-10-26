@@ -36,9 +36,12 @@ Module Comm_PLC_SERIAL
 
 
     Private R_R1100_Read As New Dictionary(Of Int32, Int32) '建立本機 table  R_R1100_Read(key,value)
+    Private M_Read As New Dictionary(Of Int32, Int32) '建立本機 table  R_R1100_Read(key,value)
     '紀錄192個暫存器是否有被更動 R1100_Changed(2)=true 代表 R1102有被更動將被比對,比對完OK=false
     Public R1100_Changed(256) As Boolean
     Public R1100_ErrorNum(256) As Integer '比對錯誤次數
+    Public M_Changed(95) As Boolean
+    Public M_ErrorNum(95) As Integer '比對錯誤次數
     Public bolonebyone As Boolean = False '是否一筆筆寫入R  False=連續寫入
     '--------------------------------------
     Public Const PLCSetMaxCount As Integer = 2000      'PLC 寫入佇列最大值
@@ -81,7 +84,6 @@ Module Comm_PLC_SERIAL
     Public PLC_XCheckCount(97) As Byte
     Public PLC_R_READ(256) As String             'R1000~R1095 的原始值
     Public PLC_R_SetRead(256) As String          'R1100~R1195 的原始值
-    Public PLC_R_OrgSetRead(256) As String       'R1100~R1195 的原始設定值
     Public CommLivePLC As Boolean                       'PLC 通訊中
     Public PLCLinkErr_Status As Boolean     'PLC 通訊異常
     Public PLCLinkErrCount As Integer      'PLC 通訊異常次數
@@ -202,13 +204,13 @@ Module Comm_PLC_SERIAL
         End If
     End Function
 
-    '讀取 R1000~R1095 R1200~R1263
+    '讀取 R1000~R1095
     Public Function Get_PLC_R1000(ByVal index As Integer) As Integer
         If index < 0 Then Exit Function
         Return Val(PLC_R_READ(index))
     End Function
 
-    '讀取 R1100~R1195 R1300~R1395
+    '讀取 R1100~R1195
     Public Function Get_PLC_R1100(ByVal index As Integer) As Integer
         If index < 0 Then Exit Function
         Return Val(PLC_R_SetRead(index))
@@ -228,14 +230,14 @@ Module Comm_PLC_SERIAL
     Public Sub Write_PLC_R1100(ByVal index As Integer, ByVal value As Integer)
         'If Get_PLC_R1100(index) = value Then Exit Sub
         PLCRValue(index).RValue = CDbl(value)
-        addOrUpdate(R_R1100_Read, index, value) '更新R_Read(,) dictionary
+        RaddOrUpdate(R_R1100_Read, index, value) '更新R_Read(,) dictionary
         PLCRUpData(index)
     End Sub
-    '更新R_Read(,) dictionary....>建立電腦本機 Table
-    Private Sub addOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
+    '更新R_Read(,) dictionary....>建立電腦本機 Table..dictionary
+    Private Sub RaddOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
         Dim val As Integer
 
-        If dic.TryGetValue(key, val) Then '這暫存器裡面有值
+        If dic.TryGetValue(key, val) Then '這電腦暫存器裡面有值
             dic(key) = newValue
             R1100_Changed(key) = True
             'Debug.Print("index=" + key.ToString + ",修改=" + newValue.ToString())
@@ -244,21 +246,36 @@ Module Comm_PLC_SERIAL
             R1100_Changed(key) = False
             'R1100_Changed(key) = True
             'bolWriteROK = True
-            'Debug.Print("index=" + key.ToString + ",新增=" + newValue.ToString())
+            Debug.Print("index=" + key.ToString + ",新增=" + newValue.ToString())
+        End If
+    End Sub
+    Private Sub MaddOrUpdate(ByVal dic As Dictionary(Of Integer, Integer), ByVal key As Integer, ByVal newValue As Integer)
+        Dim val As Integer
+
+        If dic.TryGetValue(key, val) Then '這電腦暫存器裡面有值
+            dic(key) = newValue
+            M_Changed(key) = True
+            Debug.Print("M_index=" + key.ToString + ",修改=" + newValue.ToString())
+        Else
+            dic.Add(key, newValue)
+            M_Changed(key) = False
+            'R1100_Changed(key) = True
+            'bolWriteROK = True
+            Debug.Print("M_index=" + key.ToString + ",新增=" + newValue.ToString())
         End If
     End Sub
     Private Sub ReadOriginalR1100()
         Dim i As Integer
         For i = 0 To 256
-            'If i = 96 Then
-            '    'Debug.Print("96")
-            'End If
-            'If PLC_R_SetRead(i) <> 0 Then
-            addOrUpdate(R_R1100_Read, i, PLC_R_SetRead(i))
-            'End If
+            RaddOrUpdate(R_R1100_Read, i, PLC_R_SetRead(i))
         Next
     End Sub
-
+    Private Sub ReadOriginalM()
+        Dim i As Integer
+        For i = 0 To 95
+            MaddOrUpdate(M_Read, i, PLC_M(i))
+        Next
+    End Sub
 
     Private Sub R1100_Value_Compare(ByVal dic As Dictionary(Of Integer, Integer), ByVal istart As Integer, ByVal iEnd As Integer)
         Dim val As Integer
@@ -284,6 +301,37 @@ Module Comm_PLC_SERIAL
                         'Debug.Print("index=" + i.ToString + " Compare OK")
                         bolWriteROK = False
                         R1100_ErrorNum(i) = 0
+
+                    End If
+                End If
+            End If
+        Next
+
+    End Sub
+    Private Sub M_Value_Compare(ByVal dic As Dictionary(Of Integer, Integer), ByVal istart As Integer, ByVal iEnd As Integer)
+        Dim val As Integer
+        Dim i As Integer
+
+        For i = istart To iEnd
+            If (M_Changed(i)) Then '有update
+                'Debug.Print("Change_=" + i.ToString)
+                If dic.TryGetValue(i, val) Then '取欲寫入的值 本機table val
+                    If PLC_M(i) <> val Then '讀出PLC值<>本機table val
+
+                        'Debug.Print("Compare_Errx=" + i.ToString)
+                        M_ErrorNum(i) = M_ErrorNum(i) + 1 '醜1 2....
+                        If M_ErrorNum(i) > 3 Then '>醜3
+                            Set_MBit(i, val) '再寫一遍
+                            Debug.Print("M_Write again =" + i.ToString)
+                            PLCAlarm_Log("Compare Err M_index=" + i.ToString + " val=" + val.ToString)
+                            M_ErrorNum(i) = 0
+                        End If
+
+                    Else
+                        M_Changed(i) = False '比對完OK
+                        'Debug.Print("index=" + i.ToString + " Compare OK")
+                        bolWriteROK = False
+                        M_ErrorNum(i) = 0
 
                     End If
                 End If
@@ -335,6 +383,7 @@ Module Comm_PLC_SERIAL
     Public Sub Set_MBit(ByVal index As Integer, ByVal on_off As String)
         DeviceM(index).SettingCmd = on_off
         DeviceM(index).StatusUpdated = True
+        MaddOrUpdate(M_Read, index, on_off) '更新M_Read(,) dictionary
     End Sub
 
     ' PLC BIT 資料改變記錄
@@ -1185,222 +1234,222 @@ Module Comm_PLC_SERIAL
         System.Threading.Thread.Sleep(100)
 
         If bolonebyone = True Then
-            Try
-                If PLCComm.IsOpen() Then
-                    wdog_Restart()
+            'Try
+            '    If PLCComm.IsOpen() Then
+            '        wdog_Restart()
 
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
 
-                    CommLivePLC = True
-                    boolfirst = True
-                Else
-                    CommLivePLC = False
-                End If
-                checkWriteMR()
+            '        CommLivePLC = True
+            '        boolfirst = True
+            '    Else
+            '        CommLivePLC = False
+            '    End If
+            '    checkWriteMR()
 
-                '問R R1000-R1031
-                Rx_msgPLC = PLCComm.ReadExisting()
-                Rx_msgPLC = ""
-                PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01000", ETX)) '讀取R1000-R1031
-                Do
+            '    '問R R1000-R1031
+            '    Rx_msgPLC = PLCComm.ReadExisting()
+            '    Rx_msgPLC = ""
+            '    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01000", ETX)) '讀取R1000-R1031
+            '    Do
 
-                    'Debug.Print("All_Time=" + wdog1.ElapsedMilliseconds.ToString)
-                    'wdog1_Restart()
-                    '問X
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCWatchDog = PLCWatchDogTimeSet
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60X0000", ETX)) '讀取X0-X47 '44
+            '        'Debug.Print("All_Time=" + wdog1.ElapsedMilliseconds.ToString)
+            '        'wdog1_Restart()
+            '        '問X
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCWatchDog = PLCWatchDogTimeSet
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60X0000", ETX)) '讀取X0-X47 '44
 
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    CommLivePLC = True
-                    'Debug.Print("Rx_msgPLC__X =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
-                        UpDataPLC_FB(0)
-                    End If
-                    checkWriteMR()
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        CommLivePLC = True
+            '        'Debug.Print("Rx_msgPLC__X =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0144") > 0 Then
+            '            UpDataPLC_FB(0)
+            '        End If
+            '        checkWriteMR()
 
-                    '問Y
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60Y0000", ETX)) '讀取Y0-Y71 44
+            '        '問Y
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60Y0000", ETX)) '讀取Y0-Y71 44
 
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__Y =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
-                        UpDataPLC_FB(1)
-                    End If
-                    checkWriteMR()
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__Y =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0144") > 0 Then
+            '            UpDataPLC_FB(1)
+            '        End If
+            '        checkWriteMR()
 
-                    '問M
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60M0000", ETX)) '讀取M0-M96 44
+            '        '問M
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60M0000", ETX)) '讀取M0-M96 44
 
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__M =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
-                        UpDataPLC_FB(2)
-                    End If
-                    checkWriteMR()
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__M =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0144") > 0 Then
+            '            UpDataPLC_FB(2)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1000-R1031
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01000", ETX)) '讀取R1000-R1031
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(3)
-                    End If
-                    checkWriteMR()
+            '        '問R R1000-R1031
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01000", ETX)) '讀取R1000-R1031
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(3)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1032-R1095
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01032", ETX)) ''讀取R1032-R1095
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(6)
-                    End If
-                    checkWriteMR()
+            '        '問R R1032-R1095
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01032", ETX)) ''讀取R1032-R1095
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(6)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1100-R11031
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01100", ETX)) '讀取R1100-R1131
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(5)
-                    End If
-                    checkWriteMR()
+            '        '問R R1100-R11031
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01100", ETX)) '讀取R1100-R1131
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(5)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1132-R1195
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01132", ETX)) '讀取R1132-R11095
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(7)
-                    End If
-                    checkWriteMR()
+            '        '問R R1132-R1195
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01132", ETX)) '讀取R1132-R11095
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(7)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1200-R1263
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01200", ETX)) '讀取1200-R1263
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(8)
-                    End If
-                    checkWriteMR()
+            '        '問R R1200-R1263
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01200", ETX)) '讀取1200-R1263
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(8)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1300-R1363
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01300", ETX)) '讀取R1300-R1363
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(9)
-                    End If
-                    checkWriteMR()
+            '        '問R R1300-R1363
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "40R01300", ETX)) '讀取R1300-R1363
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(9)
+            '        End If
+            '        checkWriteMR()
 
-                    '問R R1364-R1396
-                    Rx_msgPLC = PLCComm.ReadExisting()
-                    Rx_msgPLC = ""
-                    PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01364", ETX)) '讀取RR1364-R1396
-                    wdog_Restart()
-                    Do
-                        Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
-                        If wdog.ElapsedMilliseconds > 1000 Then
-                            Rs232Thread.Abort()
-                        End If
-                    Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
-                        UpDataPLC_FB(10)
-                    End If
-                    checkWriteMR()
-                    If boolfirst Then
-                        ReadOriginalR1100()
-                        boolfirst = False
-                    Else
+            '        '問R R1364-R1396
+            '        Rx_msgPLC = PLCComm.ReadExisting()
+            '        Rx_msgPLC = ""
+            '        PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADREGISTERS, "20R01364", ETX)) '讀取RR1364-R1396
+            '        wdog_Restart()
+            '        Do
+            '            Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
+            '            If wdog.ElapsedMilliseconds > 1000 Then
+            '                Rs232Thread.Abort()
+            '            End If
+            '        Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
+            '        'Debug.Print("Rx_msgPLC__R =" + Rx_msgPLC)
+            '        If InStr(1, Rx_msgPLC, "0146") > 0 Then
+            '            UpDataPLC_FB(10)
+            '        End If
+            '        checkWriteMR()
+            '        If boolfirst Then
+            '            ReadOriginalR1100()
+            '            boolfirst = False
+            '        Else
 
-                        R1100_Value_Compare(R_R1100_Read, 0, 191)
-                    End If
-                    'System.Threading.Thread.Sleep(2)
+            '            R1100_Value_Compare(R_R1100_Read, 0, 191)
+            '        End If
+            '        System.Threading.Thread.Sleep(2)
 
-                Loop Until (bolQuit = True)
-                PLCComm.Close()
-                Debug.Print("Quit")
-                Application.Exit()
-            Catch __unusedThreadAbortException2__ As ThreadAbortException
-                Debug.Print("thread_ abort")
-            End Try
+            '    Loop Until (bolQuit = True)
+            '    PLCComm.Close()
+            '    Debug.Print("Quit")
+            '    Application.Exit()
+            'Catch __unusedThreadAbortException2__ As ThreadAbortException
+            '    Debug.Print("thread_ abort")
+            'End Try
         Else '連續寫入
 
             If bolQuit = True Then
@@ -1441,7 +1490,7 @@ Module Comm_PLC_SERIAL
                     PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdREADPOINTS, "60X0000", ETX)) '讀取X0-X47 '44
 
                     'Debug.Print("All_time=" + wdog1.ElapsedMilliseconds.ToString)
-                    'wdog1_Restart()
+                    wdog1_Restart()
                     wdog_Restart()
                     'swdog_Restart()
                     Do
@@ -1452,11 +1501,11 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read x ok")
                     CommLivePLC = True
 
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01440") > 0 Then
                         UpDataPLC_FB(0)
                     End If
                     'Debug.Print("問X= " + swdog.ElapsedMilliseconds.ToString)
@@ -1477,9 +1526,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read y ok")
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01440") > 0 Then
                         UpDataPLC_FB(1)
                     End If
                     'Debug.Print("問Y= " + swdog.ElapsedMilliseconds.ToString)
@@ -1497,9 +1546,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read m ok")
-                    If InStr(1, Rx_msgPLC, "0144") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01440") > 0 Then
                         UpDataPLC_FB(2)
                     End If
 
@@ -1517,9 +1566,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1000-R1019 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(3)
                     End If
 
@@ -1537,9 +1586,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read _R1032-R1071 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(6)
                     End If
                     checkWriteM()
@@ -1558,9 +1607,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1100-1131 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(5)
                     End If
 
@@ -1579,9 +1628,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1132-R1195 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(7)
                     End If
 
@@ -1601,9 +1650,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1200-1263 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(8)
                     End If
 
@@ -1621,9 +1670,9 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1300-R1363 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(9)
                     End If
                     checkWriteM()
@@ -1643,22 +1692,25 @@ Module Comm_PLC_SERIAL
                             Rs232Thread.Abort()
                         End If
                     Loop Until (InStr(1, Rx_msgPLC, ETX) > 0)
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
                     'Debug.Print("read R1364-R1395 ok")
-                    If InStr(1, Rx_msgPLC, "0146") > 0 Then
+                    If InStr(1, Rx_msgPLC, "01460") > 0 Then
                         UpDataPLC_FB(10)
                     End If
 
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
 
                     checkWriteR()
                     If boolfirst Then
                         ReadOriginalR1100()
+                        ReadOriginalM()
+                        'M_SetRead = PLC_M
                         boolfirst = False
                     Else
                         R1100_Value_Compare(R_R1100_Read, 0, 191)
+                        M_Value_Compare(M_Read, 0, 95)
                     End If
-                    'System.Threading.Thread.Sleep(2)
+                    System.Threading.Thread.Sleep(2)
 
                 Loop Until (bolQuit = True)
                 PLCComm.Close()
@@ -1667,7 +1719,7 @@ Module Comm_PLC_SERIAL
 
             Catch __unusedThreadAbortException2__ As ThreadAbortException
                 Debug.Print("thread_ abort " + strErr)
-                If PLCWatchDog = 0 Then PLCAlarm_Log(strErr)
+                PLCAlarm_Log(strErr)
             End Try
         End If
     End Sub
@@ -1772,7 +1824,7 @@ Module Comm_PLC_SERIAL
             'Debug.Print("R_SQTailPLC 頭=  " + R_SQHeadPLC.ToString)
             'check 資料格式 error code
             If Rx_msgPLC.Substring(1, 5) <> "01490" Then
-                'Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
+                Debug.Print("err code=" + Rx_msgPLC.Substring(1, 5))
                 PLCAlarm_Log("err code=" + Rx_msgPLC.Substring(1, 5))
             End If
         End If
