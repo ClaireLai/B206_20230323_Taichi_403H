@@ -235,7 +235,7 @@ Module Module_Alarm_Task
     Public PUMPINGTIME As Integer
     Public PUMPINGVACUUM As Double
     'Add By Vincent 20190416 ------------------ End
-
+    Public VACUUMLEAKTESTBASE As Double
 #Region "Play Alarm Sound"
     ' Play Mp3, Wav  Start 
     Public BZReset_Status As Boolean

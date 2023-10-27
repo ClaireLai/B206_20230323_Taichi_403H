@@ -94,6 +94,10 @@ Public Class FormManual
     Friend WithEvents txtVacuumTestTimeHr As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents lblWaterPress As Label
+    Friend WithEvents txtBasePress As TextBox
+    Friend WithEvents lbvacc As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents lblLeakTest As Label
     Dim maxvalue(10) As Double
 
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -161,6 +165,8 @@ Public Class FormManual
         Me.btnPumpProtection = New System.Windows.Forms.Button()
         Me.lblCursorValue = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblWaterPress = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.picC05 = New System.Windows.Forms.PictureBox()
         Me.lblDPTemp = New System.Windows.Forms.Label()
         Me.pnlMFC02 = New System.Windows.Forms.Panel()
@@ -205,6 +211,7 @@ Public Class FormManual
         Me.tabManual = New System.Windows.Forms.TabControl()
         Me.tabPageVacuum = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.txtBasePress = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -224,8 +231,9 @@ Public Class FormManual
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblWaterPress = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lbvacc = New System.Windows.Forms.Label()
+        Me.lblLeakTest = New System.Windows.Forms.Label()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -644,6 +652,29 @@ Public Class FormManual
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(449, 367)
         Me.Panel2.TabIndex = 541
+        '
+        'lblWaterPress
+        '
+        Me.lblWaterPress.BackColor = System.Drawing.Color.Black
+        Me.lblWaterPress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblWaterPress.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWaterPress.ForeColor = System.Drawing.Color.Lime
+        Me.lblWaterPress.Location = New System.Drawing.Point(373, 282)
+        Me.lblWaterPress.Name = "lblWaterPress"
+        Me.lblWaterPress.Size = New System.Drawing.Size(63, 24)
+        Me.lblWaterPress.TabIndex = 563
+        Me.lblWaterPress.Text = "0"
+        Me.lblWaterPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(326, 284)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 20)
+        Me.Label3.TabIndex = 562
+        Me.Label3.Text = "水壓"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'picC05
         '
@@ -1138,16 +1169,30 @@ Public Class FormManual
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.lblLeakTest)
+        Me.Panel4.Controls.Add(Me.lbvacc)
+        Me.Panel4.Controls.Add(Me.Label4)
+        Me.Panel4.Controls.Add(Me.txtBasePress)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.txtVacuumTestTimeHr)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.txtVacuumTestTimeMin)
         Me.Panel4.Controls.Add(Me.btnLeakRateTest)
         Me.Panel4.Controls.Add(Me.btnMaxVaccTest)
-        Me.Panel4.Location = New System.Drawing.Point(782, 427)
+        Me.Panel4.Location = New System.Drawing.Point(739, 400)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(149, 225)
+        Me.Panel4.Size = New System.Drawing.Size(212, 263)
         Me.Panel4.TabIndex = 547
+        '
+        'txtBasePress
+        '
+        Me.txtBasePress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBasePress.Location = New System.Drawing.Point(89, 202)
+        Me.txtBasePress.Name = "txtBasePress"
+        Me.txtBasePress.Size = New System.Drawing.Size(79, 26)
+        Me.txtBasePress.TabIndex = 553
+        Me.txtBasePress.Text = "9.90E-2"
+        Me.txtBasePress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
         '
@@ -1191,7 +1236,7 @@ Public Class FormManual
         Me.btnLeakRateTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLeakRateTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeakRateTest.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 157)
+        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 154)
         Me.btnLeakRateTest.Name = "btnLeakRateTest"
         Me.btnLeakRateTest.Size = New System.Drawing.Size(122, 44)
         Me.btnLeakRateTest.TabIndex = 548
@@ -1233,7 +1278,7 @@ Public Class FormManual
         Me.grpDoorControl.Controls.Add(Me.btnDoor1Up)
         Me.grpDoorControl.Location = New System.Drawing.Point(465, 386)
         Me.grpDoorControl.Name = "grpDoorControl"
-        Me.grpDoorControl.Size = New System.Drawing.Size(297, 227)
+        Me.grpDoorControl.Size = New System.Drawing.Size(268, 227)
         Me.grpDoorControl.TabIndex = 543
         Me.grpDoorControl.TabStop = False
         Me.grpDoorControl.Text = "腔門操作"
@@ -1257,7 +1302,7 @@ Public Class FormManual
         Me.btnDoor2Down.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnDoor2Down.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDoor2Down.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnDoor2Down.Location = New System.Drawing.Point(165, 109)
+        Me.btnDoor2Down.Location = New System.Drawing.Point(148, 109)
         Me.btnDoor2Down.Name = "btnDoor2Down"
         Me.btnDoor2Down.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor2Down.TabIndex = 536
@@ -1283,7 +1328,7 @@ Public Class FormManual
         Me.btnDoor2Up.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnDoor2Up.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDoor2Up.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnDoor2Up.Location = New System.Drawing.Point(165, 41)
+        Me.btnDoor2Up.Location = New System.Drawing.Point(148, 41)
         Me.btnDoor2Up.Name = "btnDoor2Up"
         Me.btnDoor2Up.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor2Up.TabIndex = 534
@@ -1359,28 +1404,38 @@ Public Class FormManual
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
-        'Label3
+        'Label4
         '
-        Me.Label3.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(326, 284)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(41, 20)
-        Me.Label3.TabIndex = 562
-        Me.Label3.Text = "水壓"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label4.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Black
+        Me.Label4.Location = New System.Drawing.Point(10, 205)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(79, 20)
+        Me.Label4.TabIndex = 554
+        Me.Label4.Text = "基礎壓力"
         '
-        'lblWaterPress
+        'lbvacc
         '
-        Me.lblWaterPress.BackColor = System.Drawing.Color.Black
-        Me.lblWaterPress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblWaterPress.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWaterPress.ForeColor = System.Drawing.Color.Lime
-        Me.lblWaterPress.Location = New System.Drawing.Point(373, 282)
-        Me.lblWaterPress.Name = "lblWaterPress"
-        Me.lblWaterPress.Size = New System.Drawing.Size(63, 24)
-        Me.lblWaterPress.TabIndex = 563
-        Me.lblWaterPress.Text = "0"
-        Me.lblWaterPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbvacc.BackColor = System.Drawing.Color.Black
+        Me.lbvacc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbvacc.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbvacc.ForeColor = System.Drawing.Color.Lime
+        Me.lbvacc.Location = New System.Drawing.Point(142, 33)
+        Me.lbvacc.Name = "lbvacc"
+        Me.lbvacc.Size = New System.Drawing.Size(63, 24)
+        Me.lbvacc.TabIndex = 564
+        Me.lbvacc.Text = "0"
+        Me.lbvacc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblLeakTest
+        '
+        Me.lblLeakTest.AutoSize = True
+        Me.lblLeakTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLeakTest.Location = New System.Drawing.Point(16, 233)
+        Me.lblLeakTest.Name = "lblLeakTest"
+        Me.lblLeakTest.Size = New System.Drawing.Size(46, 16)
+        Me.lblLeakTest.TabIndex = 565
+        Me.lblLeakTest.Text = "Label5"
         '
         'FormManual
         '
@@ -1444,7 +1499,8 @@ Public Class FormManual
             maxvalue(i) = 0
         Next
         FormTextBoxSave.SetTextBox(Me, Me.Name, FormSaveINIFile)
-
+        VACUUMLEAKTESTBASE = Val(ReadProgData("VacuumLeakTestBase", "VacuumLeakTestBase", "0.09", VacuumLeakINIFile))
+        DatalogTime = Val(ReadProgData("DatalogTime", "DatalogTime", "5", VacuumLeakINIFile))
         'txtTempSet.Text = Get_PLC_R1100(DAProcessTemp01Index).ToString
         'txtTempRateSet.Text = Format(Get_PLC_R1100(DAProcessTempRate01Index) / 100, "0.00")
 
@@ -1456,7 +1512,7 @@ Public Class FormManual
 
         lblGas01MFC.Text = MFCReadValueStr(ADMFC01Index)
         lblGas01MFC.Text = MFCReadValueStr(ADMFC02Index)
-
+        DatalogTime = Val(txtDataLogStepTime.Text)
 
         '各頭資料顯示============================================
         'Dim i As Integer
@@ -1586,6 +1642,16 @@ Public Class FormManual
         End If
         ObjShow.Show(bolVaccTest, btnMaxVaccTest, ColorOn, ColorOff)
         ObjShow.Show(bolLeakTest, btnLeakRateTest, ColorOn, ColorOff)
+        'If bolVaccTest Then
+        '    lbvacc.Visible = True
+        'Else
+        '    lbvacc.Visible = False
+        'End If
+        lbvacc.Text = GaugeCHVacStr
+        lbvacc.Visible = bolVaccTest Or bolLeakTest
+
+        lblLeakTest.Text = strLeakTestMess
+
     End Sub
 
 
@@ -1647,9 +1713,10 @@ Public Class FormManual
         printCurve(ChartManualVacuum, FileName)
     End Sub
 
-
-
     Private Sub btnStartLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartLog.Click
+        StartLog()
+    End Sub
+    Public Sub StartLog()
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
             'bolDAShow = True
@@ -1658,36 +1725,10 @@ Public Class FormManual
             'bolDAShow = False
         End If
         ReadCurveNames(CurveDataINI)
-        If CSVTimerStartPb_Status = True Then
+        If CSVTimerStartPb_Status = True Then 'datalog start
             CSVTimerStartPb_Status = False
         Else
-            If bolVaccTest Then
-                DataLogShortFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
-                CheckDataLogDirAndCreate()
-                DataLogCUVFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
-                DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
-
-                DatalogTime = Val(txtDataLogStepTime.Text)
-                CSVTimerStartPb_Status = True
-            ElseIf bolLeakTest Then
-                DataLogShortFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
-                CheckDataLogDirAndCreate()
-                DataLogCUVFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
-                DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
-
-                DatalogTime = Val(txtDataLogStepTime.Text)
-                CSVTimerStartPb_Status = True
-
-            Else
-                DataLogRecordFileName = ""
-                If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                    If Len(DataLogShortFileName) > 0 Then
-                        CheckDataLogDirAndCreate()
-                        DatalogTime = Val(txtDataLogStepTime.Text)
-                        CSVTimerStartPb_Status = True
-                    End If
-                End If
-            End If
+            Vacc_LeakTest()
             lblDatalogFileName.Text = DataLogRecordFileName
         End If
         'Module_AutoTask.CSVTimerStartPb_Status = Module_Button.CSVTimerStartPb_Status
@@ -1721,6 +1762,7 @@ Public Class FormManual
         CallKeyboard2(sender, "3600", "1")
         If Val(txtDataLogStepTime.Text) > 0 Then
             DatalogTime = Val(txtDataLogStepTime.Text)
+            WriteProgData("DatalogTime", "DatalogTime", DatalogTime, VacuumLeakINIFile)
         End If
     End Sub
 
@@ -1728,6 +1770,46 @@ Public Class FormManual
 
     '正數/倒數計時器
     Private Sub btnTImerStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTimerStart.Click
+        'Dim hh As Integer
+        'Dim mm As Integer
+        'Dim ss As Integer
+        ''啟動/停止計時器
+        'Timercount_enable = Not Timercount_enable
+        ''若計時器為啟動
+        'If Timercount_enable = True Then
+        '    btnTimerStart.Text = GetLangText("停止計時", "Stop")
+        '    '載入設定時間
+        '    Timercount.set_min = Val(txtTimerMin.Text)
+        '    Timercount.set_sec = Val(txtTimerSec.Text)
+        '    '取得目前時間
+        '    hh = Val(NHour)
+        '    mm = Val(NMin)
+        '    ss = Val(NSec)
+        '    '將目前時間轉換成秒數
+        '    Timercount_start = 3600 * hh + 60 * mm + ss
+        '    Timercount_shift = False
+
+        '    If Timercount.set_min = 0 And Timercount.set_sec = 0 Then
+        '        '如果設定值為零表示要正數
+        '        Timercount_up = True
+        '        Timercount_now = False
+        '    Else
+        '        '如果設定值不為零表示要倒數
+        '        Timercount_down = True
+        '        Timercount_up = False
+        '        '計算倒數所需秒數
+        '        Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+        '    End If
+        'Else
+        '    '計時停止
+        '    Timercount_up = False
+        '    Timercount_down = False
+        '    Timercount_shift = False
+        '    btnTimerStart.Text = GetLangText("開始計時", "Start")
+        'End If
+        TImerStart()
+    End Sub
+    Public Sub TImerStart()
         Dim hh As Integer
         Dim mm As Integer
         Dim ss As Integer
@@ -1954,8 +2036,8 @@ Public Class FormManual
             'Timercount_enable = True
             Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
             txtTimerMin.Text = Timercount.set_min.ToString
-            btnTImerStart_Click(vbNull, e) '開始計時
-            Panel2.Enabled = False
+            TImerStart() '開始計時
+            'Panel2.Enabled = False
             'tabPageDataLog.Enabled = False
             'tabPageTimer.Enabled = False
             'lblTimerSec.Enabled = True
@@ -1995,21 +2077,23 @@ Public Class FormManual
     Private Sub btnLeakRateTest_Click(sender As Object, e As EventArgs) Handles btnLeakRateTest.Click
         If ProcessMode_RUN Then Exit Sub
         bolLeakTest = Not bolLeakTest
+        Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+        Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+        txtTimerMin.Text = Timercount.set_min.ToString
         If bolLeakTest Then
-            '關valve
-            Output(DoRVIndex).Status = False
-            Output(DoVentIndex).Status = False
-            'log 壓力
-            Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
-            txtTimerMin.Text = Timercount.set_min.ToString
-            btnTImerStart_Click(vbNull, e) '開始計時
-            Panel2.Enabled = False
-            btnStartLog_Click(vbNull, e) '開始紀錄
+            lbvacc.Visible = True
+            Timercount_enable = True
+            lblDatalogFileName.Text = DataLogRecordFileName
         Else
             Timercount_enable = False
-            btnStartLog_Click(vbNull, e) '開始紀錄
-            Module_Button.CSVTimerStartPb_Status = False
+            CSVTimerStartPb_Status = False
+        End If
+    End Sub
 
+    Private Sub txtBasePress_MouseClick(sender As Object, e As MouseEventArgs) Handles txtBasePress.MouseClick
+        If CallKeyboard3(sender, "7.6E+02", "1.0E-03") <> "" Then
+            VACUUMLEAKTESTBASE = sender.Text
+            WriteProgData("VacuumLeakTestBase", "VacuumLeakTestBase", VACUUMLEAKTESTBASE, VacuumLeakINIFile)
         End If
     End Sub
 End Class

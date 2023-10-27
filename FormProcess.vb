@@ -788,6 +788,7 @@ Public Class FormProcess
         '
         Me.btnAbort.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnAbort.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAbort.Enabled = False
         Me.btnAbort.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAbort.ForeColor = System.Drawing.Color.Black
         Me.btnAbort.Image = Global.CELLO.My.Resources.Resources.Button_Close1
@@ -2238,10 +2239,12 @@ Public Class FormProcess
             'btnRunProcess.Text = GetLangText("刷入條碼", "Barcode")
             FormMenus.btnExit.Enabled = Not (ProcessMode_RUN Or RemoteCIM.Enable)
             btnRunProcess.Enabled = False
+
         Else
             '按鈕動作抑能
             btnLoadRecipe.Enabled = Not ProcessMode_RUN
             btnRunProcess.Enabled = Not ProcessMode_RUN
+            btnAbort.Enabled = ProcessMode_RUN
             FormMenus.btnExit.Enabled = Not ProcessMode_RUN
             'btnRunProcess.Text = GetLangText("執行", "Run")
         End If
@@ -2376,6 +2379,7 @@ Public Class FormProcess
             MsgBoxLangErr("系統未註冊!", "Not Register!")
             Exit Sub
         End If
+
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
             'bolDAShow = True
@@ -3125,7 +3129,7 @@ Public Class FormProcess
                 CtlSanAnCIM1.txtOpID.Focus()
             End If
             MsgBoxLangOK("請刷入條碼!", "Please use barcode reader!")
-            End If
+        End If
         'BarcodeReadStart()
     End Sub
     Public Sub BarcodeReadStart()
@@ -3436,7 +3440,7 @@ Public Class FormProcess
                     CtlSanAnCIM1.txtOpID.Focus()
                 End If
             End If
-            End If
+        End If
     End Sub
 
     Private Sub btnOffLine_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOffLine.Click

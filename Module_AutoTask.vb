@@ -9,6 +9,7 @@ Module Module_AutoTask
     'Barcode 20160808 by vincent ---------------- Start
     Public RunCounts As Integer = 0
     Public RunDataINIFile As String
+    Public strLeakTestMess As String
     Public bolVaccTest As Boolean
     Public bolLeakTest As Boolean = False
     Public LastTopTemp(2) As Integer
@@ -723,8 +724,162 @@ Module Module_AutoTask
 
     Public ProcessCurveIndex As Integer     '曲線記錄用 index
     Public ProcessCSVIndex As Integer     '曲線記錄用 index
+    ''' <summary>
+    ''' for B222測漏
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function VacuumLeakTest_Task() As Integer
+        Static Control_State As Integer
+        Static Old_State As Integer
+        Static Last_State As Integer
+        Dim i As Integer
+        Static bol1 As Boolean
+        Select Case Control_State
+            Case 0  '製程初始化
+                If bolLeakTest Then
+                    ProcessStartTime = NHour + ":" + NMin + ":" + NSec
+                    Output(DoTopPurge1Index).Status = False
+                    Output(DoTopPurge2Index).Status = False
+                    Output(DoTopPurge3Index).Status = False
+
+                    Output(DoBotPurge1Index).Status = False
+                    Output(DoBotPurge2Index).Status = False
+                    Output(DoBotPurge3Index).Status = False
+                    '關門
+                    strLeakTestMess = Control_State.ToString + ":關門"
+                    If Check_PLC_X(DiSaftyGate01Index) Then
+                        Output(DoDoor1UpIndex).Status = Not Output(DoDoor1UpIndex).Status
+                        Output(DoDoor1DownIndex).Status = False
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = 1
+                        Last_State = Control_State
+                        Control_State = 1
+                    Else
+                        MsgBoxLangErr("安全門 1 異常!", "Safty Gate 1 Error!")
+                        Control_State = 99
+                        strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                    End If
+
+                Else
+                    Control_State = 0
+                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                End If
 
 
+            Case 1 '確認門關閉
+                If bolLeakTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ":確認門關閉"
+                        If Check_PLC_X(DiPullerCloseIndex) Then
+                            AutoProcessTimerEnabled = True
+                            AutoProcessTimer = 1
+                            Last_State = Control_State
+                            Control_State = 2
+                        End If
+                    End If
+                Else
+                    Control_State = 99
+                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                End If
+            Case 2 '開始抽真空
+                If bolLeakTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ":開始抽真空"
+                        '設定配方真空模式
+                        Output(DoVentIndex).Status = False
+                        CAutoPumping.Start = True
+
+                        PumpingAlarm_Error = False 'Add By Vincent 20190416 
+
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = 2
+                        Last_State = Control_State
+                        Control_State = 4
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 4 '檢查真空值是否已到,
+                If bolLeakTest Then
+
+                    strLeakTestMess = Control_State.ToString + ":檢查真空值是否已到"
+                    If GaugeCHVac <= Val(VACUUMLEAKTESTBASE) Then
+                        PumpingAlarm_Error = False
+                        ProcessVacuumOK = True
+                        CAutoPumping.Start = False
+                        Set_MBit(DoRVIndex, DEVICE_OFF)
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = 2
+                        Last_State = Control_State
+                        bol1 = True
+                        Control_State = 5
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 5 '開始測漏
+                If bolLeakTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        Debug.Print("Timercount_enable=" + Timercount_enable.ToString)
+                        Set_MBit(DoMPIndex, DEVICE_OFF)
+                        strLeakTestMess = Control_State.ToString + ":開始測漏"
+                        If bol1 Then
+                            Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+                            Timercount_down = True
+                            FormManual.StartLog()
+                            CSVTimerStartPb_Status = True
+                            bol1 = False
+                        End If
+                        If CSVTimerStartPb_Status = False Then
+                            Control_State = 99
+                        End If
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 99
+                strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                Timercount_down = False
+                bolLeakTest = False
+                Control_State = 0
+        End Select
+    End Function
+    Public Sub Vacc_LeakTest()
+        If bolVaccTest Then
+            DataLogShortFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
+            CheckDataLogDirAndCreate()
+            DataLogCUVFileName = "Vacuum_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
+            DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
+            'TimerCountUp_Down()
+            Timercount_enable = True
+            CSVTimerStartPb_Status = True
+        ElseIf bolLeakTest Then
+            DataLogShortFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".csv"
+            CheckDataLogDirAndCreate()
+            DataLogCUVFileName = "Leak_Test_" & NYear & "_" & NMonth & "_" & NDate & "-" & NHour & "_" & NMin & "_" & NSec + ".cuv"
+            DataLogRecordFileName = DataLogRecordDir + DataLogShortFileName
+            CSVTimerStartPb_Status = True
+            Timercount_enable = True
+        Else
+            DataLogRecordFileName = ""
+            If FormKeyInDataLogNames.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                If Len(DataLogShortFileName) > 0 Then
+                    CheckDataLogDirAndCreate()
+                    'DatalogTime = Val(txtDataLogStepTime.Text)
+                    CSVTimerStartPb_Status = True
+                End If
+            End If
+        End If
+    End Sub
     Public Function AutoProcess_Task() As Integer
         Dim i, j As Integer
         Dim Process_Lock As Boolean
@@ -2400,8 +2555,12 @@ Module Module_AutoTask
     Public Timercount_sys As Integer
     Public Timercount_now As Integer
 
-
-    Public Sub TimerCountUp_Down(ByRef obj_Start As Object, ByRef obj_min As Object, ByRef obj_sec As Object)
+    ''' <summary>
+    ''' 手動畫面的計時功能
+    ''' </summary>
+    ''' <param name="obj_min"></param>
+    ''' <param name="obj_sec"></param>
+    Public Sub TimerCountUp_Down(ByRef obj_min As Object, ByRef obj_sec As Object)
         Dim hh As Integer
         Dim mm As Integer
         Dim ss As Integer

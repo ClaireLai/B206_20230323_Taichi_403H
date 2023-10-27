@@ -46,7 +46,11 @@ Module Module_CurveData
     'Chart1.Series("Series5").Points.DataBindY(Press1)
     'Chart1.Series("Series6").Points.DataBindY(DPCurrent1)
     'Chart1.Series("Series7").Points.DataBindY(Pressure1)
-    '讀取曲線名稱
+
+    ''' <summary>
+    ''' 讀取曲線名稱
+    ''' </summary>
+    ''' <param name="sfile"></param>
     Public Sub ReadCurveNames(ByVal sfile As String)
         Dim i As Integer
         'If SystemParameters.bolDAlog Then

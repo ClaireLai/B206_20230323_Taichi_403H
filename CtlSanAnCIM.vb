@@ -80,7 +80,6 @@ Public Class CtlSanAnCIM
         ' And Not RemoteCIM.SanAnCIM_Start And Not RemoteCIM.SanAnCIM_Process_Start
         btnRunProcess.Enabled = cond1
 
-
         btnClearAll.Enabled = cond
 
         txtRunID1.Enabled = cond

@@ -9,6 +9,7 @@
     Public ParameterINIFile As String
     Public PIDINIFile As String
     Public PLCIOMappingINIFile As String
+    Public VacuumLeakINIFile As String
 
 
     Public Sub InitProgramIniFile(ByVal sdir As String)
@@ -24,6 +25,7 @@
         PIDINIFile = sdir + "PID.INI"
         ProcessINIFile = sdir + "PROCESS.INI"
         RunDataINIFile = ProgramDir + "RUNDATA.INI"  'Barcode 20160808 by vincent ----------------
+        VacuumLeakINIFile = sdir + "VacuumLeak.INI"
         InitRecipe(sdir)
         InitLanguage(sdir)
         'If SystemParameters.bolDAlog Then
