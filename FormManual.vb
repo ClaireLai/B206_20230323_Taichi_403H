@@ -2028,32 +2028,46 @@ Public Class FormManual
     End Sub
 
     Private Sub btnMaxVaccTest_Click(sender As Object, e As EventArgs) Handles btnMaxVaccTest.Click
+
         If ProcessMode_RUN Then Exit Sub
         CAutoPumping.AutoProtection = False
-        CAutoPumping.Start = Not CAutoPumping.Start
-        If CAutoPumping.Start Then
-            bolVaccTest = True
-            'Timercount_enable = True
-            Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
-            txtTimerMin.Text = Timercount.set_min.ToString
-            TImerStart() '開始計時
-            'Panel2.Enabled = False
-            'tabPageDataLog.Enabled = False
-            'tabPageTimer.Enabled = False
-            'lblTimerSec.Enabled = True
-            'lblTimerMin.Enabled = True
 
-            btnStartLog_Click(vbNull, e) '開始紀錄
-
+        bolVaccTest = Not bolVaccTest
+        Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+        Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+        txtTimerMin.Text = Timercount.set_min.ToString
+        If bolVaccTest Then
+            lbvacc.Visible = True
+            Timercount_enable = True
+            lblDatalogFileName.Text = DataLogRecordFileName
         Else
-            Timercount_enable = False '停止計時
-            btnStartLog_Click(vbNull, e) '開始紀錄
-            Output(DoMPIndex).Status = False
-            Output(DoRVIndex).Status = False
+            Timercount_enable = False
             CSVTimerStartPb_Status = False
-            bolVaccTest = False
-
         End If
+        'CAutoPumping.Start = Not CAutoPumping.Start
+        'If CAutoPumping.Start Then
+        '    bolVaccTest = True
+        '    'Timercount_enable = True
+        '    Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
+        '    txtTimerMin.Text = Timercount.set_min.ToString
+        '    'TImerStart() '開始計時
+        '    'Panel2.Enabled = False
+        '    'tabPageDataLog.Enabled = False
+        '    'tabPageTimer.Enabled = False
+        '    'lblTimerSec.Enabled = True
+        '    'lblTimerMin.Enabled = True
+
+        '    'btnStartLog_Click(vbNull, e) '開始紀錄
+
+        'Else
+        '    Timercount_enable = False '停止計時
+        '    btnStartLog_Click(vbNull, e) '開始紀錄
+        '    Output(DoMPIndex).Status = False
+        '    Output(DoRVIndex).Status = False
+        '    CSVTimerStartPb_Status = False
+        '    bolVaccTest = False
+
+        'End If
 
 
     End Sub

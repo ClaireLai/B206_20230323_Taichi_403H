@@ -762,7 +762,7 @@ Module Module_AutoTask
 
                 Else
                     Control_State = 0
-                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                    'strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                 End If
 
 
@@ -850,6 +850,113 @@ Module Module_AutoTask
                 strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                 Timercount_down = False
                 bolLeakTest = False
+                Control_State = 0
+        End Select
+    End Function
+    ''' <summary>
+    ''' for B222極限測試
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function VacuumTest_Task() As Integer
+        Static Control_State As Integer
+        Static Old_State As Integer
+        Static Last_State As Integer
+        Dim i As Integer
+        Static bol1 As Boolean
+        Select Case Control_State
+            Case 0  '製程初始化
+                If bolVaccTest Then
+                    ProcessStartTime = NHour + ":" + NMin + ":" + NSec
+                    Output(DoTopPurge1Index).Status = False
+                    Output(DoTopPurge2Index).Status = False
+                    Output(DoTopPurge3Index).Status = False
+
+                    Output(DoBotPurge1Index).Status = False
+                    Output(DoBotPurge2Index).Status = False
+                    Output(DoBotPurge3Index).Status = False
+                    '關門
+                    strLeakTestMess = Control_State.ToString + ":關門"
+                    If Check_PLC_X(DiSaftyGate01Index) Then
+                        Output(DoDoor1UpIndex).Status = Not Output(DoDoor1UpIndex).Status
+                        Output(DoDoor1DownIndex).Status = False
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = 1
+                        Last_State = Control_State
+                        Control_State = 1
+                    Else
+                        MsgBoxLangErr("安全門 1 異常!", "Safty Gate 1 Error!")
+                        Control_State = 99
+                        strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    End If
+
+                Else
+                    Control_State = 0
+                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                End If
+
+
+            Case 1 '確認門關閉
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ":確認門關閉"
+                        If Check_PLC_X(DiPullerCloseIndex) Then
+                            AutoProcessTimerEnabled = True
+                            AutoProcessTimer = 1
+                            Last_State = Control_State
+                            Control_State = 2
+                        End If
+                    End If
+                Else
+                    Control_State = 99
+                    strLeakTestMess = Control_State.ToString + ":VacuumTestAbort"
+                End If
+            Case 2 '開始抽真空
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ":開始抽真空"
+                        '設定配方真空模式
+                        Output(DoVentIndex).Status = False
+                        CAutoPumping.Start = True
+
+                        PumpingAlarm_Error = False 'Add By Vincent 20190416 
+
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = 12
+                        bol1 = True
+                        'Vacc_LeakTest()
+                        Last_State = Control_State
+                        Control_State = 3
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    Control_State = 99
+                End If
+            Case 3
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ": 紀錄中"
+                        If bol1 Then
+                            Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+                            Timercount_down = True
+                            FormManual.StartLog()
+                            CSVTimerStartPb_Status = True
+                            bol1 = False
+                        End If
+                        If CSVTimerStartPb_Status = False Then
+                            Control_State = 99
+                        End If
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 99
+                strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                Timercount_down = False
+                bolVaccTest = False
                 Control_State = 0
         End Select
     End Function
