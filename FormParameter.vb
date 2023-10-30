@@ -491,7 +491,7 @@ Public Class FormParameter
     Friend WithEvents Label10 As Label
     Friend WithEvents dudLogStartTime As DomainUpDown
     Friend WithEvents btnSelPath As Button
-    Friend WithEvents chkAvailBarCode As CheckBox
+    Friend WithEvents chkAvailability As CheckBox
     Friend WithEvents chkDa As CheckBox
     Friend WithEvents Panel4 As Panel
     Friend WithEvents txtForceTimeoutX_Alarm As TextBox
@@ -580,7 +580,7 @@ Public Class FormParameter
         Me.txtWebPath = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.chkAvailBarCode = New System.Windows.Forms.CheckBox()
+        Me.chkAvailability = New System.Windows.Forms.CheckBox()
         Me.chkRunConfirm = New System.Windows.Forms.CheckBox()
         Me.chkAutoRecordData = New System.Windows.Forms.CheckBox()
         Me.chkBarcodeOnly = New System.Windows.Forms.CheckBox()
@@ -634,6 +634,7 @@ Public Class FormParameter
         Me.txtCoolTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
         Me.txtAddTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblTempAlarmTimeText = New System.Windows.Forms.Label()
         Me.txtHiPressureLimit = New System.Windows.Forms.TextBox()
         Me.lblHiPressureLimitText = New System.Windows.Forms.Label()
         Me.lblKg05Text = New System.Windows.Forms.Label()
@@ -691,7 +692,6 @@ Public Class FormParameter
         Me.lblPressAlarmTimeText = New System.Windows.Forms.Label()
         Me.lblSec06Text = New System.Windows.Forms.Label()
         Me.txtPressAlarmTime = New System.Windows.Forms.TextBox()
-        Me.lblTempAlarmTimeText = New System.Windows.Forms.Label()
         Me.lblSec07Text = New System.Windows.Forms.Label()
         Me.txtTempAlarmTime = New System.Windows.Forms.TextBox()
         Me.lblA01Text = New System.Windows.Forms.Label()
@@ -1062,12 +1062,12 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.pnlParaSet.SuspendLayout
-        Me.Panel3.SuspendLayout
-        Me.Panel2.SuspendLayout
-        Me.grpVacuum.SuspendLayout
-        Me.pnlDPWaterFlow.SuspendLayout
-        Me.pnlDPTemp.SuspendLayout
+        Me.pnlParaSet.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.grpVacuum.SuspendLayout()
+        Me.pnlDPWaterFlow.SuspendLayout()
+        Me.pnlDPTemp.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1420,7 +1420,7 @@ Public Class FormParameter
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.chkAvailBarCode)
+        Me.Panel2.Controls.Add(Me.chkAvailability)
         Me.Panel2.Controls.Add(Me.chkRunConfirm)
         Me.Panel2.Controls.Add(Me.chkAutoRecordData)
         Me.Panel2.Controls.Add(Me.chkBarcodeOnly)
@@ -1431,15 +1431,15 @@ Public Class FormParameter
         Me.Panel2.TabIndex = 630
         Me.Panel2.Visible = False
         '
-        'chkAvailBarCode
+        'chkAvailability
         '
-        Me.chkAvailBarCode.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAvailBarCode.Location = New System.Drawing.Point(434, 33)
-        Me.chkAvailBarCode.Name = "chkAvailBarCode"
-        Me.chkAvailBarCode.Size = New System.Drawing.Size(94, 26)
-        Me.chkAvailBarCode.TabIndex = 610
-        Me.chkAvailBarCode.Text = "稼動率"
-        Me.chkAvailBarCode.UseVisualStyleBackColor = True
+        Me.chkAvailability.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkAvailability.Location = New System.Drawing.Point(434, 33)
+        Me.chkAvailability.Name = "chkAvailability"
+        Me.chkAvailability.Size = New System.Drawing.Size(94, 26)
+        Me.chkAvailability.TabIndex = 610
+        Me.chkAvailability.Text = "稼動率"
+        Me.chkAvailability.UseVisualStyleBackColor = True
         '
         'chkRunConfirm
         '
@@ -2109,6 +2109,18 @@ Public Class FormParameter
         Me.Label13.TabIndex = 527
         Me.Label13.Text = "降溫超過預定降溫?倍時間警報"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblTempAlarmTimeText
+        '
+        Me.lblTempAlarmTimeText.BackColor = System.Drawing.Color.Transparent
+        Me.lblTempAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTempAlarmTimeText.ForeColor = System.Drawing.Color.Black
+        Me.lblTempAlarmTimeText.Location = New System.Drawing.Point(6, 279)
+        Me.lblTempAlarmTimeText.Name = "lblTempAlarmTimeText"
+        Me.lblTempAlarmTimeText.Size = New System.Drawing.Size(158, 36)
+        Me.lblTempAlarmTimeText.TabIndex = 534
+        Me.lblTempAlarmTimeText.Text = "加溫警報時間:"
+        Me.lblTempAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtHiPressureLimit
         '
@@ -2807,18 +2819,6 @@ Public Class FormParameter
         Me.txtPressAlarmTime.TabIndex = 536
         Me.txtPressAlarmTime.Text = "300"
         Me.txtPressAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblTempAlarmTimeText
-        '
-        Me.lblTempAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblTempAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTempAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblTempAlarmTimeText.Location = New System.Drawing.Point(6, 279)
-        Me.lblTempAlarmTimeText.Name = "lblTempAlarmTimeText"
-        Me.lblTempAlarmTimeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblTempAlarmTimeText.TabIndex = 534
-        Me.lblTempAlarmTimeText.Text = "加溫警報時間:"
-        Me.lblTempAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblSec07Text
         '
@@ -7492,6 +7492,8 @@ Public Class FormParameter
         radAPG100.Checked = (GaugeName = "APG100")
         radPCG550.Checked = (GaugeName = "PCG550")
         radPSG500.Checked = (GaugeName = "PSG500")
+        chkAvailability.Visible = Availability_Flag
+        chkAvailability.Checked = Availability_Flag
 
         'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
         txtPressureAverageTimes.Text = SystemParameters.PressureAverageTimes
@@ -7518,7 +7520,8 @@ Public Class FormParameter
         pnlDPTemp.Visible = DP_Pump_Used
         pnlDPWaterFlow.Visible = DP_Flow_Used
         chkCIMUsed.Checked = CIM_Used
-        chkAvailBarCode.Checked = BarCodeFile_Flag
+        chkAvailability.Checked = Availability_Flag
+        chkCIMUsed.Visible = SanAn_TCPIP_Used_Flag
         'If SanAn_TCPIP_Used_Flag = False Then
         '    tabParameter.TabPages.RemoveByKey("TabPageCIM")
         'End If
@@ -8051,13 +8054,13 @@ Public Class FormParameter
 
         ObjShow.Show(CSVTimerStartPb_Status, btnlog, ColorOn, ColorOff)
 
-        If SanAn_TCPIP_Used_Flag Or BarCodeFile_Flag Then
+        If SanAn_TCPIP_Used_Flag Or BarCode_Flag Then
             Panel2.Visible = True
         Else
             Panel2.Visible = False
         End If
 
-        If BarCodeFile_Flag Then
+        If Availability_Flag Then
             Panel3.Visible = True
         Else
             Panel3.Visible = False
@@ -9275,9 +9278,9 @@ Public Class FormParameter
     Private Sub chkCIMUsed_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCIMUsed.Click
         CIM_Used = chkCIMUsed.Checked
         RemoteCIM.WriteCIMSetup()
-        If CIM_Used Then
-            WriteProgData("PROGRAM", "BarCodeFile", 0, ProgramINIFile)  '寫入目前控壓PID設定
-        End If
+        'If CIM_Used Then
+        '    WriteProgData("PROGRAM", "BarCodeFile", 0, ProgramINIFile)  '寫入目前控壓PID設定
+        'End If
     End Sub
 
     'Add  by Vincent 20190710  ------------------- End
@@ -9459,14 +9462,14 @@ Public Class FormParameter
         End If
     End Sub
 
-    Private Sub chkAvailBarCode_Click(sender As Object, e As EventArgs) Handles chkAvailBarCode.Click
-        BarCodeFile_Flag = chkAvailBarCode.Checked
+    Private Sub chkAvailability_Click(sender As Object, e As EventArgs) Handles chkAvailability.Click
+        Availability_Flag = chkAvailability.Checked
         'Panel3.Visible = BarCodeFile_Flag
-        If BarCodeFile_Flag Then
-            WriteProgData("PROGRAM", "BarCodeFile", 1, ProgramINIFile)  '寫入稼動率設定
+        If Availability_Flag Then
+            WriteProgData("PROGRAM", "Availability", 1, ProgramINIFile)  '寫入稼動率設定
 
         Else
-            WriteProgData("PROGRAM", "BarCodeFile", 0, ProgramINIFile)  '寫入稼動率設定
+            WriteProgData("PROGRAM", "Availability", 0, ProgramINIFile)  '寫入稼動率設定
         End If
 
     End Sub
