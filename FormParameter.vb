@@ -122,18 +122,6 @@ Public Class FormParameter
     Friend WithEvents lblKg21Text As System.Windows.Forms.Label
     Friend WithEvents picC06 As System.Windows.Forms.PictureBox
     Friend WithEvents lblTopLowLimitTempText As System.Windows.Forms.Label
-    Friend WithEvents lblProcessPressAlarmTimeText As System.Windows.Forms.Label
-    Friend WithEvents lblSec09Text As System.Windows.Forms.Label
-    Friend WithEvents txtProcessPressAlarmTime As System.Windows.Forms.TextBox
-    Friend WithEvents lblProcessTempAlarmTimeText As System.Windows.Forms.Label
-    Friend WithEvents lblSec08Text As System.Windows.Forms.Label
-    Friend WithEvents txtProcessTempAlarmTime As System.Windows.Forms.TextBox
-    Friend WithEvents lblPressAlarmTimeText As System.Windows.Forms.Label
-    Friend WithEvents lblSec06Text As System.Windows.Forms.Label
-    Friend WithEvents txtPressAlarmTime As System.Windows.Forms.TextBox
-    Friend WithEvents lblTempAlarmTimeText As System.Windows.Forms.Label
-    Friend WithEvents lblSec07Text As System.Windows.Forms.Label
-    Friend WithEvents txtTempAlarmTime As System.Windows.Forms.TextBox
     Friend WithEvents txtTopLowLimitTemp As System.Windows.Forms.TextBox
     Friend WithEvents lblTopLowLimitPowerText As System.Windows.Forms.Label
     Friend WithEvents txtTopLowLimitPower As System.Windows.Forms.TextBox
@@ -220,12 +208,6 @@ Public Class FormParameter
     Friend WithEvents lblDA10Text As System.Windows.Forms.Label
     Friend WithEvents chkTempAbort As System.Windows.Forms.CheckBox
     Friend WithEvents chkPressureAbort As System.Windows.Forms.CheckBox
-    Friend WithEvents lblKg22Text As System.Windows.Forms.Label
-    Friend WithEvents txtAbortPressureRange As System.Windows.Forms.TextBox
-    Friend WithEvents lblAbortTempRangeText As System.Windows.Forms.Label
-    Friend WithEvents lblAbortPressureRangeText As System.Windows.Forms.Label
-    Friend WithEvents txtAbortTempRange As System.Windows.Forms.TextBox
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents txtkgDARatio3 As System.Windows.Forms.TextBox
     Friend WithEvents txtkgDARatio2 As System.Windows.Forms.TextBox
     Friend WithEvents lblOverThresholdkgDA3 As System.Windows.Forms.Label
@@ -493,14 +475,34 @@ Public Class FormParameter
     Friend WithEvents btnSelPath As Button
     Friend WithEvents chkAvailability As CheckBox
     Friend WithEvents chkDa As CheckBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents txtAbortTempRange As TextBox
+    Friend WithEvents lblKg22Text As Label
+    Friend WithEvents txtAbortPressureRange As TextBox
+    Friend WithEvents lblSec09Text As Label
+    Friend WithEvents txtProcessPressAlarmTime As TextBox
+    Friend WithEvents lblSec08Text As Label
+    Friend WithEvents txtProcessTempAlarmTime As TextBox
+    Friend WithEvents lblSec06Text As Label
+    Friend WithEvents txtPressAlarmTime As TextBox
+    Friend WithEvents lblSec07Text As Label
+    Friend WithEvents txtTempAlarmTime As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label14 As Label
     Friend WithEvents txtForceTimeoutX_Alarm As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents txtCoolTempTimeoutX_Alarm As TextBox
     Friend WithEvents txtAddTempTimeoutX_Alarm As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label15 As Label
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -626,15 +628,34 @@ Public Class FormParameter
         Me.txtDoorCloseTime = New System.Windows.Forms.TextBox()
         Me.lblProcessPumpVacuumText = New System.Windows.Forms.Label()
         Me.grpAlarmSetup = New System.Windows.Forms.GroupBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.txtAbortTempRange = New System.Windows.Forms.TextBox()
+        Me.lblKg22Text = New System.Windows.Forms.Label()
+        Me.txtAbortPressureRange = New System.Windows.Forms.TextBox()
+        Me.lblSec09Text = New System.Windows.Forms.Label()
+        Me.txtProcessPressAlarmTime = New System.Windows.Forms.TextBox()
+        Me.lblSec08Text = New System.Windows.Forms.Label()
+        Me.txtProcessTempAlarmTime = New System.Windows.Forms.TextBox()
+        Me.lblSec06Text = New System.Windows.Forms.Label()
+        Me.txtPressAlarmTime = New System.Windows.Forms.TextBox()
+        Me.lblSec07Text = New System.Windows.Forms.Label()
+        Me.txtTempAlarmTime = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtForceTimeoutX_Alarm = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtCoolTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
         Me.txtAddTempTimeoutX_Alarm = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.lblTempAlarmTimeText = New System.Windows.Forms.Label()
         Me.txtHiPressureLimit = New System.Windows.Forms.TextBox()
         Me.lblHiPressureLimitText = New System.Windows.Forms.Label()
         Me.lblKg05Text = New System.Windows.Forms.Label()
@@ -677,23 +698,6 @@ Public Class FormParameter
         Me.lblmm02Text = New System.Windows.Forms.Label()
         Me.chkTempAbort = New System.Windows.Forms.CheckBox()
         Me.chkPressureAbort = New System.Windows.Forms.CheckBox()
-        Me.lblKg22Text = New System.Windows.Forms.Label()
-        Me.txtAbortPressureRange = New System.Windows.Forms.TextBox()
-        Me.lblAbortTempRangeText = New System.Windows.Forms.Label()
-        Me.lblAbortPressureRangeText = New System.Windows.Forms.Label()
-        Me.txtAbortTempRange = New System.Windows.Forms.TextBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.lblProcessPressAlarmTimeText = New System.Windows.Forms.Label()
-        Me.lblSec09Text = New System.Windows.Forms.Label()
-        Me.txtProcessPressAlarmTime = New System.Windows.Forms.TextBox()
-        Me.lblProcessTempAlarmTimeText = New System.Windows.Forms.Label()
-        Me.lblSec08Text = New System.Windows.Forms.Label()
-        Me.txtProcessTempAlarmTime = New System.Windows.Forms.TextBox()
-        Me.lblPressAlarmTimeText = New System.Windows.Forms.Label()
-        Me.lblSec06Text = New System.Windows.Forms.Label()
-        Me.txtPressAlarmTime = New System.Windows.Forms.TextBox()
-        Me.lblSec07Text = New System.Windows.Forms.Label()
-        Me.txtTempAlarmTime = New System.Windows.Forms.TextBox()
         Me.lblA01Text = New System.Windows.Forms.Label()
         Me.lblSec03Text = New System.Windows.Forms.Label()
         Me.lblLowFlowAlarmText = New System.Windows.Forms.Label()
@@ -1075,9 +1079,12 @@ Public Class FormParameter
         CType(Me.picC06, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picC01, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAlarmSetup.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.pnlFlowShow.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picC05, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPurgeSetup.SuspendLayout()
         Me.grpPIDLoadSave.SuspendLayout()
@@ -1135,9 +1142,9 @@ Public Class FormParameter
         Me.btnEndAlarm.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.btnEndAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEndAlarm.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEndAlarm.Location = New System.Drawing.Point(169, 245)
+        Me.btnEndAlarm.Location = New System.Drawing.Point(173, 246)
         Me.btnEndAlarm.Name = "btnEndAlarm"
-        Me.btnEndAlarm.Size = New System.Drawing.Size(80, 33)
+        Me.btnEndAlarm.Size = New System.Drawing.Size(80, 30)
         Me.btnEndAlarm.TabIndex = 48
         Me.btnEndAlarm.Text = "OFF"
         Me.btnEndAlarm.UseVisualStyleBackColor = False
@@ -1956,8 +1963,7 @@ Public Class FormParameter
         '
         'grpAlarmSetup
         '
-        Me.grpAlarmSetup.Controls.Add(Me.Panel4)
-        Me.grpAlarmSetup.Controls.Add(Me.lblTempAlarmTimeText)
+        Me.grpAlarmSetup.Controls.Add(Me.TabControl1)
         Me.grpAlarmSetup.Controls.Add(Me.txtHiPressureLimit)
         Me.grpAlarmSetup.Controls.Add(Me.lblHiPressureLimitText)
         Me.grpAlarmSetup.Controls.Add(Me.lblKg05Text)
@@ -1981,23 +1987,6 @@ Public Class FormParameter
         Me.grpAlarmSetup.Controls.Add(Me.lblmm02Text)
         Me.grpAlarmSetup.Controls.Add(Me.chkTempAbort)
         Me.grpAlarmSetup.Controls.Add(Me.chkPressureAbort)
-        Me.grpAlarmSetup.Controls.Add(Me.lblKg22Text)
-        Me.grpAlarmSetup.Controls.Add(Me.txtAbortPressureRange)
-        Me.grpAlarmSetup.Controls.Add(Me.lblAbortTempRangeText)
-        Me.grpAlarmSetup.Controls.Add(Me.lblAbortPressureRangeText)
-        Me.grpAlarmSetup.Controls.Add(Me.txtAbortTempRange)
-        Me.grpAlarmSetup.Controls.Add(Me.PictureBox2)
-        Me.grpAlarmSetup.Controls.Add(Me.lblProcessPressAlarmTimeText)
-        Me.grpAlarmSetup.Controls.Add(Me.lblSec09Text)
-        Me.grpAlarmSetup.Controls.Add(Me.txtProcessPressAlarmTime)
-        Me.grpAlarmSetup.Controls.Add(Me.lblProcessTempAlarmTimeText)
-        Me.grpAlarmSetup.Controls.Add(Me.lblSec08Text)
-        Me.grpAlarmSetup.Controls.Add(Me.txtProcessTempAlarmTime)
-        Me.grpAlarmSetup.Controls.Add(Me.lblPressAlarmTimeText)
-        Me.grpAlarmSetup.Controls.Add(Me.lblSec06Text)
-        Me.grpAlarmSetup.Controls.Add(Me.txtPressAlarmTime)
-        Me.grpAlarmSetup.Controls.Add(Me.lblSec07Text)
-        Me.grpAlarmSetup.Controls.Add(Me.txtTempAlarmTime)
         Me.grpAlarmSetup.Controls.Add(Me.lblHiTempLimitText)
         Me.grpAlarmSetup.Controls.Add(Me.lblPumpTimeText)
         Me.grpAlarmSetup.Controls.Add(Me.lblA01Text)
@@ -2021,37 +2010,269 @@ Public Class FormParameter
         Me.grpAlarmSetup.TabStop = False
         Me.grpAlarmSetup.Text = "警報設定"
         '
-        'Panel4
+        'TabControl1
         '
-        Me.Panel4.Controls.Add(Me.Label15)
-        Me.Panel4.Controls.Add(Me.Label14)
-        Me.Panel4.Controls.Add(Me.txtForceTimeoutX_Alarm)
-        Me.Panel4.Controls.Add(Me.Label16)
-        Me.Panel4.Controls.Add(Me.txtCoolTempTimeoutX_Alarm)
-        Me.Panel4.Controls.Add(Me.txtAddTempTimeoutX_Alarm)
-        Me.Panel4.Controls.Add(Me.Label13)
-        Me.Panel4.Location = New System.Drawing.Point(27, 316)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(339, 126)
-        Me.Panel4.TabIndex = 854
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(27, 284)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(386, 195)
+        Me.TabControl1.TabIndex = 855
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.PictureBox2)
+        Me.TabPage1.Controls.Add(Me.txtAbortTempRange)
+        Me.TabPage1.Controls.Add(Me.lblKg22Text)
+        Me.TabPage1.Controls.Add(Me.txtAbortPressureRange)
+        Me.TabPage1.Controls.Add(Me.lblSec09Text)
+        Me.TabPage1.Controls.Add(Me.txtProcessPressAlarmTime)
+        Me.TabPage1.Controls.Add(Me.lblSec08Text)
+        Me.TabPage1.Controls.Add(Me.txtProcessTempAlarmTime)
+        Me.TabPage1.Controls.Add(Me.lblSec06Text)
+        Me.TabPage1.Controls.Add(Me.txtPressAlarmTime)
+        Me.TabPage1.Controls.Add(Me.lblSec07Text)
+        Me.TabPage1.Controls.Add(Me.txtTempAlarmTime)
+        Me.TabPage1.Controls.Add(Me.Label21)
+        Me.TabPage1.Controls.Add(Me.Label20)
+        Me.TabPage1.Controls.Add(Me.Label19)
+        Me.TabPage1.Controls.Add(Me.Label18)
+        Me.TabPage1.Controls.Add(Me.Label17)
+        Me.TabPage1.Controls.Add(Me.Label15)
+        Me.TabPage1.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(378, 164)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "溫度壓力全域設定"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox2.Image = Global.CELLO.My.Resources.Resources.tempc
+        Me.PictureBox2.Location = New System.Drawing.Point(265, 131)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(29, 26)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 571
+        Me.PictureBox2.TabStop = False
+        '
+        'txtAbortTempRange
+        '
+        Me.txtAbortTempRange.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAbortTempRange.Location = New System.Drawing.Point(178, 135)
+        Me.txtAbortTempRange.Name = "txtAbortTempRange"
+        Me.txtAbortTempRange.Size = New System.Drawing.Size(80, 22)
+        Me.txtAbortTempRange.TabIndex = 570
+        Me.txtAbortTempRange.Text = "20"
+        Me.txtAbortTempRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblKg22Text
+        '
+        Me.lblKg22Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblKg22Text.ForeColor = System.Drawing.Color.Black
+        Me.lblKg22Text.Location = New System.Drawing.Point(264, 110)
+        Me.lblKg22Text.Name = "lblKg22Text"
+        Me.lblKg22Text.Size = New System.Drawing.Size(32, 26)
+        Me.lblKg22Text.TabIndex = 569
+        Me.lblKg22Text.Text = "kg"
+        '
+        'txtAbortPressureRange
+        '
+        Me.txtAbortPressureRange.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAbortPressureRange.Location = New System.Drawing.Point(178, 110)
+        Me.txtAbortPressureRange.Name = "txtAbortPressureRange"
+        Me.txtAbortPressureRange.Size = New System.Drawing.Size(80, 22)
+        Me.txtAbortPressureRange.TabIndex = 568
+        Me.txtAbortPressureRange.Text = "100"
+        Me.txtAbortPressureRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblSec09Text
+        '
+        Me.lblSec09Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSec09Text.ForeColor = System.Drawing.Color.Black
+        Me.lblSec09Text.Location = New System.Drawing.Point(262, 86)
+        Me.lblSec09Text.Name = "lblSec09Text"
+        Me.lblSec09Text.Size = New System.Drawing.Size(58, 18)
+        Me.lblSec09Text.TabIndex = 567
+        Me.lblSec09Text.Text = "Sec"
+        '
+        'txtProcessPressAlarmTime
+        '
+        Me.txtProcessPressAlarmTime.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtProcessPressAlarmTime.Location = New System.Drawing.Point(178, 84)
+        Me.txtProcessPressAlarmTime.Name = "txtProcessPressAlarmTime"
+        Me.txtProcessPressAlarmTime.Size = New System.Drawing.Size(80, 22)
+        Me.txtProcessPressAlarmTime.TabIndex = 566
+        Me.txtProcessPressAlarmTime.Text = "300"
+        Me.txtProcessPressAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblSec08Text
+        '
+        Me.lblSec08Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSec08Text.ForeColor = System.Drawing.Color.Black
+        Me.lblSec08Text.Location = New System.Drawing.Point(262, 61)
+        Me.lblSec08Text.Name = "lblSec08Text"
+        Me.lblSec08Text.Size = New System.Drawing.Size(58, 18)
+        Me.lblSec08Text.TabIndex = 565
+        Me.lblSec08Text.Text = "Sec"
+        '
+        'txtProcessTempAlarmTime
+        '
+        Me.txtProcessTempAlarmTime.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtProcessTempAlarmTime.Location = New System.Drawing.Point(178, 58)
+        Me.txtProcessTempAlarmTime.Name = "txtProcessTempAlarmTime"
+        Me.txtProcessTempAlarmTime.Size = New System.Drawing.Size(80, 22)
+        Me.txtProcessTempAlarmTime.TabIndex = 564
+        Me.txtProcessTempAlarmTime.Text = "300"
+        Me.txtProcessTempAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblSec06Text
+        '
+        Me.lblSec06Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSec06Text.ForeColor = System.Drawing.Color.Black
+        Me.lblSec06Text.Location = New System.Drawing.Point(262, 34)
+        Me.lblSec06Text.Name = "lblSec06Text"
+        Me.lblSec06Text.Size = New System.Drawing.Size(58, 18)
+        Me.lblSec06Text.TabIndex = 563
+        Me.lblSec06Text.Text = "Sec"
+        '
+        'txtPressAlarmTime
+        '
+        Me.txtPressAlarmTime.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPressAlarmTime.Location = New System.Drawing.Point(178, 32)
+        Me.txtPressAlarmTime.Name = "txtPressAlarmTime"
+        Me.txtPressAlarmTime.Size = New System.Drawing.Size(80, 22)
+        Me.txtPressAlarmTime.TabIndex = 562
+        Me.txtPressAlarmTime.Text = "300"
+        Me.txtPressAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblSec07Text
+        '
+        Me.lblSec07Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSec07Text.ForeColor = System.Drawing.Color.Black
+        Me.lblSec07Text.Location = New System.Drawing.Point(262, 5)
+        Me.lblSec07Text.Name = "lblSec07Text"
+        Me.lblSec07Text.Size = New System.Drawing.Size(58, 18)
+        Me.lblSec07Text.TabIndex = 561
+        Me.lblSec07Text.Text = "Sec"
+        '
+        'txtTempAlarmTime
+        '
+        Me.txtTempAlarmTime.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTempAlarmTime.Location = New System.Drawing.Point(178, 4)
+        Me.txtTempAlarmTime.Name = "txtTempAlarmTime"
+        Me.txtTempAlarmTime.Size = New System.Drawing.Size(80, 22)
+        Me.txtTempAlarmTime.TabIndex = 560
+        Me.txtTempAlarmTime.Text = "300"
+        Me.txtTempAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label21
+        '
+        Me.Label21.BackColor = System.Drawing.Color.Transparent
+        Me.Label21.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Black
+        Me.Label21.Location = New System.Drawing.Point(26, 132)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(140, 28)
+        Me.Label21.TabIndex = 559
+        Me.Label21.Text = "製程溫度警報(+/-):"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label20
+        '
+        Me.Label20.BackColor = System.Drawing.Color.Transparent
+        Me.Label20.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.Black
+        Me.Label20.Location = New System.Drawing.Point(22, 84)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(142, 23)
+        Me.Label20.TabIndex = 558
+        Me.Label20.Text = "製程中加壓警報:"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label19
+        '
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Black
+        Me.Label19.Location = New System.Drawing.Point(19, 107)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(145, 24)
+        Me.Label19.TabIndex = 557
+        Me.Label19.Text = "製程壓力警報(+/-):"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label18
+        '
+        Me.Label18.BackColor = System.Drawing.Color.Transparent
+        Me.Label18.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.Black
+        Me.Label18.Location = New System.Drawing.Point(35, 55)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(131, 28)
+        Me.Label18.TabIndex = 541
+        Me.Label18.Text = "製程中加溫警報:"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label17
+        '
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.Black
+        Me.Label17.Location = New System.Drawing.Point(33, 30)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(131, 28)
+        Me.Label17.TabIndex = 538
+        Me.Label17.Text = "加壓警報時間:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label15
         '
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(10, 6)
+        Me.Label15.Location = New System.Drawing.Point(35, 8)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(62, 28)
-        Me.Label15.TabIndex = 600
-        Me.Label15.Text = "製程中"
+        Me.Label15.Size = New System.Drawing.Size(129, 22)
+        Me.Label15.TabIndex = 535
+        Me.Label15.Text = "加溫警報時間:"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.Panel4)
+        Me.TabPage2.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(378, 164)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "溫度壓力各Step設定"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.txtForceTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.Label16)
+        Me.Panel4.Controls.Add(Me.txtCoolTempTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.txtAddTempTimeoutX_Alarm)
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Location = New System.Drawing.Point(16, 9)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(324, 97)
+        Me.Panel4.TabIndex = 855
         '
         'Label14
         '
         Me.Label14.BackColor = System.Drawing.Color.Transparent
         Me.Label14.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(7, 27)
+        Me.Label14.Location = New System.Drawing.Point(12, 3)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(244, 36)
         Me.Label14.TabIndex = 526
@@ -2061,7 +2282,7 @@ Public Class FormParameter
         'txtForceTimeoutX_Alarm
         '
         Me.txtForceTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtForceTimeoutX_Alarm.Location = New System.Drawing.Point(277, 91)
+        Me.txtForceTimeoutX_Alarm.Location = New System.Drawing.Point(263, 64)
         Me.txtForceTimeoutX_Alarm.Name = "txtForceTimeoutX_Alarm"
         Me.txtForceTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
         Me.txtForceTimeoutX_Alarm.TabIndex = 528
@@ -2072,7 +2293,7 @@ Public Class FormParameter
         '
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(9, 82)
+        Me.Label16.Location = New System.Drawing.Point(14, 58)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(240, 36)
         Me.Label16.TabIndex = 530
@@ -2082,7 +2303,7 @@ Public Class FormParameter
         'txtCoolTempTimeoutX_Alarm
         '
         Me.txtCoolTempTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCoolTempTimeoutX_Alarm.Location = New System.Drawing.Point(277, 60)
+        Me.txtCoolTempTimeoutX_Alarm.Location = New System.Drawing.Point(263, 37)
         Me.txtCoolTempTimeoutX_Alarm.Name = "txtCoolTempTimeoutX_Alarm"
         Me.txtCoolTempTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
         Me.txtCoolTempTimeoutX_Alarm.TabIndex = 525
@@ -2092,7 +2313,7 @@ Public Class FormParameter
         'txtAddTempTimeoutX_Alarm
         '
         Me.txtAddTempTimeoutX_Alarm.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddTempTimeoutX_Alarm.Location = New System.Drawing.Point(277, 32)
+        Me.txtAddTempTimeoutX_Alarm.Location = New System.Drawing.Point(262, 9)
         Me.txtAddTempTimeoutX_Alarm.Name = "txtAddTempTimeoutX_Alarm"
         Me.txtAddTempTimeoutX_Alarm.Size = New System.Drawing.Size(49, 21)
         Me.txtAddTempTimeoutX_Alarm.TabIndex = 524
@@ -2103,24 +2324,12 @@ Public Class FormParameter
         '
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(10, 53)
+        Me.Label13.Location = New System.Drawing.Point(15, 29)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(239, 36)
         Me.Label13.TabIndex = 527
         Me.Label13.Text = "降溫超過預定降溫?倍時間警報"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblTempAlarmTimeText
-        '
-        Me.lblTempAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblTempAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTempAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblTempAlarmTimeText.Location = New System.Drawing.Point(6, 279)
-        Me.lblTempAlarmTimeText.Name = "lblTempAlarmTimeText"
-        Me.lblTempAlarmTimeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblTempAlarmTimeText.TabIndex = 534
-        Me.lblTempAlarmTimeText.Text = "加溫警報時間:"
-        Me.lblTempAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtHiPressureLimit
         '
@@ -2657,188 +2866,6 @@ Public Class FormParameter
         Me.chkPressureAbort.TabIndex = 559
         Me.chkPressureAbort.Text = "中斷製程"
         Me.chkPressureAbort.UseVisualStyleBackColor = True
-        '
-        'lblKg22Text
-        '
-        Me.lblKg22Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblKg22Text.ForeColor = System.Drawing.Color.Black
-        Me.lblKg22Text.Location = New System.Drawing.Point(255, 412)
-        Me.lblKg22Text.Name = "lblKg22Text"
-        Me.lblKg22Text.Size = New System.Drawing.Size(32, 26)
-        Me.lblKg22Text.TabIndex = 558
-        Me.lblKg22Text.Text = "kg"
-        '
-        'txtAbortPressureRange
-        '
-        Me.txtAbortPressureRange.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAbortPressureRange.Location = New System.Drawing.Point(169, 412)
-        Me.txtAbortPressureRange.Name = "txtAbortPressureRange"
-        Me.txtAbortPressureRange.Size = New System.Drawing.Size(80, 26)
-        Me.txtAbortPressureRange.TabIndex = 554
-        Me.txtAbortPressureRange.Text = "100"
-        Me.txtAbortPressureRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblAbortTempRangeText
-        '
-        Me.lblAbortTempRangeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblAbortTempRangeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAbortTempRangeText.ForeColor = System.Drawing.Color.Black
-        Me.lblAbortTempRangeText.Location = New System.Drawing.Point(4, 439)
-        Me.lblAbortTempRangeText.Name = "lblAbortTempRangeText"
-        Me.lblAbortTempRangeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblAbortTempRangeText.TabIndex = 555
-        Me.lblAbortTempRangeText.Text = "製程溫度警報(+/-):"
-        Me.lblAbortTempRangeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblAbortPressureRangeText
-        '
-        Me.lblAbortPressureRangeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblAbortPressureRangeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAbortPressureRangeText.ForeColor = System.Drawing.Color.Black
-        Me.lblAbortPressureRangeText.Location = New System.Drawing.Point(4, 407)
-        Me.lblAbortPressureRangeText.Name = "lblAbortPressureRangeText"
-        Me.lblAbortPressureRangeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblAbortPressureRangeText.TabIndex = 556
-        Me.lblAbortPressureRangeText.Text = "製程壓力警報(+/-):"
-        Me.lblAbortPressureRangeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtAbortTempRange
-        '
-        Me.txtAbortTempRange.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAbortTempRange.Location = New System.Drawing.Point(169, 444)
-        Me.txtAbortTempRange.Name = "txtAbortTempRange"
-        Me.txtAbortTempRange.Size = New System.Drawing.Size(80, 26)
-        Me.txtAbortTempRange.TabIndex = 553
-        Me.txtAbortTempRange.Text = "20"
-        Me.txtAbortTempRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox2.Image = Global.CELLO.My.Resources.Resources.tempc
-        Me.PictureBox2.Location = New System.Drawing.Point(251, 446)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(29, 26)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 557
-        Me.PictureBox2.TabStop = False
-        '
-        'lblProcessPressAlarmTimeText
-        '
-        Me.lblProcessPressAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblProcessPressAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProcessPressAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblProcessPressAlarmTimeText.Location = New System.Drawing.Point(6, 375)
-        Me.lblProcessPressAlarmTimeText.Name = "lblProcessPressAlarmTimeText"
-        Me.lblProcessPressAlarmTimeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblProcessPressAlarmTimeText.TabIndex = 543
-        Me.lblProcessPressAlarmTimeText.Text = "製程中加壓警報:"
-        Me.lblProcessPressAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblSec09Text
-        '
-        Me.lblSec09Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSec09Text.ForeColor = System.Drawing.Color.Black
-        Me.lblSec09Text.Location = New System.Drawing.Point(253, 384)
-        Me.lblSec09Text.Name = "lblSec09Text"
-        Me.lblSec09Text.Size = New System.Drawing.Size(58, 18)
-        Me.lblSec09Text.TabIndex = 544
-        Me.lblSec09Text.Text = "Sec"
-        '
-        'txtProcessPressAlarmTime
-        '
-        Me.txtProcessPressAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProcessPressAlarmTime.Location = New System.Drawing.Point(169, 380)
-        Me.txtProcessPressAlarmTime.Name = "txtProcessPressAlarmTime"
-        Me.txtProcessPressAlarmTime.Size = New System.Drawing.Size(80, 26)
-        Me.txtProcessPressAlarmTime.TabIndex = 542
-        Me.txtProcessPressAlarmTime.Text = "300"
-        Me.txtProcessPressAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblProcessTempAlarmTimeText
-        '
-        Me.lblProcessTempAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblProcessTempAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProcessTempAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblProcessTempAlarmTimeText.Location = New System.Drawing.Point(6, 343)
-        Me.lblProcessTempAlarmTimeText.Name = "lblProcessTempAlarmTimeText"
-        Me.lblProcessTempAlarmTimeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblProcessTempAlarmTimeText.TabIndex = 540
-        Me.lblProcessTempAlarmTimeText.Text = "製程中加溫警報:"
-        Me.lblProcessTempAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblSec08Text
-        '
-        Me.lblSec08Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSec08Text.ForeColor = System.Drawing.Color.Black
-        Me.lblSec08Text.Location = New System.Drawing.Point(253, 352)
-        Me.lblSec08Text.Name = "lblSec08Text"
-        Me.lblSec08Text.Size = New System.Drawing.Size(58, 18)
-        Me.lblSec08Text.TabIndex = 541
-        Me.lblSec08Text.Text = "Sec"
-        '
-        'txtProcessTempAlarmTime
-        '
-        Me.txtProcessTempAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProcessTempAlarmTime.Location = New System.Drawing.Point(169, 348)
-        Me.txtProcessTempAlarmTime.Name = "txtProcessTempAlarmTime"
-        Me.txtProcessTempAlarmTime.Size = New System.Drawing.Size(80, 26)
-        Me.txtProcessTempAlarmTime.TabIndex = 539
-        Me.txtProcessTempAlarmTime.Text = "300"
-        Me.txtProcessTempAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblPressAlarmTimeText
-        '
-        Me.lblPressAlarmTimeText.BackColor = System.Drawing.Color.Transparent
-        Me.lblPressAlarmTimeText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPressAlarmTimeText.ForeColor = System.Drawing.Color.Black
-        Me.lblPressAlarmTimeText.Location = New System.Drawing.Point(6, 311)
-        Me.lblPressAlarmTimeText.Name = "lblPressAlarmTimeText"
-        Me.lblPressAlarmTimeText.Size = New System.Drawing.Size(158, 36)
-        Me.lblPressAlarmTimeText.TabIndex = 537
-        Me.lblPressAlarmTimeText.Text = "加壓警報時間:"
-        Me.lblPressAlarmTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblSec06Text
-        '
-        Me.lblSec06Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSec06Text.ForeColor = System.Drawing.Color.Black
-        Me.lblSec06Text.Location = New System.Drawing.Point(253, 320)
-        Me.lblSec06Text.Name = "lblSec06Text"
-        Me.lblSec06Text.Size = New System.Drawing.Size(58, 18)
-        Me.lblSec06Text.TabIndex = 538
-        Me.lblSec06Text.Text = "Sec"
-        '
-        'txtPressAlarmTime
-        '
-        Me.txtPressAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPressAlarmTime.Location = New System.Drawing.Point(169, 316)
-        Me.txtPressAlarmTime.Name = "txtPressAlarmTime"
-        Me.txtPressAlarmTime.Size = New System.Drawing.Size(80, 26)
-        Me.txtPressAlarmTime.TabIndex = 536
-        Me.txtPressAlarmTime.Text = "300"
-        Me.txtPressAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblSec07Text
-        '
-        Me.lblSec07Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSec07Text.ForeColor = System.Drawing.Color.Black
-        Me.lblSec07Text.Location = New System.Drawing.Point(253, 288)
-        Me.lblSec07Text.Name = "lblSec07Text"
-        Me.lblSec07Text.Size = New System.Drawing.Size(58, 18)
-        Me.lblSec07Text.TabIndex = 535
-        Me.lblSec07Text.Text = "Sec"
-        '
-        'txtTempAlarmTime
-        '
-        Me.txtTempAlarmTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTempAlarmTime.Location = New System.Drawing.Point(169, 284)
-        Me.txtTempAlarmTime.Name = "txtTempAlarmTime"
-        Me.txtTempAlarmTime.Size = New System.Drawing.Size(80, 26)
-        Me.txtTempAlarmTime.TabIndex = 533
-        Me.txtTempAlarmTime.Text = "300"
-        Me.txtTempAlarmTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblA01Text
         '
@@ -7366,10 +7393,14 @@ Public Class FormParameter
         CType(Me.picC01, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAlarmSetup.ResumeLayout(False)
         Me.grpAlarmSetup.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.pnlFlowShow.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picC05, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPurgeSetup.ResumeLayout(False)
         Me.grpPurgeSetup.PerformLayout()
