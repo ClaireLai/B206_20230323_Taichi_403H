@@ -41,7 +41,7 @@
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         btnTry.Visible = CelloUsbFlag  ' Not LC.IsTrial
         pnlSpecial.Visible = CelloUsbFlag
-        If CelloKeyFlag Then
+        If CelloUsbFlag Then
             chkLicenseOK.Checked = LC.IsOK
             chkLicenseExpired.Checked = LC.IsExpired
             chkLicenseTrial.Checked = LC.IsTrial
@@ -100,8 +100,8 @@
         LC.ResetTrial()
     End Sub
 
-    Private Sub picCelloLogo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picCelloLogo1.Click
-        If CelloKeyFlag Then
+    Private Sub picCelloLogo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picCelloLogo1.Click, lblRegisterText.Click
+        If CelloUsbFlag Then
             If Me.Width = 440 Then
                 txtTrialDays.Text = LC.GetTrialDays
                 Dim today As Date

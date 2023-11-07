@@ -505,19 +505,19 @@ Module Module_License_Data
     '        subkey.SetValue("Trial", trial + vbNullChar, Microsoft.Win32.RegistryValueKind.String)
     '        subkey.SetValue("TrialDays", TrialDate, Microsoft.Win32.RegistryValueKind.DWord)
     '    End Sub
-    '    Public Sub WriteLicenseCode(ByVal vcode As String)
-    '        Dim key As Microsoft.Win32.RegistryKey, subkey As Microsoft.Win32.RegistryKey
-    '        On Error Resume Next
-    '        key = Microsoft.Win32.Registry.LocalMachine
-    '        subkey = key.OpenSubKey("SOFTWARE\" + KeyName, True)
-    '        If IsNothing(subkey) Then
-    '            subkey = key.CreateSubKey("SOFTWARE\" + KeyName, Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree)
-    '            subkey.SetValue("Code", vcode + vbNullChar, Microsoft.Win32.RegistryValueKind.String)
-    '        Else
-    '            subkey.SetValue("Code", vcode + vbNullChar, Microsoft.Win32.RegistryValueKind.String)
-    '        End If
+    'Public Sub WriteLicenseCode(ByVal vcode As String)
+    '    Dim key As Microsoft.Win32.RegistryKey, subkey As Microsoft.Win32.RegistryKey
+    '    On Error Resume Next
+    '    key = Microsoft.Win32.Registry.LocalMachine
+    '    subkey = key.OpenSubKey("SOFTWARE\" + KeyName, True)
+    '    If IsNothing(subkey) Then
+    '        subkey = key.CreateSubKey("SOFTWARE\" + KeyName, Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree)
+    '        subkey.SetValue("Code", vcode + vbNullChar, Microsoft.Win32.RegistryValueKind.String)
+    '    Else
+    '        subkey.SetValue("Code", vcode + vbNullChar, Microsoft.Win32.RegistryValueKind.String)
+    '    End If
 
-    '    End Sub
+    'End Sub
     '    Public Sub WriteLicenseDate(ByVal vdate As String)
     '        Dim key As Microsoft.Win32.RegistryKey, subkey As Microsoft.Win32.RegistryKey
     '        Try

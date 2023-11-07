@@ -10,11 +10,14 @@ Module Module_AutoTask
     Public RunCounts As Integer = 0
     Public RunDataINIFile As String
     Public strLeakTestMess As String
+    Public strAutoPressCalMess As String
     Public bolVaccTest As Boolean
     Public bolLeakTest As Boolean = False
     Public LastTopTemp(2) As Integer
     Public LastBotTemp(2) As Integer
     Public timecounts As Integer = 0
+    Public sigTotalLeakRate As Single
+    Public FirstVacuum As Single
 
 
     Public Sub ReadRunData()
@@ -732,6 +735,7 @@ Module Module_AutoTask
         Static Control_State As Integer
         Static Old_State As Integer
         Static Last_State As Integer
+        'Static FirstVacuum As Single
         Dim i As Integer
         Static bol1 As Boolean
         Select Case Control_State
@@ -746,7 +750,7 @@ Module Module_AutoTask
                     Output(DoBotPurge2Index).Status = False
                     Output(DoBotPurge3Index).Status = False
                     '關門
-                    strLeakTestMess = Control_State.ToString + ":關門"
+                    strLeakTestMess = Control_State.ToString + ":关门"
                     If Check_PLC_X(DiSaftyGate01Index) Then
                         Output(DoDoor1UpIndex).Status = Not Output(DoDoor1UpIndex).Status
                         Output(DoDoor1DownIndex).Status = False
@@ -769,7 +773,7 @@ Module Module_AutoTask
             Case 1 '確認門關閉
                 If bolLeakTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":確認門關閉"
+                        strLeakTestMess = Control_State.ToString + ":确认门关闭"
                         If Check_PLC_X(DiPullerCloseIndex) Then
                             AutoProcessTimerEnabled = True
                             AutoProcessTimer = 1
@@ -784,7 +788,7 @@ Module Module_AutoTask
             Case 2 '開始抽真空
                 If bolLeakTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":開始抽真空"
+                        strLeakTestMess = Control_State.ToString + ":开始抽真空"
                         '設定配方真空模式
                         Output(DoVentIndex).Status = False
                         CAutoPumping.Start = True
@@ -805,7 +809,7 @@ Module Module_AutoTask
             Case 4 '檢查真空值是否已到,
                 If bolLeakTest Then
 
-                    strLeakTestMess = Control_State.ToString + ":檢查真空值是否已到"
+                    strLeakTestMess = Control_State.ToString + ":检查真空值是否已到"
                     If GaugeCHVac <= Val(VACUUMLEAKTESTBASE) Then
                         PumpingAlarm_Error = False
                         ProcessVacuumOK = True
@@ -828,16 +832,19 @@ Module Module_AutoTask
                     If AutoProcessTimerEnabled = False Then
                         Debug.Print("Timercount_enable=" + Timercount_enable.ToString)
                         Set_MBit(DoMPIndex, DEVICE_OFF)
-                        strLeakTestMess = Control_State.ToString + ":開始測漏"
+                        strLeakTestMess = Control_State.ToString + ":开始测漏记录"
                         If bol1 Then
+                            FirstVacuum = GaugeCHVac
                             Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+                            TotalTimercount = Timercount_now
+
                             Timercount_down = True
                             FormManual.StartLog()
                             CSVTimerStartPb_Status = True
                             bol1 = False
                         End If
                         If CSVTimerStartPb_Status = False Then
-                            Control_State = 99
+                            Control_State = 10
                         End If
                     End If
                 Else
@@ -845,7 +852,14 @@ Module Module_AutoTask
                     strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                     Control_State = 99
                 End If
+            Case 10 '結束
+                If bolLeakTest Then
+                    strLeakTestMess = Control_State.ToString + ":Leak Test Finish"
 
+                    sigTotalLeakRate = 0.9 * (GaugeCHVac - FirstVacuum) / 0.75 / TotalTimercount
+                    Control_State = 0
+                    bolLeakTest = False
+                End If
             Case 99
                 strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                 Timercount_down = False
@@ -875,7 +889,7 @@ Module Module_AutoTask
                     Output(DoBotPurge2Index).Status = False
                     Output(DoBotPurge3Index).Status = False
                     '關門
-                    strLeakTestMess = Control_State.ToString + ":關門"
+                    strLeakTestMess = Control_State.ToString + ":关门"
                     If Check_PLC_X(DiSaftyGate01Index) Then
                         Output(DoDoor1UpIndex).Status = Not Output(DoDoor1UpIndex).Status
                         Output(DoDoor1DownIndex).Status = False
@@ -891,14 +905,14 @@ Module Module_AutoTask
 
                 Else
                     Control_State = 0
-                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    'strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
                 End If
 
 
             Case 1 '確認門關閉
                 If bolVaccTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":確認門關閉"
+                        strLeakTestMess = Control_State.ToString + ":确认门关闭"
                         If Check_PLC_X(DiPullerCloseIndex) Then
                             AutoProcessTimerEnabled = True
                             AutoProcessTimer = 1
@@ -913,7 +927,7 @@ Module Module_AutoTask
             Case 2 '開始抽真空
                 If bolVaccTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":開始抽真空"
+                        strLeakTestMess = Control_State.ToString + ":开始抽真空"
                         '設定配方真空模式
                         Output(DoVentIndex).Status = False
                         CAutoPumping.Start = True
@@ -935,24 +949,36 @@ Module Module_AutoTask
             Case 3
                 If bolVaccTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ": 紀錄中"
-                        If bol1 Then
-                            Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
-                            Timercount_down = True
-                            FormManual.StartLog()
-                            CSVTimerStartPb_Status = True
-                            bol1 = False
+                        If PLC_Y(DoRVIndex) Then
+                            strLeakTestMess = Control_State.ToString + ": 纪录中"
+                            If bol1 Then
+                                Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+                                Timercount_down = True
+                                FormManual.StartLog()
+                                CSVTimerStartPb_Status = True
+                                bol1 = False
+                            End If
+                        ElseIf bol1 = False Then
+                            If CSVTimerStartPb_Status = False Then
+                                Control_State = 10
+                            End If
+
                         End If
-                        If CSVTimerStartPb_Status = False Then
-                            Control_State = 99
-                        End If
+
                     End If
                 Else
                     Last_State = Control_State
                     strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
                     Control_State = 99
                 End If
-
+            Case 10
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ": Vacuum Test Finish"
+                        bolVaccTest = False
+                        Control_State = 0
+                    End If
+                End If
             Case 99
                 strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
                 Timercount_down = False
@@ -2661,6 +2687,7 @@ Module Module_AutoTask
     Public Timercount_last As Integer
     Public Timercount_sys As Integer
     Public Timercount_now As Integer
+    Public TotalTimercount As Integer
 
     ''' <summary>
     ''' 手動畫面的計時功能
@@ -2711,13 +2738,13 @@ Module Module_AutoTask
                     Timercount_enable = False   '停止計時
                     If bolVaccTest And Timercount_enable = False Then
                         CAutoPumping.Start = False
-                        bolVaccTest = False
+                        'bolVaccTest = False
                         Output(DoMPIndex).Status = False
                         Output(DoRVIndex).Status = False
                         CSVTimerStartPb_Status = False
                     End If
                     If bolLeakTest And Timercount_enable = False Then
-                        bolLeakTest = False
+                        'bolLeakTest = False
                         CSVTimerStartPb_Status = False
                     End If
                     Timercount_up = False       '
@@ -3630,16 +3657,20 @@ Module Module_AutoTask
                         Write_PLC_R1100(DAPressure01Cal3Index + index * 5, 0)
                         Write_PLC_R1100(DAPressure01Cal4Index + index * 5, 0)
                         Write_PLC_R1100(DAPressure01Cal5Index + index * 5, 0)
-
-                        DelayTimer = 2
+                        strAutoPressCalMess = State.ToString + ":畫面歸0"
+                        DelayTimer = 5
                         State = 1
+                    Else
+                        'strAutoPressCalMess = ""
                     End If
+
                 Case 1 '執行第一段壓力
                     If StartRun Then
                         If DelayTimerEndbled = False Then '計時到
                             ManualControl(index).txtPressureSet.Text = PressCal(index).txtX1.Text
                             ManualControl(index).txtPressureRateSet.Text = 50
                             ManualControl(index).SetForce()
+                            strAutoPressCalMess = State.ToString + ":執行第一段壓力"
                             DelayTimerEndbled = True
                             DelayTimer = 10
                             State = 2
@@ -3649,10 +3680,15 @@ Module Module_AutoTask
                     End If
                 Case 2 '等待壓力1
                     If StartRun Then
-                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX1.Text)) < 5 Then
-                            DelayTimerEndbled = True
-                            DelayTimer = 10
-                            State = 3
+                        strAutoPressCalMess = State.ToString + ":等待第一段壓力"
+                        If DelayTimerEndbled = False Then '計時到
+                            If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX1.Text)) < 50 Then
+                                Debug.Print("壓力_1 =" + ManualControl(index).lblPressure.Text)
+                                strAutoPressCalMess = State.ToString + ":壓力到1"
+                                DelayTimerEndbled = True
+                                DelayTimer = 10
+                                State = 3
+                            End If
                         End If
                     Else
                         State = 99
@@ -3660,8 +3696,9 @@ Module Module_AutoTask
                 Case 3 '紀錄 1
                     If StartRun Then
                         If DelayTimerEndbled = False Then
-                            'PressCal(index).txtY1.Text = ManualControl(index).lblPressure.Text
-                            Write_PLC_R1100(DAPressure01Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            strAutoPressCalMess = State.ToString + ":紀錄 1"
+                            Debug.Print("壓力_1 =" + ManualControl(index).lblPressure.Text)
+                            Write_PLC_R1100(DAPressure01Cal1Index + index * 5, Val(ManualControl(index).lblPressure.Text))
                             DelayTimerEndbled = True
                             DelayTimer = 1
                             State = 4
@@ -3676,6 +3713,7 @@ Module Module_AutoTask
                             ManualControl(index).txtPressureRateSet.Text = 100
                             ManualControl(index).SetForce()
                             DelayTimerEndbled = True
+                            strAutoPressCalMess = State.ToString + ":執行第2段壓力"
                             DelayTimer = 10
                             State = 5
                         End If
@@ -3684,10 +3722,15 @@ Module Module_AutoTask
                     End If
                 Case 5 '等待壓力2
                     If StartRun Then
-                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX2.Text)) < 5 Then
-                            DelayTimerEndbled = True
-                            DelayTimer = 10
-                            State = 6
+                        If DelayTimerEndbled = False Then
+                            strAutoPressCalMess = State.ToString + ":等待第2段壓力"
+                            If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX2.Text)) < 50 Then
+                                Debug.Print("壓力_2 =" + ManualControl(index).lblPressure.Text)
+                                strAutoPressCalMess = State.ToString + ":第2段壓力到"
+                                DelayTimerEndbled = True
+                                DelayTimer = 10
+                                State = 6
+                            End If
                         End If
                     Else
                         State = 99
@@ -3695,8 +3738,9 @@ Module Module_AutoTask
                 Case 6 '紀錄 2
                     If StartRun Then
                         If DelayTimerEndbled = False Then
-                            'PressCal(index).txtY2.Text = ManualControl(index).lblPressure.Text
-                            Write_PLC_R1100(DAPressure02Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            strAutoPressCalMess = State.ToString + ":紀錄 2"
+                            Debug.Print("壓力_2 =" + ManualControl(index).lblPressure.Text)
+                            Write_PLC_R1100(DAPressure01Cal2Index + index * 5, Val(ManualControl(index).lblPressure.Text))
                             DelayTimerEndbled = True
                             DelayTimer = 1
                             State = 7
@@ -3711,6 +3755,7 @@ Module Module_AutoTask
                             ManualControl(index).txtPressureRateSet.Text = 100
                             ManualControl(index).SetForce()
                             DelayTimerEndbled = True
+                            strAutoPressCalMess = State.ToString + ":執行第3段壓力"
                             DelayTimer = 10
                             State = 8
                         End If
@@ -3719,10 +3764,15 @@ Module Module_AutoTask
                     End If
                 Case 8 '等待壓力3
                     If StartRun Then
-                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX3.Text)) < 5 Then
-                            DelayTimerEndbled = True
-                            DelayTimer = 10
-                            State = 9
+                        If DelayTimerEndbled = False Then
+                            strAutoPressCalMess = State.ToString + ":等待第3段壓力"
+                            If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX3.Text)) < 50 Then
+                                strAutoPressCalMess = State.ToString + ":第3段壓力到"
+                                Debug.Print("壓力_3 =" + ManualControl(index).lblPressure.Text)
+                                DelayTimerEndbled = True
+                                DelayTimer = 10
+                                State = 9
+                            End If
                         End If
                     Else
                         State = 99
@@ -3730,8 +3780,9 @@ Module Module_AutoTask
                 Case 9 '紀錄 3
                     If StartRun Then
                         If DelayTimerEndbled = False Then
-                            'PressCal(index).txtY3.Text = ManualControl(index).lblPressure.Text
-                            Write_PLC_R1100(DAPressure03Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            strAutoPressCalMess = State.ToString + ":紀錄 3"
+                            Debug.Print("壓力_3 =" + ManualControl(index).lblPressure.Text)
+                            Write_PLC_R1100(DAPressure01Cal3Index + index * 5, Val(ManualControl(index).lblPressure.Text))
                             DelayTimerEndbled = True
                             DelayTimer = 1
                             State = 10
@@ -3742,6 +3793,7 @@ Module Module_AutoTask
                 Case 10 '執行第4段壓力
                     If StartRun Then
                         If DelayTimerEndbled = False Then '計時到
+                            strAutoPressCalMess = State.ToString + ":執行第4段壓力"
                             ManualControl(index).txtPressureSet.Text = PressCal(index).txtX4.Text
                             ManualControl(index).txtPressureRateSet.Text = 200
                             ManualControl(index).SetForce()
@@ -3754,10 +3806,15 @@ Module Module_AutoTask
                     End If
                 Case 11 '等待壓力4
                     If StartRun Then
-                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX4.Text)) < 5 Then
-                            DelayTimerEndbled = True
-                            DelayTimer = 10
-                            State = 12
+                        strAutoPressCalMess = State.ToString + ":等待第4段壓力"
+                        If DelayTimerEndbled = False Then
+                            If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX4.Text)) < 50 Then
+                                strAutoPressCalMess = State.ToString + ":第4段壓力到"
+                                Debug.Print("壓力_4 =" + ManualControl(index).lblPressure.Text)
+                                DelayTimerEndbled = True
+                                DelayTimer = 10
+                                State = 12
+                            End If
                         End If
                     Else
                         State = 99
@@ -3765,13 +3822,13 @@ Module Module_AutoTask
                 Case 12 '紀錄 4
                     If StartRun Then
                         If DelayTimerEndbled = False Then
-                            If DelayTimerEndbled = False Then
-                                'PressCal(index).txtY4.Text = ManualControl(index).lblPressure.Text
-                                Write_PLC_R1100(DAPressure04Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
-                                DelayTimerEndbled = True
-                                DelayTimer = 1
-                                State = 13
-                            End If
+                            'PressCal(index).txtY4.Text = ManualControl(index).lblPressure.Text
+                            Write_PLC_R1100(DAPressure01Cal4Index + index * 5, Val(ManualControl(index).lblPressure.Text))
+                            DelayTimerEndbled = True
+                            strAutoPressCalMess = State.ToString + ":紀錄 4"
+                            Debug.Print("壓力_4 =" + ManualControl(index).lblPressure.Text)
+                            DelayTimer = 1
+                            State = 13
                         End If
                     Else
                         State = 99
@@ -3779,6 +3836,7 @@ Module Module_AutoTask
                 Case 13 '執行第5段壓力
                     If StartRun Then
                         If DelayTimerEndbled = False Then '計時到
+                            strAutoPressCalMess = State.ToString + ":執行第5段壓力"
                             ManualControl(index).txtPressureSet.Text = PressCal(index).txtX5.Text
                             ManualControl(index).txtPressureRateSet.Text = 250
                             ManualControl(index).SetForce()
@@ -3791,10 +3849,15 @@ Module Module_AutoTask
                     End If
                 Case 14 '等待壓力5
                     If StartRun Then
-                        If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX5.Text)) < 5 Then
-                            DelayTimerEndbled = True
-                            DelayTimer = 10
-                            State = 15
+                        strAutoPressCalMess = State.ToString + ":等待第5段壓力"
+                        If DelayTimerEndbled = False Then
+                            If Math.Abs(Val(ManualControl(index).lblPressure.Text) - Val(PressCal(index).txtX5.Text)) < 50 Then
+                                strAutoPressCalMess = State.ToString + ":第5段壓力到"
+                                Debug.Print("壓力_5 =" + ManualControl(index).lblPressure.Text)
+                                DelayTimerEndbled = True
+                                DelayTimer = 10
+                                State = 15
+                            End If
                         End If
                     Else
                         State = 99
@@ -3803,17 +3866,31 @@ Module Module_AutoTask
                     If StartRun Then
                         If DelayTimerEndbled = False Then
                             'PressCal(index).txtY5.Text = ManualControl(index).lblPressure.Text
-                            Write_PLC_R1100(DAPressure05Cal1Index + index * 5, GetPLCRValue(ADOriginPress04Index))
+                            Write_PLC_R1100(DAPressure01Cal5Index + index * 5, Val(ManualControl(index).lblPressure.Text))
                             DelayTimerEndbled = True
+                            Debug.Print("壓力_5 =" + ManualControl(index).lblPressure.Text)
+                            strAutoPressCalMess = State.ToString + ":紀錄 5"
                             DelayTimer = 1
-                            State = 99
+                            State = 20
                         End If
                     Else
                         State = 99
                     End If
+                Case 20 '完成
+                    If StartRun Then
+                        If DelayTimerEndbled = False Then
+                            strAutoPressCalMess = State.ToString + ":完成"
+                            DelayTimer = 1
+                            State = 0
+                            StartRun = False
+                        End If
+                    Else
+                        State = 0
+                    End If
                 Case 99
                     DelayTimerEndbled = False
                     DelayTimer = 0
+                    strAutoPressCalMess = State.ToString + ":Abort"
                     'RunCount = 0
                     State = 0
                     StartRun = False
@@ -3827,7 +3904,7 @@ Module Module_AutoTask
             Else
                 DelayTimer = 0
             End If
-            timer1.Interval = 100
+            timer1.Interval = 1000
         End Sub
     End Class
 #End Region

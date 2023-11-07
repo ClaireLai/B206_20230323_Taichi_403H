@@ -307,7 +307,7 @@
         Next
         '可以 vent
         VentOK = (VentOKCount = 0)
-        WaterPressStr = Format(Get_PLC_R1000(ADWaterPressIndex), "0.00")
+        WaterPressStr = Format(Get_PLC_R1000(ADWaterPressIndex) / 100, "0.00")
 
     End Sub
     'End Class

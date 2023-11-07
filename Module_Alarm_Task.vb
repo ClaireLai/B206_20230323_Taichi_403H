@@ -789,7 +789,7 @@ Module Module_Alarm_Task
         If CommLivePLC Then
             AlarmError(Alarm_Name.CDA_Error) = Not Check_PLC_X(DiCDAIndex)
             AlarmError(Alarm_Name.N2_Error) = Not Check_PLC_X(DiN2Index)
-            AlarmError(Alarm_Name.WATER_Error1) = Not Check_PLC_X(DiWater01Index)
+            'AlarmError(Alarm_Name.WATER_Error1) = Not Check_PLC_X(DiWater01Index)
             'AlarmError(Alarm_Name.WATER_Error2) = Not Check_PLC_X(DiWater02Index)
             AlarmError(Alarm_Name.EMO_Error) = Not Check_PLC_X(DiEMOIndex)
             AlarmError(Alarm_Name.MPOL_Error) = Check_PLC_X(DiDPFailIndex)

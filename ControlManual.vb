@@ -682,16 +682,16 @@
                     End If
                 End If
             End If
-            If Check_PLC_X(DiWater01Index) = False Then
-                If CelloUsbFlag Then
-                    If MsgBoxLangYesNo("無冷卻水壓!,確認要開啟加熱?", "No Cooling Water Flow,Still Force ON?") = False Then
-                        Exit Sub
-                    End If
-                Else
-                    MsgBoxLangErr("無冷卻水壓!", "No Cooling Water Pressure!!")
-                    Exit Sub
-                End If
-            End If
+            'If Check_PLC_X(DiWater01Index) = False Then
+            '    If CelloUsbFlag Then
+            '        If MsgBoxLangYesNo("無冷卻水壓!,確認要開啟加熱?", "No Cooling Water Flow,Still Force ON?") = False Then
+            '            Exit Sub
+            '        End If
+            '    Else
+            '        MsgBoxLangErr("無冷卻水壓!", "No Cooling Water Pressure!!")
+            '        Exit Sub
+            '    End If
+            'End If
             If Check_PLC_X(DiDoor1UpIndex) = False Or Check_PLC_X(DiDoor2UpIndex) = False Then
                 If CelloUsbFlag Then
                     If MsgBoxLangYesNo("腔門未關閉!,確認要開啟加熱?", "Door not Close!, Still Force ON?") = False Then

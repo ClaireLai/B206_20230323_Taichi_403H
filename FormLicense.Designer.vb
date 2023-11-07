@@ -54,13 +54,13 @@ Partial Class FormLicense
         Me.lblCurrentDate = New System.Windows.Forms.Label()
         Me.txtTrialDays = New System.Windows.Forms.TextBox()
         Me.pnlSpecial = New System.Windows.Forms.Panel()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.lblHDDSN = New System.Windows.Forms.Label()
         Me.lblUsedMins = New System.Windows.Forms.Label()
         Me.lblHDD1ID = New System.Windows.Forms.Label()
         Me.lblMBID = New System.Windows.Forms.Label()
         Me.lblCPUID = New System.Windows.Forms.Label()
         Me.lblTotalMins = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         CType(Me.picCelloLogo1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSpecial.SuspendLayout()
         Me.SuspendLayout()
@@ -442,6 +442,19 @@ Partial Class FormLicense
         Me.pnlSpecial.TabIndex = 241
         Me.pnlSpecial.Visible = False
         '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CalendarFont = New System.Drawing.Font("新細明體", 14.0!)
+        Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
+        Me.DateTimePicker1.Font = New System.Drawing.Font("Arial", 26.0!)
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker1.Location = New System.Drawing.Point(13, 229)
+        Me.DateTimePicker1.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
+        Me.DateTimePicker1.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(279, 47)
+        Me.DateTimePicker1.TabIndex = 560
+        '
         'lblHDDSN
         '
         Me.lblHDDSN.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -515,19 +528,6 @@ Partial Class FormLicense
         Me.lblTotalMins.TabIndex = 241
         Me.lblTotalMins.Text = "0123456789012"
         Me.lblTotalMins.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.CalendarFont = New System.Drawing.Font("新細明體", 14.0!)
-        Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Arial", 26.0!)
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(13, 229)
-        Me.DateTimePicker1.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
-        Me.DateTimePicker1.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(279, 47)
-        Me.DateTimePicker1.TabIndex = 560
         '
         'FormLicense
         '

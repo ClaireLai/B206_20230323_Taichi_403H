@@ -363,19 +363,19 @@
     Public Const DAPressureCal4XIndex As Integer = 99
     Public Const DAPressureCal5XIndex As Integer = 100
     'R1305
-    Public Const DAPressure01Cal1Index As Integer = 101   '壓合壓力5點校正實際值 R1305
+    Public Const DAPressure01Cal1Index As Integer = 101   '第一頭 壓合壓力5點校正實際值 R1305
     Public Const DAPressure01Cal2Index As Integer = 102
     Public Const DAPressure01Cal3Index As Integer = 103
     Public Const DAPressure01Cal4Index As Integer = 104
     Public Const DAPressure01Cal5Index As Integer = 105
     'R1310
-    Public Const DAPressure02Cal1Index As Integer = 106   '壓合壓力5點校正實際值 R1310
+    Public Const DAPressure02Cal1Index As Integer = 106   '第二頭 壓合壓力5點校正實際值 R1310
     Public Const DAPressure02Cal2Index As Integer = 107
     Public Const DAPressure02Cal3Index As Integer = 108
     Public Const DAPressure02Cal4Index As Integer = 109
     Public Const DAPressure02Cal5Index As Integer = 110
     'R1315
-    Public Const DAPressure03Cal1Index As Integer = 111   '壓合壓力5點校正實際值 R1315
+    Public Const DAPressure03Cal1Index As Integer = 111   '第三頭 壓合壓力5點校正實際值 R1315
     Public Const DAPressure03Cal2Index As Integer = 112
     Public Const DAPressure03Cal3Index As Integer = 113
     Public Const DAPressure03Cal4Index As Integer = 114
@@ -489,7 +489,7 @@
     '=====================================================
 
 
-
+    'R1000
     Public Const ADBoundingP01Index As Integer = 0     '目前 LOAD CELL 值(校正過已扣重)
     Public Const ADBoundingP02Index As Integer = 1     '目前 LOAD CELL 值(校正過已扣重)
     Public Const ADBoundingP03Index As Integer = 2     '目前 LOAD CELL 值(校正過已扣重)
@@ -573,7 +573,7 @@
     Public Const ADBotTemp05Index As Integer = 89       '目前 下壓頭溫度值
     Public Const ADTopTemp06Index As Integer = 90        '目前 上壓頭溫度值
     Public Const ADBotTemp06Index As Integer = 91       '目前 下壓頭溫度值
-    Public Const ADWaterPressIndex As Integer = 96       '目前 水壓
+    Public Const ADWaterPressIndex As Integer = 92       '目前 水壓
 
     'R1200 ~R1263 從 96開始
     Public Const ADTopFlowMeter01Index As Integer = 96        '上水流量01R1200
@@ -604,18 +604,18 @@
     Public Const ADScalerB06Index As Integer = 119        '油壓比例閥高壓輸出
     'R1224
     Public Const ADOriginPress01Index As Integer = 120     '壓力未校正值
-    Public Const ADOriginPress02Index As Integer = 121     '壓力未校正值
+    Public Const ADOriginPress02Index As Integer = 121     '壓力未校正值  轉換後壓力值
     Public Const ADOriginPress03Index As Integer = 122     '壓力未校正值
     Public Const ADOriginPress04Index As Integer = 123     '壓力未校正值
     Public Const ADOriginPress05Index As Integer = 124     '壓力未校正值
     Public Const ADOriginPress06Index As Integer = 125     '壓力未校正值
     'R1230
-    Public Const ADOriginPressAD01Index As Integer = 126     '壓力未校正值
-    Public Const ADOriginPressAD02Index As Integer = 127     '壓力未校正值
-    Public Const ADOriginPressAD03Index As Integer = 128     '壓力未校正值
-    Public Const ADOriginPressAD04Index As Integer = 129     '壓力未校正值
-    Public Const ADOriginPressAD05Index As Integer = 130     '壓力未校正值
-    Public Const ADOriginPressAD06Index As Integer = 131     '壓力未校正值
+    Public Const ADOriginPressAD01Index As Integer = 126     '壓力AD值
+    Public Const ADOriginPressAD02Index As Integer = 127     '壓力AD值
+    Public Const ADOriginPressAD03Index As Integer = 128     '壓力AD值
+    Public Const ADOriginPressAD04Index As Integer = 129     '壓力AD值
+    Public Const ADOriginPressAD05Index As Integer = 130     '壓力AD值
+    Public Const ADOriginPressAD06Index As Integer = 131     '壓力AD值
     'R1236
     Public Const ADTopPower01Index As Integer = 132     '壓力未校正值
     Public Const ADBotPower01Index As Integer = 133     '壓力未校正值

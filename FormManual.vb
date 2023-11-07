@@ -1,4 +1,4 @@
-Public Class FormManual
+ï»¿Public Class FormManual
     Inherits System.Windows.Forms.Form
 
     Friend WithEvents btnAutoPurge As System.Windows.Forms.Button
@@ -98,21 +98,26 @@ Public Class FormManual
     Friend WithEvents lbvacc As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents lblLeakTest As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents lbLeak As Label
+    Friend WithEvents Label6 As Label
     Dim maxvalue(10) As Double
 
-#Region " Windows Form ³]­p¤u¨ã²£¥Íªºµ{¦¡½X "
+#Region " Windows Form è¨­è¨ˆå·¥å…·ç”¢ç”Ÿçš„ç¨‹å¼ç¢¼ "
 
     Public Sub New()
         MyBase.New()
 
-        '¦¹©I¥s¬° Windows Form ³]­p¤u¨ãªº¥²­n¶µ¡C
+        'æ­¤å‘¼å«ç‚º Windows Form è¨­è¨ˆå·¥å…·çš„å¿…è¦é …ã€‚
         InitializeComponent()
 
-        '¦b InitializeComponent() ©I¥s¤§«á¥[¤J©Ò¦³ªºªì©l³]©w
+        'åœ¨ InitializeComponent() å‘¼å«ä¹‹å¾ŒåŠ å…¥æ‰€æœ‰çš„åˆå§‹è¨­å®š
 
     End Sub
 
-    'Form ÂĞ¼g Dispose ¥H²M°£¤¸¥ó²M³æ¡C
+    'Form è¦†å¯« Dispose ä»¥æ¸…é™¤å…ƒä»¶æ¸…å–®ã€‚
     Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing Then
             If Not (components Is Nothing) Then
@@ -122,12 +127,12 @@ Public Class FormManual
         MyBase.Dispose(disposing)
     End Sub
 
-    '¬° Windows Form ³]­p¤u¨ãªº¥²­n¶µ
+    'ç‚º Windows Form è¨­è¨ˆå·¥å…·çš„å¿…è¦é …
     Private components As System.ComponentModel.IContainer
 
-    'ª`·N: ¥H¤U¬° Windows Form ³]­p¤u¨ã©Ò»İªºµ{§Ç
-    '±z¥i¥H¨Ï¥Î Windows Form ³]­p¤u¨ã¶i¦æ­×§ï¡C
-    '½Ğ¤Å¨Ï¥Îµ{¦¡½X½s¿è¾¹¨Ó­×§ï³o¨Çµ{§Ç¡C
+    'æ³¨æ„: ä»¥ä¸‹ç‚º Windows Form è¨­è¨ˆå·¥å…·æ‰€éœ€çš„ç¨‹åº
+    'æ‚¨å¯ä»¥ä½¿ç”¨ Windows Form è¨­è¨ˆå·¥å…·é€²è¡Œä¿®æ”¹ã€‚
+    'è«‹å‹¿ä½¿ç”¨ç¨‹å¼ç¢¼ç·¨è¼¯å™¨ä¾†ä¿®æ”¹é€™äº›ç¨‹åºã€‚
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents btnYReset As System.Windows.Forms.Button
     Friend WithEvents btnPrintCurve As System.Windows.Forms.Button
@@ -165,6 +170,7 @@ Public Class FormManual
         Me.btnPumpProtection = New System.Windows.Forms.Button()
         Me.lblCursorValue = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.lblWaterPress = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.picC05 = New System.Windows.Forms.PictureBox()
@@ -211,11 +217,16 @@ Public Class FormManual
         Me.tabManual = New System.Windows.Forms.TabControl()
         Me.tabPageVacuum = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.txtBasePress = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.txtVacuumTestTimeMin = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblLeakTest = New System.Windows.Forms.Label()
+        Me.lbvacc = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtBasePress = New System.Windows.Forms.TextBox()
         Me.btnLeakRateTest = New System.Windows.Forms.Button()
         Me.btnMaxVaccTest = New System.Windows.Forms.Button()
         Me.btnChamberLight = New System.Windows.Forms.Button()
@@ -231,9 +242,8 @@ Public Class FormManual
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.lbvacc = New System.Windows.Forms.Label()
-        Me.lblLeakTest = New System.Windows.Forms.Label()
+        Me.lbLeak = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -257,6 +267,7 @@ Public Class FormManual
         Me.tabManual.SuspendLayout()
         Me.tabPageVacuum.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.grpDoorControl.SuspendLayout()
         Me.tabPage1to3.SuspendLayout()
         Me.tabPage4to6.SuspendLayout()
@@ -340,7 +351,7 @@ Public Class FormManual
         Me.tabPageDataLog.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPageDataLog.Size = New System.Drawing.Size(441, 236)
         Me.tabPageDataLog.TabIndex = 0
-        Me.tabPageDataLog.Text = "¸ê®Æ°O¿ı"
+        Me.tabPageDataLog.Text = "è³‡æ–™è¨˜éŒ„"
         '
         'lblSec02Text
         '
@@ -361,7 +372,7 @@ Public Class FormManual
         Me.lblDataLogStepTimeText.Name = "lblDataLogStepTimeText"
         Me.lblDataLogStepTimeText.Size = New System.Drawing.Size(129, 19)
         Me.lblDataLogStepTimeText.TabIndex = 115
-        Me.lblDataLogStepTimeText.Text = "°O¿ı¶¡¹j(¬í):"
+        Me.lblDataLogStepTimeText.Text = "è¨˜éŒ„é–“éš”(ç§’):"
         Me.lblDataLogStepTimeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnOpenLogFile
@@ -374,7 +385,7 @@ Public Class FormManual
         Me.btnOpenLogFile.Name = "btnOpenLogFile"
         Me.btnOpenLogFile.Size = New System.Drawing.Size(114, 41)
         Me.btnOpenLogFile.TabIndex = 118
-        Me.btnOpenLogFile.Text = "¶}±ÒÀÉ®×"
+        Me.btnOpenLogFile.Text = "é–‹å•Ÿæª”æ¡ˆ"
         Me.btnOpenLogFile.UseVisualStyleBackColor = False
         '
         'btnStartLog
@@ -387,7 +398,7 @@ Public Class FormManual
         Me.btnStartLog.Name = "btnStartLog"
         Me.btnStartLog.Size = New System.Drawing.Size(114, 41)
         Me.btnStartLog.TabIndex = 112
-        Me.btnStartLog.Text = "¶}©l°O¿ı"
+        Me.btnStartLog.Text = "é–‹å§‹è¨˜éŒ„"
         Me.btnStartLog.UseVisualStyleBackColor = False
         '
         'lblDatalogFileName
@@ -430,7 +441,7 @@ Public Class FormManual
         Me.tabPageTimer.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPageTimer.Size = New System.Drawing.Size(441, 236)
         Me.tabPageTimer.TabIndex = 1
-        Me.tabPageTimer.Text = "­p®É¾¹"
+        Me.tabPageTimer.Text = "è¨ˆæ™‚å™¨"
         '
         'lblTimerMin
         '
@@ -465,7 +476,7 @@ Public Class FormManual
         Me.btnTimerStart.Name = "btnTimerStart"
         Me.btnTimerStart.Size = New System.Drawing.Size(116, 39)
         Me.btnTimerStart.TabIndex = 84
-        Me.btnTimerStart.Text = "¶}©l­p®É"
+        Me.btnTimerStart.Text = "é–‹å§‹è¨ˆæ™‚"
         Me.btnTimerStart.UseVisualStyleBackColor = False
         '
         'lblTimerSec
@@ -545,7 +556,7 @@ Public Class FormManual
         Me.btnTimerReset.Name = "btnTimerReset"
         Me.btnTimerReset.Size = New System.Drawing.Size(116, 39)
         Me.btnTimerReset.TabIndex = 85
-        Me.btnTimerReset.Text = "²M°£¸ê®Æ"
+        Me.btnTimerReset.Text = "æ¸…é™¤è³‡æ–™"
         Me.btnTimerReset.UseVisualStyleBackColor = False
         '
         'Timer1
@@ -560,7 +571,7 @@ Public Class FormManual
         Me.btnYReset.Name = "btnYReset"
         Me.btnYReset.Size = New System.Drawing.Size(62, 36)
         Me.btnYReset.TabIndex = 520
-        Me.btnYReset.Text = "­«³]"
+        Me.btnYReset.Text = "é‡è¨­"
         Me.btnYReset.UseVisualStyleBackColor = False
         '
         'btnPrintCurve
@@ -572,7 +583,7 @@ Public Class FormManual
         Me.btnPrintCurve.Name = "btnPrintCurve"
         Me.btnPrintCurve.Size = New System.Drawing.Size(62, 36)
         Me.btnPrintCurve.TabIndex = 522
-        Me.btnPrintCurve.Text = "¦C¦L"
+        Me.btnPrintCurve.Text = "åˆ—å°"
         Me.btnPrintCurve.UseVisualStyleBackColor = False
         '
         'OpenFileDialog1
@@ -589,7 +600,7 @@ Public Class FormManual
         Me.btnAutoVacuum.Name = "btnAutoVacuum"
         Me.btnAutoVacuum.Size = New System.Drawing.Size(108, 44)
         Me.btnAutoVacuum.TabIndex = 532
-        Me.btnAutoVacuum.Text = "¦Û°Ê©â®ğ"
+        Me.btnAutoVacuum.Text = "è‡ªå‹•æŠ½æ°£"
         Me.btnAutoVacuum.UseVisualStyleBackColor = False
         '
         'btnPumpProtection
@@ -602,7 +613,7 @@ Public Class FormManual
         Me.btnPumpProtection.Name = "btnPumpProtection"
         Me.btnPumpProtection.Size = New System.Drawing.Size(108, 28)
         Me.btnPumpProtection.TabIndex = 533
-        Me.btnPumpProtection.Text = "¯uªÅºû«ù"
+        Me.btnPumpProtection.Text = "çœŸç©ºç¶­æŒ"
         Me.btnPumpProtection.UseVisualStyleBackColor = False
         '
         'lblCursorValue
@@ -620,6 +631,7 @@ Public Class FormManual
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.lblWaterPress)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.picC05)
@@ -653,15 +665,25 @@ Public Class FormManual
         Me.Panel2.Size = New System.Drawing.Size(449, 367)
         Me.Panel2.TabIndex = 541
         '
+        'Label5
+        '
+        Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(411, 282)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(30, 20)
+        Me.Label5.TabIndex = 564
+        Me.Label5.Text = "Kg"
+        '
         'lblWaterPress
         '
         Me.lblWaterPress.BackColor = System.Drawing.Color.Black
         Me.lblWaterPress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblWaterPress.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWaterPress.ForeColor = System.Drawing.Color.Lime
-        Me.lblWaterPress.Location = New System.Drawing.Point(373, 282)
+        Me.lblWaterPress.Location = New System.Drawing.Point(359, 282)
         Me.lblWaterPress.Name = "lblWaterPress"
-        Me.lblWaterPress.Size = New System.Drawing.Size(63, 24)
+        Me.lblWaterPress.Size = New System.Drawing.Size(45, 24)
         Me.lblWaterPress.TabIndex = 563
         Me.lblWaterPress.Text = "0"
         Me.lblWaterPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -669,11 +691,11 @@ Public Class FormManual
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(326, 284)
+        Me.Label3.Location = New System.Drawing.Point(316, 284)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(41, 20)
         Me.Label3.TabIndex = 562
-        Me.Label3.Text = "¤ôÀ£"
+        Me.Label3.Text = "æ°´å£“"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'picC05
@@ -1134,7 +1156,7 @@ Public Class FormManual
         Me.btnSaveAs.Name = "btnSaveAs"
         Me.btnSaveAs.Size = New System.Drawing.Size(62, 36)
         Me.btnSaveAs.TabIndex = 546
-        Me.btnSaveAs.Text = "¥t¦s"
+        Me.btnSaveAs.Text = "å¦å­˜"
         Me.btnSaveAs.UseVisualStyleBackColor = False
         '
         'tabManual
@@ -1165,70 +1187,131 @@ Public Class FormManual
         Me.tabPageVacuum.Name = "tabPageVacuum"
         Me.tabPageVacuum.Size = New System.Drawing.Size(1016, 671)
         Me.tabPageVacuum.TabIndex = 2
-        Me.tabPageVacuum.Text = "¯uªÅ©â®ğ¤Î°O¿ı"
+        Me.tabPageVacuum.Text = "çœŸç©ºæŠ½æ°£åŠè¨˜éŒ„"
         '
         'Panel4
         '
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label6)
+        Me.Panel4.Controls.Add(Me.lbLeak)
+        Me.Panel4.Controls.Add(Me.Button1)
+        Me.Panel4.Controls.Add(Me.GroupBox1)
         Me.Panel4.Controls.Add(Me.lblLeakTest)
         Me.Panel4.Controls.Add(Me.lbvacc)
         Me.Panel4.Controls.Add(Me.Label4)
         Me.Panel4.Controls.Add(Me.txtBasePress)
-        Me.Panel4.Controls.Add(Me.Label2)
-        Me.Panel4.Controls.Add(Me.txtVacuumTestTimeHr)
-        Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Controls.Add(Me.txtVacuumTestTimeMin)
         Me.Panel4.Controls.Add(Me.btnLeakRateTest)
         Me.Panel4.Controls.Add(Me.btnMaxVaccTest)
         Me.Panel4.Location = New System.Drawing.Point(739, 400)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(212, 263)
+        Me.Panel4.Size = New System.Drawing.Size(252, 263)
         Me.Panel4.TabIndex = 547
         '
-        'txtBasePress
+        'Button1
         '
-        Me.txtBasePress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBasePress.Location = New System.Drawing.Point(89, 202)
-        Me.txtBasePress.Name = "txtBasePress"
-        Me.txtBasePress.Size = New System.Drawing.Size(79, 26)
-        Me.txtBasePress.TabIndex = 553
-        Me.txtBasePress.Text = "9.90E-2"
-        Me.txtBasePress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Button1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(226, 3)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(22, 27)
+        Me.Button1.TabIndex = 568
+        Me.Button1.Text = "?"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtVacuumTestTimeHr)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.txtVacuumTestTimeMin)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 73)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(191, 48)
+        Me.GroupBox1.TabIndex = 566
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "æ¸¬è©¦æ™‚é–“"
+        '
+        'txtVacuumTestTimeHr
+        '
+        Me.txtVacuumTestTimeHr.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(29, 17)
+        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
+        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 26)
+        Me.txtVacuumTestTimeHr.TabIndex = 551
+        Me.txtVacuumTestTimeHr.Text = "0"
         '
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(67, 79)
+        Me.Label2.Location = New System.Drawing.Point(70, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 20)
+        Me.Label2.Size = New System.Drawing.Size(30, 20)
         Me.Label2.TabIndex = 552
         Me.Label2.Text = "Hr"
         '
-        'txtVacuumTestTimeHr
+        'txtVacuumTestTimeMin
         '
-        Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(26, 73)
-        Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
-        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 29)
-        Me.txtVacuumTestTimeHr.TabIndex = 551
-        Me.txtVacuumTestTimeHr.Text = "0"
+        Me.txtVacuumTestTimeMin.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVacuumTestTimeMin.Location = New System.Drawing.Point(106, 16)
+        Me.txtVacuumTestTimeMin.Name = "txtVacuumTestTimeMin"
+        Me.txtVacuumTestTimeMin.Size = New System.Drawing.Size(35, 26)
+        Me.txtVacuumTestTimeMin.TabIndex = 549
+        Me.txtVacuumTestTimeMin.Text = "1"
         '
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(67, 114)
+        Me.Label1.Location = New System.Drawing.Point(147, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 20)
         Me.Label1.TabIndex = 550
         Me.Label1.Text = "min"
         '
-        'txtVacuumTestTimeMin
+        'lblLeakTest
         '
-        Me.txtVacuumTestTimeMin.Location = New System.Drawing.Point(26, 108)
-        Me.txtVacuumTestTimeMin.Name = "txtVacuumTestTimeMin"
-        Me.txtVacuumTestTimeMin.Size = New System.Drawing.Size(35, 29)
-        Me.txtVacuumTestTimeMin.TabIndex = 549
-        Me.txtVacuumTestTimeMin.Text = "1"
+        Me.lblLeakTest.AutoSize = True
+        Me.lblLeakTest.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLeakTest.ForeColor = System.Drawing.Color.Blue
+        Me.lblLeakTest.Location = New System.Drawing.Point(15, 231)
+        Me.lblLeakTest.Name = "lblLeakTest"
+        Me.lblLeakTest.Size = New System.Drawing.Size(56, 18)
+        Me.lblLeakTest.TabIndex = 565
+        Me.lblLeakTest.Text = "Label5"
+        '
+        'lbvacc
+        '
+        Me.lbvacc.BackColor = System.Drawing.Color.Black
+        Me.lbvacc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbvacc.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbvacc.ForeColor = System.Drawing.Color.Lime
+        Me.lbvacc.Location = New System.Drawing.Point(142, 33)
+        Me.lbvacc.Name = "lbvacc"
+        Me.lbvacc.Size = New System.Drawing.Size(63, 24)
+        Me.lbvacc.TabIndex = 564
+        Me.lbvacc.Text = "0"
+        Me.lbvacc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Black
+        Me.Label4.Location = New System.Drawing.Point(11, 191)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(79, 20)
+        Me.Label4.TabIndex = 554
+        Me.Label4.Text = "åŸºç¤å£“åŠ›"
+        '
+        'txtBasePress
+        '
+        Me.txtBasePress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBasePress.Location = New System.Drawing.Point(96, 186)
+        Me.txtBasePress.Name = "txtBasePress"
+        Me.txtBasePress.Size = New System.Drawing.Size(79, 26)
+        Me.txtBasePress.TabIndex = 553
+        Me.txtBasePress.Text = "9.90E-2"
+        Me.txtBasePress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnLeakRateTest
         '
@@ -1236,11 +1319,11 @@ Public Class FormManual
         Me.btnLeakRateTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLeakRateTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeakRateTest.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLeakRateTest.Location = New System.Drawing.Point(14, 154)
+        Me.btnLeakRateTest.Location = New System.Drawing.Point(13, 136)
         Me.btnLeakRateTest.Name = "btnLeakRateTest"
         Me.btnLeakRateTest.Size = New System.Drawing.Size(122, 44)
         Me.btnLeakRateTest.TabIndex = 548
-        Me.btnLeakRateTest.Text = "¬ªº|²v´ú¸Õ"
+        Me.btnLeakRateTest.Text = "æ´©æ¼ç‡æ¸¬è©¦"
         Me.btnLeakRateTest.UseVisualStyleBackColor = False
         '
         'btnMaxVaccTest
@@ -1253,7 +1336,7 @@ Public Class FormManual
         Me.btnMaxVaccTest.Name = "btnMaxVaccTest"
         Me.btnMaxVaccTest.Size = New System.Drawing.Size(122, 44)
         Me.btnMaxVaccTest.TabIndex = 547
-        Me.btnMaxVaccTest.Text = "·¥­­À£¤O´ú¸Õ"
+        Me.btnMaxVaccTest.Text = "æ¥µé™å£“åŠ›æ¸¬è©¦"
         Me.btnMaxVaccTest.UseVisualStyleBackColor = False
         '
         'btnChamberLight
@@ -1266,7 +1349,7 @@ Public Class FormManual
         Me.btnChamberLight.Name = "btnChamberLight"
         Me.btnChamberLight.Size = New System.Drawing.Size(101, 44)
         Me.btnChamberLight.TabIndex = 544
-        Me.btnChamberLight.Text = "µÄ¤º·Ó©ú"
+        Me.btnChamberLight.Text = "è…”å…§ç…§æ˜"
         Me.btnChamberLight.UseVisualStyleBackColor = False
         '
         'grpDoorControl
@@ -1281,7 +1364,7 @@ Public Class FormManual
         Me.grpDoorControl.Size = New System.Drawing.Size(268, 227)
         Me.grpDoorControl.TabIndex = 543
         Me.grpDoorControl.TabStop = False
-        Me.grpDoorControl.Text = "µÄªù¾Ş§@"
+        Me.grpDoorControl.Text = "è…”é–€æ“ä½œ"
         '
         'btnPullerClose
         '
@@ -1293,7 +1376,7 @@ Public Class FormManual
         Me.btnPullerClose.Name = "btnPullerClose"
         Me.btnPullerClose.Size = New System.Drawing.Size(116, 44)
         Me.btnPullerClose.TabIndex = 538
-        Me.btnPullerClose.Text = "ªù©Ô¬ûÃö³¬"
+        Me.btnPullerClose.Text = "é–€æ‹‰ç¼¸é—œé–‰"
         Me.btnPullerClose.UseVisualStyleBackColor = False
         '
         'btnDoor2Down
@@ -1306,7 +1389,7 @@ Public Class FormManual
         Me.btnDoor2Down.Name = "btnDoor2Down"
         Me.btnDoor2Down.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor2Down.TabIndex = 536
-        Me.btnDoor2Down.Text = "µÄªù 2 ¤U­°"
+        Me.btnDoor2Down.Text = "è…”é–€ 2 ä¸‹é™"
         Me.btnDoor2Down.UseVisualStyleBackColor = False
         '
         'btnDoor1Down
@@ -1319,7 +1402,7 @@ Public Class FormManual
         Me.btnDoor1Down.Name = "btnDoor1Down"
         Me.btnDoor1Down.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor1Down.TabIndex = 535
-        Me.btnDoor1Down.Text = "µÄªù 1 ¤U­°"
+        Me.btnDoor1Down.Text = "è…”é–€ 1 ä¸‹é™"
         Me.btnDoor1Down.UseVisualStyleBackColor = False
         '
         'btnDoor2Up
@@ -1332,7 +1415,7 @@ Public Class FormManual
         Me.btnDoor2Up.Name = "btnDoor2Up"
         Me.btnDoor2Up.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor2Up.TabIndex = 534
-        Me.btnDoor2Up.Text = "µÄªù 2 ¤W¤É"
+        Me.btnDoor2Up.Text = "è…”é–€ 2 ä¸Šå‡"
         Me.btnDoor2Up.UseVisualStyleBackColor = False
         '
         'btnDoor1Up
@@ -1345,7 +1428,7 @@ Public Class FormManual
         Me.btnDoor1Up.Name = "btnDoor1Up"
         Me.btnDoor1Up.Size = New System.Drawing.Size(116, 44)
         Me.btnDoor1Up.TabIndex = 533
-        Me.btnDoor1Up.Text = "µÄªù 1 ¤W¤É"
+        Me.btnDoor1Up.Text = "è…”é–€ 1 ä¸Šå‡"
         Me.btnDoor1Up.UseVisualStyleBackColor = False
         '
         'tabPage1to3
@@ -1404,38 +1487,28 @@ Public Class FormManual
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
-        'Label4
+        'lbLeak
         '
-        Me.Label4.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(10, 205)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(79, 20)
-        Me.Label4.TabIndex = 554
-        Me.Label4.Text = "°òÂ¦À£¤O"
+        Me.lbLeak.BackColor = System.Drawing.Color.Black
+        Me.lbLeak.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbLeak.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbLeak.ForeColor = System.Drawing.Color.Lime
+        Me.lbLeak.Location = New System.Drawing.Point(141, 148)
+        Me.lbLeak.Name = "lbLeak"
+        Me.lbLeak.Size = New System.Drawing.Size(62, 24)
+        Me.lbLeak.TabIndex = 569
+        Me.lbLeak.Text = "0"
+        Me.lbLeak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lbvacc
+        'Label6
         '
-        Me.lbvacc.BackColor = System.Drawing.Color.Black
-        Me.lbvacc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lbvacc.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbvacc.ForeColor = System.Drawing.Color.Lime
-        Me.lbvacc.Location = New System.Drawing.Point(142, 33)
-        Me.lbvacc.Name = "lbvacc"
-        Me.lbvacc.Size = New System.Drawing.Size(63, 24)
-        Me.lbvacc.TabIndex = 564
-        Me.lbvacc.Text = "0"
-        Me.lbvacc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblLeakTest
-        '
-        Me.lblLeakTest.AutoSize = True
-        Me.lblLeakTest.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLeakTest.Location = New System.Drawing.Point(16, 233)
-        Me.lblLeakTest.Name = "lblLeakTest"
-        Me.lblLeakTest.Size = New System.Drawing.Size(46, 16)
-        Me.lblLeakTest.TabIndex = 565
-        Me.lblLeakTest.Text = "Label5"
+        Me.Label6.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(181, 172)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(67, 20)
+        Me.Label6.TabIndex = 570
+        Me.Label6.Text = "mbar.mÂ³/s"
         '
         'FormManual
         '
@@ -1478,6 +1551,8 @@ Public Class FormManual
         Me.tabPageVacuum.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.grpDoorControl.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
@@ -1501,7 +1576,8 @@ Public Class FormManual
         FormTextBoxSave.SetTextBox(Me, Me.Name, FormSaveINIFile)
         VACUUMLEAKTESTBASE = Val(ReadProgData("VacuumLeakTestBase", "VacuumLeakTestBase", "0.09", VacuumLeakINIFile))
         DatalogTime = Val(ReadProgData("DatalogTime", "DatalogTime", "5", VacuumLeakINIFile))
-        'txtTempSet.Text = Get_PLC_R1100(DAProcessTemp01Index).ToString
+        txtVacuumTestTimeHr.Text = Val(ReadProgData("Hr", "Hr", "0", VacuumLeakINIFile))
+        txtVacuumTestTimeMin.Text = Val(ReadProgData("mm", "mm", "1", VacuumLeakINIFile))
         'txtTempRateSet.Text = Format(Get_PLC_R1100(DAProcessTempRate01Index) / 100, "0.00")
 
         'txtPressureSet.Text = PressPVstr(i)
@@ -1514,7 +1590,7 @@ Public Class FormManual
         lblGas01MFC.Text = MFCReadValueStr(ADMFC02Index)
         DatalogTime = Val(txtDataLogStepTime.Text)
 
-        '¦UÀY¸ê®ÆÅã¥Ü============================================
+        'å„é ­è³‡æ–™é¡¯ç¤º============================================
         'Dim i As Integer
         For i = 0 To MAXPLATE
             'ManualControl(i).RunMode = ProcessMode_RUN
@@ -1605,7 +1681,7 @@ Public Class FormManual
         'ObjShow.Show(PLC_M(DoBondForce01Index) = "1", btnBondingForce, ColorOn, "ON", ColorOff, "OFF")
         'ObjShow.Show(PLC_Y(DoOilPumpIndex) = "1", btnOilPump, ColorOn, ColorOff)
 
-        'MFC ¬y¶qÅã¥Ü
+        'MFC æµé‡é¡¯ç¤º
         lblGas01MFC.Text = MFCReadValueStr(ADMFC01Index)
         lblGas02MFC.Text = MFCReadValueStr(ADMFC02Index)
         ObjShow.Show(Check_PLC_Y(DoV10Index), picGas01T, My.Resources.vvon, My.Resources.vvoff)
@@ -1649,6 +1725,12 @@ Public Class FormManual
         'End If
         lbvacc.Text = GaugeCHVacStr
         lbvacc.Visible = bolVaccTest Or bolLeakTest
+        If bolLeakTest Then
+            lbLeak.Text = ""
+        Else
+            lbLeak.Text = Format(sigTotalLeakRate, "0.000")
+        End If
+
 
         lblLeakTest.Text = strLeakTestMess
 
@@ -1663,11 +1745,11 @@ Public Class FormManual
         Else
             If PLC_Y(DoMPIndex) = "0" Then
                 'RVPb_Status = False
-                MsgBoxLangErr("½Ğ¥ı¶}±Ò¯uªÅÀ°®ú.", "Pump On first.")
+                MsgBoxLangErr("è«‹å…ˆé–‹å•ŸçœŸç©ºå¹«æµ¦.", "Pump On first.")
                 'RVPb_Status = Not RVPb_Status
             Else
                 If PLC_X(DiDoor1UpIndex) = "0" Or PLC_X(DiDoor2UpIndex) = "0" Then
-                    MsgBoxLangErr("µÄªù¥¼Ãö³¬,½ĞÃö³¬µÄªù!", "Door not Close!")
+                    MsgBoxLangErr("è…”é–€æœªé—œé–‰,è«‹é—œé–‰è…”é–€!", "Door not Close!")
                 Else
                     Output(DoVentIndex).Status = False
                     Output(DoRVIndex).Status = True
@@ -1694,7 +1776,7 @@ Public Class FormManual
     Private Sub picDP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picDP.Click
         If ProcessMode_RUN Then Exit Sub
         If Check_PLC_X(DiPullerCloseIndex) = False Then
-            MsgBoxLangErr("½ĞÃö³¬ªù©Ô¬û")
+            MsgBoxLangErr("è«‹é—œé–‰é–€æ‹‰ç¼¸")
             Exit Sub
         End If
         CAutoPumping.Start = False
@@ -1718,10 +1800,10 @@ Public Class FormManual
     End Sub
     Public Sub StartLog()
         If SystemParameters.bolDAlog Then
-            CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        'µ{¦¡¸ê®ÆINIÀÉ®× ¦³DAÄæ¦ì
+            CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        'ç¨‹å¼è³‡æ–™INIæª”æ¡ˆ æœ‰DAæ¬„ä½
             'bolDAShow = True
         Else
-            CurveDataINI = ProgramDir + "CURVEDATA.INI"        'µ{¦¡¸ê®ÆINIÀÉ®×
+            CurveDataINI = ProgramDir + "CURVEDATA.INI"        'ç¨‹å¼è³‡æ–™INIæª”æ¡ˆ
             'bolDAShow = False
         End If
         ReadCurveNames(CurveDataINI)
@@ -1766,46 +1848,46 @@ Public Class FormManual
         End If
     End Sub
 
-    '­p®É¾¹===========================================================
+    'è¨ˆæ™‚å™¨===========================================================
 
-    '¥¿¼Æ/­Ë¼Æ­p®É¾¹
+    'æ­£æ•¸/å€’æ•¸è¨ˆæ™‚å™¨
     Private Sub btnTImerStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTimerStart.Click
         'Dim hh As Integer
         'Dim mm As Integer
         'Dim ss As Integer
-        ''±Ò°Ê/°±¤î­p®É¾¹
+        ''å•Ÿå‹•/åœæ­¢è¨ˆæ™‚å™¨
         'Timercount_enable = Not Timercount_enable
-        ''­Y­p®É¾¹¬°±Ò°Ê
+        ''è‹¥è¨ˆæ™‚å™¨ç‚ºå•Ÿå‹•
         'If Timercount_enable = True Then
-        '    btnTimerStart.Text = GetLangText("°±¤î­p®É", "Stop")
-        '    '¸ü¤J³]©w®É¶¡
+        '    btnTimerStart.Text = GetLangText("åœæ­¢è¨ˆæ™‚", "Stop")
+        '    'è¼‰å…¥è¨­å®šæ™‚é–“
         '    Timercount.set_min = Val(txtTimerMin.Text)
         '    Timercount.set_sec = Val(txtTimerSec.Text)
-        '    '¨ú±o¥Ø«e®É¶¡
+        '    'å–å¾—ç›®å‰æ™‚é–“
         '    hh = Val(NHour)
         '    mm = Val(NMin)
         '    ss = Val(NSec)
-        '    '±N¥Ø«e®É¶¡Âà´«¦¨¬í¼Æ
+        '    'å°‡ç›®å‰æ™‚é–“è½‰æ›æˆç§’æ•¸
         '    Timercount_start = 3600 * hh + 60 * mm + ss
         '    Timercount_shift = False
 
         '    If Timercount.set_min = 0 And Timercount.set_sec = 0 Then
-        '        '¦pªG³]©w­È¬°¹sªí¥Ü­n¥¿¼Æ
+        '        'å¦‚æœè¨­å®šå€¼ç‚ºé›¶è¡¨ç¤ºè¦æ­£æ•¸
         '        Timercount_up = True
         '        Timercount_now = False
         '    Else
-        '        '¦pªG³]©w­È¤£¬°¹sªí¥Ü­n­Ë¼Æ
+        '        'å¦‚æœè¨­å®šå€¼ä¸ç‚ºé›¶è¡¨ç¤ºè¦å€’æ•¸
         '        Timercount_down = True
         '        Timercount_up = False
-        '        '­pºâ­Ë¼Æ©Ò»İ¬í¼Æ
+        '        'è¨ˆç®—å€’æ•¸æ‰€éœ€ç§’æ•¸
         '        Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
         '    End If
         'Else
-        '    '­p®É°±¤î
+        '    'è¨ˆæ™‚åœæ­¢
         '    Timercount_up = False
         '    Timercount_down = False
         '    Timercount_shift = False
-        '    btnTimerStart.Text = GetLangText("¶}©l­p®É", "Start")
+        '    btnTimerStart.Text = GetLangText("é–‹å§‹è¨ˆæ™‚", "Start")
         'End If
         TImerStart()
     End Sub
@@ -1813,46 +1895,46 @@ Public Class FormManual
         Dim hh As Integer
         Dim mm As Integer
         Dim ss As Integer
-        '±Ò°Ê/°±¤î­p®É¾¹
+        'å•Ÿå‹•/åœæ­¢è¨ˆæ™‚å™¨
         Timercount_enable = Not Timercount_enable
-        '­Y­p®É¾¹¬°±Ò°Ê
+        'è‹¥è¨ˆæ™‚å™¨ç‚ºå•Ÿå‹•
         If Timercount_enable = True Then
-            btnTimerStart.Text = GetLangText("°±¤î­p®É", "Stop")
-            '¸ü¤J³]©w®É¶¡
+            btnTimerStart.Text = GetLangText("åœæ­¢è¨ˆæ™‚", "Stop")
+            'è¼‰å…¥è¨­å®šæ™‚é–“
             Timercount.set_min = Val(txtTimerMin.Text)
             Timercount.set_sec = Val(txtTimerSec.Text)
-            '¨ú±o¥Ø«e®É¶¡
+            'å–å¾—ç›®å‰æ™‚é–“
             hh = Val(NHour)
             mm = Val(NMin)
             ss = Val(NSec)
-            '±N¥Ø«e®É¶¡Âà´«¦¨¬í¼Æ
+            'å°‡ç›®å‰æ™‚é–“è½‰æ›æˆç§’æ•¸
             Timercount_start = 3600 * hh + 60 * mm + ss
             Timercount_shift = False
 
             If Timercount.set_min = 0 And Timercount.set_sec = 0 Then
-                '¦pªG³]©w­È¬°¹sªí¥Ü­n¥¿¼Æ
+                'å¦‚æœè¨­å®šå€¼ç‚ºé›¶è¡¨ç¤ºè¦æ­£æ•¸
                 Timercount_up = True
                 Timercount_now = False
             Else
-                '¦pªG³]©w­È¤£¬°¹sªí¥Ü­n­Ë¼Æ
+                'å¦‚æœè¨­å®šå€¼ä¸ç‚ºé›¶è¡¨ç¤ºè¦å€’æ•¸
                 Timercount_down = True
                 Timercount_up = False
-                '­pºâ­Ë¼Æ©Ò»İ¬í¼Æ
+                'è¨ˆç®—å€’æ•¸æ‰€éœ€ç§’æ•¸
                 Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
             End If
         Else
-            '­p®É°±¤î
+            'è¨ˆæ™‚åœæ­¢
             Timercount_up = False
             Timercount_down = False
             Timercount_shift = False
-            btnTimerStart.Text = GetLangText("¶}©l­p®É", "Start")
+            btnTimerStart.Text = GetLangText("é–‹å§‹è¨ˆæ™‚", "Start")
         End If
     End Sub
 
 
     Private Sub btnTimerReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTimerReset.Click
         Timercount_enable = False
-        btnTimerStart.Text = GetLangText("¶}©l­p®É", "Start")
+        btnTimerStart.Text = GetLangText("é–‹å§‹è¨ˆæ™‚", "Start")
         lblTimerMin.Text = "0"
         lblTimerSec.Text = "0"
         Timercount_up = False
@@ -1965,7 +2047,7 @@ Public Class FormManual
             Output(DoDoor1DownIndex).Status = False
             'Set_MBit(DoBZIndex, DEVICE_ON)
         Else
-            MsgBoxLangErr("¦w¥şªù 1 ²§±`!", "Safty Gate 1 Error!")
+            MsgBoxLangErr("å®‰å…¨é–€ 1 ç•°å¸¸!", "Safty Gate 1 Error!")
         End If
     End Sub
 
@@ -1974,7 +2056,7 @@ Public Class FormManual
         Dim sstr As String
         If VentOK = False Then
             sstr = SystemParameters.CoolingTemperature
-            MsgBoxLangErr("µ¥«İ·Å«×­°¦Ü: " + sstr, "Wait Temp Down: " + sstr)
+            MsgBoxLangErr("ç­‰å¾…æº«åº¦é™è‡³: " + sstr, "Wait Temp Down: " + sstr)
             Exit Sub
         End If
         If Vac1ATM_Status Then
@@ -1982,7 +2064,7 @@ Public Class FormManual
             Output(DoDoor1DownIndex).Status = Not Output(DoDoor1DownIndex).Status
         Else
             Output(DoDoor1DownIndex).Status = False
-            MsgBoxLangErr("­n¦b¤@¤j®ğÀ£¤U¤~¯à¶}ªù!", "Must In 1 Atm.")
+            MsgBoxLangErr("è¦åœ¨ä¸€å¤§æ°£å£“ä¸‹æ‰èƒ½é–‹é–€!", "Must In 1 Atm.")
         End If
 
     End Sub
@@ -1993,7 +2075,7 @@ Public Class FormManual
             Output(DoDoor2UpIndex).Status = Not Output(DoDoor2UpIndex).Status
             Output(DoDoor2DownIndex).Status = False
         Else
-            MsgBoxLangErr("¦w¥şªù 2 ²§±`!", "Safty Gate 1 Error!")
+            MsgBoxLangErr("å®‰å…¨é–€ 2 ç•°å¸¸!", "Safty Gate 1 Error!")
         End If
     End Sub
     Private Sub btnDoor2Down_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoor2Down.Click
@@ -2001,7 +2083,7 @@ Public Class FormManual
         Dim sstr As String
         If VentOK = False Then
             sstr = SystemParameters.CoolingTemperature
-            MsgBoxLangErr("µ¥«İ·Å«×­°¦Ü: " + sstr, "Wait Temp Down: " + sstr)
+            MsgBoxLangErr("ç­‰å¾…æº«åº¦é™è‡³: " + sstr, "Wait Temp Down: " + sstr)
             Exit Sub
         End If
         If Vac1ATM_Status Then
@@ -2009,7 +2091,7 @@ Public Class FormManual
             Output(DoDoor2DownIndex).Status = Not Output(DoDoor2DownIndex).Status
         Else
             Output(DoDoor2DownIndex).Status = False
-            MsgBoxLangErr("­n¦b¤@¤j®ğÀ£¤U¤~¯à¶}ªù!", "Must In 1 Atm.")
+            MsgBoxLangErr("è¦åœ¨ä¸€å¤§æ°£å£“ä¸‹æ‰èƒ½é–‹é–€!", "Must In 1 Atm.")
         End If
 
     End Sub
@@ -2050,18 +2132,18 @@ Public Class FormManual
         '    'Timercount_enable = True
         '    Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
         '    txtTimerMin.Text = Timercount.set_min.ToString
-        '    'TImerStart() '¶}©l­p®É
+        '    'TImerStart() 'é–‹å§‹è¨ˆæ™‚
         '    'Panel2.Enabled = False
         '    'tabPageDataLog.Enabled = False
         '    'tabPageTimer.Enabled = False
         '    'lblTimerSec.Enabled = True
         '    'lblTimerMin.Enabled = True
 
-        '    'btnStartLog_Click(vbNull, e) '¶}©l¬ö¿ı
+        '    'btnStartLog_Click(vbNull, e) 'é–‹å§‹ç´€éŒ„
 
         'Else
-        '    Timercount_enable = False '°±¤î­p®É
-        '    btnStartLog_Click(vbNull, e) '¶}©l¬ö¿ı
+        '    Timercount_enable = False 'åœæ­¢è¨ˆæ™‚
+        '    btnStartLog_Click(vbNull, e) 'é–‹å§‹ç´€éŒ„
         '    Output(DoMPIndex).Status = False
         '    Output(DoRVIndex).Status = False
         '    CSVTimerStartPb_Status = False
@@ -2078,6 +2160,7 @@ Public Class FormManual
         If Val(sender.Text) > 59 Then
             sender.Text = "59"
         End If
+        WriteProgData("mm", "mm", sender.Text, VacuumLeakINIFile)
     End Sub
 
     Private Sub txtVacuumTestTimeHr_MouseDown(sender As Object, e As MouseEventArgs) Handles txtVacuumTestTimeHr.MouseDown
@@ -2086,6 +2169,7 @@ Public Class FormManual
         If Val(sender.Text) > 24 Then
             sender.Text = "24"
         End If
+        WriteProgData("Hr", "Hr", sender.Text, VacuumLeakINIFile)
     End Sub
 
     Private Sub btnLeakRateTest_Click(sender As Object, e As EventArgs) Handles btnLeakRateTest.Click
@@ -2109,5 +2193,10 @@ Public Class FormManual
             VACUUMLEAKTESTBASE = sender.Text
             WriteProgData("VacuumLeakTestBase", "VacuumLeakTestBase", VACUUMLEAKTESTBASE, VacuumLeakINIFile)
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'MsgBoxLangOK("1.æ¸¬è©¦æ™‚é–“: è¨­å®šæ¥µé™å£“åŠ›æˆ–æ´©æ¼ç‡æ¸¬è©¦æ™‚é–“ã€‚" + vbCrLf + "2.è¨˜éŒ„é–“éš”èˆ‡æª”åè«‹çœ‹æ—é‚Šè¨ˆæ™‚å™¨ï¼Œæª”åä¸€æŒ‰å³å¯ä»¥çœ‹åˆ°è³‡æ–™ã€‚" + vbCrLf + "3.æ´©æ¼ç‡æ¸¬è©¦æœƒå…ˆæŠ½åˆ°å°æ–¼åŸºç¤å£“åŠ›å†é–‹å§‹æ¸¬è©¦", "åƒæ•¸èªªæ˜")
+        MsgBoxLangOK("1.æ¸¬è©¦æ™‚é–“: è¨­å®šæ¥µé™å£“åŠ›æˆ–æ´©æ¼ç‡æ¸¬è©¦æ™‚é–“ã€‚" + vbCrLf + "2.è¨˜éŒ„é–“éš”èˆ‡æª”åè«‹çœ‹æ—é‚Šè¨ˆæ™‚å™¨èˆ‡è³‡æ–™è¨˜éŒ„ï¼Œæª”åä¸€æŒ‰å³å¯ä»¥çœ‹åˆ°è³‡æ–™ã€‚" + vbCrLf + "3.æ´©æ¼ç‡æ¸¬è©¦æœƒå…ˆæŠ½åˆ°å°æ–¼åŸºç¤å£“åŠ›å†é–‹å§‹æ¸¬è©¦", "åƒæ•¸èªªæ˜")
     End Sub
 End Class
