@@ -125,7 +125,14 @@
             Return PV
         End If
     End Function
-    '檢查一數是否在限制範圍內
+
+    ''' <summary>
+    ''' 檢查一數是否在限制範圍內
+    ''' </summary>
+    ''' <param name="SV"></param>
+    ''' <param name="PV"></param>
+    ''' <param name="LIMIT"></param>
+    ''' <returns></returns>
     Public Function PV_InRange(ByVal SV As Double, ByVal PV As Double, ByVal LIMIT As Double) As Boolean
         If Math.Abs((SV - PV)) > LIMIT Then
             Return False
@@ -133,7 +140,10 @@
             Return True
         End If
     End Function
-    '寫入單筆資料, 在最後端換行,檔案不存在會自動建立
+
+    ''' <summary>
+    ''' 寫入單筆資料, 在最後端換行,檔案不存在不會自動建立
+    ''' </summary>
     Public Sub AppendData(ByVal sfile As String, ByVal Data As String, ByVal DataLen As Integer)
         On Error Resume Next
         If IsNothing(sfile) Then Exit Sub
@@ -157,7 +167,9 @@
         sw.Close()
     End Sub
 
-    '寫入多筆資料以TAB 隔開, 並在最後端換行,檔案不存在會自動建立
+    ''' <summary>
+    ''' 寫入多筆資料以TAB 隔開, 並在最後端換行,檔案不存在不會自動建立
+    ''' </summary>
     Public Sub AppendMultiData(ByVal sfile As String, ByVal DataLen As Integer, ByVal ParamArray sstr() As Object)
         Dim i As Integer
         On Error Resume Next
