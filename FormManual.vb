@@ -217,6 +217,8 @@
         Me.tabManual = New System.Windows.Forms.TabControl()
         Me.tabPageVacuum = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lbLeak = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtVacuumTestTimeHr = New System.Windows.Forms.TextBox()
@@ -242,8 +244,6 @@
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.lbLeak = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -1207,6 +1207,29 @@
         Me.Panel4.Size = New System.Drawing.Size(252, 263)
         Me.Panel4.TabIndex = 547
         '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(181, 172)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(67, 20)
+        Me.Label6.TabIndex = 570
+        Me.Label6.Text = "Toor.m³/s"
+        '
+        'lbLeak
+        '
+        Me.lbLeak.BackColor = System.Drawing.Color.Black
+        Me.lbLeak.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbLeak.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbLeak.ForeColor = System.Drawing.Color.Lime
+        Me.lbLeak.Location = New System.Drawing.Point(141, 148)
+        Me.lbLeak.Name = "lbLeak"
+        Me.lbLeak.Size = New System.Drawing.Size(62, 24)
+        Me.lbLeak.TabIndex = 569
+        Me.lbLeak.Text = "0"
+        Me.lbLeak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1486,29 +1509,6 @@
         Me.flwManualPage2.Name = "flwManualPage2"
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
-        '
-        'lbLeak
-        '
-        Me.lbLeak.BackColor = System.Drawing.Color.Black
-        Me.lbLeak.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lbLeak.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbLeak.ForeColor = System.Drawing.Color.Lime
-        Me.lbLeak.Location = New System.Drawing.Point(141, 148)
-        Me.lbLeak.Name = "lbLeak"
-        Me.lbLeak.Size = New System.Drawing.Size(62, 24)
-        Me.lbLeak.TabIndex = 569
-        Me.lbLeak.Text = "0"
-        Me.lbLeak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label6
-        '
-        Me.Label6.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(181, 172)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(67, 20)
-        Me.Label6.TabIndex = 570
-        Me.Label6.Text = "mbar.m³/s"
         '
         'FormManual
         '

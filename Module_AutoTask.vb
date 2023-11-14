@@ -15,9 +15,12 @@ Module Module_AutoTask
     Public bolLeakTest As Boolean = False
     Public LastTopTemp(2) As Integer
     Public LastBotTemp(2) As Integer
-    Public timecounts As Integer = 0
+    Public timecounts As Integer = 0 '平均溫度計算幾次
     Public sigTotalLeakRate As Single
     Public FirstVacuum As Single
+    Public ii As Integer
+    Const RecordInterval As Integer = 60
+    Public Data(RecordInterval, 50) As String
 
 
     Public Sub ReadRunData()
@@ -856,7 +859,7 @@ Module Module_AutoTask
                 If bolLeakTest Then
                     strLeakTestMess = Control_State.ToString + ":Leak Test Finish"
 
-                    sigTotalLeakRate = 0.9 * (GaugeCHVac - FirstVacuum) / 0.75 / TotalTimercount
+                    sigTotalLeakRate = 0.9 * (GaugeCHVac - FirstVacuum) / TotalTimercount
                     Control_State = 0
                     bolLeakTest = False
                 End If
@@ -2000,71 +2003,76 @@ Module Module_AutoTask
     End Sub
     Public Sub ProcessRecord_Task_222()
         Static Control_State As Byte
+        Static datamax As Integer
         Dim ShowData As String
-        Dim Data(200) As String
-        Dim j, datamax As Integer
+        Dim j As Integer
         Dim i As Byte
+        Dim bollog As Boolean = False
+        Dim strAvgTopTempRate(MAXPLATE) As String
+        Dim strAvgBotTempRate(MAXPLATE) As String
+
         On Error Resume Next
         If ProcessRecordFileName_222 = "" Then
             Exit Sub
         End If
 
-        Debug.Print("ProcessRecordsIndex_222 =" + ProcessRecordsIndex_222.ToString)
-        Debug.Print("Control_State =" + Control_State.ToString)
+        'Debug.Print("ProcessRecordsIndex_222 =" + ProcessRecordsIndex_222.ToString)
+        'Debug.Print("Control_State =" + Control_State.ToString)
         Select Case Control_State
             Case 0
                 If ProcessMode_RUN Then
                     ProcessRecordsIndex_222 = 0
-
+                    ReDim Data(RecordInterval, 50)
                     Control_State = 1
+                    ii = 0
                 End If
             Case 1
                 If ProcessMode_RUN Then
-                    If ProcessRecordsIndex_222 = 0 Then
+                    If ProcessRecordsIndex_222 = 0 Then '寫入抬頭
                         ShowData = "Model:" + vbTab + Program_ModelName + vbTab + " Process Start for Recipe:" + vbTab + ProcessRecipeName + "Date/Time:" + ADate + " " + TTime + vbTab + "  PN:" + ProcessPN
                         AppendMultiData(ProcessRecordFileName_222, 150, ShowData)
                         ShowData = ""
                         datamax = 0
-                        Data(datamax) = "No."
+                        Data(0, datamax) = "No."
                         datamax += 1
-                        Data(datamax) = "Step"
+                        Data(0, datamax) = "Step"
                         datamax += 1
-                        Data(datamax) = "Time"
+                        Data(0, datamax) = "Time"
                         datamax += 1
-                        Data(datamax) = "ProcessTime"
+                        Data(0, datamax) = "ProcessTime"
                         datamax += 1
-                        Data(datamax) = "Vacuum"
+                        Data(0, datamax) = "Vacuum"
                         datamax += 1
-                        Data(datamax) = "MPCurrent"
+                        Data(0, datamax) = "MPCurrent"
                         datamax += 1
-                        Data(datamax) = "WaterPress"
+                        Data(0, datamax) = "WaterPress"
                         For i = 0 To MAXPLATE
                             datamax += 1
-                            Data(datamax) = "Site#" + Format(i + 1, "00") + " Step"
+                            Data(0, datamax) = "Site#" + Format(i + 1, "00") + " Step"
                             datamax += 1
-                            Data(datamax) = "TopTemp" + Format(i + 1, "00")
+                            Data(0, datamax) = "TopTemp" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "BotTemp" + Format(i + 1, "00")
+                            Data(0, datamax) = "BotTemp" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "TopTempRate" + Format(i + 1, "00")
+                            Data(0, datamax) = "TopTempRate" + Format(i + 1, "00") + " c/s"
                             datamax += 1
-                            Data(datamax) = "BotTempRate" + Format(i + 1, "00")
+                            Data(0, datamax) = "BotTempRate" + Format(i + 1, "00") + " c/s"
                             datamax += 1
-                            Data(datamax) = "Pressure" + Format(i + 1, "00")
+                            Data(0, datamax) = "Pressure" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "TopCurrent" + Format(i + 1, "00")
+                            Data(0, datamax) = "TopCurrent" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "BotCurrent" + Format(i + 1, "00")
+                            Data(0, datamax) = "BotCurrent" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "TopWater" + Format(i + 1, "00")
+                            Data(0, datamax) = "TopWater" + Format(i + 1, "00")
                             datamax += 1
-                            Data(datamax) = "BotWater" + Format(i + 1, "00")
+                            Data(0, datamax) = "BotWater" + Format(i + 1, "00")
 
                         Next
                         For i = 0 To datamax - 1
-                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
+                            ShowData = ShowData + Data(0, i) + Space(15 - Len(Data(0, i))) + vbTab '
                         Next
-                        ShowData = ShowData + Data(i)
+                        ShowData = ShowData + Data(0, i)
                         'AppendMultiData(ProcessRecordFileName_222, 511, ShowData)
                         AppendData(ProcessRecordFileName_222, ShowData, 511)
                         ShowData = ""
@@ -2072,95 +2080,107 @@ Module Module_AutoTask
                         timecounts = 0
                     End If
 
-                    If ProcessMode_RUN Then
-
+                    If ProcessMode_RUN Then '資料開始log
+                        ii = ii + 1
+                        If ii > 59 Then
+                            ii = 60
+                        End If
                         ShowData = ""
                         datamax = 0
-                        Data(datamax) = Format(ProcessRecordsIndex_222)
+                        Data(ii, datamax) = Format(ProcessRecordsIndex_222)
                         datamax += 1
-                        Data(datamax) = Format(ProcessStepIndex + 1)
+                        Data(ii, datamax) = Format(ProcessStepIndex + 1)
                         datamax += 1
-                        Data(datamax) = TTime
+                        Data(ii, datamax) = TTime
                         datamax += 1
-                        Data(datamax) = ConvertSecToTime(TotalProcessTime)
+                        Data(ii, datamax) = ConvertSecToTime(TotalProcessTime)
                         datamax += 1
-                        Data(datamax) = GaugeCHVacStr
+                        Data(ii, datamax) = GaugeCHVacStr
                         datamax += 1
-                        Data(datamax) = MPCurrentStr
+                        Data(ii, datamax) = MPCurrentStr
                         datamax += 1
-                        Data(datamax) = WaterPressStr
-                        Dim bollog As Boolean = False
-                        Dim sinAvgTopTempRate(MAXPLATE) As Single
-                        Dim sinAvgBotTempRate(MAXPLATE) As Single
-                        If TotalProcessTime > timecounts * 60 Then
+                        Data(ii, datamax) = WaterPressStr
+
+
+                        bollog = False
+                        If TotalProcessTime > timecounts * RecordInterval Then
                             'log
                             bollog = True
                             timecounts += 1
+                        Else
+                            bollog = False
                         End If
                         For i = 0 To MAXPLATE
                             datamax += 1
-                            Data(datamax) = CSubAutoProcess(i).RunIndex.ToString
+                            Data(ii, datamax) = CSubAutoProcess(i).RunIndex.ToString
                             datamax += 1
-                            Data(datamax) = TopTempPVStr(i)
+                            Data(ii, datamax) = TopTempPVStr(i)
                             datamax += 1
-                            Data(datamax) = BotTempPVStr(i)
+                            Data(ii, datamax) = BotTempPVStr(i)
 
-                            If bollog Then
-                                If timecounts > 1 Then '計算平均加熱速度
-                                    sinAvgTopTempRate(i) = TopTempPV(i) - LastTopTemp(i)
-                                    sinAvgBotTempRate(i) = BotTempPV(i) - LastBotTemp(i)
-                                    datamax += 1
-                                    Data(datamax) = sinAvgTopTempRate(i).ToString
-                                    datamax += 1
-                                    Data(datamax) = sinAvgBotTempRate(i).ToString
-                                Else
-                                    datamax += 1
-                                    Data(datamax) = "_"
-                                    datamax += 1
-                                    Data(datamax) = "_"
-                                End If
+                            'If ii = RecordInterval Then
+                            If ii = RecordInterval Then '計算平均加熱速度
+                                strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / RecordInterval, "0.0")
+                                strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / RecordInterval, "0.0")
+                                datamax += 1
+                                Data(ii, datamax) = strAvgTopTempRate(i)
+                                datamax += 1
+                                Data(ii, datamax) = strAvgBotTempRate(i)
+
+                                '要加入之前的溫度平均
+                                Data(ii, (i + 1) * 10) = strAvgTopTempRate(i)
+                                Data(ii, (i + 1) * 10 + 1) = strAvgBotTempRate(i)
+                            ElseIf ii = 1 Then
                                 LastTopTemp(i) = TopTempPV(i)
                                 LastBotTemp(i) = BotTempPV(i)
+                                datamax += 1
+                                Data(ii, datamax) = "_"
+                                datamax += 1
+                                Data(ii, datamax) = "_"
                             Else
                                 datamax += 1
-                                Data(datamax) = "_"
+
+                                Data(ii, datamax) = "_"
                                 datamax += 1
-                                Data(datamax) = "_"
+                                Data(ii, datamax) = "_"
                             End If
-                            'datamax += 1
-                            'Data(datamax) = sinAvgTopTempRate(i).ToString
-                            'datamax += 1
-                            'Data(datamax) = sinAvgBotTempRate(i).ToString
+                            'Else
+                            '    datamax += 1 '要加入之前的溫度平均
+                            '    Data(ii, datamax) = "_"
+                            '    datamax += 1
+                            '    Data(ii, datamax) = "_"
+                            'End If
+
                             datamax += 1
-                            Data(datamax) = PressPVstr(i)
+                            Data(ii, datamax) = PressPVstr(i)
                             datamax += 1
-                            Data(datamax) = TopCurrentStr(i)
+                            Data(ii, datamax) = TopCurrentStr(i)
                             datamax += 1
-                            Data(datamax) = BotCurrentStr(i)
+                            Data(ii, datamax) = BotCurrentStr(i)
                             datamax += 1
-                            Data(datamax) = FlowRead(i).GetTopFLowStr
+                            Data(ii, datamax) = FlowRead(i).GetTopFLowStr
                             datamax += 1
-                            Data(datamax) = FlowRead(i).GetBotFLowStr
+                            Data(ii, datamax) = FlowRead(i).GetBotFLowStr
 
                         Next
-                        For i = 0 To datamax - 1
-                            ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab
-                        Next
-                        ShowData = ShowData + Data(i)
-                        AppendMultiData(ProcessRecordFileName_222, 255, ShowData)
-
-                        'ProcessRecords.ProcessStep = Data(0)
-                        'ProcessRecords.ProcessTime = Data(1)
-                        'ProcessRecords.TopTemperature = Data(2)
-                        'ProcessRecords.BotTemperature = Data(3)
-                        'ProcessRecords.TopCurrent = Data(4)
-                        'ProcessRecords.BotCurrent = Data(5)
-                        'ProcessRecords.BondingPressure = Data(6)
-                        'ProcessRecords.DPCurrent = Data(7)
-                        'ProcessRecords.Vacuum = Data(8)
-                        'FileOpen(21, ProcessRecordCurveFileName, OpenMode.Random, , OpenShare.Shared, 300)
-                        'FilePut(21, ProcessRecords, ProcessRecordsIndex_222)
-                        'FileClose(21)
+                        If ii > RecordInterval - 1 Then
+                            For i = 1 To MAXPLATE + 1
+                                For j = 1 To RecordInterval
+                                    Data(j, i * 10) = strAvgTopTempRate(i - 1).ToString
+                                    Data(j, i * 10 + 1) = strAvgBotTempRate(i - 1).ToString
+                                Next
+                            Next
+                            For j = 1 To RecordInterval
+                                ShowData = ""
+                                For i = 0 To datamax - 1
+                                    ShowData = ShowData + Data(j, i) + Space(15 - Len(Data(j, i))) + vbTab
+                                Next
+                                ShowData = ShowData + Data(j, i)
+                                AppendMultiData(ProcessRecordFileName_222, 255, ShowData)
+                                Debug.Print(j.ToString + "=" + ShowData)
+                            Next
+                            ii = 0
+                        End If
                         ProcessRecordsIndex_222 = ProcessRecordsIndex_222 + 1
                     End If
                 Else
@@ -2169,6 +2189,34 @@ Module Module_AutoTask
             Case 99
                 Control_State = 0
                 ProcessRecordsIndex_222 = 0
+                'If bollog = False Then
+                For i = 0 To MAXPLATE
+                    strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / ii, "0.0")
+                    strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / ii, "0.0")
+                    Debug.Print("LastTopTemp(" + i.ToString + ") =" + LastTopTemp(i).ToString + ",LastBotTemp(" + i.ToString + ") =" + LastBotTemp(i).ToString)
+                    Debug.Print("strAvgTopTempRate(" + i.ToString + ") =" + strAvgTopTempRate(i) + ",strAvgBotTempRate(" + i.ToString + ") =" + strAvgBotTempRate(i))
+                Next
+
+                For i = 1 To MAXPLATE + 1
+                    For j = 1 To ii
+                        Data(j, i * 10) = strAvgTopTempRate(i - 1)
+                        Data(j, i * 10 + 1) = strAvgBotTempRate(i - 1)
+                    Next
+                Next
+
+
+
+                For j = 1 To ii
+                    ShowData = ""
+                    For i = 0 To datamax - 1
+                        ShowData = ShowData + Data(j, i) + Space(15 - Len(Data(j, i))) + vbTab
+                    Next
+                    ShowData = ShowData + Data(j, i)
+                    AppendMultiData(ProcessRecordFileName_222, 255, ShowData)
+                Next
+                'End If
+
+                ii = 0
                 'If ProcessRecordsIndex_222 > 0 Then
                 '    FileClose(21)
                 'End If
@@ -2511,7 +2559,7 @@ Module Module_AutoTask
                         datamax += 1
                         'strLastVacuum = 0
                         sigLastVacuum = 0
-                        Data(datamax) = "LeakRate(mbar.m³/s)"
+                        Data(datamax) = "LeakRate(Toor.m³/s)"
                     End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
@@ -2558,8 +2606,8 @@ Module Module_AutoTask
                     If bolLeakTest Then
                         datamax += 1
                         If sigLastVacuum <> 0 Then
-                            'sinLeakRate=0.9m³*mbar/s  1mabr=0.75torr
-                            sigLeakRate = 0.9 * (GaugeCHVac - sigLastVacuum) / 0.75 / DatalogTime
+                            'sinLeakRate=0.9m³*toor/s 
+                            sigLeakRate = 0.9 * (GaugeCHVac - sigLastVacuum) / DatalogTime
                             Data(datamax) = Format(sigLeakRate, "0.00")
                         Else
                             Data(datamax) = "_" '第一筆資料

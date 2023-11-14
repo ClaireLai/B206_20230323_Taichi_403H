@@ -1199,7 +1199,7 @@ Public Class FormRecord
                     ii = ii + 1
                     pnlRecordCSelect1.Controls.Remove(aa)
                 Next
-                Debug.Print("ii=" + ii.ToString)
+                'Debug.Print("ii=" + ii.ToString)
             Loop Until ii = 0
             '建立曲線實體
             CreateSeriesRecord(ChartRecord, CurveName, 0, Title.Length)

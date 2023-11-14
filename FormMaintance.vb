@@ -64,7 +64,7 @@
         i = 0
         n = 0
         For Each aa As Control In pnl.Controls
-            Debug.Print("aa.Text=" + aa.Text + ",aa.Name=" + aa.Name)
+            'Debug.Print("aa.Text=" + aa.Text + ",aa.Name=" + aa.Name)
             match = Strings.Left(aa.Name, Len(aa.Name) - 2)
             n = Val(Strings.Right(aa.Name, 2)) '63
             If name = match Then 'lblx
