@@ -415,7 +415,7 @@ Public Class FormParameter
     Friend WithEvents lblSec13Text As System.Windows.Forms.Label
     Friend WithEvents txtDoorCloseTime As System.Windows.Forms.TextBox
     Friend WithEvents lblProcessPumpVacuumText As System.Windows.Forms.Label
-    Friend WithEvents lblToor09Text As System.Windows.Forms.Label
+    Friend WithEvents lblTorr09Text As System.Windows.Forms.Label
     Friend WithEvents txtProcessPumpVacuum As System.Windows.Forms.TextBox
     Friend WithEvents txtProcessPumpTime As System.Windows.Forms.TextBox
     Friend WithEvents lblProcessPumpTimeText As System.Windows.Forms.Label
@@ -499,6 +499,7 @@ Public Class FormParameter
     Friend WithEvents btnSite1Cal As Button
     Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
     Friend WithEvents lblDA01Text As System.Windows.Forms.Label
     Public Sub New()
         MyBase.New()
@@ -691,7 +692,7 @@ Public Class FormParameter
         Me.picC05 = New System.Windows.Forms.PictureBox()
         Me.txtLowFlowAlarm = New System.Windows.Forms.TextBox()
         Me.lblFlowUnit01Text = New System.Windows.Forms.Label()
-        Me.lblToor09Text = New System.Windows.Forms.Label()
+        Me.lblTorr09Text = New System.Windows.Forms.Label()
         Me.grpPurgeSetup = New System.Windows.Forms.GroupBox()
         Me.lblPumpingPurgeText = New System.Windows.Forms.Label()
         Me.lblTimes01Text = New System.Windows.Forms.Label()
@@ -789,7 +790,6 @@ Public Class FormParameter
         Me.flwPressCalUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPageSystem = New System.Windows.Forms.TabPage()
         Me.TabPageCIM = New System.Windows.Forms.TabPage()
-        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
         Me.TabPageCello = New System.Windows.Forms.TabPage()
         Me.tabSystem = New System.Windows.Forms.TabControl()
         Me.tabpageTempCal = New System.Windows.Forms.TabPage()
@@ -1009,7 +1009,6 @@ Public Class FormParameter
         Me.lblThresholdPressRatioText = New System.Windows.Forms.Label()
         Me.flwPressPID = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
-        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
         Me.chkDa = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -1058,6 +1057,9 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
+        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlParaSet.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -1304,7 +1306,7 @@ Public Class FormParameter
         Me.pnlParaSet.Controls.Add(Me.txtDoorCloseTime)
         Me.pnlParaSet.Controls.Add(Me.lblProcessPumpVacuumText)
         Me.pnlParaSet.Controls.Add(Me.grpAlarmSetup)
-        Me.pnlParaSet.Controls.Add(Me.lblToor09Text)
+        Me.pnlParaSet.Controls.Add(Me.lblTorr09Text)
         Me.pnlParaSet.Controls.Add(Me.grpPurgeSetup)
         Me.pnlParaSet.Controls.Add(Me.txtProcessPumpVacuum)
         Me.pnlParaSet.Controls.Add(Me.txtProcessPumpTime)
@@ -2822,15 +2824,15 @@ Public Class FormParameter
         Me.lblFlowUnit01Text.TabIndex = 518
         Me.lblFlowUnit01Text.Text = "L/Min"
         '
-        'lblToor09Text
+        'lblTorr09Text
         '
-        Me.lblToor09Text.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblToor09Text.ForeColor = System.Drawing.Color.Black
-        Me.lblToor09Text.Location = New System.Drawing.Point(984, 349)
-        Me.lblToor09Text.Name = "lblToor09Text"
-        Me.lblToor09Text.Size = New System.Drawing.Size(27, 18)
-        Me.lblToor09Text.TabIndex = 622
-        Me.lblToor09Text.Text = "Torr"
+        Me.lblTorr09Text.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTorr09Text.ForeColor = System.Drawing.Color.Black
+        Me.lblTorr09Text.Location = New System.Drawing.Point(984, 349)
+        Me.lblTorr09Text.Name = "lblTorr09Text"
+        Me.lblTorr09Text.Size = New System.Drawing.Size(27, 18)
+        Me.lblTorr09Text.TabIndex = 622
+        Me.lblTorr09Text.Text = "Torr"
         '
         'grpPurgeSetup
         '
@@ -3592,7 +3594,7 @@ Public Class FormParameter
         '
         Me.lblDA04Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDA04Text.ForeColor = System.Drawing.Color.Black
-        Me.lblDA04Text.Location = New System.Drawing.Point(937, 362)
+        Me.lblDA04Text.Location = New System.Drawing.Point(937, 359)
         Me.lblDA04Text.Name = "lblDA04Text"
         Me.lblDA04Text.Size = New System.Drawing.Size(45, 26)
         Me.lblDA04Text.TabIndex = 508
@@ -3662,7 +3664,7 @@ Public Class FormParameter
         Me.tabParameter.Name = "tabParameter"
         Me.tabParameter.Padding = New System.Drawing.Point(40, 3)
         Me.tabParameter.SelectedIndex = 0
-        Me.tabParameter.Size = New System.Drawing.Size(1600, 923)
+        Me.tabParameter.Size = New System.Drawing.Size(2000, 1154)
         Me.tabParameter.TabIndex = 529
         '
         'TabPageTIC
@@ -3678,7 +3680,7 @@ Public Class FormParameter
         Me.TabPageTIC.Location = New System.Drawing.Point(4, 44)
         Me.TabPageTIC.Name = "TabPageTIC"
         Me.TabPageTIC.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageTIC.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPageTIC.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageTIC.TabIndex = 0
         Me.TabPageTIC.Text = "溫控器參數"
         Me.TabPageTIC.UseVisualStyleBackColor = True
@@ -3726,7 +3728,7 @@ Public Class FormParameter
         Me.tabPIDSetup.Location = New System.Drawing.Point(3, 9)
         Me.tabPIDSetup.Name = "tabPIDSetup"
         Me.tabPIDSetup.SelectedIndex = 0
-        Me.tabPIDSetup.Size = New System.Drawing.Size(1583, 731)
+        Me.tabPIDSetup.Size = New System.Drawing.Size(1979, 914)
         Me.tabPIDSetup.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabPIDSetup.TabIndex = 544
         '
@@ -3737,7 +3739,7 @@ Public Class FormParameter
         Me.tabPage1to3.Location = New System.Drawing.Point(4, 44)
         Me.tabPage1to3.Name = "tabPage1to3"
         Me.tabPage1to3.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPage1to3.Size = New System.Drawing.Size(1575, 683)
+        Me.tabPage1to3.Size = New System.Drawing.Size(1971, 866)
         Me.tabPage1to3.TabIndex = 0
         Me.tabPage1to3.Text = "Head 1~3"
         '
@@ -3746,7 +3748,7 @@ Public Class FormParameter
         Me.flwPIDPage1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flwPIDPage1.Location = New System.Drawing.Point(3, 3)
         Me.flwPIDPage1.Name = "flwPIDPage1"
-        Me.flwPIDPage1.Size = New System.Drawing.Size(1569, 677)
+        Me.flwPIDPage1.Size = New System.Drawing.Size(1965, 860)
         Me.flwPIDPage1.TabIndex = 0
         '
         'tabPage4to6
@@ -3775,7 +3777,7 @@ Public Class FormParameter
         Me.TabPageTCal.Controls.Add(Me.flwTempCalUser)
         Me.TabPageTCal.Location = New System.Drawing.Point(4, 44)
         Me.TabPageTCal.Name = "TabPageTCal"
-        Me.TabPageTCal.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPageTCal.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageTCal.TabIndex = 3
         Me.TabPageTCal.Text = "溫度校正"
         '
@@ -3849,7 +3851,7 @@ Public Class FormParameter
         Me.TabPagePCal.Controls.Add(Me.flwPressCalUser)
         Me.TabPagePCal.Location = New System.Drawing.Point(4, 44)
         Me.TabPagePCal.Name = "TabPagePCal"
-        Me.TabPagePCal.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPagePCal.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPagePCal.TabIndex = 4
         Me.TabPagePCal.Text = "壓力校正"
         '
@@ -3926,7 +3928,7 @@ Public Class FormParameter
         Me.TabPageSystem.Location = New System.Drawing.Point(4, 44)
         Me.TabPageSystem.Name = "TabPageSystem"
         Me.TabPageSystem.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageSystem.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPageSystem.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageSystem.TabIndex = 1
         Me.TabPageSystem.Text = "參數設定"
         Me.TabPageSystem.UseVisualStyleBackColor = True
@@ -3938,17 +3940,9 @@ Public Class FormParameter
         Me.TabPageCIM.Location = New System.Drawing.Point(4, 44)
         Me.TabPageCIM.Name = "TabPageCIM"
         Me.TabPageCIM.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCIM.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPageCIM.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageCIM.TabIndex = 5
         Me.TabPageCIM.Text = "CIM Setup"
-        '
-        'CtlSanAnCIMSetup1
-        '
-        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
-        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
-        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
-        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
-        Me.CtlSanAnCIMSetup1.TabIndex = 0
         '
         'TabPageCello
         '
@@ -3956,7 +3950,7 @@ Public Class FormParameter
         Me.TabPageCello.Controls.Add(Me.tabSystem)
         Me.TabPageCello.Location = New System.Drawing.Point(4, 44)
         Me.TabPageCello.Name = "TabPageCello"
-        Me.TabPageCello.Size = New System.Drawing.Size(1592, 875)
+        Me.TabPageCello.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageCello.TabIndex = 2
         Me.TabPageCello.Text = "系統設定"
         Me.TabPageCello.UseVisualStyleBackColor = True
@@ -3978,7 +3972,7 @@ Public Class FormParameter
         Me.tabSystem.Name = "tabSystem"
         Me.tabSystem.Padding = New System.Drawing.Point(20, 3)
         Me.tabSystem.SelectedIndex = 0
-        Me.tabSystem.Size = New System.Drawing.Size(1588, 850)
+        Me.tabSystem.Size = New System.Drawing.Size(1985, 1063)
         Me.tabSystem.TabIndex = 536
         '
         'tabpageTempCal
@@ -3990,7 +3984,7 @@ Public Class FormParameter
         Me.tabpageTempCal.Location = New System.Drawing.Point(4, 44)
         Me.tabpageTempCal.Name = "tabpageTempCal"
         Me.tabpageTempCal.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpageTempCal.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpageTempCal.Size = New System.Drawing.Size(1977, 1015)
         Me.tabpageTempCal.TabIndex = 0
         Me.tabpageTempCal.Text = "溫度校正"
         Me.tabpageTempCal.UseVisualStyleBackColor = True
@@ -4361,7 +4355,7 @@ Public Class FormParameter
         Me.tabpageVacuum.Location = New System.Drawing.Point(4, 44)
         Me.tabpageVacuum.Name = "tabpageVacuum"
         Me.tabpageVacuum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpageVacuum.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpageVacuum.Size = New System.Drawing.Size(1977, 1015)
         Me.tabpageVacuum.TabIndex = 1
         Me.tabpageVacuum.Text = "真空設定"
         Me.tabpageVacuum.UseVisualStyleBackColor = True
@@ -4628,7 +4622,7 @@ Public Class FormParameter
         Me.tabpagePressCal.Controls.Add(Me.flwPressCal)
         Me.tabpagePressCal.Location = New System.Drawing.Point(4, 44)
         Me.tabpagePressCal.Name = "tabpagePressCal"
-        Me.tabpagePressCal.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpagePressCal.Size = New System.Drawing.Size(1977, 1015)
         Me.tabpagePressCal.TabIndex = 2
         Me.tabpagePressCal.Text = "壓力校正"
         Me.tabpagePressCal.UseVisualStyleBackColor = True
@@ -4738,7 +4732,7 @@ Public Class FormParameter
         Me.tabpagePressControl.Controls.Add(Me.flwPressPID)
         Me.tabpagePressControl.Location = New System.Drawing.Point(4, 44)
         Me.tabpagePressControl.Name = "tabpagePressControl"
-        Me.tabpagePressControl.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpagePressControl.Size = New System.Drawing.Size(1977, 1015)
         Me.tabpagePressControl.TabIndex = 3
         Me.tabpagePressControl.Text = "壓力控制設定"
         Me.tabpagePressControl.UseVisualStyleBackColor = True
@@ -4825,7 +4819,7 @@ Public Class FormParameter
         Me.txtdown.Name = "txtdown"
         Me.txtdown.Size = New System.Drawing.Size(60, 27)
         Me.txtdown.TabIndex = 957
-        Me.txtdown.Text = "1500"
+        Me.txtdown.Text = "1000"
         Me.txtdown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtup
@@ -4835,7 +4829,7 @@ Public Class FormParameter
         Me.txtup.Name = "txtup"
         Me.txtup.Size = New System.Drawing.Size(60, 27)
         Me.txtup.TabIndex = 956
-        Me.txtup.Text = "2200"
+        Me.txtup.Text = "2000"
         Me.txtup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtinterval
@@ -4872,7 +4866,7 @@ Public Class FormParameter
         '
         Me.btnForceDAOut.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.btnForceDAOut.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnForceDAOut.Location = New System.Drawing.Point(713, 357)
+        Me.btnForceDAOut.Location = New System.Drawing.Point(713, 352)
         Me.btnForceDAOut.Name = "btnForceDAOut"
         Me.btnForceDAOut.Size = New System.Drawing.Size(128, 31)
         Me.btnForceDAOut.TabIndex = 849
@@ -4881,6 +4875,7 @@ Public Class FormParameter
         '
         'pnlPressureAverage
         '
+        Me.pnlPressureAverage.Controls.Add(Me.Label15)
         Me.pnlPressureAverage.Controls.Add(Me.txtPeakTimes)
         Me.pnlPressureAverage.Controls.Add(Me.lblPeakTimesText)
         Me.pnlPressureAverage.Controls.Add(Me.txtPeakLimit)
@@ -4890,18 +4885,17 @@ Public Class FormParameter
         Me.pnlPressureAverage.Controls.Add(Me.txtPressureAverageTimes)
         Me.pnlPressureAverage.Controls.Add(Me.chkPressureAdjust)
         Me.pnlPressureAverage.Controls.Add(Me.chkPressureAverage)
-        Me.pnlPressureAverage.Location = New System.Drawing.Point(696, 400)
+        Me.pnlPressureAverage.Location = New System.Drawing.Point(696, 387)
         Me.pnlPressureAverage.Name = "pnlPressureAverage"
-        Me.pnlPressureAverage.Size = New System.Drawing.Size(303, 93)
+        Me.pnlPressureAverage.Size = New System.Drawing.Size(303, 101)
         Me.pnlPressureAverage.TabIndex = 944
-        Me.pnlPressureAverage.Visible = False
         '
         'txtPeakTimes
         '
-        Me.txtPeakTimes.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtPeakTimes.Location = New System.Drawing.Point(175, 64)
+        Me.txtPeakTimes.Font = New System.Drawing.Font("新細明體", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtPeakTimes.Location = New System.Drawing.Point(181, 53)
         Me.txtPeakTimes.Name = "txtPeakTimes"
-        Me.txtPeakTimes.Size = New System.Drawing.Size(60, 27)
+        Me.txtPeakTimes.Size = New System.Drawing.Size(60, 23)
         Me.txtPeakTimes.TabIndex = 943
         Me.txtPeakTimes.Text = "3"
         Me.txtPeakTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -4911,19 +4905,19 @@ Public Class FormParameter
         Me.lblPeakTimesText.BackColor = System.Drawing.Color.Transparent
         Me.lblPeakTimesText.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.lblPeakTimesText.ForeColor = System.Drawing.Color.Black
-        Me.lblPeakTimesText.Location = New System.Drawing.Point(76, 65)
+        Me.lblPeakTimesText.Location = New System.Drawing.Point(3, 55)
         Me.lblPeakTimesText.Name = "lblPeakTimesText"
-        Me.lblPeakTimesText.Size = New System.Drawing.Size(89, 22)
+        Me.lblPeakTimesText.Size = New System.Drawing.Size(172, 22)
         Me.lblPeakTimesText.TabIndex = 942
-        Me.lblPeakTimesText.Text = "Peak 次數:"
+        Me.lblPeakTimesText.Text = "Peak 次數(0=不使用):"
         Me.lblPeakTimesText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtPeakLimit
         '
-        Me.txtPeakLimit.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtPeakLimit.Location = New System.Drawing.Point(174, 38)
+        Me.txtPeakLimit.Font = New System.Drawing.Font("新細明體", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtPeakLimit.Location = New System.Drawing.Point(181, 27)
         Me.txtPeakLimit.Name = "txtPeakLimit"
-        Me.txtPeakLimit.Size = New System.Drawing.Size(60, 27)
+        Me.txtPeakLimit.Size = New System.Drawing.Size(60, 23)
         Me.txtPeakLimit.TabIndex = 941
         Me.txtPeakLimit.Text = "300"
         Me.txtPeakLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -4933,18 +4927,17 @@ Public Class FormParameter
         Me.lblPeakLimitText.BackColor = System.Drawing.Color.Transparent
         Me.lblPeakLimitText.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.lblPeakLimitText.ForeColor = System.Drawing.Color.Black
-        Me.lblPeakLimitText.Location = New System.Drawing.Point(36, 47)
+        Me.lblPeakLimitText.Location = New System.Drawing.Point(17, 35)
         Me.lblPeakLimitText.Name = "lblPeakLimitText"
-        Me.lblPeakLimitText.Size = New System.Drawing.Size(133, 21)
+        Me.lblPeakLimitText.Size = New System.Drawing.Size(162, 23)
         Me.lblPeakLimitText.TabIndex = 939
-        Me.lblPeakLimitText.Text = "Peak 消除(0=不使用):"
-        Me.lblPeakLimitText.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblPeakLimitText.Text = "Peak 消除"
         '
         'lblTimes03Text
         '
         Me.lblTimes03Text.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.lblTimes03Text.ForeColor = System.Drawing.Color.Black
-        Me.lblTimes03Text.Location = New System.Drawing.Point(248, 68)
+        Me.lblTimes03Text.Location = New System.Drawing.Point(248, 60)
         Me.lblTimes03Text.Name = "lblTimes03Text"
         Me.lblTimes03Text.Size = New System.Drawing.Size(30, 23)
         Me.lblTimes03Text.TabIndex = 938
@@ -4962,10 +4955,10 @@ Public Class FormParameter
         '
         'txtPressureAverageTimes
         '
-        Me.txtPressureAverageTimes.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.txtPressureAverageTimes.Location = New System.Drawing.Point(171, 4)
+        Me.txtPressureAverageTimes.Font = New System.Drawing.Font("新細明體", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.txtPressureAverageTimes.Location = New System.Drawing.Point(181, 4)
         Me.txtPressureAverageTimes.Name = "txtPressureAverageTimes"
-        Me.txtPressureAverageTimes.Size = New System.Drawing.Size(60, 27)
+        Me.txtPressureAverageTimes.Size = New System.Drawing.Size(60, 23)
         Me.txtPressureAverageTimes.TabIndex = 936
         Me.txtPressureAverageTimes.Text = "10"
         Me.txtPressureAverageTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -4974,11 +4967,11 @@ Public Class FormParameter
         '
         Me.chkPressureAdjust.AutoSize = True
         Me.chkPressureAdjust.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.chkPressureAdjust.Location = New System.Drawing.Point(17, 31)
+        Me.chkPressureAdjust.Location = New System.Drawing.Point(15, 78)
         Me.chkPressureAdjust.Name = "chkPressureAdjust"
-        Me.chkPressureAdjust.Size = New System.Drawing.Size(132, 21)
+        Me.chkPressureAdjust.Size = New System.Drawing.Size(236, 21)
         Me.chkPressureAdjust.TabIndex = 935
-        Me.chkPressureAdjust.Text = "壓力修整功能"
+        Me.chkPressureAdjust.Text = "壓力修整功能(>均化值移除)"
         Me.chkPressureAdjust.UseVisualStyleBackColor = True
         '
         'chkPressureAverage
@@ -4997,7 +4990,7 @@ Public Class FormParameter
         Me.lblNoControlPressText.BackColor = System.Drawing.Color.Transparent
         Me.lblNoControlPressText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNoControlPressText.ForeColor = System.Drawing.Color.Black
-        Me.lblNoControlPressText.Location = New System.Drawing.Point(708, 296)
+        Me.lblNoControlPressText.Location = New System.Drawing.Point(708, 291)
         Me.lblNoControlPressText.Name = "lblNoControlPressText"
         Me.lblNoControlPressText.Size = New System.Drawing.Size(125, 26)
         Me.lblNoControlPressText.TabIndex = 862
@@ -5009,7 +5002,7 @@ Public Class FormParameter
         Me.lblPressAverageText.BackColor = System.Drawing.Color.Transparent
         Me.lblPressAverageText.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPressAverageText.ForeColor = System.Drawing.Color.Black
-        Me.lblPressAverageText.Location = New System.Drawing.Point(708, 329)
+        Me.lblPressAverageText.Location = New System.Drawing.Point(708, 323)
         Me.lblPressAverageText.Name = "lblPressAverageText"
         Me.lblPressAverageText.Size = New System.Drawing.Size(125, 26)
         Me.lblPressAverageText.TabIndex = 952
@@ -5019,7 +5012,7 @@ Public Class FormParameter
         'txtNoControlPress
         '
         Me.txtNoControlPress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNoControlPress.Location = New System.Drawing.Point(850, 296)
+        Me.txtNoControlPress.Location = New System.Drawing.Point(850, 291)
         Me.txtNoControlPress.Name = "txtNoControlPress"
         Me.txtNoControlPress.Size = New System.Drawing.Size(78, 30)
         Me.txtNoControlPress.TabIndex = 861
@@ -5029,7 +5022,7 @@ Public Class FormParameter
         'txtPressAverage
         '
         Me.txtPressAverage.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPressAverage.Location = New System.Drawing.Point(852, 331)
+        Me.txtPressAverage.Location = New System.Drawing.Point(850, 321)
         Me.txtPressAverage.Name = "txtPressAverage"
         Me.txtPressAverage.Size = New System.Drawing.Size(76, 30)
         Me.txtPressAverage.TabIndex = 951
@@ -5040,7 +5033,7 @@ Public Class FormParameter
         '
         Me.lblKg23Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblKg23Text.ForeColor = System.Drawing.Color.Black
-        Me.lblKg23Text.Location = New System.Drawing.Point(939, 299)
+        Me.lblKg23Text.Location = New System.Drawing.Point(939, 297)
         Me.lblKg23Text.Name = "lblKg23Text"
         Me.lblKg23Text.Size = New System.Drawing.Size(45, 26)
         Me.lblKg23Text.TabIndex = 860
@@ -5050,7 +5043,7 @@ Public Class FormParameter
         '
         Me.lblKg12Text.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblKg12Text.ForeColor = System.Drawing.Color.Black
-        Me.lblKg12Text.Location = New System.Drawing.Point(941, 331)
+        Me.lblKg12Text.Location = New System.Drawing.Point(941, 329)
         Me.lblKg12Text.Name = "lblKg12Text"
         Me.lblKg12Text.Size = New System.Drawing.Size(45, 26)
         Me.lblKg12Text.TabIndex = 950
@@ -5081,7 +5074,7 @@ Public Class FormParameter
         'txtHighPDAOut
         '
         Me.txtHighPDAOut.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHighPDAOut.Location = New System.Drawing.Point(853, 362)
+        Me.txtHighPDAOut.Location = New System.Drawing.Point(851, 351)
         Me.txtHighPDAOut.Name = "txtHighPDAOut"
         Me.txtHighPDAOut.Size = New System.Drawing.Size(75, 30)
         Me.txtHighPDAOut.TabIndex = 807
@@ -6667,7 +6660,7 @@ Public Class FormParameter
         Me.flwPressPID.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.flwPressPID.Location = New System.Drawing.Point(698, 42)
         Me.flwPressPID.Name = "flwPressPID"
-        Me.flwPressPID.Size = New System.Drawing.Size(300, 249)
+        Me.flwPressPID.Size = New System.Drawing.Size(300, 243)
         Me.flwPressPID.TabIndex = 949
         '
         'tabPageIniEdit
@@ -6679,15 +6672,6 @@ Public Class FormParameter
         Me.tabPageIniEdit.TabIndex = 4
         Me.tabPageIniEdit.Text = "設定檔編輯"
         Me.tabPageIniEdit.UseVisualStyleBackColor = True
-        '
-        'ControlINIEdit1
-        '
-        Me.ControlINIEdit1.AutoSize = True
-        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
-        Me.ControlINIEdit1.Name = "ControlINIEdit1"
-        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
-        Me.ControlINIEdit1.TabIndex = 0
         '
         'TabPageTempCalTool
         '
@@ -6797,7 +6781,7 @@ Public Class FormParameter
         '
         Me.txtCR_Timer.Location = New System.Drawing.Point(53, 422)
         Me.txtCR_Timer.Name = "txtCR_Timer"
-        Me.txtCR_Timer.Size = New System.Drawing.Size(190, 35)
+        Me.txtCR_Timer.Size = New System.Drawing.Size(298, 44)
         Me.txtCR_Timer.TabIndex = 861
         Me.txtCR_Timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -6805,7 +6789,7 @@ Public Class FormParameter
         '
         Me.txtC_Timer.Location = New System.Drawing.Point(53, 376)
         Me.txtC_Timer.Name = "txtC_Timer"
-        Me.txtC_Timer.Size = New System.Drawing.Size(190, 35)
+        Me.txtC_Timer.Size = New System.Drawing.Size(298, 44)
         Me.txtC_Timer.TabIndex = 860
         Me.txtC_Timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -7294,6 +7278,33 @@ Public Class FormParameter
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'CtlSanAnCIMSetup1
+        '
+        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
+        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
+        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
+        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
+        Me.CtlSanAnCIMSetup1.TabIndex = 0
+        '
+        'ControlINIEdit1
+        '
+        Me.ControlINIEdit1.AutoSize = True
+        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
+        Me.ControlINIEdit1.Name = "ControlINIEdit1"
+        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
+        Me.ControlINIEdit1.TabIndex = 0
+        '
+        'Label15
+        '
+        Me.Label15.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(250, 33)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(36, 19)
+        Me.Label15.TabIndex = 944
+        Me.Label15.Text = "kg"
         '
         'FormParameter
         '
@@ -9351,6 +9362,7 @@ Public Class FormParameter
     End Sub
 
     Private Sub btnlog_Click(sender As Object, e As EventArgs) Handles btnlog.Click
+
         Dim tempstr As String
         tempstr = DataLogRecordFileName
         If CSVTimerStartPb_Status = True Then
@@ -9380,8 +9392,6 @@ Public Class FormParameter
         SystemParameters.RunConfirm = GetTrue01String(chkRunConfirm.Checked)
         WriteProgData("PARAMETER", "RunConfirm", SystemParameters.RunConfirm, ParameterINIFile)
     End Sub
-
-
     Private Sub btnShowPicControl_Click(sender As Object, e As EventArgs) Handles btnShowPicControl.Click
         Dim show As New FormMesgBox_passward
 
@@ -9430,7 +9440,6 @@ Public Class FormParameter
             txtWebPath.Text = folderBrowserDialog1.SelectedPath
             SystemParameters.WebPath = txtWebPath.Text
             WriteProgData("PARAMETER", "WebPath", SystemParameters.WebPath, ParameterINIFile)
-
         End If
     End Sub
 
@@ -9494,5 +9503,24 @@ Public Class FormParameter
 
     Private Sub Label13_DoubleClick(sender As Object, e As EventArgs) Handles Label13.DoubleClick
         GroupBox3.Visible = Not GroupBox3.Visible
+    End Sub
+
+    Private Sub txtdown_MouseDown(sender As Object, e As MouseEventArgs) Handles txtdown.MouseDown
+        If CallKeyboard2(sender, "9999", "1") <> "" Then
+            'Write_PLC_R1100(DAT1stControlKgIndex, Val(sender.Text))
+            'SaveParameter()
+        End If
+    End Sub
+
+    Private Sub txtup_MouseDown(sender As Object, e As MouseEventArgs) Handles txtup.MouseDown
+        If CallKeyboard2(sender, "9999", "1") <> "" Then
+
+        End If
+    End Sub
+
+    Private Sub txtinterval_MouseDown(sender As Object, e As MouseEventArgs) Handles txtinterval.MouseDown
+        If CallKeyboard2(sender, "9999", "1") <> "" Then
+
+        End If
     End Sub
 End Class

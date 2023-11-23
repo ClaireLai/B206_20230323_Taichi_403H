@@ -453,7 +453,7 @@
     ''' <remarks>99.02.02</remarks>
     Public Const DAPositionSet01Index As Integer = 167   '油壓缸貼合位置
     Public Const DAPositionSet02Index As Integer = 168   '
-    Public Const DAPositionSet03Index As Integer = 169        '溫度
+    Public Const DAPositionSet03Index As Integer = 169    '溫度
     Public Const DAPositionSet04Index As Integer = 170    '溫速
     Public Const DAPositionSet05Index As Integer = 171    '溫速
     Public Const DAPositionSet06Index As Integer = 172    '溫速

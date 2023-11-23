@@ -213,27 +213,27 @@
             If oriPressPV(i) < 0 Then oriPressPV(i) = 0
 
             If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then '平均次數
-                If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
-                    AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
-                    Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                    PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(ave, Val(SystemParameters.PressAverage))
-                    PressPV(i) = SetInRange(True, PressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                Else
-                    AvergaeValue(i).CLearAverageTimes()
-                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                End If
+                'If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
+                AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
+                'Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(oriPressPV(i), Val(SystemParameters.PeakLimit), Val(SystemParameters.PeakTimes))
+                '    PressPV(i) = SetInRange(True, PressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                'Else
+                '    AvergaeValue(i).CLearAverageTimes()
+                '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內傳回值
+                'End If
             Else
-                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內傳回值
             End If
 
             If GetTrue01Boolean(SystemParameters.PressureAdjust) Then '壓力修整
                 Select Case PressState(i)
                     Case 0
-                        If Check_PLC_M(DoBondForce01Index + i) Then
+                        If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
                             OldPressValue(i) = Get_PLC_R1100(DAProcessBond01Index + 4 * i)
                             If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), PressPV(i), Val(SystemParameters.PressAverage)) Then '均化範圍內
                                 PressStateDelay(i) += 1
-                                If PressStateDelay(i) > 3 Then
+                                If PressStateDelay(i) > 3 Then '等3秒
                                     PressState(i) = 1
                                     PressStateDelay(i) = 0
                                 End If
@@ -245,8 +245,8 @@
                         End If
                     Case 1
                         If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
-                            If Get_PLC_R1100(DAProcessBond01Index + 4 * i) <> OldPressValue(i) Then
-                                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                            If Get_PLC_R1100(DAProcessBond01Index + 4 * i) <> OldPressValue(i) Then '設定值有變
+                                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內顯示設定值
                                 PressStateDelay(i) += 1
                                 If PressStateDelay(i) > 3 Then
                                     PressStateDelay(i) = 0
@@ -254,7 +254,7 @@
                                     OldPressValue(i) = 0
                                 End If
                             Else
-                                PressPV(i) = Get_PLC_R1100(DAProcessBond01Index + 4 * i)
+                                PressPV(i) = Get_PLC_R1100(DAProcessBond01Index + 4 * i) '在均化範圍內顯示設定值
                             End If
                         Else
                             PressState(i) = 0
@@ -311,10 +311,6 @@
 
     End Sub
     'End Class
-
-
-
-
 
     '傳回校正後數值
     'GetCalibratedTemp(未校正前數值,校正後序列,校正前序列,點數)

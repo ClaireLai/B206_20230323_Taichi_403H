@@ -418,7 +418,7 @@
         Me.txtDataLogStepTime.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDataLogStepTime.Location = New System.Drawing.Point(171, 86)
         Me.txtDataLogStepTime.Name = "txtDataLogStepTime"
-        Me.txtDataLogStepTime.Size = New System.Drawing.Size(79, 26)
+        Me.txtDataLogStepTime.Size = New System.Drawing.Size(79, 30)
         Me.txtDataLogStepTime.TabIndex = 116
         Me.txtDataLogStepTime.Text = "5"
         Me.txtDataLogStepTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -461,7 +461,7 @@
         Me.txtTimerSec.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimerSec.Location = New System.Drawing.Point(157, 13)
         Me.txtTimerSec.Name = "txtTimerSec"
-        Me.txtTimerSec.Size = New System.Drawing.Size(81, 29)
+        Me.txtTimerSec.Size = New System.Drawing.Size(81, 35)
         Me.txtTimerSec.TabIndex = 11
         Me.txtTimerSec.Text = "0"
         Me.txtTimerSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -519,7 +519,7 @@
         Me.txtTimerMin.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimerMin.Location = New System.Drawing.Point(16, 13)
         Me.txtTimerMin.Name = "txtTimerMin"
-        Me.txtTimerMin.Size = New System.Drawing.Size(81, 29)
+        Me.txtTimerMin.Size = New System.Drawing.Size(81, 35)
         Me.txtTimerMin.TabIndex = 10
         Me.txtTimerMin.Text = "0"
         Me.txtTimerMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -773,7 +773,7 @@
         Me.txtGas02MFCSet.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtGas02MFCSet.Location = New System.Drawing.Point(67, 23)
         Me.txtGas02MFCSet.Name = "txtGas02MFCSet"
-        Me.txtGas02MFCSet.Size = New System.Drawing.Size(62, 26)
+        Me.txtGas02MFCSet.Size = New System.Drawing.Size(62, 30)
         Me.txtGas02MFCSet.TabIndex = 543
         Me.txtGas02MFCSet.Text = "000"
         Me.txtGas02MFCSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -854,7 +854,7 @@
         Me.txtGas01MFCSet.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtGas01MFCSet.Location = New System.Drawing.Point(67, 23)
         Me.txtGas01MFCSet.Name = "txtGas01MFCSet"
-        Me.txtGas01MFCSet.Size = New System.Drawing.Size(62, 26)
+        Me.txtGas01MFCSet.Size = New System.Drawing.Size(62, 30)
         Me.txtGas01MFCSet.TabIndex = 540
         Me.txtGas01MFCSet.Text = "000"
         Me.txtGas01MFCSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1211,11 +1211,11 @@
         '
         Me.Label6.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(181, 172)
+        Me.Label6.Location = New System.Drawing.Point(174, 172)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(67, 20)
+        Me.Label6.Size = New System.Drawing.Size(73, 20)
         Me.Label6.TabIndex = 570
-        Me.Label6.Text = "Toor.m³/s"
+        Me.Label6.Text = "Torr.m³/s"
         '
         'lbLeak
         '
@@ -1259,7 +1259,7 @@
         Me.txtVacuumTestTimeHr.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtVacuumTestTimeHr.Location = New System.Drawing.Point(29, 17)
         Me.txtVacuumTestTimeHr.Name = "txtVacuumTestTimeHr"
-        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 26)
+        Me.txtVacuumTestTimeHr.Size = New System.Drawing.Size(35, 30)
         Me.txtVacuumTestTimeHr.TabIndex = 551
         Me.txtVacuumTestTimeHr.Text = "0"
         '
@@ -1278,7 +1278,7 @@
         Me.txtVacuumTestTimeMin.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtVacuumTestTimeMin.Location = New System.Drawing.Point(106, 16)
         Me.txtVacuumTestTimeMin.Name = "txtVacuumTestTimeMin"
-        Me.txtVacuumTestTimeMin.Size = New System.Drawing.Size(35, 26)
+        Me.txtVacuumTestTimeMin.Size = New System.Drawing.Size(35, 30)
         Me.txtVacuumTestTimeMin.TabIndex = 549
         Me.txtVacuumTestTimeMin.Text = "1"
         '
@@ -1299,7 +1299,7 @@
         Me.lblLeakTest.ForeColor = System.Drawing.Color.Blue
         Me.lblLeakTest.Location = New System.Drawing.Point(15, 231)
         Me.lblLeakTest.Name = "lblLeakTest"
-        Me.lblLeakTest.Size = New System.Drawing.Size(56, 18)
+        Me.lblLeakTest.Size = New System.Drawing.Size(69, 23)
         Me.lblLeakTest.TabIndex = 565
         Me.lblLeakTest.Text = "Label5"
         '
@@ -1331,7 +1331,7 @@
         Me.txtBasePress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBasePress.Location = New System.Drawing.Point(96, 186)
         Me.txtBasePress.Name = "txtBasePress"
-        Me.txtBasePress.Size = New System.Drawing.Size(79, 26)
+        Me.txtBasePress.Size = New System.Drawing.Size(79, 30)
         Me.txtBasePress.TabIndex = 553
         Me.txtBasePress.Text = "9.90E-2"
         Me.txtBasePress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1707,7 +1707,16 @@
         lblCHVac.Text = GaugeCHVacStr
         'for B222 claire
         If bolLeakTest Or bolVaccTest Or Not Timercount_enable Then
-            Panel2.Enabled = Not Timercount_enable
+            'Panel2.Enabled = Not Timercount_enable
+
+            picV4P.Enabled = Not Timercount_enable
+            picRVP.Enabled = Not Timercount_enable
+            btnAutoVacuum.Enabled = Not Timercount_enable
+            btnAutoPurge.Enabled = Not Timercount_enable
+            picDP.Enabled = Not Timercount_enable
+
+
+            lblWaterPress.Enabled = True
             txtTimerMin.Enabled = Not Timercount_enable
             txtTimerSec.Enabled = Not Timercount_enable
             btnTimerStart.Enabled = Not Timercount_enable
@@ -1728,7 +1737,7 @@
         If bolLeakTest Then
             lbLeak.Text = ""
         Else
-            lbLeak.Text = Format(sigTotalLeakRate, "0.000")
+            lbLeak.Text = Format(sigTotalLeakRate, "0.0E+00")
         End If
 
 
@@ -2114,6 +2123,14 @@
         If ProcessMode_RUN Then Exit Sub
         CAutoPumping.AutoProtection = False
 
+        Timercount_enable = False
+        btnTimerStart.Text = GetLangText("開始計時", "Start")
+        lblTimerMin.Text = "0"
+        lblTimerSec.Text = "0"
+        Timercount_up = False
+        Timercount_down = False
+        Timercount_shift = 0
+
         bolVaccTest = Not bolVaccTest
         Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
         Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
@@ -2126,30 +2143,6 @@
             Timercount_enable = False
             CSVTimerStartPb_Status = False
         End If
-        'CAutoPumping.Start = Not CAutoPumping.Start
-        'If CAutoPumping.Start Then
-        '    bolVaccTest = True
-        '    'Timercount_enable = True
-        '    Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
-        '    txtTimerMin.Text = Timercount.set_min.ToString
-        '    'TImerStart() '開始計時
-        '    'Panel2.Enabled = False
-        '    'tabPageDataLog.Enabled = False
-        '    'tabPageTimer.Enabled = False
-        '    'lblTimerSec.Enabled = True
-        '    'lblTimerMin.Enabled = True
-
-        '    'btnStartLog_Click(vbNull, e) '開始紀錄
-
-        'Else
-        '    Timercount_enable = False '停止計時
-        '    btnStartLog_Click(vbNull, e) '開始紀錄
-        '    Output(DoMPIndex).Status = False
-        '    Output(DoRVIndex).Status = False
-        '    CSVTimerStartPb_Status = False
-        '    bolVaccTest = False
-
-        'End If
 
 
     End Sub
@@ -2174,6 +2167,17 @@
 
     Private Sub btnLeakRateTest_Click(sender As Object, e As EventArgs) Handles btnLeakRateTest.Click
         If ProcessMode_RUN Then Exit Sub
+
+        Timercount_enable = False
+        btnTimerStart.Text = GetLangText("開始計時", "Start")
+        lblTimerMin.Text = "0"
+        lblTimerSec.Text = "0"
+        Timercount_up = False
+        Timercount_down = False
+        Timercount_shift = 0
+
+
+
         bolLeakTest = Not bolLeakTest
         Timercount.set_min = Val(txtVacuumTestTimeMin.Text) + Val(txtVacuumTestTimeHr.Text) * 60
         Timercount_now = Timercount.set_min * 60 + Timercount.set_sec

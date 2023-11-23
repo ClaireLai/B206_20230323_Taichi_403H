@@ -819,7 +819,7 @@ Module Module_AutoTask
                         CAutoPumping.Start = False
                         Set_MBit(DoRVIndex, DEVICE_OFF)
                         AutoProcessTimerEnabled = True
-                        AutoProcessTimer = 2
+                        AutoProcessTimer = 1
                         Last_State = Control_State
                         bol1 = True
                         Control_State = 5
@@ -866,6 +866,7 @@ Module Module_AutoTask
             Case 99
                 strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                 Timercount_down = False
+                'Timercount_enable = False
                 bolLeakTest = False
                 Control_State = 0
         End Select
@@ -938,7 +939,7 @@ Module Module_AutoTask
                         PumpingAlarm_Error = False 'Add By Vincent 20190416 
 
                         AutoProcessTimerEnabled = True
-                        AutoProcessTimer = 12
+                        AutoProcessTimer = 1
                         bol1 = True
                         'Vacc_LeakTest()
                         Last_State = Control_State
@@ -965,9 +966,7 @@ Module Module_AutoTask
                             If CSVTimerStartPb_Status = False Then
                                 Control_State = 10
                             End If
-
                         End If
-
                     End If
                 Else
                     Last_State = Control_State
@@ -985,6 +984,7 @@ Module Module_AutoTask
             Case 99
                 strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
                 Timercount_down = False
+                'Timercount_enable = False
                 bolVaccTest = False
                 Control_State = 0
         End Select
@@ -2054,9 +2054,9 @@ Module Module_AutoTask
                             datamax += 1
                             Data(0, datamax) = "BotTemp" + Format(i + 1, "00")
                             datamax += 1
-                            Data(0, datamax) = "TopTempRate" + Format(i + 1, "00") + " c/s"
+                            Data(0, datamax) = "TopTempRate" + Format(i + 1, "00")
                             datamax += 1
-                            Data(0, datamax) = "BotTempRate" + Format(i + 1, "00") + " c/s"
+                            Data(0, datamax) = "BotTempRate" + Format(i + 1, "00")
                             datamax += 1
                             Data(0, datamax) = "Pressure" + Format(i + 1, "00")
                             datamax += 1
@@ -2120,8 +2120,8 @@ Module Module_AutoTask
 
                             'If ii = RecordInterval Then
                             If ii = RecordInterval Then '計算平均加熱速度
-                                strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / RecordInterval, "0.0")
-                                strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / RecordInterval, "0.0")
+                                strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / RecordInterval, "0.00")
+                                strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / RecordInterval, "0.00")
                                 datamax += 1
                                 Data(ii, datamax) = strAvgTopTempRate(i)
                                 datamax += 1
@@ -2191,8 +2191,8 @@ Module Module_AutoTask
                 ProcessRecordsIndex_222 = 0
                 'If bollog = False Then
                 For i = 0 To MAXPLATE
-                    strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / ii, "0.0")
-                    strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / ii, "0.0")
+                    strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / ii, "0.00")
+                    strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / ii, "0.00")
                     Debug.Print("LastTopTemp(" + i.ToString + ") =" + LastTopTemp(i).ToString + ",LastBotTemp(" + i.ToString + ") =" + LastBotTemp(i).ToString)
                     Debug.Print("strAvgTopTempRate(" + i.ToString + ") =" + strAvgTopTempRate(i) + ",strAvgBotTempRate(" + i.ToString + ") =" + strAvgBotTempRate(i))
                 Next
@@ -2559,7 +2559,7 @@ Module Module_AutoTask
                         datamax += 1
                         'strLastVacuum = 0
                         sigLastVacuum = 0
-                        Data(datamax) = "LeakRate(Toor.m³/s)"
+                        Data(datamax) = "LeakRate(Torr.m³/s)"
                     End If
                     For i = 0 To datamax - 1
                         ShowData = ShowData + Data(i) + Space(15 - Len(Data(i))) + vbTab '
@@ -2606,9 +2606,9 @@ Module Module_AutoTask
                     If bolLeakTest Then
                         datamax += 1
                         If sigLastVacuum <> 0 Then
-                            'sinLeakRate=0.9m³*toor/s 
+                            'sinLeakRate=0.9m³*torr/s 
                             sigLeakRate = 0.9 * (GaugeCHVac - sigLastVacuum) / DatalogTime
-                            Data(datamax) = Format(sigLeakRate, "0.00")
+                            Data(datamax) = Format(sigLeakRate, "0.0E+00")
                         Else
                             Data(datamax) = "_" '第一筆資料
                         End If

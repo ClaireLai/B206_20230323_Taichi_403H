@@ -113,7 +113,15 @@
     End Sub
 
 
-    '在限制範圍內則傳回
+    '
+    ''' <summary>
+    ''' 在限制範圍內則傳回PV
+    ''' </summary>
+    ''' <param name="Cond"></param>
+    ''' <param name="PV"></param>
+    ''' <param name="SV"></param>
+    ''' <param name="iLimit"></param>
+    ''' <returns></returns>
     Public Function SetInRange(ByVal Cond As Boolean, ByVal PV As Integer, ByVal SV As Integer, ByVal iLimit As Integer) As Integer
         If Cond Then
             If PV_InRange(SV, PV, iLimit) Then

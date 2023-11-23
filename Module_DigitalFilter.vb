@@ -76,10 +76,16 @@ Module Module_DigitalFiiter
             LastData = CurrentData
             Return Average
         End Function
+        ''' <summary>
+        ''' 平均值
+        ''' </summary>
+        ''' <param name="dData"></param>
+        ''' <param name="PeakLimit"></param>
+        ''' <returns></returns>
         Public Function GetAverageValueDePeak(ByVal dData As Double, ByVal PeakLimit As Double) As Double
             Static PeakCount As Integer = 0
-            If AverageTimes <= 0 Then AverageTimes = 1
-            If PeakLimit <= 0 Then PeakLimit = 100
+            If AverageTimes <= 0 Then AverageTimes = 1 '平均次數
+            If PeakLimit <= 0 Then PeakLimit = 100 '均化值
             CurrentData = dData
             If AverageCount = 0 Then
                 LastData = dData
@@ -111,14 +117,14 @@ Module Module_DigitalFiiter
         End Function
         Public Function GetAverageValueDePeak(ByVal dData As Double, ByVal PeakLimit As Double, ByVal iPeakTimes As Integer) As Double
             Static PeakCount As Integer = 0
-            CurrentData = dData
+            CurrentData = dData '原始壓力值
             If AverageCount = 0 Then
                 LastData = dData
             End If
-            If Math.Abs(CurrentData - LastData) > PeakLimit Then
+            If Math.Abs(CurrentData - LastData) > PeakLimit Then '跳動值>peak跳動
                 PeakCount += 1
-                If PeakCount < iPeakTimes Then
-                    CurrentData = LastData
+                If PeakCount < iPeakTimes Then '隱藏次數<peak次數
+                    CurrentData = LastData '壓力值=上次
                 Else
                     PeakCount = 0
                 End If

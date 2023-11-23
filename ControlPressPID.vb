@@ -54,7 +54,7 @@
     End Sub
 
     Private Sub txtInterval_MouseDown(sender As Object, e As MouseEventArgs) Handles txtInterval.MouseDown
-        CallKeyboard2(sender, "10", "3")
+        CallKeyboard2(sender, "10", "2")
         sender.text = Format(Val(sender.Text), "0")
         SavePID()
     End Sub
