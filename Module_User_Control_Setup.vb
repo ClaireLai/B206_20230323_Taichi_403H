@@ -147,7 +147,7 @@
         If PressPID_Flag Then
             FormParameters.flwPressPID.Visible = True
             FormParameters.Panel1.Visible = False
-            FormParameters.pnlPressureAverage.Visible = False
+            'FormParameters.pnlPressureAverage.Visible = False
             FormParameters.lblOutRangAddDAText.Visible = False
             FormParameters.txtOutRangAddDA1.Visible = False
             FormParameters.txtOutRangAddDA2.Visible = False

@@ -790,6 +790,7 @@ Public Class FormParameter
         Me.flwPressCalUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPageSystem = New System.Windows.Forms.TabPage()
         Me.TabPageCIM = New System.Windows.Forms.TabPage()
+        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
         Me.TabPageCello = New System.Windows.Forms.TabPage()
         Me.tabSystem = New System.Windows.Forms.TabControl()
         Me.tabpageTempCal = New System.Windows.Forms.TabPage()
@@ -861,6 +862,7 @@ Public Class FormParameter
         Me.btUp = New System.Windows.Forms.Button()
         Me.btnForceDAOut = New System.Windows.Forms.Button()
         Me.pnlPressureAverage = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.txtPeakTimes = New System.Windows.Forms.TextBox()
         Me.lblPeakTimesText = New System.Windows.Forms.Label()
         Me.txtPeakLimit = New System.Windows.Forms.TextBox()
@@ -1009,6 +1011,7 @@ Public Class FormParameter
         Me.lblThresholdPressRatioText = New System.Windows.Forms.Label()
         Me.flwPressPID = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabPageIniEdit = New System.Windows.Forms.TabPage()
+        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
         Me.TabPageTempCalTool = New System.Windows.Forms.TabPage()
         Me.chkDa = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -1057,9 +1060,6 @@ Public Class FormParameter
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.CtlSanAnCIMSetup1 = New CELLO.ctlSanAnCIMSetup()
-        Me.ControlINIEdit1 = New CELLO.ControlINIEdit()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlParaSet.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -3758,7 +3758,7 @@ Public Class FormParameter
         Me.tabPage4to6.Location = New System.Drawing.Point(4, 44)
         Me.tabPage4to6.Name = "tabPage4to6"
         Me.tabPage4to6.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPage4to6.Size = New System.Drawing.Size(1575, 683)
+        Me.tabPage4to6.Size = New System.Drawing.Size(1971, 866)
         Me.tabPage4to6.TabIndex = 1
         Me.tabPage4to6.Text = "Head 4~6"
         '
@@ -3767,7 +3767,7 @@ Public Class FormParameter
         Me.flwPIDPage2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flwPIDPage2.Location = New System.Drawing.Point(3, 3)
         Me.flwPIDPage2.Name = "flwPIDPage2"
-        Me.flwPIDPage2.Size = New System.Drawing.Size(1569, 677)
+        Me.flwPIDPage2.Size = New System.Drawing.Size(1965, 860)
         Me.flwPIDPage2.TabIndex = 1
         '
         'TabPageTCal
@@ -3943,6 +3943,14 @@ Public Class FormParameter
         Me.TabPageCIM.Size = New System.Drawing.Size(1992, 1106)
         Me.TabPageCIM.TabIndex = 5
         Me.TabPageCIM.Text = "CIM Setup"
+        '
+        'CtlSanAnCIMSetup1
+        '
+        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
+        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
+        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
+        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
+        Me.CtlSanAnCIMSetup1.TabIndex = 0
         '
         'TabPageCello
         '
@@ -4890,6 +4898,16 @@ Public Class FormParameter
         Me.pnlPressureAverage.Size = New System.Drawing.Size(303, 101)
         Me.pnlPressureAverage.TabIndex = 944
         '
+        'Label15
+        '
+        Me.Label15.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(250, 33)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(36, 19)
+        Me.Label15.TabIndex = 944
+        Me.Label15.Text = "kg"
+        '
         'txtPeakTimes
         '
         Me.txtPeakTimes.Font = New System.Drawing.Font("新細明體", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
@@ -4927,9 +4945,9 @@ Public Class FormParameter
         Me.lblPeakLimitText.BackColor = System.Drawing.Color.Transparent
         Me.lblPeakLimitText.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.lblPeakLimitText.ForeColor = System.Drawing.Color.Black
-        Me.lblPeakLimitText.Location = New System.Drawing.Point(17, 35)
+        Me.lblPeakLimitText.Location = New System.Drawing.Point(3, 35)
         Me.lblPeakLimitText.Name = "lblPeakLimitText"
-        Me.lblPeakLimitText.Size = New System.Drawing.Size(162, 23)
+        Me.lblPeakLimitText.Size = New System.Drawing.Size(97, 23)
         Me.lblPeakLimitText.TabIndex = 939
         Me.lblPeakLimitText.Text = "Peak 消除"
         '
@@ -6668,10 +6686,19 @@ Public Class FormParameter
         Me.tabPageIniEdit.Controls.Add(Me.ControlINIEdit1)
         Me.tabPageIniEdit.Location = New System.Drawing.Point(4, 44)
         Me.tabPageIniEdit.Name = "tabPageIniEdit"
-        Me.tabPageIniEdit.Size = New System.Drawing.Size(1580, 802)
+        Me.tabPageIniEdit.Size = New System.Drawing.Size(1977, 1015)
         Me.tabPageIniEdit.TabIndex = 4
         Me.tabPageIniEdit.Text = "設定檔編輯"
         Me.tabPageIniEdit.UseVisualStyleBackColor = True
+        '
+        'ControlINIEdit1
+        '
+        Me.ControlINIEdit1.AutoSize = True
+        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
+        Me.ControlINIEdit1.Name = "ControlINIEdit1"
+        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
+        Me.ControlINIEdit1.TabIndex = 0
         '
         'TabPageTempCalTool
         '
@@ -6682,7 +6709,7 @@ Public Class FormParameter
         Me.TabPageTempCalTool.Location = New System.Drawing.Point(4, 44)
         Me.TabPageTempCalTool.Name = "TabPageTempCalTool"
         Me.TabPageTempCalTool.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageTempCalTool.Size = New System.Drawing.Size(1580, 802)
+        Me.TabPageTempCalTool.Size = New System.Drawing.Size(1977, 1015)
         Me.TabPageTempCalTool.TabIndex = 5
         Me.TabPageTempCalTool.Text = "校溫工具"
         Me.TabPageTempCalTool.UseVisualStyleBackColor = True
@@ -6754,7 +6781,7 @@ Public Class FormParameter
         Me.tabpageCycleRun.Controls.Add(Me.btnPlateUpACR1)
         Me.tabpageCycleRun.Location = New System.Drawing.Point(4, 44)
         Me.tabpageCycleRun.Name = "tabpageCycleRun"
-        Me.tabpageCycleRun.Size = New System.Drawing.Size(1580, 802)
+        Me.tabpageCycleRun.Size = New System.Drawing.Size(1977, 1015)
         Me.tabpageCycleRun.TabIndex = 6
         Me.tabpageCycleRun.Text = "CycleRun"
         Me.tabpageCycleRun.UseVisualStyleBackColor = True
@@ -6781,7 +6808,7 @@ Public Class FormParameter
         '
         Me.txtCR_Timer.Location = New System.Drawing.Point(53, 422)
         Me.txtCR_Timer.Name = "txtCR_Timer"
-        Me.txtCR_Timer.Size = New System.Drawing.Size(298, 44)
+        Me.txtCR_Timer.Size = New System.Drawing.Size(298, 35)
         Me.txtCR_Timer.TabIndex = 861
         Me.txtCR_Timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -6789,7 +6816,7 @@ Public Class FormParameter
         '
         Me.txtC_Timer.Location = New System.Drawing.Point(53, 376)
         Me.txtC_Timer.Name = "txtC_Timer"
-        Me.txtC_Timer.Size = New System.Drawing.Size(298, 44)
+        Me.txtC_Timer.Size = New System.Drawing.Size(298, 35)
         Me.txtC_Timer.TabIndex = 860
         Me.txtC_Timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -7278,33 +7305,6 @@ Public Class FormParameter
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'CtlSanAnCIMSetup1
-        '
-        Me.CtlSanAnCIMSetup1.Font = New System.Drawing.Font("Arial", 12.0!)
-        Me.CtlSanAnCIMSetup1.Location = New System.Drawing.Point(0, 4)
-        Me.CtlSanAnCIMSetup1.Name = "CtlSanAnCIMSetup1"
-        Me.CtlSanAnCIMSetup1.Size = New System.Drawing.Size(1013, 542)
-        Me.CtlSanAnCIMSetup1.TabIndex = 0
-        '
-        'ControlINIEdit1
-        '
-        Me.ControlINIEdit1.AutoSize = True
-        Me.ControlINIEdit1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ControlINIEdit1.Location = New System.Drawing.Point(4, 3)
-        Me.ControlINIEdit1.Name = "ControlINIEdit1"
-        Me.ControlINIEdit1.Size = New System.Drawing.Size(982, 475)
-        Me.ControlINIEdit1.TabIndex = 0
-        '
-        'Label15
-        '
-        Me.Label15.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(250, 33)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(36, 19)
-        Me.Label15.TabIndex = 944
-        Me.Label15.Text = "kg"
         '
         'FormParameter
         '
@@ -9406,7 +9406,7 @@ Public Class FormParameter
         If PressPID_Flag Then
             FormParameters.flwPressPID.Visible = True
             FormParameters.Panel1.Visible = False
-            FormParameters.pnlPressureAverage.Visible = False
+            FormParameters.pnlPressureAverage.Visible = True
             lblOutRangAddDAText.Visible = False
             txtOutRangAddDA1.Visible = False
             txtOutRangAddDA2.Visible = False

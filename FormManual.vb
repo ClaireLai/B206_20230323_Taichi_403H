@@ -1252,7 +1252,7 @@
         Me.GroupBox1.Size = New System.Drawing.Size(191, 48)
         Me.GroupBox1.TabIndex = 566
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "測試時間"
+        Me.GroupBox1.Text = "测试时间"
         '
         'txtVacuumTestTimeHr
         '
@@ -1324,7 +1324,7 @@
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 20)
         Me.Label4.TabIndex = 554
-        Me.Label4.Text = "基礎壓力"
+        Me.Label4.Text = "基础压力"
         '
         'txtBasePress
         '
@@ -1346,7 +1346,7 @@
         Me.btnLeakRateTest.Name = "btnLeakRateTest"
         Me.btnLeakRateTest.Size = New System.Drawing.Size(122, 44)
         Me.btnLeakRateTest.TabIndex = 548
-        Me.btnLeakRateTest.Text = "洩漏率測試"
+        Me.btnLeakRateTest.Text = "泄漏率测试"
         Me.btnLeakRateTest.UseVisualStyleBackColor = False
         '
         'btnMaxVaccTest
@@ -1359,7 +1359,7 @@
         Me.btnMaxVaccTest.Name = "btnMaxVaccTest"
         Me.btnMaxVaccTest.Size = New System.Drawing.Size(122, 44)
         Me.btnMaxVaccTest.TabIndex = 547
-        Me.btnMaxVaccTest.Text = "極限壓力測試"
+        Me.btnMaxVaccTest.Text = "极限压力测试"
         Me.btnMaxVaccTest.UseVisualStyleBackColor = False
         '
         'btnChamberLight

@@ -719,6 +719,9 @@ Module Comm_PLC_SERIAL
         PLCComm.Write(PLCSendCmd(STX, Slaveno, CmdWRITEREGISTERS, cmdstr, ETX))
         'System.Threading.Thread.Sleep(5)
     End Sub
+    ''' <summary>
+    ''' R暫存器連續多點寫入
+    ''' </summary>
     Private Sub WriteManyDToPLCFB()
         Dim cmdstr As String
         Dim m As String
@@ -1785,24 +1788,24 @@ Module Comm_PLC_SERIAL
             'If R_SQTailPLC <> R_SQHeadPLC Or RChanged() Then
             intHead = R_SQHeadPLC '大
             intTail = R_SQTailPLC
-            If bolonebyone = True Then
-                'Debug.Print("R_SQTailPLC =  " + R_SQTailPLC.ToString() + "    R_SQHeadPLC=  " + R_SQHeadPLC.ToString())
-                For i = intTail To intHead
-                    R_SQTailPLC = (R_SQTailPLC + 1) Mod PLCRSetMaxCount
-                    WriteDToPLCFB()
-                    'Debug.Print("WriteR OK " + R_SQTailPLC.ToString() + "~" + R_SQHeadPLC.ToString())
-                    'Debug.Print("WriteR OK TTime=" + TTime)
-                    'Debug.Print("1-1 耗時=" + swdog.ElapsedMilliseconds.ToString)
-                Next
-                R_SQTailPLC = R_SQHeadPLC
-            Else
-                WriteManyDToPLCFB()
+            'If bolonebyone = True Then
+            '    'Debug.Print("R_SQTailPLC =  " + R_SQTailPLC.ToString() + "    R_SQHeadPLC=  " + R_SQHeadPLC.ToString())
+            '    For i = intTail To intHead
+            '        R_SQTailPLC = (R_SQTailPLC + 1) Mod PLCRSetMaxCount
+            '        WriteDToPLCFB()
+            '        'Debug.Print("WriteR OK " + R_SQTailPLC.ToString() + "~" + R_SQHeadPLC.ToString())
+            '        'Debug.Print("WriteR OK TTime=" + TTime)
+            '        'Debug.Print("1-1 耗時=" + swdog.ElapsedMilliseconds.ToString)
+            '    Next
+            '    R_SQTailPLC = R_SQHeadPLC
+            'Else
+            WriteManyDToPLCFB()
 
-                'Debug.Print("WriteR OK TTime=" + TTime)
-                'Debug.Print("1-多 耗時=" + swdog.ElapsedMilliseconds.ToString)
-                'Debug.Print("WriteR many " + intTail.ToString() + "~" + intHead.ToString())
-                'R_SQTailPLC = R_SQHeadPLC
-            End If
+            'Debug.Print("WriteR OK TTime=" + TTime)
+            'Debug.Print("1-多 耗時=" + swdog.ElapsedMilliseconds.ToString)
+            'Debug.Print("WriteR many " + intTail.ToString() + "~" + intHead.ToString())
+            'R_SQTailPLC = R_SQHeadPLC
+            'End If
             Do
                 Rx_msgPLC = Rx_msgPLC + PLCComm.ReadExisting()
                 If wdog.ElapsedMilliseconds > 1000 Then
