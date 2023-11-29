@@ -211,6 +211,7 @@ Module Module_Alarm_Task
         Site1_Pressure_Timeout_Error = 152
         Site2_Pressure_Timeout_Error = 153
         Site3_Pressure_Timeout_Error = 154
+        LoadRecipe_Error = 155
         'Add By Vincent 20190416 ------------------ End
     End Enum
     'Add By Vincent 20190416 ------------------ Start
@@ -888,7 +889,7 @@ Module Module_Alarm_Task
 
             'Add By Vincent 20190416 ------------------ End
         End If
-
+        AlarmError(Alarm_Name.LoadRecipe_Error) = FormProcesss.lblBasePressureSet.Text = "0.0E+00" And FormProcesss.lblRecipeFileName.Text <> ""
         'DP_LIFE_Error = 68
         'TOP_HEATER_LIFE_Error1 = 69
         'BOT_HEATER_LIFE_Error1 = 70
