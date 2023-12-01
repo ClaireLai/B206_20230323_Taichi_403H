@@ -2500,6 +2500,7 @@ Module Module_AutoTask
             DAVacuumGaugeIndex = DAVacIndex
             Door_Index = iDoorIndex
             PurgeOK = False
+            ProgramINIFile = CurDir() + "\PROGRAM.INI"
             RV_ON_Time = ReadProgData("PUMPING_SETUP", "RV_ON_DELAY", "20", ProgramINIFile)
             WriteProgData("PUMPING_SETUP", "RV_ON_DELAY", RV_ON_Time.ToString, ProgramINIFile)
         End Sub
