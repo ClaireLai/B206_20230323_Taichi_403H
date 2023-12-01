@@ -21,6 +21,9 @@ Module Module_AutoTask
     Public ii As Integer
     Const RecordInterval As Integer = 60
     Public Data(RecordInterval, 50) As String
+    Public bolLog As Boolean
+    Public RV_ON_Time As Integer
+
 
 
     Public Sub ReadRunData()
@@ -788,62 +791,112 @@ Module Module_AutoTask
                     Control_State = 99
                     strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                 End If
-            Case 2 '開始抽真空
-                If bolLeakTest Then
-                    If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":开始抽真空"
-                        '設定配方真空模式
-                        Output(DoVentIndex).Status = False
-                        CAutoPumping.Start = True
 
-                        PumpingAlarm_Error = False 'Add By Vincent 20190416 
 
-                        AutoProcessTimerEnabled = True
-                        AutoProcessTimer = 2
-                        Last_State = Control_State
-                        Control_State = 4
-                    End If
-                Else
-                    Last_State = Control_State
-                    strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
-                    Control_State = 99
-                End If
-
-            Case 4 '檢查真空值是否已到,
+            Case 2 '檢查真空值是否已到,
                 If bolLeakTest Then
 
                     strLeakTestMess = Control_State.ToString + ":检查真空值是否已到"
                     If GaugeCHVac <= Val(VACUUMLEAKTESTBASE) Then
                         PumpingAlarm_Error = False
                         ProcessVacuumOK = True
-                        CAutoPumping.Start = False
+                        'CAutoPumping.Start = False
+                        FormManual.StartLog() '開始記錄
+                        CSVTimerStartPb_Status = True
                         Set_MBit(DoRVIndex, DEVICE_OFF)
-                        AutoProcessTimerEnabled = True
-                        AutoProcessTimer = 1
+                        'Set_MBit(DoRVIndex, DEVICE_OFF)
+                        'AutoProcessTimerEnabled = True
+                        'AutoProcessTimer = 0
+                        FirstVacuum = GaugeCHVac
                         Last_State = Control_State
                         bol1 = True
                         Control_State = 5
+                    Else
+                        strLeakTestMess = Control_State.ToString + ":抽真空"
+                        If Check_PLC_Y(DoMPIndex) = False Then '抽真空
+                            'DPPb_Status = True
+                            Set_MBit(DoMPIndex, DEVICE_ON)
+                            AutoProcessTimer = RV_ON_Time
+                            AutoProcessTimerEnabled = True
+                            Control_State = 3
+                        ElseIf Check_PLC_Y(DoRVIndex) = False Then
+                            Control_State = 3
+                            'Else
+                            '    Control_State = 3
+                        End If
+                        'Control_State = 1
                     End If
                 Else
                     Last_State = Control_State
                     strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
                     Control_State = 99
                 End If
+            Case 3 'wait
+                strLeakTestMess = Control_State.ToString + "wait"
+                If AutoProcessTimer = 0 Then
+                    If bolLeakTest Then
+                        strLeakTestMess = Control_State.ToString + ":wait"
+                        If AutoProcessTimerEnabled = False Then
+                            AutoProcessTimer = RV_ON_Time
+                            AutoProcessTimerEnabled = True
+                            Control_State = 4
+                        End If
+                    Else
+                        Last_State = Control_State
+                        strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                        Control_State = 99
+                    End If
+                End If
+            Case 4 '開RV 
+                strLeakTestMess = Control_State.ToString + ":等开RV (" + AutoProcessTimer.ToString + ")"
+                If AutoProcessTimer = 0 Then
+                    If bolLeakTest Then
+                        strLeakTestMess = Control_State.ToString + ":开RV"
+                        If AutoProcessTimerEnabled = False Then
+                            Set_MBit(DoRVIndex, DEVICE_ON)
+                            Control_State = 2
+                        End If
+                    Else
+                        Last_State = Control_State
+                        strLeakTestMess = Control_State.ToString + ": LeakTestAbort"
+                        Control_State = 99
+                    End If
+                End If
+            Case 5 '关Pump delay
+                If AutoProcessTimerEnabled = False Then
+                    strLeakTestMess = Control_State.ToString + "关Pump delay"
+                    FormManual.StartLog()
+                    CSVTimerStartPb_Status = True
+                    AutoProcessTimerEnabled = True
+                    AutoProcessTimer = DatalogTime
+                    If AutoProcessTimer < 3 Then AutoProcessTimer = AutoProcessTimer + 2
+                    Control_State = 6
+                End If
 
-            Case 5 '開始測漏
+            Case 6 '開始測漏记录
                 If bolLeakTest Then
                     If AutoProcessTimerEnabled = False Then
-                        Debug.Print("Timercount_enable=" + Timercount_enable.ToString)
+                        strLeakTestMess = Control_State.ToString + "关PUMP,开始测漏记录"
+                        'Debug.Print("Timercount_enable=" + Timercount_enable.ToString)
+                        'If bolLog Then
+
+                        '    FormManual.StartLog()
+                        '    CSVTimerStartPb_Status = True
+                        'End If
                         Set_MBit(DoMPIndex, DEVICE_OFF)
-                        strLeakTestMess = Control_State.ToString + ":开始测漏记录"
                         If bol1 Then
                             FirstVacuum = GaugeCHVac
                             Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
                             TotalTimercount = Timercount_now
 
-                            Timercount_down = True
                             FormManual.StartLog()
                             CSVTimerStartPb_Status = True
+                            strLeakTestMess = Control_State.ToString + ":开始测漏记录"
+                            Timercount_down = True
+                            'FormManual.StartLog()
+                            'CSVTimerStartPb_Status = True
+                            'CAutoPumping.Start = False
+                            'Set_MBit(DoRVIndex, DEVICE_OFF)
                             bol1 = False
                         End If
                         If CSVTimerStartPb_Status = False Then
@@ -870,6 +923,7 @@ Module Module_AutoTask
                 bolLeakTest = False
                 Control_State = 0
         End Select
+        'Debug.Print("AutoProcessTimerEnabled=" + AutoProcessTimerEnabled.ToString + ", Timer=" + AutoProcessTimer.ToString)
     End Function
     ''' <summary>
     ''' for B222極限測試
@@ -931,15 +985,15 @@ Module Module_AutoTask
             Case 2 '開始抽真空
                 If bolVaccTest Then
                     If AutoProcessTimerEnabled = False Then
-                        strLeakTestMess = Control_State.ToString + ":开始抽真空"
+                        strLeakTestMess = Control_State.ToString + ":开Pump"
                         '設定配方真空模式
                         Output(DoVentIndex).Status = False
-                        CAutoPumping.Start = True
-
+                        'CAutoPumping.Start = True
+                        Output(DoMPIndex).Status = True
                         PumpingAlarm_Error = False 'Add By Vincent 20190416 
 
                         AutoProcessTimerEnabled = True
-                        AutoProcessTimer = 1
+                        AutoProcessTimer = RV_ON_Time
                         bol1 = True
                         'Vacc_LeakTest()
                         Last_State = Control_State
@@ -950,22 +1004,54 @@ Module Module_AutoTask
                     strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
                     Control_State = 99
                 End If
-            Case 3
+            Case 3 '抽真空測試 delay
                 If bolVaccTest Then
                     If AutoProcessTimerEnabled = False Then
-                        If PLC_Y(DoRVIndex) Then
-                            strLeakTestMess = Control_State.ToString + ": 纪录中"
-                            If bol1 Then
-                                Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
-                                Timercount_down = True
-                                FormManual.StartLog()
-                                CSVTimerStartPb_Status = True
-                                bol1 = False
-                            End If
+                        strLeakTestMess = Control_State.ToString + ":抽真空測試 delay "
+                        AutoProcessTimerEnabled = True
+                        AutoProcessTimer = DatalogTime
+                        If AutoProcessTimer < 2 Then AutoProcessTimer = 2
+                        FormManual.StartLog()
+                        CSVTimerStartPb_Status = True
+                        Control_State = 4
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 4
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        strLeakTestMess = Control_State.ToString + ":开始抽真空 "
+                        Output(DoRVIndex).Status = True
+                        Control_State = 5
+                    End If
+                Else
+                    Last_State = Control_State
+                    strLeakTestMess = Control_State.ToString + ": VacuumTestAbort"
+                    Control_State = 99
+                End If
+
+            Case 5
+                If bolVaccTest Then
+                    If AutoProcessTimerEnabled = False Then
+                        'If PLC_Y(DoRVIndex) Then
+                        'If bolLog Then
+                        strLeakTestMess = Control_State.ToString + ": 纪录中"
+                        If bol1 Then
+                            Timercount_now = Timercount.set_min * 60 + Timercount.set_sec
+                            Timercount_down = True
+                            'FormManual.StartLog()
+                            'CSVTimerStartPb_Status = True
+                            bol1 = False
+
                         ElseIf bol1 = False Then
                             If CSVTimerStartPb_Status = False Then
                                 Control_State = 10
                             End If
+                            'End If
                         End If
                     End If
                 Else
@@ -978,6 +1064,7 @@ Module Module_AutoTask
                     If AutoProcessTimerEnabled = False Then
                         strLeakTestMess = Control_State.ToString + ": Vacuum Test Finish"
                         bolVaccTest = False
+                        bolLog = False
                         Control_State = 0
                     End If
                 End If
@@ -986,6 +1073,7 @@ Module Module_AutoTask
                 Timercount_down = False
                 'Timercount_enable = False
                 bolVaccTest = False
+                bolLog = False
                 Control_State = 0
         End Select
     End Function
@@ -2193,8 +2281,8 @@ Module Module_AutoTask
                 For i = 0 To MAXPLATE
                     strAvgTopTempRate(i) = Format((TopTempPV(i) - LastTopTemp(i)) / ii, "0.00")
                     strAvgBotTempRate(i) = Format((BotTempPV(i) - LastBotTemp(i)) / ii, "0.00")
-                    Debug.Print("LastTopTemp(" + i.ToString + ") =" + LastTopTemp(i).ToString + ",LastBotTemp(" + i.ToString + ") =" + LastBotTemp(i).ToString)
-                    Debug.Print("strAvgTopTempRate(" + i.ToString + ") =" + strAvgTopTempRate(i) + ",strAvgBotTempRate(" + i.ToString + ") =" + strAvgBotTempRate(i))
+                    'Debug.Print("LastTopTemp(" + i.ToString + ") =" + LastTopTemp(i).ToString + ",LastBotTemp(" + i.ToString + ") =" + LastBotTemp(i).ToString)
+                    'Debug.Print("strAvgTopTempRate(" + i.ToString + ") =" + strAvgTopTempRate(i) + ",strAvgBotTempRate(" + i.ToString + ") =" + strAvgBotTempRate(i))
                 Next
 
                 For i = 1 To MAXPLATE + 1
@@ -2567,10 +2655,12 @@ Module Module_AutoTask
                     ShowData = ShowData + Data(i)
                     AppendData(DataLogRecordFileName, ShowData, 150)
                     Control_State = 1
+                    'Debug.Print("Log Title")
                 End If
             Case 1
                 DatalogTimerCount = DatalogTimerCount + 1
                 If (bolLeakTest And sigLastVacuum = 0) Or (CSVTimerStartPb_Status And DatalogTimerCount >= DatalogTime) Then
+                    'Debug.Print("Log data=" + DatalogTimerCount.ToString)
                     '收集資料記錄
                     DatalogTimerCount = 0
                     ShowData = ""
@@ -2775,6 +2865,7 @@ Module Module_AutoTask
                 Timercount_now = Timercount_now - 1
                 '減1後不為0,表示還未數到
                 If Timercount_now > 0 Then
+                    'If Timercount_now > (-1) * DatalogTime Then
                     Timercount.pv_min = Timercount_now \ 60         '秒除以60取商數
                     Timercount.pv_sec = Timercount_now Mod 60       '取秒之餘數
                     '更新表單計時值
@@ -2815,7 +2906,7 @@ Module Module_AutoTask
     '自動抽真空類別
     Public CAutoPumping As New CAutoVacuum(DoMPIndex, DoRVIndex, DoVentIndex, DiDoor1UpIndex, DiCDAIndex, DiEMOIndex, DiDPFailIndex, ADVacuumIndex)
     Public Class CAutoVacuum
-        Private RV_ON_Time As Integer
+        'Private RV_ON_Time As Integer
         Private RV_ON_TimeStr As String
 
 
@@ -2956,7 +3047,8 @@ Module Module_AutoTask
             DAVacuumGaugeIndex = DAVacIndex
             Door_Index = iDoorIndex
             PurgeOK = False
-            RV_ON_Time = ReadProgData("PUMPING_SETUP", "RV_ON_DELAY", "20", ProgramINIFile)
+            ProgramINIFile = CurDir() + "\" + "PROGRAM.INI"         '程式資料INI檔案
+            RV_ON_Time = ReadProgData("PUMPING_SETUP", "RV_ON_DELAY", "30", ProgramINIFile)
             WriteProgData("PUMPING_SETUP", "RV_ON_DELAY", RV_ON_Time.ToString, ProgramINIFile)
         End Sub
 
@@ -3059,6 +3151,7 @@ Module Module_AutoTask
                                     PurgeCount = 0
                                 End If
                                 Control_State = 3
+
                             Else
                                 PurgeOK = False
                                 PurgeStatus = False
@@ -3067,14 +3160,22 @@ Module Module_AutoTask
                         Else
                             Control_State = 0
                         End If
-
+                    '    If bolVaccTest Then Control_State = 10
+                    'Case 10 '抽真空測試 delay
+                    '    If TimeUp() Then
+                    '        If bolVaccTest Or bolLeakTest Then bolLog = True 'Start Log
+                    '        SetTimer(DatalogTime * 2)
+                    '        Control_State = 2
+                    '    End If
                     Case 2 'RVP ON
                         If TimeUp() Then
                             If Check_PLC_X(Door_Index) And Check_PLC_Y(DP_Index) And Check_PLC_Y(Vent_Index) = False Then
+                                'If bolVaccTest Then bolLog = True 'Start Log
                                 If Check_PLC_Y(RV_Index) = False Then
                                     Output(Vent_Index).Status = False
                                     'Set_MBit(Vent_Index, DEVICE_OFF)
                                     Output(RV_Index).Status = True
+                                    'If bolVaccTest Then Timercount_down = True
                                     'Set_MBit(RV_Index, DEVICE_ON)
                                 End If
                                 If AutoBasePressure Then
@@ -3101,6 +3202,7 @@ Module Module_AutoTask
                                 '真空度小於設定值
                                 If CurrentVac < BasePressureHi Then
                                     SetTimer(10) '30s    再抽10秒
+                                    If bolLeakTest Then bolLog = True
                                     Control_State = 8
                                 Else
                                     Control_State = 0
@@ -3109,10 +3211,14 @@ Module Module_AutoTask
                         Else
                             Control_State = 0
                         End If
+                    'Case 12'開始記錄洩漏率
+
+
                     Case 8 '關閉 RV
                         If AutoBasePressure Then
                             If TimeUp() Then
                                 If Check_PLC_Y(RV_Index) = True Then
+                                    If bolLeakTest Then Timercount_down = True
                                     Set_MBit(RV_Index, DEVICE_OFF)
                                     SetTimer(3)
                                     Control_State = 9

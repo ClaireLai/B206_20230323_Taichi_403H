@@ -281,6 +281,7 @@ Module Module_Parameter
         'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
         Public PressureAverageTimes As String
         Public PressureAverageEnable As String
+        Public PeakClearEnable As String
         Public PressureAdjust As String
         Public PeakLimit As String
         Public PeakTimes As String
@@ -424,6 +425,7 @@ Module Module_Parameter
         'Add  by Vincent 20181016  壓力修整功能 ------------------- Start
         SystemParameters.PressureAverageTimes = ReadProgData("PARAMETER", "PressureAverageTimes", "1", sfile)
         SystemParameters.PressureAverageEnable = ReadProgData("PARAMETER", "PressureAverageEnable", "0", sfile)
+        SystemParameters.PeakClearEnable = ReadProgData("PARAMETER", "PeakClearEnable", "0", sfile)
         SystemParameters.PressureAdjust = ReadProgData("PARAMETER", "PressureAdjust", "0", sfile)
         SystemParameters.PeakLimit = ReadProgData("PARAMETER", "PeakLimit", "0", sfile)
         SystemParameters.PeakTimes = ReadProgData("PARAMETER", "PeakTimes", "3", sfile)

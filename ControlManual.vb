@@ -537,6 +537,9 @@
         Output(DoPlateDownIndex).Status = True
         Output(DoPlateUpIndex).Status = False
         Output(DoBondForceIndex).Status = False
+        bolAddPress(SiteIndex) = False
+        bolRedPress(SiteIndex) = False
+        LastSetPress(SiteIndex) = 0
     End Sub
     Private Sub txtPressureSet_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtPressureSet.MouseDown
         If RunFlag Then Exit Sub

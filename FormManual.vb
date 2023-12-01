@@ -103,6 +103,7 @@
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents lbLeak As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents GroupBox2 As GroupBox
     Dim maxvalue(10) As Double
 
 #Region " Windows Form 設計工具產生的程式碼 "
@@ -244,6 +245,7 @@
         Me.tabPage4to6 = New System.Windows.Forms.TabPage()
         Me.flwManualChart2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.flwManualPage2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.tabManualLog.SuspendLayout()
         Me.tabPageDataLog.SuspendLayout()
         Me.tabPageTimer.SuspendLayout()
@@ -271,6 +273,7 @@
         Me.grpDoorControl.SuspendLayout()
         Me.tabPage1to3.SuspendLayout()
         Me.tabPage4to6.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlVacuumCurve
@@ -1192,14 +1195,13 @@
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.GroupBox2)
         Me.Panel4.Controls.Add(Me.Label6)
         Me.Panel4.Controls.Add(Me.lbLeak)
         Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.GroupBox1)
         Me.Panel4.Controls.Add(Me.lblLeakTest)
         Me.Panel4.Controls.Add(Me.lbvacc)
-        Me.Panel4.Controls.Add(Me.Label4)
-        Me.Panel4.Controls.Add(Me.txtBasePress)
         Me.Panel4.Controls.Add(Me.btnLeakRateTest)
         Me.Panel4.Controls.Add(Me.btnMaxVaccTest)
         Me.Panel4.Location = New System.Drawing.Point(739, 400)
@@ -1247,7 +1249,7 @@
         Me.GroupBox1.Controls.Add(Me.txtVacuumTestTimeMin)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 73)
+        Me.GroupBox1.Location = New System.Drawing.Point(14, 73)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(191, 48)
         Me.GroupBox1.TabIndex = 566
@@ -1320,16 +1322,16 @@
         '
         Me.Label4.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(11, 191)
+        Me.Label4.Location = New System.Drawing.Point(4, 7)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(79, 20)
+        Me.Label4.Size = New System.Drawing.Size(82, 20)
         Me.Label4.TabIndex = 554
         Me.Label4.Text = "基础压力"
         '
         'txtBasePress
         '
         Me.txtBasePress.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBasePress.Location = New System.Drawing.Point(96, 186)
+        Me.txtBasePress.Location = New System.Drawing.Point(92, 7)
         Me.txtBasePress.Name = "txtBasePress"
         Me.txtBasePress.Size = New System.Drawing.Size(79, 30)
         Me.txtBasePress.TabIndex = 553
@@ -1510,6 +1512,16 @@
         Me.flwManualPage2.Size = New System.Drawing.Size(1016, 377)
         Me.flwManualPage2.TabIndex = 1
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.txtBasePress)
+        Me.GroupBox2.Location = New System.Drawing.Point(14, 190)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(177, 34)
+        Me.GroupBox2.TabIndex = 571
+        Me.GroupBox2.TabStop = False
+        '
         'FormManual
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1556,6 +1568,8 @@
         Me.grpDoorControl.ResumeLayout(False)
         Me.tabPage1to3.ResumeLayout(False)
         Me.tabPage4to6.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1709,19 +1723,20 @@
         If bolLeakTest Or bolVaccTest Or Not Timercount_enable Then
             'Panel2.Enabled = Not Timercount_enable
 
-            picV4P.Enabled = Not Timercount_enable
-            picRVP.Enabled = Not Timercount_enable
-            btnAutoVacuum.Enabled = Not Timercount_enable
-            btnAutoPurge.Enabled = Not Timercount_enable
-            picDP.Enabled = Not Timercount_enable
-
+            picV4P.Enabled = Not (bolLeakTest Or bolVaccTest)
+            picRVP.Enabled = Not (bolLeakTest Or bolVaccTest)
+            btnAutoVacuum.Enabled = Not (bolLeakTest Or bolVaccTest)
+            btnAutoPurge.Enabled = Not (bolLeakTest Or bolVaccTest)
+            picDP.Enabled = Not (bolLeakTest Or bolVaccTest)
+            GroupBox2.Enabled = Not bolLeakTest
 
             lblWaterPress.Enabled = True
-            txtTimerMin.Enabled = Not Timercount_enable
-            txtTimerSec.Enabled = Not Timercount_enable
-            btnTimerStart.Enabled = Not Timercount_enable
-            btnTimerReset.Enabled = Not Timercount_enable
-            tabPageDataLog.Enabled = Not Timercount_enable
+            'txtTimerMin.Enabled = Not (bolLeakTest Or bolVaccTest)
+            'txtTimerSec.Enabled = Not (bolLeakTest Or bolVaccTest)
+            GroupBox1.Enabled = Not (bolLeakTest Or bolVaccTest)
+            btnTimerStart.Enabled = Not (bolLeakTest Or bolVaccTest)
+            btnTimerReset.Enabled = Not (bolLeakTest Or bolVaccTest)
+            tabPageDataLog.Enabled = Not (bolLeakTest Or bolVaccTest)
             btnMaxVaccTest.Enabled = Not bolLeakTest
             btnLeakRateTest.Enabled = Not bolVaccTest
         End If

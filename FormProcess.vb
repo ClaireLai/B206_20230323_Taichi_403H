@@ -97,7 +97,6 @@ Public Class FormProcess
     Friend WithEvents chkVacuumPurge As System.Windows.Forms.CheckBox
     Friend WithEvents btnPullerClose As System.Windows.Forms.Button
     Friend WithEvents TabPagePaint As System.Windows.Forms.TabPage
-    Friend WithEvents ControlPaintBoard1 As CELLO.ControlPaintBoard
     Friend WithEvents lblModelnameText As System.Windows.Forms.Label
     Friend WithEvents lblModelname As System.Windows.Forms.Label
     Friend WithEvents picC05 As System.Windows.Forms.PictureBox
@@ -129,6 +128,7 @@ Public Class FormProcess
     Friend WithEvents lblCIMError As System.Windows.Forms.Label
     Friend WithEvents btnEnter As Button
     Friend WithEvents txtRecipeFile As TextBox
+    Friend WithEvents ControlPaintBoard1 As ControlPaintBoard
     Friend WithEvents TabPageVacuum As System.Windows.Forms.TabPage
     Public Sub New()
         MyBase.New()
@@ -313,9 +313,9 @@ Public Class FormProcess
         Me.lblCPUUsage = New System.Windows.Forms.Label()
         Me.pnlVacuumChart = New System.Windows.Forms.Panel()
         Me.TabPagePaint = New System.Windows.Forms.TabPage()
-        Me.ControlPaintBoard1 = New CELLO.ControlPaintBoard()
         Me.tpCIMInput = New System.Windows.Forms.TabPage()
         Me.CtlSanAnCIM1 = New CELLO.CtlSanAnCIM()
+        Me.ControlPaintBoard1 = New CELLO.ControlPaintBoard()
         Me.grpProcess.SuspendLayout()
         Me.grpDoorControl.SuspendLayout()
         Me.pnlProcessCSelect.SuspendLayout()
@@ -2003,18 +2003,6 @@ Public Class FormProcess
         Me.TabPagePaint.TabIndex = 4
         Me.TabPagePaint.Text = "留言板"
         '
-        'ControlPaintBoard1
-        '
-        Me.ControlPaintBoard1.Enable = False
-        Me.ControlPaintBoard1.Eraser = False
-        Me.ControlPaintBoard1.iHeight = 484
-        Me.ControlPaintBoard1.iWidth = 1016
-        Me.ControlPaintBoard1.Location = New System.Drawing.Point(0, 1)
-        Me.ControlPaintBoard1.Margin = New System.Windows.Forms.Padding(6)
-        Me.ControlPaintBoard1.Name = "ControlPaintBoard1"
-        Me.ControlPaintBoard1.Size = New System.Drawing.Size(1016, 484)
-        Me.ControlPaintBoard1.TabIndex = 0
-        '
         'tpCIMInput
         '
         Me.tpCIMInput.Controls.Add(Me.CtlSanAnCIM1)
@@ -2033,6 +2021,18 @@ Public Class FormProcess
         Me.CtlSanAnCIM1.Name = "CtlSanAnCIM1"
         Me.CtlSanAnCIM1.Size = New System.Drawing.Size(1016, 486)
         Me.CtlSanAnCIM1.TabIndex = 0
+        '
+        'ControlPaintBoard1
+        '
+        Me.ControlPaintBoard1.Enable = False
+        Me.ControlPaintBoard1.Eraser = False
+        Me.ControlPaintBoard1.iHeight = 484
+        Me.ControlPaintBoard1.iWidth = 1016
+        Me.ControlPaintBoard1.Location = New System.Drawing.Point(0, 1)
+        Me.ControlPaintBoard1.Margin = New System.Windows.Forms.Padding(6)
+        Me.ControlPaintBoard1.Name = "ControlPaintBoard1"
+        Me.ControlPaintBoard1.Size = New System.Drawing.Size(1016, 484)
+        Me.ControlPaintBoard1.TabIndex = 0
         '
         'FormProcess
         '
@@ -2367,6 +2367,7 @@ Public Class FormProcess
             btnEnter.Visible = False
             txtRecipeFile.Visible = False
         End If
+        'Debug.Print("Alive")
     End Sub
 
     Public Sub ShowInit()
@@ -2374,12 +2375,23 @@ Public Class FormProcess
         Timer1.Enabled = True
     End Sub
     Private Sub btnRunProcess_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRunProcess.Click
+        Dim i As Integer
+        Dim j As Integer
         BondCycleStop("all") 'By chesly 20170914 壓缸自動循環動作
         If LC.IsExpired Then
             MsgBoxLangErr("系統未註冊!", "Not Register!")
             Exit Sub
         End If
+        For i = 0 To MAXPLATE
+            For j = 0 To 20000
+                dePeak(i, j) = New CdePeak()
+            Next
+        Next
+        'dePeak(2, 20000) = New CdePeak()
 
+        intPeakClearTimes(0) = 0
+        intPeakClearTimes(1) = 0
+        intPeakClearTimes(2) = 0
         If SystemParameters.bolDAlog Then
             CurveDataINI = ProgramDir + "CURVEDATA_DA.INI"        '程式資料INI檔案 有DA欄位
             'bolDAShow = True
@@ -2396,7 +2408,7 @@ Public Class FormProcess
         'Add  by Vincent 20180419  ------------------- End
         Dim sstr As String = ""
         Dim sFile As String = ""
-        Dim i As Integer
+        'Dim i As Integer
         'If SystemParameters.BarcodeOnly = "1" Then
         If RemoteCIM.Enable Then
             'MsgBoxLangOK("請刷入條碼!", "Please use barcode reader!")
@@ -3641,6 +3653,14 @@ Public Class FormProcess
             txtRecipeFile.Text = ""
             txtRecipeFile.Focus()
             txtRecipeFile.SelectAll()
+        End If
+    End Sub
+
+
+    Private Sub tabProcessDataCurve_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabProcessDataCurve.SelectedIndexChanged
+        Debug.Print(tabProcessDataCurve.SelectedIndex.ToString)
+        If tabProcessDataCurve.SelectedIndex <> 3 Then
+            ControlPaintBoard1.Enable = False
         End If
     End Sub
     'SanAn CIM  20190710  by vincent ---------------- End

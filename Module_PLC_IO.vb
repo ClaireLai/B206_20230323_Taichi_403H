@@ -399,17 +399,17 @@
     Public Const DAPressure06Cal4Index As Integer = 129
     Public Const DAPressure06Cal5Index As Integer = 130
     'R1335
-    Public Const DAProcessBond01Index As Integer = 131     '壓合壓力 
+    Public Const DAProcessBond01Index As Integer = 131     '壓合壓力  1
     Public Const DAProcessBondRate01Index As Integer = 132 '壓速
     Public Const DAProcessTemp01Index As Integer = 133        '溫度 'R1337
     Public Const DAProcessTempRate01Index As Integer = 134    '溫速
     'R1339
-    Public Const DAProcessBond02Index As Integer = 135     '壓合壓力 
+    Public Const DAProcessBond02Index As Integer = 135     '壓合壓力  2
     Public Const DAProcessBondRate02Index As Integer = 136 '壓速
     Public Const DAProcessTemp02Index As Integer = 137        '溫度 'R1341
     Public Const DAProcessTempRate02Index As Integer = 138    '溫速
     'R1343
-    Public Const DAProcessBond03Index As Integer = 139     '壓合壓力 
+    Public Const DAProcessBond03Index As Integer = 139     '壓合壓力 3
     Public Const DAProcessBondRate03Index As Integer = 140 '壓速
     Public Const DAProcessTemp03Index As Integer = 141        '溫度'R1345
     Public Const DAProcessTempRate03Index As Integer = 142    '溫速

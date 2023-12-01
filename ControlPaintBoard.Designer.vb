@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ControlPaintBoard
     Inherits System.Windows.Forms.UserControl
 
     'UserControl 覆寫 Dispose 以清除元件清單。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,14 @@ Partial Class ControlPaintBoard
     '注意: 以下為 Windows Form 設計工具所需的程序
     '可以使用 Windows Form 設計工具進行修改。
     '請不要使用程式碼編輯器進行修改。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.picPaintBoard = New System.Windows.Forms.PictureBox
-        Me.btnClear = New System.Windows.Forms.Button
-        Me.btnEnable = New System.Windows.Forms.Button
-        Me.btnEraser = New System.Windows.Forms.Button
+        Me.components = New System.ComponentModel.Container()
+        Me.picPaintBoard = New System.Windows.Forms.PictureBox()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnEnable = New System.Windows.Forms.Button()
+        Me.btnEraser = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picPaintBoard, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -80,6 +82,12 @@ Partial Class ControlPaintBoard
         Me.btnEraser.Text = "橡皮擦"
         Me.btnEraser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEraser.UseVisualStyleBackColor = False
+        Me.btnEraser.Visible = False
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'ControlPaintBoard
         '
@@ -99,5 +107,5 @@ Partial Class ControlPaintBoard
     Friend WithEvents btnClear As System.Windows.Forms.Button
     Friend WithEvents btnEnable As System.Windows.Forms.Button
     Friend WithEvents btnEraser As System.Windows.Forms.Button
-
+    Friend WithEvents Timer1 As Timer
 End Class

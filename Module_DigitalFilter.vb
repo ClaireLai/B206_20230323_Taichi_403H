@@ -5,7 +5,12 @@ Module Module_DigitalFiiter
     Public PressState(6) As Integer
     Public OldPressValue(6) As Integer
     Public PressStateDelay(6) As Integer
-
+    Public dePeak(2, 20000) As CdePeak
+    Public Class CdePeak
+        Public limit As Integer
+        Public OriPress As Integer
+        Public SetPress As Integer
+    End Class
     Public Class CAverage 'Vincent + 20171117
         ''' <summary>
         ''' 平均次數
@@ -56,26 +61,7 @@ Module Module_DigitalFiiter
             Average = 0
             DataList = New List(Of Double)
         End Sub
-        Public Function GetAverageValue(ByVal dData As Double) As Double
-            CurrentData = dData
-            If AverageCount = 0 Then
-                LastData = dData
-            End If
-            DataList.Add(CurrentData)
-            If AverageCount >= AverageTimes Then
-                DataList.RemoveAt(0)
-            Else
-                AverageCount += 1
-            End If
-            Dim i As Integer = 0
-            Average = 0
-            For i = 0 To DataList.Count - 1
-                Average = Average + DataList.Item(i)
-            Next
-            Average = Math.Round(Average / DataList.Count)
-            LastData = CurrentData
-            Return Average
-        End Function
+
         ''' <summary>
         ''' 平均值
         ''' </summary>
@@ -149,6 +135,56 @@ Module Module_DigitalFiiter
             End If
             LastData = CurrentData
             Return Average
+        End Function
+        Public Function GetAverageValue(ByVal dData As Double) As Double
+            Static PeakCount As Integer = 0
+            CurrentData = dData '原始壓力值
+            If AverageCount = 0 Then
+                LastData = dData
+            End If
+
+            DataList.Add(CurrentData)
+            If AverageCount >= AverageTimes Then
+                DataList.RemoveAt(0)
+            Else
+                AverageCount += 1
+            End If
+            Dim i As Integer = 0
+            Average = 0
+            If DataList.Count > 0 Then
+                For i = 0 To DataList.Count - 1
+                    Average = Average + DataList.Item(i)
+                Next
+                Average = Math.Round(Average / DataList.Count)
+            Else
+                Average = CurrentData
+            End If
+            LastData = CurrentData
+            Return Average
+        End Function
+        Public Function GetDePeak(ByVal dData As Double, ByVal PeakLimit As Double, ByVal iPeakTimes As Integer, ByVal SetPress As Integer, ByVal plate As Integer) As Double
+            Static PeakCount As Integer = 0
+            CurrentData = dData '原始壓力值
+            CurrentData = 6000
+            If Math.Abs(CurrentData - SetPress) > PeakLimit Then '跳動值>peak跳動
+                dePeak(plate, intPeakClearTimes(plate)).OriPress = CurrentData
+                dePeak(plate, intPeakClearTimes(plate)).limit = PeakLimit
+                dePeak(plate, intPeakClearTimes(plate)).SetPress = SetPress
+                PeakCount += 1
+                intPeakClearTimes(plate) += 1
+                Debug.Print("intPeakClearTimes(" + plate.ToString + ")=" + intPeakClearTimes(plate).ToString)
+
+                If PeakCount < iPeakTimes Then '隱藏次數<peak次數
+                    If LastData <> 0 Then CurrentData = LastData '壓力值=上次
+                Else
+                    PeakCount = 0
+                End If
+            Else
+                PeakCount = 0
+                LastData = CurrentData
+            End If
+            Return CurrentData
+            'LastData = CurrentData
         End Function
         Public Function GetAverageValue(ByVal dData As Double, ByVal iAverageTimes As Integer) As Double
             AverageTimes = iAverageTimes

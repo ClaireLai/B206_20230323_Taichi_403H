@@ -9,6 +9,7 @@
     Public tempBotY(Max_POINT) As Integer
     Public VentOKCount As Integer
     Public VentOK As Boolean
+    Public intPeakClearTimes(2) As Integer
 
     'Public CInfo(20) As ClassInfomation
 
@@ -147,8 +148,11 @@
     Public MPCurrentStr As String
 
     Public WaterPressStr As String
-
-
+    Public bolAddPress(MAXPLATE) As Boolean
+    Public bolRedPress(MAXPLATE) As Boolean
+    Public bolDePeakStart(MAXPLATE) As Boolean
+    Public bolPressChange(MAXPLATE) As Boolean
+    Public LastSetPress(MAXPLATE) As Integer
 
     Public Sub ReadInformation()
         '單頭溫度 
@@ -215,18 +219,54 @@
             If GetTrue01Boolean(SystemParameters.PressureAverageEnable) Then '平均次數
                 'If PV_InRange(Get_PLC_R1100(DAProcessBond01Index + 4 * i), oriPressPV(i), Val(SystemParameters.PressAverage)) Then
                 AvergaeValue(i).SetAverageTimes(Val(SystemParameters.PressureAverageTimes))
-                'Dim ave As Integer = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                PressPV(i) = AvergaeValue(i).GetAverageValueDePeak(oriPressPV(i), Val(SystemParameters.PeakLimit), Val(SystemParameters.PeakTimes))
-                '    PressPV(i) = SetInRange(True, PressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
-                'Else
-                '    AvergaeValue(i).CLearAverageTimes()
-                '    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內傳回值
-                'End If
-            Else
-                PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內傳回值
-            End If
+                PressPV(i) = AvergaeValue(i).GetAverageValue(oriPressPV(i))
 
-            If GetTrue01Boolean(SystemParameters.PressureAdjust) Then '壓力修整
+
+            ElseIf GetTrue01Boolean(SystemParameters.PeakClearEnable) Then '去 Peak
+                If Check_PLC_M(DoBondForce01Index + i) And LastSetPress(i) <> Get_PLC_R1100(DAProcessBond01Index + i * 4) Then
+                    Debug.Print("LastSetPress(" + i.ToString + ")=" + LastSetPress(i).ToString + " , Get_PLC_R1100(" + i.ToString + ")=" + Get_PLC_R1100(DAProcessBond01Index + i * 4).ToString)
+                    If Get_PLC_R1100(DAProcessBond01Index + i * 4) > oriPressPV(i) Then
+                        bolAddPress(i) = True '有升壓
+                        Debug.Print("升壓(" + i.ToString + ")")
+                    Else
+                        bolAddPress(i) = False
+                    End If
+                    If Get_PLC_R1100(DAProcessBond01Index + i * 4) < oriPressPV(i) Then
+                        bolRedPress(i) = True '有降壓
+                        Debug.Print("降壓(" + i.ToString + ")")
+                    Else
+                        bolRedPress(i) = False
+                    End If
+                    bolPressChange(i) = True
+                    LastSetPress(i) = Get_PLC_R1100(DAProcessBond01Index + i * 4)
+                End If
+                If Get_PLC_R1100(DAProcessBond01Index + i * 4) > 200 Then
+                    SystemParameters.PeakLimit = Int(Get_PLC_R1100(DAProcessBond01Index + i * 4) * 0.02).ToString
+                Else
+                    SystemParameters.PeakLimit = Int(Get_PLC_R1100(DAProcessBond01Index + i * 4) * 0.08).ToString
+                End If
+                If Check_PLC_M(DoBondForce01Index + i) And bolAddPress(i) And oriPressPV(i) >= Get_PLC_R1100(DAProcessBond01Index + i * 4) And bolPressChange(i) Then
+                    bolDePeakStart(i) = True '有加壓修整
+                    bolPressChange(i) = False
+                Else
+                    If Check_PLC_M(DoBondForce01Index + i) And bolRedPress(i) And oriPressPV(i) <= Get_PLC_R1100(DAProcessBond01Index + i * 4) And bolPressChange(i) Then
+                        bolDePeakStart(i) = True '有降壓修整
+                        bolPressChange(i) = False
+                    Else
+                        If bolPressChange(i) Then bolDePeakStart(i) = False '無修整
+                    End If
+                End If
+                If Not Check_PLC_M(DoBondForce01Index + i) Then
+                    bolDePeakStart(i) = False
+                    LastSetPress(i) = 0
+                End If
+                If bolDePeakStart(i) Then AvergaeValue(i).GetDePeak(oriPressPV(i), SystemParameters.PeakLimit, SystemParameters.PeakTimes, Get_PLC_R1100(DAProcessBond01Index + i * 4), i)
+
+            Else
+                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '在均化範圍內傳回值
+            End If
+            'Debug.Print("bolDePeakStart(" + i.ToString + ")=" + bolDePeakStart(i).ToString)
+            If GetTrue01Boolean(SystemParameters.PressureAdjust) Then '壓力修整......不好用
                 Select Case PressState(i)
                     Case 0
                         If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
@@ -262,8 +302,8 @@
                         End If
                 End Select
             Else
-                If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False Then
-                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage))
+                If GetTrue01Boolean(SystemParameters.PressureAverageEnable) = False Then '不平均
+                    PressPV(i) = SetInRange(True, oriPressPV(i), Get_PLC_R1100(DAProcessBond01Index + 4 * i), Val(SystemParameters.PressAverage)) '均化
                 End If
             End If
             If Check_PLC_M(DoBondForce01Index + i) Then '有加壓
