@@ -22,10 +22,12 @@ Partial Class ControlPaintBoard
     '請不要使用程式碼編輯器進行修改。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.picPaintBoard = New System.Windows.Forms.PictureBox
-        Me.btnClear = New System.Windows.Forms.Button
-        Me.btnEnable = New System.Windows.Forms.Button
-        Me.btnEraser = New System.Windows.Forms.Button
+        Me.components = New System.ComponentModel.Container()
+        Me.picPaintBoard = New System.Windows.Forms.PictureBox()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnEnable = New System.Windows.Forms.Button()
+        Me.btnEraser = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picPaintBoard, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -81,6 +83,10 @@ Partial Class ControlPaintBoard
         Me.btnEraser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEraser.UseVisualStyleBackColor = False
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
         'ControlPaintBoard
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -99,5 +105,5 @@ Partial Class ControlPaintBoard
     Friend WithEvents btnClear As System.Windows.Forms.Button
     Friend WithEvents btnEnable As System.Windows.Forms.Button
     Friend WithEvents btnEraser As System.Windows.Forms.Button
-
+    Friend WithEvents Timer1 As Timer
 End Class

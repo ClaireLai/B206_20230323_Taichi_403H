@@ -175,4 +175,8 @@
     Private Sub ControlPaintBoard_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
         ResizePic()
     End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+    End Sub
 End Class
