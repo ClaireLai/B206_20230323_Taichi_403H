@@ -89,11 +89,11 @@
 
     End Sub
 
-    Private Sub PictureBox1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picPaintBoard.Paint
-        If bEnable Then
-            picPaintBoard.Image = gBitmap
-        End If
-    End Sub
+    'Private Sub PictureBox1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picPaintBoard.Paint
+    '    If bEnable Then
+    '        picPaintBoard.Image = gBitmap
+    '    End If
+    'End Sub
 
     Private Sub PictureBox1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picPaintBoard.MouseDown
         If bEnable Then
@@ -154,8 +154,10 @@
         Enable = Not Enable
         If Enable Then
             btnEnable.BackColor = Color.Lime
+            Timer1.Enabled = True
         Else
             btnEnable.BackColor = Color.LightPink
+            Timer1.Enabled = False
         End If
     End Sub
 
@@ -177,6 +179,16 @@
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-
+        If Eraser Then
+            btnEraser.BackColor = Color.Lime
+        Else
+            btnEraser.BackColor = Color.LightBlue
+        End If
+        If Enable Then
+            btnEnable.BackColor = Color.Lime
+            picPaintBoard.Image = gBitmap
+        Else
+            btnEnable.BackColor = Color.LightPink
+        End If
     End Sub
 End Class
