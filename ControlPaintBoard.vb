@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports System.Drawing
 Public Class ControlPaintBoard
 
     Private gPaint As Graphics
@@ -16,7 +17,7 @@ Public Class ControlPaintBoard
     Private Newxy As New Point
 
     'Private PaintThread As System.Threading.Thread
-    'Private PictureBox1_PaintThread As System.Threading.Thread
+    Private PictureBox1_PaintThread As System.Threading.Thread
     Private bolquit As Boolean
     Private ColorDiag As New ColorDialog
     Private epoint As New Point
@@ -26,6 +27,7 @@ Public Class ControlPaintBoard
     Private bolLoad As Boolean
     Private bolClear As Boolean
     Private bolEraser As Boolean
+    'Private objGraph sa 
 
     Property iWidth() As Integer
         Get
@@ -106,12 +108,15 @@ Public Class ControlPaintBoard
 
     Private Sub PictureBox1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picPaintBoard.Paint
         If bEnable Then
-            picPaintBoard.Image = gBitmap
-            'bolUp = True
-            'If Not PictureBox1_PaintThread.IsAlive Then
-            '    PictureBox1_PaintThread.Start()
-            '    bolUp = False
+            'picPaintBoard.Image = gBitmap
+            Timer1.Enabled = True
+            'If InvokeRequired Then
+            'Invoke(New EventHandler(AddressOf PictureBox1_PaintThreadWork), sender)
+            'BeginInvoke(New EventHandler(Of ImageGrabbedEventArgs)(AddressOf OnImageGrabbedGige), sender, e.Clone())
+            Return
             'End If
+        Else
+            Timer1.Enabled = False
         End If
     End Sub
 
@@ -184,10 +189,10 @@ Public Class ControlPaintBoard
     End Sub
 
     Private Sub btnEnable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnable.Click
-        If ProcessMode_RUN Then
-            MsgBoxLangOK("製程中無法啟用")
-            Exit Sub
-        End If
+        'If ProcessMode_RUN Then
+        '    MsgBoxLangOK("製程中無法啟用")
+        '    Exit Sub
+        'End If
         Enable = Not Enable
 
         'If Enable Then
@@ -238,11 +243,11 @@ Public Class ControlPaintBoard
             picPaintBoard.Image = gBitmap
         End If
         gOldBitmap.Dispose()
-        gOldBitmap = gBitmap
+        'gOldBitmap = gBitmap
     End Sub
     Private Sub PictureBox1_PaintThreadWork()
         'Do
-        picPaintBoard.Image = gOldBitmap
+        picPaintBoard.Image = gBitmap
         'gOldBitmap.Dispose()
         'Loop Until Enable = False
     End Sub
@@ -255,8 +260,12 @@ Public Class ControlPaintBoard
         End If
         If Enable Then
             btnEnable.BackColor = Color.Lime
+            'Invoke(New EventHandler(AddressOf PictureBox1_PaintThreadWork), sender)
+            'PictureBox1_PaintThreadWork()
+            picPaintBoard.Image = gBitmap
         Else
             btnEnable.BackColor = Color.LightPink
         End If
+
     End Sub
 End Class

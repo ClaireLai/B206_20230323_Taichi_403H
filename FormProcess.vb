@@ -3660,7 +3660,7 @@ Public Class FormProcess
     Private Sub tabProcessDataCurve_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabProcessDataCurve.SelectedIndexChanged
         Debug.Print(tabProcessDataCurve.SelectedIndex.ToString)
         If tabProcessDataCurve.SelectedIndex <> 3 Then
-            ControlPaintBoard1.Enable = False
+            'ControlPaintBoard1.Enable = False
         End If
     End Sub
     'SanAn CIM  20190710  by vincent ---------------- End
