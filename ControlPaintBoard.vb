@@ -106,19 +106,19 @@ Public Class ControlPaintBoard
 
     End Sub
 
-    Private Sub PictureBox1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picPaintBoard.Paint
-        If bEnable Then
-            'picPaintBoard.Image = gBitmap
-            Timer1.Enabled = True
-            'If InvokeRequired Then
-            'Invoke(New EventHandler(AddressOf PictureBox1_PaintThreadWork), sender)
-            'BeginInvoke(New EventHandler(Of ImageGrabbedEventArgs)(AddressOf OnImageGrabbedGige), sender, e.Clone())
-            Return
-            'End If
-        Else
-            Timer1.Enabled = False
-        End If
-    End Sub
+    'Private Sub PictureBox1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picPaintBoard.Paint
+    '    If bEnable Then
+    '        'picPaintBoard.Image = gBitmap
+    '        Timer1.Enabled = True
+    '        'If InvokeRequired Then
+    '        'Invoke(New EventHandler(AddressOf PictureBox1_PaintThreadWork), sender)
+    '        'BeginInvoke(New EventHandler(Of ImageGrabbedEventArgs)(AddressOf OnImageGrabbedGige), sender, e.Clone())
+    '        Return
+    '        'End If
+    '    Else
+    '        Timer1.Enabled = False
+    '    End If
+    'End Sub
 
     Private Sub PictureBox1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picPaintBoard.MouseDown
         If bEnable Then
@@ -150,8 +150,6 @@ Public Class ControlPaintBoard
     Private Sub PictureBox1_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picPaintBoard.MouseMove
         If bEnable Then
             If Draw_Flag Then
-                'bolMove = True
-                'PaintThread.Start(e)
                 Newxy.X = e.X
                 Newxy.Y = e.Y
                 If Eraser Then
@@ -162,7 +160,6 @@ Public Class ControlPaintBoard
                 Oldxy.X = e.X
                 Oldxy.Y = e.Y
                 picPaintBoard.Image = gBitmap
-                'bolMove = False
             End If
         End If
     End Sub
@@ -189,27 +186,23 @@ Public Class ControlPaintBoard
     End Sub
 
     Private Sub btnEnable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnable.Click
-        'If ProcessMode_RUN Then
-        '    MsgBoxLangOK("製程中無法啟用")
-        '    Exit Sub
-        'End If
         Enable = Not Enable
-
-        'If Enable Then
-        '    btnEnable.BackColor = Color.Lime
-        'Else
-        '    btnEnable.BackColor = Color.LightPink
-        'End If
-
+        If Enable Then
+            btnEnable.BackColor = Color.Lime
+            Timer1.Enabled = True
+        Else
+            btnEnable.BackColor = Color.LightPink
+            Timer1.Enabled = False
+        End If
     End Sub
 
     Private Sub btnEraser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEraser.Click
         Eraser = Not Eraser
-        'If Eraser Then
-        '    btnEraser.BackColor = Color.Lime
-        'Else
-        '    btnEraser.BackColor = Color.LightBlue
-        'End If
+        If Eraser Then
+            btnEraser.BackColor = Color.Lime
+        Else
+            btnEraser.BackColor = Color.LightBlue
+        End If
 
     End Sub
 
@@ -244,12 +237,6 @@ Public Class ControlPaintBoard
         End If
         gOldBitmap.Dispose()
         'gOldBitmap = gBitmap
-    End Sub
-    Private Sub PictureBox1_PaintThreadWork()
-        'Do
-        picPaintBoard.Image = gBitmap
-        'gOldBitmap.Dispose()
-        'Loop Until Enable = False
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick

@@ -82,11 +82,9 @@ Partial Class ControlPaintBoard
         Me.btnEraser.Text = "橡皮擦"
         Me.btnEraser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEraser.UseVisualStyleBackColor = False
-        Me.btnEraser.Visible = False
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
         'ControlPaintBoard
